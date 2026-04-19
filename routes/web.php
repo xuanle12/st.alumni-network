@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', \App\Livewire\User\Home::class);
+
+//Auth
+Route::get('/login', \App\Livewire\Auth\Login::class);
+
+//User
+
+//Admin
+Route::get('/admin', \App\Livewire\Admin\Dashboard::class);
