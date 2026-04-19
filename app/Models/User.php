@@ -42,9 +42,9 @@ class User extends Authenticatable
     }
  
     public function cv()
-    {
-        return $this->hasMany(Cv::class)->orderByDesc('is_primary')->orderByDesc('created_at');
-    }
+{
+    return $this->hasMany(Cv::class,'user_id');
+}
     public function posts()
     {
         return $this->hasMany(Post::class);
