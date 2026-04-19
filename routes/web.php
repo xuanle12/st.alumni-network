@@ -12,5 +12,6 @@ Route::get('/login', \App\Livewire\Auth\Login::class);
 
 //User
 Route::get('/csv', \App\Livewire\User\Csv::class);
+Route::get('/job', \App\Livewire\User\Jobs::class);
 //Admin
 Route::get('/admin', \App\Livewire\Admin\Dashboard::class);
