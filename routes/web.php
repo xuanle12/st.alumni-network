@@ -19,3 +19,6 @@ Route::get('/profile', \App\Livewire\User\profile::class);
 //Admin
 Route::get('/admin', \App\Livewire\Admin\Dashboard::class);
 Route::get('/admin/Csv', \App\Livewire\Admin\csv::class);
+Route::get('/admin/company', \App\Livewire\Admin\company::class);
+Route::get('/admin/job', \App\Livewire\Admin\job::class);
+Route::get('/admin/thongk', \App\Livewire\Admin\thongk::class);
