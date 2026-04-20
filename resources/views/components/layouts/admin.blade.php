@@ -26,13 +26,13 @@
         {{-- Nav --}}
         <div class="adm-sec">Quản lý</div>
 
-        <a href="#"
+        <a href="{{ route('admin') }}"
            class="adm-item {{ request()->routeIs('admin.students') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="layout-dashboard"></span>
             Dashboard
         </a>
 
-        <a href="#"
+        <a href="{{ route('admin.csv') }}"
            class="adm-item {{ request()->routeIs('admin.alumni') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="graduation-cap"></span>
             Cựu sinh viên
@@ -42,13 +42,13 @@
             @endif
         </a>
 
-        <a href="#"
+        <a href="{{ route('admin.job') }}"
            class="adm-item {{ request()->routeIs('admin.jobs') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="briefcase"></span>
             Tuyển dụng
         </a>
 
-        <a href="#"
+        <a href="{{ route('admin.company') }}"
            class="adm-item {{ request()->routeIs('admin.companies') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="building-2"></span>
             Doanh nghiệp
@@ -57,7 +57,7 @@
         <div class="adm-div"></div>
         <div class="adm-sec">Hệ thống</div>
 
-        <a href="#"
+        <a href="{{ route('admin.thongk') }}"
            class="adm-item {{ request()->routeIs('admin.stats') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="bar-chart-3"></span> 
             Thống kê

@@ -24,10 +24,10 @@
     </a>
 
     <nav>
-        <a href="#" wire:navigate class="{{ request()->routeIs('home') ? 'active' : '' }}">Trang chủ</a>
-        <a href="#" wire:navigate class="{{ request()->routeIs('alumni*') ? 'active' : '' }}">Cựu sinh viên</a>
-        <a href="#" wire:navigate class="{{ request()->routeIs('jobs*') ? 'active' : '' }}">Tuyển dụng</a>
-        <a href="#" wire:navigate class="{{ request()->routeIs('events*') ? 'active' : '' }}">Sự kiện</a>
+        <a href="{{ route('home') }}" wire:navigate class="{{ request()->routeIs('home') ? 'active' : '' }}">Trang chủ</a>
+        <a href="{{ route('csv') }}" wire:navigate class="{{ request()->routeIs('alumni*') ? 'active' : '' }}">Cựu sinh viên</a>
+        <a href="{{ route('job') }}" wire:navigate class="{{ request()->routeIs('jobs*') ? 'active' : '' }}">Tuyển dụng</a>
+        <a href="{{ route('event') }}" wire:navigate class="{{ request()->routeIs('events*') ? 'active' : '' }}">Sự kiện</a>
 
     </nav>
 
