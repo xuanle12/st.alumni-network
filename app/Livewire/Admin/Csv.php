@@ -98,8 +98,7 @@ class Csv extends Component
             'f_year.digits'    => 'Năm tốt nghiệp phải là 4 chữ số.',
         ]);
  
-        // ── TODO: bỏ comment khi muốn lưu vào DB ──
-        /*
+       
         if ($this->editId) {
             // CẬP NHẬT
             $user = User::findOrFail($this->editId);
@@ -137,10 +136,10 @@ class Csv extends Component
             ]);
             session()->flash('success', 'Đã thêm cựu sinh viên.');
         }
-        */
+        
  
-        // Tạm thời chỉ đóng modal (chưa ghi DB)
-        session()->flash('success', $this->editId ? 'Đã cập nhật (chưa lưu DB).' : 'Đã thêm (chưa lưu DB).');
+        // Tạm thời chỉ đóng modal 
+        session()->flash('success', $this->editId ? 'Đã cập nhật .' : 'Đã thêm.');
         $this->closeModal();
     }
  
@@ -152,9 +151,6 @@ class Csv extends Component
         $this->resetValidation();
     }
  
-    /* ────────────────────────────────
-       XEM HỒ SƠ CHI TIẾT
-    ──────────────────────────────── */
     public function openView(int $userId): void
     {
         $this->viewId    = $userId;
@@ -176,9 +172,7 @@ class Csv extends Component
         session()->flash('success', 'Đã duyệt hồ sơ.');
     }
  
-    /* ────────────────────────────────
-       XOÁ
-    ──────────────────────────────── */
+    
     public function confirmDelete(int $userId): void
     {
         $this->deleteId  = $userId;
@@ -211,9 +205,7 @@ class Csv extends Component
         $this->f_status = 'pending';
     }
  
-    /* ────────────────────────────────
-       RENDER
-    ──────────────────────────────── */
+   
     public function render()
     {
         // Query cựu sinh viên (role = alumni hoặc lọc theo profile)

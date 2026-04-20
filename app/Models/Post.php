@@ -18,9 +18,19 @@ class Post extends Model
         'shares_count'   => 'integer',
     ];
  
-    // -------------------------------------------------------
-    // Relationships
-    // -------------------------------------------------------
+    public const CATEGORIES = [
+
+    'general' => 'Thảo luận chung',
+
+    'event' => 'Sự kiện',
+
+    'job' => 'Việc làm',
+
+    'share' => 'Chia sẻ',
+
+    'question' => 'Hỏi đáp',
+
+    ];
  
     public function author()
     {
@@ -47,7 +57,7 @@ class Post extends Model
     {
         return $query->whereHas('author.profile', fn ($q) => $q->where('role', 'alumni'));
     }
- 
+    
     /** Lọc bài của bạn bè (contacts của user hiện tại) */
     public function scopeFromFriends($query, User $user)
     {

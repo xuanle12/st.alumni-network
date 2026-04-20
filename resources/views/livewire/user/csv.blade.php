@@ -15,9 +15,8 @@
         <a href="#" class="nw-li {{ request()->routeIs('home')    ? 'on' : '' }}"><span class="nw-ic">🏠</span> Trang chủ</a>
         <a href="#" class="nw-li {{ request()->routeIs('network') ? 'on' : '' }}"><span class="nw-ic">👥</span> Mạng lưới</a>
         <a href="#" class="nw-li {{ request()->routeIs('jobs*')   ? 'on' : '' }}"><span class="nw-ic">💼</span> Tuyển dụng</a>
-        <a href="#" class="nw-li {{ request()->routeIs('events*') ? 'on' : '' }}"><span class="nw-ic">📅</span> Sự kiện</a>
-        <a href="#" class="nw-li {{ request()->routeIs('saved')   ? 'on' : '' }}"><span class="nw-ic">🔖</span> Đã lưu</a>
-        <a href="#" class="nw-li {{ request()->routeIs('profile') ? 'on' : '' }}"><span class="nw-ic">👤</span> Hồ sơ</a>
+        <a href="{{ route('event') }}" class="nw-li {{ request()->routeIs('events*') ? 'on' : '' }}"><span class="nw-ic">📅</span> Sự kiện</a>
+        <a href="{{ route('profile') }}" class="nw-li {{ request()->routeIs('profile') ? 'on' : '' }}"><span class="nw-ic">👤</span> Hồ sơ</a>
         <div class="nw-sep"></div>
         <div class="nw-lbl">Lối tắt</div>
         <a href="#" class="nw-sc"><span class="nw-sc-ic">🏫</span> FITA - VNUA</a>
@@ -38,13 +37,133 @@
         {{-- Ô tạo bài viết --}}
         <div class="nw-cp">
             <div class="nw-cp-row">
+                <div class="nw-cp-row">
+
                 @if($currentUser->profile?->avatar)
-                    <img src="{{ asset('storage/' . $currentUser->profile->avatar) }}"
-                         class="nw-av nw-av-sm" alt="{{ $currentUser->name }}"/>
+                    <img src="{{ asset('storage/'.$currentUser->profile->avatar) }}"class="nw-av nw-av-sm">
                 @else
                     <div class="nw-av nw-av-green nw-av-sm">{{ $currentUser->initials }}</div>
                 @endif
-                <input class="nw-cp-in" type="text" placeholder="Bạn đang nghĩ gì?"/>
+                    <div class="nw-cp-in" wire:click="openModal">Bạn đang nghĩ gì?</div>
+                </div>
+                        @if($showModal)
+<div class="modal-overlay" wire:click.self="closeModal">
+  <div class="modal-box">
+ 
+    {{-- Header --}}
+    <div class="modal-hd">
+      <div style="width:32px"></div>
+      <div class="modal-hd-title">Tạo bài viết</div>
+      <button class="modal-close" wire:click="closeModal">×</button>
+    </div>
+ 
+    {{-- Body --}}
+    <div class="modal-body">
+ 
+      {{-- Author + category --}}
+      <div class="author-row">
+        <div class="author-av">
+          {{ strtoupper(substr(auth()->user()?->name ?? 'U', 0, 2)) }}
+        </div>
+        <div>
+          <div class="author-name">{{ auth()->user()?->name }}</div>
+          <div class="author-cat">
+            <select class="cat-sel" wire:model="category">
+              <option value="discussion">💬 Thảo luận</option>
+              <option value="experience">💡 Chia sẻ kinh nghiệm</option>
+              <option value="news">📢 Tin tức</option>
+              <option value="job">💼 Tìm việc</option>
+              <option value="network">🤝 Kết nối</option>
+            </select>
+          </div>
+        </div>
+      </div>
+ 
+      {{-- Ảnh bìa preview --}}
+      @if($coverImage)
+        <div class="cover-wrap">
+          <img src="{{ $coverImage->temporaryUrl() }}" class="cover-img" alt="Cover">
+          <button class="cover-remove" wire:click="$set('coverImage', null)">×</button>
+        </div>
+      @endif
+ 
+      {{-- Tags --}}
+      @if(count($tags) > 0)
+        <div class="tags-row">
+          @foreach($tags as $i => $tag)
+            <span class="tag-pill">
+              # {{ $tag }}
+              <button type="button" wire:click="removeTag({{ $i }})">×</button>
+            </span>
+          @endforeach
+        </div>
+      @endif
+ 
+      {{-- Tiêu đề (tuỳ chọn) --}}
+      <input class="title-input"
+             wire:model="title"
+             type="text"
+             placeholder="Tiêu đề (tuỳ chọn)...">
+ 
+      {{-- Nội dung --}}
+      <textarea
+        class="content-editor"
+        wire:model="content"
+        placeholder="Bạn đang nghĩ gì? Chia sẻ với mọi người..."
+        rows="5"
+        autofocus>
+      </textarea>
+      @error('content')<div class="err">{{ $message }}</div>@enderror
+ 
+      {{-- Tag input --}}
+      @if(count($tags) < 5)
+        <div class="tag-input-row">
+          <span style="font-size:12px;color:#9ca3af">#</span>
+          <input class="tag-input-el"
+                 wire:model="tagInput"
+                 type="text"
+                 placeholder="Thêm tag... (nhấn Enter)"
+                 wire:keydown.enter.prevent="addTag">
+        </div>
+      @endif
+ 
+    </div>
+ 
+    {{-- Footer --}}
+    <div class="modal-ft">
+      <div class="action-row">
+        {{-- Upload ảnh --}}
+        <label class="action-btn" for="cover-file">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="#16a34a" stroke-width="1.5"/><circle cx="5" cy="6" r="1.2" stroke="#16a34a" stroke-width="1.2"/><path d="M1 11l4-4 3 3 2-2 4 4" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="action-label" style="color:#16a34a">Ảnh</span>
+          <input type="file" id="cover-file" wire:model="coverImage" accept="image/*" style="display:none">
+        </label>
+ 
+        {{-- Tag --}}
+        <button class="action-btn" onclick="this.closest('.modal-box').querySelector('.tag-input-el')?.focus()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8L8 2l6 6-6 6-6-6z" stroke="#3b82f6" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="6" r="1" fill="#3b82f6"/></svg>
+          <span class="action-label" style="color:#3b82f6">Tag</span>
+        </button>
+ 
+        {{-- Cảm xúc --}}
+        <button class="action-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#f59e0b" stroke-width="1.5"/><circle cx="6" cy="7" r=".8" fill="#f59e0b"/><circle cx="10" cy="7" r=".8" fill="#f59e0b"/><path d="M5.5 10c.5 1 4.5 1 5 0" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span class="action-label" style="color:#f59e0b">Cảm xúc</span>
+        </button>
+      </div>
+ 
+      <button class="pub-btn"
+              wire:click="publish"
+              wire:loading.attr="disabled"
+              wire:loading.class="opacity-75">
+        <span wire:loading wire:target="publish">Đang đăng...</span>
+        <span wire:loading.remove wire:target="publish">Đăng bài</span>
+      </button>
+    </div>
+  </div>
+</div>
+@endif
+
             </div>
             <div class="nw-cp-sep"></div>
             <div class="nw-cp-ac">
@@ -55,7 +174,7 @@
             </div>
         </div>
 
-        {{-- Danh sách bài viết --}}
+        
         @forelse($posts as $post)
             <div class="nw-post">
                 <div class="nw-ph">
@@ -149,6 +268,7 @@
                 <div class="nw-cn">{{ $contact->name }}</div>
             </div>
         @endforeach
+
     </aside>
 <style>
     
@@ -241,6 +361,74 @@
   .nw-feed{overflow-y:visible;height:auto;padding:10px;}
   .nw-fb{padding:5px 10px;font-size:11px;}
   .nw-title{font-size:16px;}
+}
+/* Trigger box */
+.trigger-wrap{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:.875rem 1.1rem;display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.trigger-avatar{width:38px;height:38px;border-radius:50%;background:#1e3a5f;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#60a5fa;flex-shrink:0;}
+.trigger-input{flex:1;padding:9px 14px;background:#f8fafc;border:1px solid #e8edf2;border-radius:20px;font-size:13px;color:#9ca3af;cursor:pointer;transition:all .15s;user-select:none;}
+.trigger-input:hover{background:#f1f5f9;border-color:#cbd5e1;color:#6b7280;}
+ 
+/* Modal overlay */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.modal-box{background:#fff;border-radius:12px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;}
+ 
+/* Modal header */
+.modal-hd{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #f3f4f6;position:sticky;top:0;background:#fff;z-index:1;}
+.modal-hd-title{font-size:15px;font-weight:600;color:#111;}
+.modal-close{width:32px;height:32px;border:none;background:#f3f4f6;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:18px;line-height:1;}
+.modal-close:hover{background:#e5e7eb;color:#111;}
+ 
+/* Modal body */
+.modal-body{padding:1rem 1.25rem;flex:1;}
+.author-row{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.author-av{width:40px;height:40px;border-radius:50%;background:#1e3a5f;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#60a5fa;flex-shrink:0;}
+.author-name{font-size:13px;font-weight:600;color:#111;}
+.author-cat{margin-top:3px;}
+.cat-sel{padding:2px 8px;border:1px solid #e2e8f0;border-radius:20px;font-size:11px;color:#374151;background:#f8fafc;cursor:pointer;}
+.cat-sel:focus{outline:none;border-color:#3b82f6;}
+ 
+/* Content editor */
+.content-editor{width:100%;border:none;outline:none;font-size:14px;color:#374151;font-family:inherit;resize:none;line-height:1.7;min-height:120px;placeholder-color:#9ca3af;}
+.content-editor::placeholder{color:#9ca3af;}
+.content-editor:focus{outline:none;}
+ 
+/* Cover preview */
+.cover-wrap{position:relative;margin-bottom:.875rem;}
+.cover-img{width:100%;height:180px;object-fit:cover;border-radius:8px;display:block;}
+.cover-remove{position:absolute;top:6px;right:6px;width:28px;height:28px;background:rgba(0,0,0,.6);border:none;border-radius:50%;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.cover-remove:hover{background:rgba(0,0,0,.8);}
+ 
+/* Tags */
+.tags-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.875rem;}
+.tag-pill{display:flex;align-items:center;gap:3px;background:#eff6ff;color:#1e40af;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;}
+.tag-pill button{background:none;border:none;cursor:pointer;color:#60a5fa;font-size:12px;line-height:1;padding:0;}
+ 
+/* Title input */
+.title-input{width:100%;border:none;border-top:1px solid #f3f4f6;outline:none;font-size:12px;color:#6b7280;font-family:inherit;padding:.625rem 0;margin-bottom:.5rem;}
+.title-input::placeholder{color:#c4cdd6;}
+ 
+/* Modal footer */
+.modal-ft{padding:.875rem 1.25rem;border-top:1px solid #f3f4f6;display:flex;flex-direction:column;gap:.625rem;position:sticky;bottom:0;background:#fff;}
+.action-row{display:flex;align-items:center;gap:6px;}
+.action-btn{display:flex;align-items:center;gap:5px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:7px;background:#fff;color:#6b7280;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.action-btn:hover{background:#f8fafc;border-color:#cbd5e1;color:#374151;}
+.action-label{font-size:11px;font-weight:500;}
+ 
+/* Tag input row */
+.tag-input-row{display:flex;align-items:center;gap:6px;padding:4px 0;}
+.tag-input-el{flex:1;border:none;outline:none;font-size:12px;color:#111;font-family:inherit;padding:3px 0;}
+.tag-input-el::placeholder{color:#c4cdd6;}
+ 
+.pub-btn{width:100%;padding:10px;background:#111;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+.pub-btn:hover{background:#333;}
+.pub-btn:disabled{background:#d1d5db;cursor:not-allowed;}
+ 
+.err{font-size:11px;color:#dc2626;margin-top:3px;}
+.flash-ok{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem;}
+ 
+@media(max-width:480px){
+  .modal-overlay{padding:.5rem;align-items:flex-end;}
+  .modal-box{border-radius:12px 12px 0 0;max-height:95vh;}
 }
 </style>
 </div>

@@ -33,9 +33,9 @@
 
     <div class="header-right">
       @auth
-        <a href="#" class="btn btn-primary" wire:navigate>Dashboard</a>
+        <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
       @else
-        <a href="#" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
+        <a href="{{ route('login') }}" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
         <a href="#" class="btn btn-primary" wire:navigate>Đăng ký</a>
       @endauth
       <button class="menu-icon-btn" id="menuBtn" aria-label="Mở menu">
@@ -187,7 +187,5 @@
   });
 </script>
 
-</body>
-</html>
 </body>
 </html>

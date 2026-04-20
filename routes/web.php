@@ -16,6 +16,7 @@ Route::get('/csv', \App\Livewire\User\Csv::class)->name('csv');
 Route::get('/job', \App\Livewire\User\Jobs::class)->name('job');
 Route::get('/event', \App\Livewire\User\event::class)->name('event');
 Route::get('/profile', \App\Livewire\User\profile::class)->name('profile');
+Route::get('/post', \App\Livewire\User\post::class)->name('post');
 
 //Admin
 Route::get('/admin', \App\Livewire\Admin\Dashboard::class)->name('admin');

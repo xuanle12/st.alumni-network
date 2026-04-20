@@ -40,7 +40,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
- 
+    public function cvs()
+    {
+        return $this->hasMany(Cv::class,'user_id');
+    }
+    
     public function cv()
 {
     return $this->hasMany(Cv::class,'user_id');
