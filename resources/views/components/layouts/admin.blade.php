@@ -21,8 +21,16 @@
                 <div class="adm-brand-name"> Cựu sinh viên VNUA</div>
                 <div class="adm-brand-sub">Admin portal</div>
             </div>
+            
         </div>
+       <a href="{{ route('csv') }}"
+   class="adm-item adm-back">
 
+<span class="adm-item-ic">←</span>
+
+Trang người dùng
+
+</a>
         {{-- Nav --}}
         <div class="adm-sec">Quản lý</div>
 
