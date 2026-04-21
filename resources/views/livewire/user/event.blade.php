@@ -185,7 +185,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
   <div class="section-title">Sự kiện nổi bật</div>
   <div class="events-grid" style="margin-bottom:1.5rem">
     @php $isReg = in_array($featured->id, $registeredIds); @endphp
-    <div class="event-card featured">
+    <a href="{{ route('event.show', $featured->id) }}" class="event-card featured" style="text-decoration:none;color:inherit">
       <div class="ec-header ec-featured">
         <div class="ec-date" style="background:#eff6ff;border-color:#bfdbfe">
           <div class="ec-day" style="color:#1d4ed8">{{ $featured->day }}</div>
@@ -239,7 +239,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
           <button class="btn-reg done" disabled>Đã đóng</button>
         @endif
       </div>
-    </div>
+    </a>
   </div>
   @endif
 
@@ -266,7 +266,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
         default                              => 'Đăng ký',
       };
     @endphp
-    <div class="event-card">
+    <a href="{{ route('event.show', $event->id) }}" class="event-card">
       <div class="ec-header">
         <div class="ec-date">
           <div class="ec-day">{{ $event->day }}</div>
@@ -307,7 +307,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
           <button class="btn-reg done" disabled>{{ $btnText }}</button>
         @endif
       </div>
-    </div>
+    </a>
     @endforeach
   </div>
   @else
@@ -320,7 +320,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
   <div class="upcoming-list">
     @foreach($upcomingEvents as $event)
     @php $isReg = in_array($event->id, $registeredIds); @endphp
-    <div class="up-item">
+    <a href="{{ route('event.show', $event->id) }}" class="up-item" style="text-decoration:none;color:inherit">
       <div class="up-date">
         <div class="up-day">{{ $event->day }}</div>
         <div class="up-month">{{ $event->month_label }}</div>
@@ -347,10 +347,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
           <button class="btn-reg done" disabled>Đã đóng</button>
         @endif
       </div>
-    </div>
+    </a>
     @endforeach
   </div>
   @endif
-
-</div>
 </div>
