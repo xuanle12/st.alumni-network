@@ -91,7 +91,7 @@
                 <button wire:click="resetFilters" class="text-xs text-green-700 hover:underline">Đặt lại</button>
             </div>
 
-            {{-- Loại công việc --}}
+        
             <div x-data="{ open: true }" class="border-b border-gray-100">
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-5 py-3 hover:bg-gray-50 transition text-left">
@@ -102,20 +102,17 @@
                     </svg>
                 </button>
                 <div x-show="open" x-transition class="px-5 pb-4 space-y-2">
-                    {{--@foreach($jobTypes as $val => $label)--}}
+                    @foreach($jobTypes as $val => $label)
                         <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer hover:text-gray-900">
-                            {{--<input type="checkbox" wire:model.live="types" value="{{ $val }}"
+                            <input type="checkbox" wire:model.live="types" value="{{ $val }}"
                                    class="accent-green-700 w-4 h-4 flex-shrink-0">
-                            <span>{{ $label }}</span>--}}
-                            <input type="checkbox" wire:model.live="types" value=""
-                                   class="accent-green-700 w-4 h-4 flex-shrink-0">
-                            <span>.</span>
+                            <span>{{ $label }}</span>
                         </label>
-                    {{--@endforeach--}}
+                    @endforeach
                 </div>
             </div>
 
-            {{-- Khoa / Ngành --}}
+            
             <div x-data="{ open: true }" class="border-b border-gray-100">
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-5 py-3 hover:bg-gray-50 transition text-left">
@@ -126,24 +123,17 @@
                     </svg>
                 </button>
                 <div x-show="open" x-transition class="px-5 pb-4 space-y-2">
-                    {{--@foreach($departments as $dept)
+                    @foreach($departments as $dept)
                         <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer hover:text-gray-900">
                             <input type="checkbox" wire:model.live="fields" value="{{ $dept->slug }}"
                                    class="accent-green-700 w-4 h-4 flex-shrink-0">
                             <span class="flex-1 leading-snug">{{ $dept->name }}</span>
                             <span class="text-xs text-gray-400">{{ $dept->jobs_count }}</span>
                         </label>
-                    @endforeach--}}
-                    <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer hover:text-gray-900">
-                            <input type="checkbox" wire:model.live="fields" value=""
-                                   class="accent-green-700 w-4 h-4 flex-shrink-0">
-                            <span class="flex-1 leading-snug">Công nghệ thông tin </span>
-                            <span class="text-xs text-gray-400">Lập trình viên </span>
-                        </label>
+                    @endforeach
                 </div>
             </div>
 
-            {{-- Địa điểm --}}
             <div x-data="{ open: false }">
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-5 py-3 hover:bg-gray-50 transition text-left">
@@ -154,18 +144,18 @@
                     </svg>
                 </button>
                 <div x-show="open" x-transition class="px-5 pb-4 space-y-2">
-                    {{--@foreach($locationOptions as $loc)
+                    @foreach($locationOptions as $loc)
                         <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer hover:text-gray-900">
                             <input type="checkbox" wire:model.live="locations" value="{{ $loc->location_key }}"
                                    class="accent-green-700 w-4 h-4 flex-shrink-0">
                             <span>{{ $loc->location }}</span>
                         </label>
-                    @endforeach--}}
+                    @endforeach
                 </div>
             </div>
         </div>
 
-        {{-- Doanh nghiệp --}}
+        
         <div class="bg-white border border-gray-100 rounded-xl p-5">
             <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Doanh nghiệp</p>
             <p class="text-sm text-gray-500 leading-relaxed mb-3">
@@ -179,7 +169,7 @@
 
     </aside>
 
-    {{-- ───── MAIN ───── --}}
+    
     <div class="flex-1 min-w-0">
 
         {{-- Tìm kiếm --}}
@@ -191,17 +181,17 @@
             <select wire:model.live="field"
                     class="border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white outline-none text-gray-700">
                 <option value="">Tất cả lĩnh vực</option>
-                {{--@foreach($departments as $dept)
+                @foreach($departments as $dept)
                     <option value="{{ $dept->slug }}">{{ $dept->name }}</option>
-                @endforeach--}}
+                @endforeach
             </select>
         </div>
 
-        {{-- Meta --}}
+        
         <div class="flex items-center justify-between mb-3 px-1">
-            {{--<p class="text-sm text-gray-500">
+            <p class="text-sm text-gray-500">
                 Tìm thấy <span class="font-semibold text-gray-800">{{ $jobs->total() }} tin</span> phù hợp
-            </p>--}}
+            </p>
             <p class="text-sm text-gray-500">
                 Tìm thấy <span class="font-semibold text-gray-800"> tin</span> phù hợp
             </p>
@@ -212,9 +202,9 @@
             </select>
         </div>
 
-        {{-- Danh sách tin --}}
+        
         <div class="space-y-3">
-            {{--@forelse($jobs as $job)
+            @forelse($jobs as $job)
                 <div class="bg-white border rounded-xl p-5 hover:border-green-600 transition
                             {{ $job->is_featured ? 'border-amber-300' : 'border-gray-100' }}">
                     <div class="flex gap-4 items-start">
@@ -240,11 +230,10 @@
                                         <span class="text-xs text-green-700 bg-green-50 border border-green-100 px-2 py-0.5 rounded-md">{{ $skill }}</span>
                                     @endforeach
                                 </div>
-                            @endif--}}
+                            @endif
                         </div>
                         <div class="flex-shrink-0 text-right w-36">
-                            {{--<p class="text-sm font-semibold text-green-700 mb-3">{{ $job->salary_label }}</p>--}}
-                            <p class="text-sm font-semibold text-green-700 mb-3">20/03/2026</p>
+                            <p class="text-sm font-semibold text-green-700 mb-3">{{ $job->salary_label }}</p>
                             <a href="#"
                                class="block w-full py-2 text-center text-xs font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 transition mb-2">
                                 Ứng tuyển
@@ -252,22 +241,21 @@
                             <button class="block w-full py-2 text-xs text-gray-500 border border-gray-200 rounded-lg hover:border-green-600 hover:text-green-700 transition">
                                 Lưu tin
                             </button>
-                            {{--<p class="text-xs text-gray-400 mt-2">Hạn: {{ $job->deadline }}</p>--}}
-                            <p class="text-xs text-gray-400 mt-2">Hạn:12/04/2026</p>
-                        </div>
+                            <p class="text-xs text-gray-400 mt-2">Hạn: {{ $job->deadline }}</p>
+?                        </div>
                     </div>
                 </div>
-            {{--@empty--}}
+            @empty
                 <div class="bg-white border border-gray-100 rounded-xl p-12 text-center">
                     <p class="text-gray-400 text-sm">Không tìm thấy tin tuyển dụng phù hợp.</p>
                     <button wire:click="resetFilters" class="mt-3 text-green-700 text-sm hover:underline">Xóa bộ lọc</button>
                 </div>
-            {{--@endforelse--}}
+            @endforelse
         </div>
 
-        {{--@if($jobs->hasPages())
+        @if($jobs->hasPages())
             <div class="mt-6">{{ $jobs->links() }}</div>
-        @endif--}}
+        @endif
 
     </div>
 

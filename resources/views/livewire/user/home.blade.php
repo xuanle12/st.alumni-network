@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
       <h1>Kết nối <em>cựu sinh viên</em><br>— Mở rộng tương lai</h1>
       <p>Nền tảng tập trung giúp kết nối sinh viên, cựu sinh viên và doanh nghiệp. Đăng nhập một lần — truy cập toàn bộ hệ sinh thái số của Học viện.</p>
       <div class="hero-actions">
-        <a href="#" class="btn-hero btn-hero-primary">🎓 Tham gia ngay</a>
+        <a href="#" class="btn-hero btn-hero-primary"> Tham gia ngay</a>
         <a href="#" class="btn-hero btn-hero-outline">Xem tuyển dụng →</a>
       </div>
     </div>
@@ -43,21 +43,26 @@ use Illuminate\Support\Str;
   <div class="section-inner">
     <div class="section-tag">Tính năng</div>
     <h2 class="section-title">Đầy đủ công cụ cho<br>mọi đối tượng người dùng</h2>
-    <p class="section-desc">Từ sinh viên, cựu sinh viên cho đến doanh nghiệp — tất cả đều có không gian riêng trên một nền tảng thống nhất.</p>
+    <p class="section-desc">
+      Từ sinh viên, cựu sinh viên cho đến doanh nghiệp — tất cả đều có không gian riêng trên một nền tảng thống nhất.
+    </p>
+
     <div class="features-grid">
       @foreach([
-        ['ic-green','👥','Quản lý hồ sơ cựu sinh viên','Lưu trữ tập trung thông tin cựu sinh viên theo khóa, ngành. Tra cứu và lọc nhanh theo nhiều tiêu chí.'],
-        ['ic-gold','💼','Cổng tuyển dụng nội bộ','Doanh nghiệp đăng tin, sinh viên và cựu sinh viên tìm việc — tất cả ngay trên hệ thống của Học viện.'],
-        ['ic-green','🔐','Đăng nhập một lần (SSO)','Tích hợp SSO giúp người dùng chỉ cần một tài khoản để truy cập toàn bộ dịch vụ số của Học viện.'],
-        ['ic-blue','📅','Sự kiện & Diễn đàn','Quản lý và thông báo sự kiện kết nối, hội thảo, gặp mặt cựu sinh viên theo khoa và toàn trường.'],
-        ['ic-gold','📊','Thống kê & Báo cáo','Dashboard admin với báo cáo trực quan về tình trạng việc làm, phân bố cựu sinh viên theo khu vực.'],
-        ['ic-green','🔔','Thông báo realtime','Nhận thông báo ngay khi có tin tuyển dụng mới, sự kiện sắp diễn ra hoặc cập nhật từ mạng lưới.'],
+        ['ic-green','fa-solid fa-users','Quản lý hồ sơ cựu sinh viên','Lưu trữ tập trung thông tin cựu sinh viên theo khóa, ngành. Tra cứu và lọc nhanh theo nhiều tiêu chí.'],
+        ['ic-gold','fa-solid fa-briefcase','Cổng tuyển dụng nội bộ','Doanh nghiệp đăng tin, sinh viên và cựu sinh viên tìm việc — tất cả ngay trên hệ thống của Học viện.'],
+        ['ic-green','fa-solid fa-shield-halved','Đăng nhập một lần (SSO)','Tích hợp SSO giúp người dùng chỉ cần một tài khoản để truy cập toàn bộ dịch vụ số của Học viện.'],
+        ['ic-blue','fa-solid fa-calendar-days','Sự kiện & Diễn đàn','Quản lý và thông báo sự kiện kết nối, hội thảo, gặp mặt cựu sinh viên theo khoa và toàn trường.'],
+        ['ic-gold','fa-solid fa-chart-column','Thống kê & Báo cáo','Dashboard admin với báo cáo trực quan về tình trạng việc làm, phân bố cựu sinh viên theo khu vực.'],
+        ['ic-green','fa-solid fa-bell','Thông báo realtime','Nhận thông báo ngay khi có tin tuyển dụng mới, sự kiện sắp diễn ra hoặc cập nhật từ mạng lưới.'],
       ] as [$cls, $icon, $title, $desc])
-      <div class="feature-card">
-        <div class="feature-icon {{ $cls }}">{{ $icon }}</div>
-        <h3>{{ $title }}</h3>
-        <p>{{ $desc }}</p>
-      </div>
+        <div class="feature-card">
+          <div class="feature-icon {{ $cls }}">
+            <i class="{{ $icon }}"></i>
+          </div>
+          <h3>{{ $title }}</h3>
+          <p>{{ $desc }}</p>
+        </div>
       @endforeach
     </div>
   </div>
@@ -160,7 +165,7 @@ use Illuminate\Support\Str;
   <h2>Sẵn sàng tham gia<br><em>mạng lưới</em> của chúng tôi?</h2>
   <p>Đăng ký ngay hôm nay để kết nối với hơn {{ number_format($stats['alumni']) }} cựu sinh viên và hàng trăm doanh nghiệp đối tác.</p>
   <div class="cta-actions">
-    <a href="#" class="btn-hero btn-hero-primary">🎓 Đăng ký tài khoản</a>
+    <a href="#" class="btn-hero btn-hero-primary"> Đăng ký tài khoản</a>
     <a href="#" class="btn-hero btn-hero-outline">Tìm hiểu thêm</a>
   </div>
 </section>
