@@ -77,10 +77,10 @@ td{padding:8px;font-size:12px;color:#374151;vertical-align:middle}
   </div>
  
   @if(session('success'))
-    <div class="flash-ok">✓ {{ session('success') }}</div>
+    <div class="flash-ok"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
   @endif
  
-  {{-- Stats --}}
+ 
   <div class="stats">
     <div class="stat">
       <div class="stat-top">
@@ -90,7 +90,7 @@ td{padding:8px;font-size:12px;color:#374151;vertical-align:middle}
         </div>
       </div>
       <div class="stat-val">{{ number_format($totalAlumni) }}</div>
-      <div class="stat-sub up">↑ Đang hoạt động</div>
+      <div class="stat-sub up"> Đang hoạt động</div>
     </div>
     <div class="stat">
       <div class="stat-top">
@@ -124,7 +124,7 @@ td{padding:8px;font-size:12px;color:#374151;vertical-align:middle}
     </div>
   </div>
  
-  {{-- Charts --}}
+  
   <div class="row2">
     <div class="card">
       <div class="card-hd">
@@ -144,7 +144,7 @@ td{padding:8px;font-size:12px;color:#374151;vertical-align:middle}
     </div>
   </div>
  
-  {{-- Table + Activity --}}
+  
   <div class="row3">
     <div class="card">
       <div class="card-hd">
@@ -174,8 +174,8 @@ td{padding:8px;font-size:12px;color:#374151;vertical-align:middle}
             <td>
               @if($profile->status === 'pending')
                 <div style="display:flex;gap:4px">
-                  <button wire:click="approve({{ $profile->id }})" class="btn-xs btn-ok">✓</button>
-                  <button wire:click="reject({{ $profile->id }})" class="btn-xs btn-no">✕</button>
+                  <button wire:click="approve({{ $profile->id }})" class="btn-xs btn-ok"><i class="fa-solid fa-check"></i></button>
+                  <button wire:click="reject({{ $profile->id }})" class="btn-xs btn-no"><i class="fa-solid fa-times"></i></button>
                 </div>
               @endif
             </td>

@@ -528,7 +528,7 @@
       </div>
 
       @if(session('success'))
-        <div class="flash-ok">✓ {{ session('success') }}</div>
+        <div class="flash-ok"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
       @endif
 
       <div class="stats-sm">
@@ -536,31 +536,30 @@
           <div>
             <div class="stat-sm-label">Tổng tin</div>
             <div class="stat-sm-val">{{ \App\Models\Job::count() }}</div>
-          </div><span style="font-size:20px">💼</span>
+          </div><span style="font-size:20px"><i class="fa-solid fa-briefcase"></i></span>
         </div>
         <div class="stat-sm">
           <div>
             <div class="stat-sm-label">Đang hiển thị</div>
             <div class="stat-sm-val">{{ \App\Models\Job::where('is_active', true)->count() }}</div>
-          </div><span style="font-size:20px">✅</span>
+          </div><span style="font-size:20px"><i class="fa-solid fa-eye"></i></span>
         </div>
         <div class="stat-sm">
           <div>
             <div class="stat-sm-label">Thực tập</div>
             <div class="stat-sm-val">{{ \App\Models\Job::where('type', 'internship')->count() }}</div>
-          </div><span style="font-size:20px">🎓</span>
+          </div><span style="font-size:20px"><i class="fa-solid fa-graduation-cap"></i></span>
         </div>
         <div class="stat-sm">
           <div>
             <div class="stat-sm-label">Tất cả khoa</div>
             <div class="stat-sm-val">{{ \App\Models\Job::whereNull('khoa')->count() }}</div>
-          </div><span style="font-size:20px">🌐</span>
+          </div><span style="font-size:20px"><i class="fa-solid fa-globe"></i></span>
         </div>
       </div>
 
       <div class="toolbar">
-        <input class="tb-in" wire:model.live.debounce.300ms="search" type="text"
-          placeholder="🔍  Tìm theo tiêu đề, công ty...">
+      <input class="tb-in" wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm theo tiêu đề, công ty...">       
         <select class="tb-sel" wire:model.live="type">
           <option value="">Tất cả loại</option>
           <option value="full-time">Full-time</option>
@@ -624,10 +623,10 @@
                       <span class="dd-dot"></span>
                     </button>
                     <div class="dd-menu" x-show="open" @click.outside="open=false" x-transition>
-                      <div class="dd-item" @click="open=false" wire:click="openDetail({{ $job->id }})"> Xem chi tiết</div>
-                      <div class="dd-item" @click="open=false" wire:click="openEdit({{ $job->id }})">Chỉnh sửa </div>
+                      <div class="dd-item" @click="open=false" wire:click="openDetail({{ $job->id }})"> <i class="fa-solid fa-eye"></i> Xem chi tiết</div>
+                      <div class="dd-item" @click="open=false" wire:click="openEdit({{ $job->id }})"> <i class="fa-solid fa-edit"></i> Chỉnh sửa </div>
                       <div class="dd-sep"></div>
-                      <div class="dd-item red" @click="open=false" wire:click="delete({{ $job->id }})">Xóa</div>
+                      <div class="dd-item red" @click="open=false" wire:click="delete({{ $job->id }})"> <i class="fa-solid fa-trash"></i> Xóa</div>
                     </div>
                   </div>
                 </td>
@@ -646,7 +645,6 @@
       </div>
     </div>
 
-    {{-- MODAL XEM CHI TIẾT --}}
     @if($showDetail && $detail)
       <div class="modal-bg" wire:click.self="$set('showDetail', false)">
         <div class="modal">
@@ -688,18 +686,18 @@
             <div class="d-desc">{{ $detail->description }}</div>
           @endif
           <div class="d-footer">
-            <button class="btn-xs btn-del-sm" wire:click="delete({{ $detail->id }})" wire:confirm="Xóa tin này?">🗑 Xóa
+            <button class="btn-xs btn-del-sm" wire:click="delete({{ $detail->id }})" wire:confirm="Xóa tin này?"><i class="fa-solid fa-trash"></i> Xóa
               tin</button>
             <div style="display:flex;gap:8px">
               <button class="btn-xs" wire:click="$set('showDetail', false)">Đóng</button>
-              <button class="btn-prim" wire:click="openEdit({{ $detail->id }})">✎ Chỉnh sửa</button>
+              <button class="btn-prim" wire:click="openEdit({{ $detail->id }})"><i class="fa-solid fa-edit"></i> Chỉnh sửa</button>
             </div>
           </div>
         </div>
       </div>
     @endif
 
-    {{-- MODAL THÊM / SỬA --}}
+    
     @if($showForm)
       <div class="modal-bg" wire:click.self="$set('showForm', false)">
         <div class="modal">
@@ -728,8 +726,7 @@
             <div class="fi"><label>Ngành nghề</label><input wire:model="field" type="text" placeholder="Công nghệ...">
             </div>
             <div class="fi"><label>Mức lương</label><input wire:model="salary" type="text" placeholder="18–30 tr"></div>
-            <div class="fi"><label>Icon (emoji)</label><input wire:model="logo_emoji" type="text" placeholder="💻"></div>
-            <div class="fi"><label>Email liên hệ</label><input wire:model="contact_email" type="email"
+            <div class="fi"><label>Icon</label><input wire:model="logo_emoji" type="text" placeholder="<i class='fa-solid fa-laptop'></i>"></div>            <div class="fi"><label>Email liên hệ</label><input wire:model="contact_email" type="email"
                 placeholder="hr@congty.com">@error('contact_email')<div class="err">{{ $message }}</div>@enderror</div>
             <div class="fi full"><label>Mô tả công việc</label><textarea wire:model="description"
                 placeholder="Mô tả yêu cầu, quyền lợi..."></textarea></div>

@@ -12,7 +12,7 @@ Route::get('/login', \App\Livewire\Auth\Login::class) ->name('login');
 Route::get('/register', \App\Livewire\Auth\register::class)->name('register');
 
 //User
-Route::get('/csv', \App\Livewire\User\Csv::class)->name('csv');
+Route::get('/csv', \App\Livewire\User\Csv::class)->middleware('auth')->name('csv');
 Route::get('/job', \App\Livewire\User\Jobs::class)->name('job');
 Route::get('/event', \App\Livewire\User\event::class)->name('event');
 Route::get('/event/{id}', \App\Livewire\User\eventdetail::class)->name('event.show');

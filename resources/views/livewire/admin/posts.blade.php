@@ -160,15 +160,15 @@
 </div>
  
 <div class="stats">
-  <div class="stat"><div class="stat-ic ic-b">📝</div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng bài viết</div></div>
-  <div class="stat"><div class="stat-ic ic-g">✅</div><div class="stat-n n-g">{{ $stats['published'] }}</div><div class="stat-l">Đã đăng</div></div>
-  <div class="stat"><div class="stat-ic ic-o">🔔</div><div class="stat-n n-o">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
-  <div class="stat"><div class="stat-ic ic-a">⏳</div><div class="stat-n n-a">{{ $stats['draft'] }}</div><div class="stat-l">Bản nháp</div></div>
+  <div class="stat"><div class="stat-ic ic-b"><i class="fa-solid fa-pen-to-square"></i></div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng bài viết</div></div>
+  <div class="stat"><div class="stat-ic ic-g"><i class="fa-solid fa-check-circle"></i></div><div class="stat-n n-g">{{ $stats['published'] }}</div><div class="stat-l">Đã đăng</div></div>
+  <div class="stat"><div class="stat-ic ic-o"><i class="fa-solid fa-bell"></i></div><div class="stat-n n-o">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
+  <div class="stat"><div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div><div class="stat-n n-a">{{ $stats['draft'] }}</div><div class="stat-l">Bản nháp</div></div>
 </div>
  
 <div class="toolbar">
   <div class="sw">
-    <span class="sw-ic">🔍</span>
+    <span class="sw-ic"><i class="fa-solid fa-magnifying-glass"></i></span>
     <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tiêu đề, tác giả...">
   </div>
   <select wire:model.live="filterStatus" class="sel">
@@ -215,9 +215,15 @@
             'draft'     => 'Bản nháp',
             default     => 'Ẩn'
           };
-          $catIcons = ['Sự kiện'=>'📅','Tuyển dụng'=>'💼','Chia sẻ'=>'💬','Tin tức'=>'📰'];
-          $ico = $catIcons[$post->category] ?? '📄';
-        @endphp
+          $catIcons = [
+            'Sự kiện'   => '<i class="fa-solid fa-calendar-days"></i>',
+            'Tuyển dụng'=> '<i class="fa-solid fa-briefcase"></i>',
+            'Chia sẻ'   => '<i class="fa-solid fa-comments"></i>',
+            'Tin tức'   => '<i class="fa-solid fa-newspaper"></i>',
+          ];
+
+          $ico = $catIcons[$post->category] ?? '<i class="fa-solid fa-file-lines"></i>';        
+      @endphp
         <tr>
           <td>
             <div class="post-row">
@@ -225,12 +231,12 @@
                 @if($post->thumbnail)
                   <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="">
                 @else
-                  {{ $ico }}
+                  {!! $ico !!}
                 @endif
               </div>
               <div style="min-width:0">
                 <div class="post-title">{{ $post->title }}</div>
-                <div class="post-meta">👁 {{ $post->formatted_views }} lượt xem</div>
+                <div class="post-meta"><i class="fa-solid fa-eye"></i> {{ $post->formatted_views }} lượt xem</div>
               </div>
             </div>
           </td>
@@ -252,49 +258,49 @@
  
                 {{-- Xem trước --}}
                 <div class="dd-item" @click="open=false" wire:click="openView({{ $post->id }})">
-                  👁 Xem trước
+                  <i class="fa-solid fa-eye"></i> Xem trước
                 </div>
  
-                {{-- Duyệt (chỉ khi pending) --}}
+               
                 @if($post->status === 'pending')
                 <div class="dd-item green" @click="open=false" wire:click="openApprove({{ $post->id }})">
-                  ✓ Duyệt bài
+                  <i class="fa-solid fa-check"></i> Duyệt bài
                 </div>
                 @endif
  
-                {{-- Đăng nhanh (draft/hidden) --}}
+                
                 @if(in_array($post->status, ['draft', 'hidden']))
                 <div class="dd-item green" @click="open=false" wire:click="openApprove({{ $post->id }})"">
-                  ✓ Duyệt & Đăng
+                  <i class="fa-solid fa-check"></i> Duyệt & Đăng
                 </div>
                 @endif
  
-                {{-- Về nháp --}}
+                
                 @if($post->status === 'published')
                 <div class="dd-item amber" @click="open=false" wire:click="toDraft({{ $post->id }})">
-                  ⏳ Về bản nháp
+                  <i class="fa-solid fa-clock"></i> Chờ duyệt 
                 </div>
                 @endif
  
-                {{-- Ẩn --}}
+                
                 @if($post->status === 'published')
                 <div class="dd-item amber" @click="open=false" wire:click="hidePost({{ $post->id }})">
-                  🚫 Ẩn bài
+                  <i class="fa-solid fa-eye-slash"></i> Từ chối 
                 </div>
                 @endif
  
                 <div class="dd-sep"></div>
  
-                {{-- Sửa --}}
+                
                 <div class="dd-item" @click="open=false" wire:click="openEdit({{ $post->id }})">
-                  ✎ Chỉnh sửa
+                  <i class="fa-solid fa-edit"></i> Chỉnh sửa
                 </div>
  
                 <div class="dd-sep"></div>
  
-                {{-- Xoá --}}
+                
                 <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $post->id }})">
-                  🗑 Xoá
+                  <i class="fa-solid fa-trash"></i> Xoá
                 </div>
  
               </div>
@@ -317,9 +323,7 @@
  
 </div>
  
-{{-- ══════════════════════
-     MODAL THÊM / SỬA
-══════════════════════ --}}
+
 @if($showModal)
 <div class="mo-bg" wire:click.self="closeModal">
   <div class="mo">
@@ -342,20 +346,20 @@
           <label>Danh mục *</label>
           <select wire:model="f_category">
             <option value="">-- Chọn danh mục --</option>
-            <option value="Tin tức">📰 Tin tức</option>
-            <option value="Sự kiện">📅 Sự kiện</option>
-            <option value="Tuyển dụng">💼 Tuyển dụng</option>
-            <option value="Chia sẻ">💬 Chia sẻ</option>
+            <option value="Tin tức"><i class="fa-solid fa-newspaper"></i> Tin tức</option>
+            <option value="Sự kiện"><i class="fa-solid fa-calendar"></i> Sự kiện</option>
+            <option value="Tuyển dụng"><i class="fa-solid fa-briefcase"></i> Tuyển dụng</option>
+            <option value="Chia sẻ"><i class="fa-solid fa-comments"></i> Chia sẻ</option>
           </select>
           @error('f_category')<div class="err">{{ $message }}</div>@enderror
         </div>
         <div class="fi">
           <label>Trạng thái</label>
           <select wire:model="f_status">
-            <option value="draft">⏳ Bản nháp</option>
-            <option value="pending">🔔 Gửi duyệt</option>
-            <option value="published">✅ Đăng luôn</option>
-            <option value="hidden">🚫 Ẩn</option>
+            <option value="draft"><i class="fa-solid fa-clock"></i> Chờ duyệt</option>
+            <option value="pending"><i class="fa-solid fa-paper-plane"></i> Gửi duyệt</option>
+            <option value="published"><i class="fa-solid fa-check"></i> Đăng luôn</option>
+            <option value="hidden"><i class="fa-solid fa-eye-slash"></i> Từ chối</option>
           </select>
         </div>
       </div>
@@ -378,7 +382,7 @@
  
       <div class="check-row">
         <input type="checkbox" wire:model="f_featured" id="featured">
-        <label for="featured">⭐ Đánh dấu là bài viết nổi bật</label>
+        <label for="featured"><i class="fa-solid fa-star"></i> Đánh dấu là bài viết nổi bật</label>
       </div>
  
     </div>
@@ -393,9 +397,7 @@
 </div>
 @endif
  
-{{-- ══════════════════════
-     MODAL XEM TRƯỚC
-══════════════════════ --}}
+
 @if($showView && $viewPost)
 <div class="mo-bg" wire:click.self="closeView">
   <div class="mo">
@@ -404,20 +406,27 @@
       <button class="mo-close" wire:click="closeView">✕</button>
     </div>
     <div class="mo-body" style="gap:0">
-      @php $catIcons = ['Sự kiện'=>'📅','Tuyển dụng'=>'💼','Chia sẻ'=>'💬','Tin tức'=>'📰']; @endphp
-      <div class="pv-thumb">
+    @php
+      $catIcons = [
+        'Sự kiện'    => '<i class="fa-solid fa-calendar-days"></i>',
+        'Tuyển dụng' => '<i class="fa-solid fa-briefcase"></i>',
+        'Chia sẻ'    => '<i class="fa-solid fa-comments"></i>',
+        'Tin tức'    => '<i class="fa-solid fa-newspaper"></i>',
+      ];
+    @endphp      
+    <div class="pv-thumb">
         @if($viewPost->thumbnail)
           <img src="{{ asset('storage/'.$viewPost->thumbnail) }}" alt="">
         @else
-          {{ $catIcons[$viewPost->category] ?? '📄' }}
+          {!! $catIcons[$viewPost->category] ?? '<i class="fa-solid fa-file-lines"></i>' !!}
         @endif
       </div>
       <div class="pv-cat">{{ $viewPost->category ?: 'Chưa phân loại' }}</div>
       <div class="pv-title">{{ $viewPost->title }}</div>
       <div class="pv-meta">
-        <span>✍ {{ $viewPost->author?->name ?? '—' }}</span>
-        <span>📅 {{ $viewPost->published_date }}</span>
-        <span>👁 {{ $viewPost->formatted_views }} lượt xem</span>
+        <span><i class="fa-solid fa-pen"></i> {{ $viewPost->author?->name ?? '—' }}</span>
+        <span><i class="fa-solid fa-calendar-days"></i> {{ $viewPost->published_date }}</span>
+        <span><i class="fa-solid fa-eye"></i> {{ $viewPost->formatted_views }} lượt xem</span>
         @php
           $vbc = match($viewPost->status){ 'published'=>'bd-g','pending'=>'bd-o','draft'=>'bd-a',default=>'bd-r' };
           $vbl = match($viewPost->status){ 'published'=>'Đã đăng','pending'=>'Chờ duyệt','draft'=>'Bản nháp',default=>'Ẩn' };
@@ -431,20 +440,18 @@
     </div>
     <div class="mo-ft">
       <button wire:click="closeView" class="btn btn-ghost">Đóng</button>
-      <button wire:click="openEdit({{ $viewPost->id }})" class="btn btn-ghost">✎ Sửa</button>
+      <button wire:click="openEdit({{ $viewPost->id }})" class="btn btn-ghost"><i class="fa-solid fa-pen-to-square"></i> Sửa</button>
       @if(in_array($viewPost->status, ['draft','pending','hidden']))
-        <button wire:click="openApprove({{ $viewPost->id }})" class="btn btn-green">✓ Duyệt & Đăng</button>
+        <button wire:click="openApprove({{ $viewPost->id }})" class="btn btn-green"><i class="fa-solid fa-check"></i> Duyệt & Đăng</button>
       @elseif($viewPost->status === 'published')
-        <button wire:click="toDraft({{ $viewPost->id }})" class="btn btn-amber">⏳ Về nháp</button>
+        <button wire:click="toDraft({{ $viewPost->id }})" class="btn btn-amber"><i class="fa-solid fa-clock"></i> Về nháp</button>
       @endif
     </div>
   </div>
 </div>
 @endif
  
-{{-- ══════════════════════
-     MODAL DUYỆT BÀI
-══════════════════════ --}}
+
 @if($showApprove && $approvePost)
 <div class="mo-bg" wire:click.self="closeApprove">
   <div class="mo mo-sm">
@@ -456,9 +463,9 @@
       <div class="ap-info">
         <div class="ap-title">{{ $approvePost->title }}</div>
         <div class="ap-meta">
-          ✍ {{ $approvePost->author?->name ?? '—' }} ·
-          📅 {{ $approvePost->published_date }} ·
-          {{ $approvePost->category }}
+          <i class="fa-solid fa-pen"></i> {{ $approvePost->author?->name ?? '—' }} ·
+          <i class="fa-solid fa-calendar-days"></i> {{ $approvePost->published_date }} ·
+          <i class="fa-solid fa-tag"></i> {{ $approvePost->category }}
         </div>
       </div>
       <p style="font-size:13px;color:#64748b;line-height:1.7">
@@ -469,7 +476,7 @@
     <div class="mo-ft">
       <button wire:click="closeApprove" class="btn btn-ghost">Huỷ</button>
       <button wire:click="approve" class="btn btn-green">
-        <span wire:loading.remove wire:target="approve">✓ Duyệt & Đăng ngay</span>
+        <span wire:loading.remove wire:target="approve"><i class="fa-solid fa-check"></i> Duyệt & Đăng ngay</span>
         <span wire:loading wire:target="approve"><span class="spin"></span> Đang duyệt...</span>
       </button>
     </div>
@@ -477,14 +484,12 @@
 </div>
 @endif
  
-{{-- ══════════════════════
-     MODAL XOÁ
-══════════════════════ --}}
+
 @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo mo-sm">
     <div class="cf-wrap">
-      <div class="cf-ic">🗑</div>
+      <div class="cf-ic"><i class="fa-solid fa-trash"></i></div>
       <div class="cf-t">Xoá bài viết?</div>
       <div class="cf-s">
         Bạn sắp xoá bài viết<br>

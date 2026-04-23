@@ -115,21 +115,21 @@
     <div class="flash">✓ {{ session('success') }}</div>
   @endif
 
-  {{-- topbar --}}
+  
   <div class="topbar">
     <div><div class="tt">Cựu sinh viên</div><div class="ts">Quản lý danh sách alumni</div></div>
     <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
   </div>
 
-  {{-- stats --}}
+ 
   <div class="stats">
-    <div class="stat"><div class="stat-ic ic-b">🎓</div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng cựu SV</div></div>
-    <div class="stat"><div class="stat-ic ic-g">✅</div><div class="stat-n n-g">{{ $stats['active'] }}</div><div class="stat-l">Đã xác minh</div></div>
-    <div class="stat"><div class="stat-ic ic-a">⏳</div><div class="stat-n n-a">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
-    <div class="stat"><div class="stat-ic ic-p">💼</div><div class="stat-n n-p">{{ $stats['hasJob'] }}</div><div class="stat-l">Có việc làm</div></div>
+    <div class="stat"><div class="stat-ic ic-b"><i class="fa-solid fa-graduation-cap"></i></div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng cựu SV</div></div>
+    <div class="stat"><div class="stat-ic ic-g"><i class="fa-solid fa-check-circle"></i></div><div class="stat-n n-g">{{ $stats['active'] }}</div><div class="stat-l">Đã xác minh</div></div>
+    <div class="stat"><div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div><div class="stat-n n-a">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
+    <div class="stat"><div class="stat-ic ic-p"><i class="fa-solid fa-briefcase"></i></div><div class="stat-n n-p">{{ $stats['hasJob'] }}</div><div class="stat-l">Có việc làm</div></div>
   </div>
 
-  {{-- toolbar --}}
+  
   <div class="toolbar">
     <div class="sw">
       <span class="sw-ic">🔍</span>
@@ -192,20 +192,20 @@
               </button>
               <div class="dropdown" :class="{ open: open }">
                 <div class="dd-item" @click="open=false" wire:click="openView({{ $u->id }})">
-                  <span class="dd-ic">👁</span> Xem hồ sơ
+                  <span class="dd-ic"><i class="fa-solid fa-eye"></i></span> Xem hồ sơ
                 </div>
                 @if($st === 'pending')
                 <div class="dd-item green" @click="open=false" wire:click="quickApprove({{ $u->id }})" wire:confirm="Duyệt hồ sơ {{ $u->name }}?">
-                  <span class="dd-ic">✓</span> Duyệt hồ sơ
+                  <span class="dd-ic"><i class="fa-solid fa-check"></i></span> Duyệt hồ sơ
                 </div>
                 @endif
                 <div class="dd-sep"></div>
                 <div class="dd-item" @click="open=false" wire:click="openEdit({{ $u->id }})">
-                  <span class="dd-ic">✎</span> Chỉnh sửa
+                  <span class="dd-ic"><i class="fa-solid fa-pen-to-square"></i></span> Chỉnh sửa
                 </div>
                 <div class="dd-sep"></div>
                 <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $u->id }})">
-                  <span class="dd-ic">🗑</span> Xoá
+                  <span class="dd-ic"><i class="fa-solid fa-trash"></i></span> Xoá
                 </div>
               </div>
             </div>
@@ -287,9 +287,9 @@
         <div class="fi">
           <label>Trạng thái xác minh</label>
           <select wire:model="f_status">
-            <option value="active">✓ Đã xác minh</option>
-            <option value="pending">⏳ Chờ duyệt</option>
-            <option value="inactive">✕ Từ chối</option>
+            <option value="active"> <i class="fa-solid fa-check"></i> Đã xác minh</option>
+            <option value="pending"> <i class="fa-solid fa-clock"></i> Chờ duyệt</option>
+            <option value="inactive"> <i class="fa-solid fa-times"></i> Từ chối</option>
           </select>
         </div>
       </div>
@@ -355,7 +355,7 @@
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:8px">CV đính kèm</div>
       @foreach($viewUser->cvs as $cv)
       <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;margin-bottom:6px">
-        <span style="font-size:18px">📄</span>
+        <span style="font-size:18px"><i class="fa-solid fa-file-lines"></i></span>
         <div style="flex:1;min-width:0">
           <div style="font-size:13px;font-weight:600;color:#0f172a">{{ $cv->file_name }}@if($cv->is_primary) <span class="bd bd-g" style="font-size:10px;margin-left:4px">Chính</span>@endif</div>
           <div style="font-size:11px;color:#94a3b8;margin-top:1px">{{ $cv->file_size }} · {{ $cv->created_at->format('d/m/Y') }}</div>

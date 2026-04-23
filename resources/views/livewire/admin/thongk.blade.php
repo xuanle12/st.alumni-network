@@ -108,7 +108,7 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
         </div>
       </div>
       <div class="sc-val">{{ $this->totalJobs }}</div>
-      <div class="sc-sub up">↑ Đang hiển thị</div>
+      <div class="sc-sub up"> Đang hiển thị</div>
     </div>
     <div class="sc">
       <div class="sc-top">
@@ -132,7 +132,7 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
     </div>
   </div>
  
-  {{-- Biểu đồ cột + Donut --}}
+ 
   <div class="row2">
     <div class="card">
       <div class="card-hd">
@@ -172,9 +172,8 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
     </div>
   </div>
  
-  {{-- 3 cột biểu đồ ngang --}}
+ 
   <div class="row3">
-    {{-- CSV theo khoa --}}
     <div class="card">
       <div class="card-title">CSV theo khoa</div>
       @php $maxKhoa = collect($this->byKhoa)->max('total') ?: 1; @endphp
@@ -190,7 +189,6 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
       </div>
     </div>
  
-    {{-- Khu vực làm việc --}}
     <div class="card">
       <div class="card-title">Khu vực làm việc</div>
       @php $maxLoc = collect($this->byLocation)->max('total') ?: 1; @endphp
@@ -206,7 +204,7 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
       </div>
     </div>
  
-    {{-- Lĩnh vực việc làm --}}
+   
     <div class="card">
       <div class="card-title">Lĩnh vực tuyển dụng</div>
       @php
@@ -229,7 +227,7 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
     </div>
   </div>
  
-  {{-- Bảng top doanh nghiệp --}}
+ 
   <div class="card">
     <div class="card-hd">
       <div class="card-title">Top doanh nghiệp tuyển dụng</div>

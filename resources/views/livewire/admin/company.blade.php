@@ -193,18 +193,18 @@
   <button class="btn-add" wire:click="openAdd">＋ Thêm doanh nghiệp</button>
 </div>
 
-{{-- stats --}}
+
 <div class="stats">
-  <div class="stat"><div class="stat-ic ic-b">🏢</div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng doanh nghiệp</div></div>
-  <div class="stat"><div class="stat-ic ic-g">✅</div><div class="stat-n n-g">{{ $stats['active'] }}</div><div class="stat-l">Đang hợp tác</div></div>
-  <div class="stat"><div class="stat-ic ic-p">📋</div><div class="stat-n n-p">{{ $stats['jobs'] }}</div><div class="stat-l">Tin tuyển dụng</div></div>
-  <div class="stat"><div class="stat-ic ic-a">⏳</div><div class="stat-n n-a">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
+  <div class="stat"><div class="stat-ic ic-b"><i class="fa-solid fa-building"></i></div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng doanh nghiệp</div></div>
+  <div class="stat"><div class="stat-ic ic-g"><i class="fa-solid fa-circle-check"></i></div><div class="stat-n n-g">{{ $stats['active'] }}</div><div class="stat-l">Đang hợp tác</div></div>
+  <div class="stat"><div class="stat-ic ic-p"><i class="fa-solid fa-list"></i></div><div class="stat-n n-p">{{ $stats['jobs'] }}</div><div class="stat-l">Tin tuyển dụng</div></div>
+  <div class="stat"><div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div><div class="stat-n n-a">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
 </div>
 
-{{-- toolbar --}}
+
 <div class="toolbar">
   <div class="sw">
-    <span class="sw-ic">🔍</span>
+    <span class="sw-ic"><i class="fa-solid fa-magnifying-glass"></i></span>
     <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tên, email, lĩnh vực...">
   </div>
   <select wire:model.live="filterStatus" class="sel">
@@ -275,22 +275,22 @@
               </button>
               <div class="dropdown" :class="{ open: open }">
                 <div class="dd-item" @click="open=false" wire:click="openView({{ $c->id }})">
-                  👁 Xem chi tiết
+                  Xem chi tiết
                 </div>
                 @if($c->status === 'pending')
                 <div class="dd-item green" @click="open=false"
                      wire:click="quickApprove({{ $c->id }})"
                      wire:confirm="Duyệt doanh nghiệp {{ $c->name }}?">
-                  ✓ Duyệt
+                  Duyệt
                 </div>
                 @endif
                 <div class="dd-sep"></div>
                 <div class="dd-item" @click="open=false" wire:click="openEdit({{ $c->id }})">
-                  ✎ Chỉnh sửa
+                   Chỉnh sửa
                 </div>
                 <div class="dd-sep"></div>
                 <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $c->id }})">
-                  🗑 Xoá
+                  Xoá
                 </div>
               </div>
             </div>
@@ -298,7 +298,7 @@
         </tr>
         @empty
         <tr>
-          <td colspan="6"><div class="empty">📭 Không tìm thấy doanh nghiệp nào.</div></td>
+          <td colspan="6"><div class="empty"> Không tìm thấy doanh nghiệp nào.</div></td>
         </tr>
         @endforelse
       </tbody>
@@ -400,9 +400,9 @@
         <div class="fi">
           <label>Trạng thái hợp tác</label>
           <select wire:model="f_status">
-            <option value="active">✓ Đang hợp tác</option>
-            <option value="pending">⏳ Chờ duyệt</option>
-            <option value="inactive">✕ Ngừng hợp tác</option>
+            <option value="active"> Đang hợp tác</option>
+            <option value="pending">Chờ duyệt</option>
+            <option value="inactive">Ngừng hợp tác</option>
           </select>
         </div>
         <div class="fi">
@@ -490,7 +490,7 @@
 
       @if($viewCompany->admin_note)
       <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 12px;font-size:13px;color:#92400e">
-        📝 {{ $viewCompany->admin_note }}
+        <i class="fa-solid fa-pen-to-square"></i>{{ $viewCompany->admin_note }}
       </div>
       @endif
     </div>

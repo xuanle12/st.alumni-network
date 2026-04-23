@@ -10,16 +10,15 @@ class Csv extends Component
 {
     use WithPagination;
  
-    // ── tìm kiếm / lọc ──
     public string $search      = '';
     public string $filterStatus = '';
     public string $filterKhoa  = '';
  
-    // ── modal thêm/sửa ──
+    
     public bool    $showModal  = false;
-    public ?int    $editId     = null;   // null = thêm mới
+    public ?int    $editId     = null;   
  
-    // ── fields form ──
+   
     public string $f_name  = '';
     public string $f_email = '';
     public string $f_msv   = '';
@@ -30,11 +29,11 @@ class Csv extends Component
     public string $f_khoa  = '';
     public string $f_status = 'pending';
  
-    // ── modal xem ──
+    
     public bool $showView   = false;
     public ?int $viewId     = null;
  
-    // ── confirm xoá ──
+    
     public bool $showDelete = false;
     public ?int $deleteId   = null;
  
@@ -42,9 +41,7 @@ class Csv extends Component
     public function updatedFilterStatus(): void { $this->resetPage(); }
     public function updatedFilterKhoa():   void { $this->resetPage(); }
  
-    /* ────────────────────────────────
-       MỞ MODAL THÊM MỚI
-    ──────────────────────────────── */
+    
     public function openAdd(): void
     {
         $this->resetForm();
@@ -52,9 +49,7 @@ class Csv extends Component
         $this->showModal = true;
     }
  
-    /* ────────────────────────────────
-       MỞ MODAL SỬA
-    ──────────────────────────────── */
+    
     public function openEdit(int $userId): void
     {
         $user = User::with('profile')->findOrFail($userId);
@@ -74,10 +69,7 @@ class Csv extends Component
         $this->showModal = true;
     }
  
-    /* ────────────────────────────────
-       LƯU (thêm mới hoặc cập nhật)
-       Tạm thời: CHỈ ĐỌC DB, chưa ghi
-    ──────────────────────────────── */
+    
     public function save(): void
     {
         $this->validate([
@@ -100,7 +92,6 @@ class Csv extends Component
  
        
         if ($this->editId) {
-            // CẬP NHẬT
             $user = User::findOrFail($this->editId);
             $user->update(['name' => $this->f_name, 'email' => $this->f_email]);
             Profile::updateOrCreate(
@@ -117,7 +108,6 @@ class Csv extends Component
             );
             session()->flash('success', 'Đã cập nhật thông tin.');
         } else {
-            // THÊM MỚI
             $user = User::create([
                 'name'     => $this->f_name,
                 'email'    => $this->f_email,
@@ -138,7 +128,7 @@ class Csv extends Component
         }
         
  
-        // Tạm thời chỉ đóng modal 
+        
         session()->flash('success', $this->editId ? 'Đã cập nhật .' : 'Đã thêm.');
         $this->closeModal();
     }
@@ -163,9 +153,7 @@ class Csv extends Component
         $this->viewId   = null;
     }
  
-    /* ────────────────────────────────
-       DUYỆT NHANH
-    ──────────────────────────────── */
+    
     public function quickApprove(int $userId): void
     {
         Profile::where('user_id', $userId)->update(['status' => 'active']);
@@ -194,9 +182,7 @@ class Csv extends Component
         $this->closeDelete();
     }
  
-    /* ────────────────────────────────
-       HELPERS
-    ──────────────────────────────── */
+    
     private function resetForm(): void
     {
         $this->f_name = $this->f_email = $this->f_msv = '';
