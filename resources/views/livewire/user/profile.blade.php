@@ -2,7 +2,12 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:100vh}
-
+.fi input,
+.fi textarea,
+.sf-row input,
+.btn{
+    font-family: "Times New Roman", Times, serif;
+}
 /* ── LAYOUT ── */
 .page{display:flex;min-height:100vh}
 
@@ -61,16 +66,22 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
 
 .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
 
-/* ── CARD ── */
+
 .card{background:#fff;border:1px solid #e0e4ee;border-radius:12px;padding:1.25rem 1.5rem}
 .card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .card-title{font-size:15px;font-weight:700;color:#111827}
 
-/* ── BUTTONS ── */
 .btn{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;
-  border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  min-width:90px;
+}
+.btn span{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 .btn-out{background:#fff;border-color:#d1d5db;color:#374151}
 .btn-out:hover{background:#f9fafb;border-color:#9ca3af}
@@ -194,7 +205,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
 
 <div class="page">
    
-  {{-- ══ SIDEBAR ══ --}}
+  
   <aside class="sb">
   <div class="sb-ava">{{ auth()->user()?->initials ?? '?' }}</div>
   <div class="sb-name">{{ auth()->user()?->name ?? 'Guest' }}</div>
@@ -219,14 +230,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
   </aside>
    
 
-  {{-- ══ MAIN ══ --}}
   <div class="main">
 
     @if(session('success'))
       <div class="flash">✓ {{ session('success') }}</div>
     @endif
 
-    {{-- Card 1: Thông tin cơ bản --}}
     <div class="card">
       <div class="card-hd">
         <div class="card-title">Thông tin cơ bản</div>
@@ -267,8 +276,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
         <div class="fa">
           <button wire:click="cancelInfo" class="btn btn-ghost">Huỷ</button>
           <button wire:click="saveInfo" class="btn btn-prim">
-            <span wire:loading wire:target="saveInfo">Đang lưu...</span>
             <span wire:loading.remove wire:target="saveInfo">Lưu</span>
+            <span wire:loading wire:target="saveInfo">Đang lưu...</span>
           </button>
         </div>
 
@@ -308,7 +317,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
       @endif
     </div>
 
-    {{-- Card 2: Mạng xã hội --}}
+   
     <div class="card">
       <div class="card-hd">
         <div class="card-title">Mạng xã hội &amp; Liên kết</div>
@@ -320,17 +329,17 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
        @if(isset($editingSocial) && !$editingSocial)
         <div class="sf-list">
           <div class="sf-row">
-            <span>⌥</span>
+            <span><i class="fa-brands fa-github"></i></span>
             <input wire:model="github" type="url" placeholder="https://github.com/username">
           </div>
           @error('github')<div class="err" style="margin-left:32px">{{ $message }}</div>@enderror
           <div class="sf-row">
-            <span>🔗</span>
+            <span><i class="fa-brands fa-linkedin"></i></span>
             <input wire:model="linkedin" type="url" placeholder="https://linkedin.com/in/username">
           </div>
           @error('linkedin')<div class="err" style="margin-left:32px">{{ $message }}</div>@enderror
           <div class="sf-row">
-            <span>🌐</span>
+            <span><i class="fa-brands fa-globe"></i></span>
             <input wire:model="website" type="url" placeholder="https://yourwebsite.com">
           </div>
           @error('website')<div class="err" style="margin-left:32px">{{ $message }}</div>@enderror
@@ -346,7 +355,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
       @else
         <div class="soc-list">
           <div class="soc-item">
-            <div class="soc-ico">⌥</div>
+            <div class="soc-ico"><i class="fa-brands fa-github"></i></div>
             <div class="soc-text">
               <div class="soc-lbl">GitHub</div>
               @if(auth()->user()?->profile?->github)
@@ -357,7 +366,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
             </div>
           </div>
           <div class="soc-item">
-            <div class="soc-ico">🔗</div>
+            <div class="soc-ico"><i class="fa-brands fa-linkedin"></i></div>
             <div class="soc-text">
               <div class="soc-lbl">LinkedIn</div>
               @if(auth()->user()?->profile?->linkedin)
@@ -368,7 +377,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
             </div>
           </div>
           <div class="soc-item">
-            <div class="soc-ico">🌐</div>
+            <div class="soc-ico"><i class="fa-brands fa-globe"></i></div>
             <div class="soc-text">
               <div class="soc-lbl">Website</div>
               @if(auth()->user()?->profile?->website)
@@ -382,20 +391,20 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
       @endif
     </div>
 
-    {{-- Card 3: CV --}}
+  
     <div class="card">
       <div class="card-hd">
         <div class="card-title">CV / Hồ sơ đính kèm</div>
       </div>
 
-      {{-- Danh sách CV --}}
+      
       @php
         $cvs = auth()->user()?->cv()->get() ?? collect();
       @endphp
 
       @forelse($cvs as $cv)
         <div class="cv-item">
-          <div class="cv-ico">📄</div>
+          <div class="cv-ico"><i class="fa-solid fa-file-lines"></i></div>
           <div class="cv-inf">
             <div class="cv-name">
               {{ $cv->file_name }}
@@ -412,13 +421,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
           </div>
         </div>
       @empty
-        <div class="empty-cv">📂 Chưa có CV nào. Tải lên bên dưới.</div>
+        <div class="empty-cv"><i class="fa-solid fa-folder-open"></i> Chưa có CV nào. Tải lên bên dưới.</div>
       @endforelse
 
       {{-- Upload --}}
       <label class="upzone">
         <input wire:model="cvFile" type="file" accept=".pdf,.doc,.docx">
-        <div class="up-ico">☁</div>
+        <div class="up-ico"><i class="fa-solid fa-cloud-upload-alt"></i></div>
         <div class="up-title">Tải lên CV (PDF)</div>
         <div class="up-sub">PDF, DOC, DOCX · Tối đa 5MB</div>
         <span class="btn btn-out btn-sm" style="pointer-events:none">Chọn file</span>
@@ -426,7 +435,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
 
       @if(!empty($errors->get('cvFile')) == false && request()->hasFile('cvFile'))
         <div class="up-prev">
-          <span style="font-size:18px">📎</span>
+          <span style="font-size:18px"><i class="fa-solid fa-paperclip"></i></span>
           <p>{{ is_object($cvFile) ? $cvFile->getClientOriginalName() : 'File đã chọn' }}</p>
         </div>
         @error('cvFile')<div class="err" style="margin-top:5px;font-size:12px">{{ $message }}</div>@enderror
@@ -441,6 +450,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
       @endif
     </div>
 
-  </div>{{-- end main --}}
-</div>{{-- end page --}}
+  </div>
+</div>
 </div>

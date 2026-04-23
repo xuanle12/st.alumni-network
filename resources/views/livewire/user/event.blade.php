@@ -131,18 +131,18 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
 
 <div class="wrap">
 
-  {{-- Flash --}}
+  
   @if(session('success'))
-    <div class="flash-s">✓ {{ session('success') }}</div>
+    <div class="flash-s"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
   @endif
   @if(session('error'))
-    <div class="flash-e">✕ {{ session('error') }}</div>
+    <div class="flash-e"><i class="fa-solid fa-times"></i> {{ session('error') }}</div>
   @endif
   @if(session('info'))
-    <div class="flash-i">ℹ {{ session('info') }}</div>
+    <div class="flash-i"><i class="fa-solid fa-info-circle"></i> {{ session('info') }}</div>
   @endif
 
-  {{-- ── HERO ── --}}
+  
   <div class="hero">
     <div class="hero-label">Sự kiện & Hoạt động</div>
     <div class="hero-title">Kết nối — Chia sẻ — Phát triển</div>
@@ -163,7 +163,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
     </div>
   </div>
 
-  {{-- ── FILTER BAR ── --}}
+  
   <div class="filter-bar">
     <div class="search-box">
       <svg class="search-ico" width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -180,7 +180,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
     </div>
   </div>
 
-  {{-- ── SỰ KIỆN NỔI BẬT ── --}}
+  
   @if($featured && $activeTab === 'all' && !$search)
   <div class="section-title">Sự kiện nổi bật</div>
   <div class="events-grid" style="margin-bottom:1.5rem">
@@ -243,7 +243,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
   </div>
   @endif
 
-  {{-- ── EVENTS GRID ── --}}
   <div class="section-title">
     {{ $activeTab === 'past' ? 'Sự kiện đã qua' : 'Sự kiện ' . ($search ? 'tìm thấy' : 'sắp diễn ra') }}
   </div>
@@ -314,7 +313,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
     <div class="empty">📭 Không tìm thấy sự kiện nào.</div>
   @endif
 
-  {{-- ── SẮP DIỄN RA (list) ── --}}
+  
   @if($upcomingEvents->count() && $activeTab === 'all' && !$search)
   <div class="section-title">Sắp diễn ra</div>
   <div class="upcoming-list">
@@ -328,7 +327,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
       <div class="up-divider"></div>
       <div class="up-info">
         <div class="up-title">{{ $event->title }}</div>
-        <div class="up-meta">📍 {{ $event->location ?: 'TBA' }} · {{ $event->time_range }}</div>
+        <div class="up-meta"><i class="fa-solid fa-location-dot"></i>{{ $event->location ?: 'TBA' }} · {{ $event->time_range }}</div>
       </div>
       <div class="up-right">
         @if($event->is_internal)

@@ -101,14 +101,14 @@
   </a>
  
   @if(session('success'))
-    <div class="flash-ok">✓ {{ session('success') }}</div>
+    <div class="flash-ok"><i class="fa-solid fa-check"></i>{{ session('success') }}</div>
   @endif
  
   <div class="ep-layout">
  
-    {{-- Nội dung chính --}}
+    
     <div>
-      {{-- Cover --}}
+     
       <div class="cover-box">
         @if($event->cover_image ?? false)
           <img src="{{ asset('storage/'.$event->cover_image) }}" alt="{{ $event->title }}">
@@ -134,7 +134,7 @@
           <span class="tag tgr">Trực tiếp</span>
         </div>
  
-        {{-- Info grid --}}
+        
         <div class="info-grid">
           <div class="ig-item">
             <div class="ig-ico" style="background:#eff6ff">
@@ -174,7 +174,7 @@
           </div>
         </div>
  
-        {{-- Mô tả --}}
+        
         @if($event->description ?? false)
           <div class="sec-title">Giới thiệu sự kiện</div>
           <div class="ev-content">{!! nl2br(e($event->description)) !!}</div>
@@ -188,10 +188,10 @@
       </div>
     </div>
  
-    {{-- Sidebar --}}
+   
     <div>
  
-      {{-- Đăng ký --}}
+   
       <div class="side-card">
         @if($event->event_date->isFuture())
           <div class="countdown">
@@ -219,7 +219,6 @@
         </button>
       </div>
  
-      {{-- Thông tin --}}
       <div class="side-card">
         <div class="side-title">Thông tin chi tiết</div>
         <div class="meta-row"><span class="meta-key">Hình thức</span><span class="meta-val">Trực tiếp</span></div>
@@ -233,7 +232,7 @@
         </div>
       </div>
  
-      {{-- Chia sẻ --}}
+      
       <div class="side-card">
         <div class="side-title">Chia sẻ sự kiện</div>
         <div class="share-row">
@@ -248,7 +247,7 @@
         </div>
       </div>
  
-      {{-- Sự kiện liên quan --}}
+     
       @if($relatedEvents->count() > 0)
       <div class="side-card">
         <div class="side-title">Sự kiện khác</div>
@@ -261,7 +260,7 @@
             </div>
             <div>
               <div class="rel-title">{{ Str::limit($rel->title, 50) }}</div>
-              <div class="rel-meta">📍 {{ Str::limit($rel->location ?? '—', 30) }} · {{ $rel->badge_label }}</div>
+              <div class="rel-meta"><i class="fa-solid fa-location-dot"></i> {{ Str::limit($rel->location ?? '—', 30) }} · {{ $rel->badge_label }}</div>
             </div>
           </div>
         </a>

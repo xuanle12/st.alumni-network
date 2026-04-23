@@ -1,6 +1,6 @@
 <div class="nw-page">
 
-    {{-- LEFT SIDEBAR --}}
+    
     <aside class="nw-left">
         <a href="#" class="nw-profile-row">
             @if($currentUser->profile?->avatar)
@@ -12,19 +12,19 @@
             <div class="nw-profile-name">{{ $currentUser->name }}</div>
         </a>
         <div class="nw-sep"></div>
-        <a href="#" class="nw-li {{ request()->routeIs('home')    ? 'on' : '' }}"><span class="nw-ic">🏠</span> Trang chủ</a>
-        <a href="#" class="nw-li {{ request()->routeIs('network') ? 'on' : '' }}"><span class="nw-ic">👥</span> Mạng lưới</a>
-        <a href="#" class="nw-li {{ request()->routeIs('jobs*')   ? 'on' : '' }}"><span class="nw-ic">💼</span> Tuyển dụng</a>
-        <a href="{{ route('event') }}" class="nw-li {{ request()->routeIs('events*') ? 'on' : '' }}"><span class="nw-ic">📅</span> Sự kiện</a>
-        <a href="{{ route('profile') }}" class="nw-li {{ request()->routeIs('profile') ? 'on' : '' }}"><span class="nw-ic">👤</span> Hồ sơ</a>
+        <a href="#" class="nw-li {{ request()->routeIs('home')    ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-house"></i></span> Trang chủ</a>
+        <a href="#" class="nw-li {{ request()->routeIs('network') ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-users"></i></span> Mạng lưới</a>
+        <a href="#" class="nw-li {{ request()->routeIs('jobs*')   ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-briefcase"></i></span> Tuyển dụng</a>
+        <a href="{{ route('event') }}" class="nw-li {{ request()->routeIs('events*') ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-calendar"></i></span> Sự kiện</a>
+        <a href="{{ route('profile') }}" class="nw-li {{ request()->routeIs('profile') ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-user"></i></span> Hồ sơ</a>
         <div class="nw-sep"></div>
         <div class="nw-lbl">Lối tắt</div>
-        <a href="#" class="nw-sc"><span class="nw-sc-ic">🏫</span> FITA - VNUA</a>
-        <a href="#" class="nw-sc"><span class="nw-sc-ic">💻</span> CSV CNTT HVNNA</a>
-        <a href="#" class="nw-sc"><span class="nw-sc-ic">🌿</span> CSV Nông nghiệp</a>
+        <a href="#" class="nw-sc"><span class="nw-sc-ic"><i class="fa-solid fa-school"></i></span> FITA - VNUA</a>
+        <a href="#" class="nw-sc"><span class="nw-sc-ic"><i class="fa-solid fa-laptop"></i></span> CSV CNTT HVNNA</a>
+        <a href="#" class="nw-sc"><span class="nw-sc-ic"><i class="fa-solid fa-leaf"></i></span> CSV Nông nghiệp</a>
     </aside>
 
-    {{-- FEED --}}
+  
     <main class="nw-feed">
         <div class="nw-filter-bar">
             <h2 class="nw-title">Mạng lưới</h2>
@@ -34,7 +34,6 @@
             <button wire:click="setFilter('recruit')" class="nw-fb {{ $filter === 'recruit' ? 'on' : '' }}">Tuyển dụng</button>
         </div>
 
-        {{-- Ô tạo bài viết --}}
         <div class="nw-cp">
             <div class="nw-cp-row">
                 <div class="nw-cp-row">
@@ -50,17 +49,15 @@
 <div class="modal-overlay" wire:click.self="closeModal">
   <div class="modal-box">
  
-    {{-- Header --}}
     <div class="modal-hd">
       <div style="width:32px"></div>
       <div class="modal-hd-title">Tạo bài viết</div>
       <button class="modal-close" wire:click="closeModal">×</button>
     </div>
  
-    {{-- Body --}}
     <div class="modal-body">
  
-      {{-- Author + category --}}
+    
       <div class="author-row">
         <div class="author-av">
           {{ strtoupper(substr(auth()->user()?->name ?? 'U', 0, 2)) }}
@@ -69,17 +66,17 @@
           <div class="author-name">{{ auth()->user()?->name }}</div>
           <div class="author-cat">
             <select class="cat-sel" wire:model="category">
-              <option value="discussion">💬 Thảo luận</option>
-              <option value="experience">💡 Chia sẻ kinh nghiệm</option>
-              <option value="news">📢 Tin tức</option>
-              <option value="job">💼 Tìm việc</option>
-              <option value="network">🤝 Kết nối</option>
+              <option value="discussion"><i class="fa-solid fa-comments"></i> Thảo luận</option>
+              <option value="experience"><i class="fa-solid fa-lightbulb"></i> Chia sẻ kinh nghiệm</option>
+              <option value="news"><i class="fa-solid fa-bullhorn"></i> Tin tức</option>
+              <option value="job"><i class="fa-solid fa-briefcase"></i> Tìm việc</option>
+              <option value="network"><i class="fa-solid fa-handshake"></i> Kết nối</option>
             </select>
           </div>
         </div>
       </div>
  
-      {{-- Ảnh bìa preview --}}
+      
       @if($coverImage)
         <div class="cover-wrap">
           <img src="{{ $coverImage->temporaryUrl() }}" class="cover-img" alt="Cover">
@@ -87,7 +84,6 @@
         </div>
       @endif
  
-      {{-- Tags --}}
       @if(count($tags) > 0)
         <div class="tags-row">
           @foreach($tags as $i => $tag)
@@ -99,13 +95,13 @@
         </div>
       @endif
  
-      {{-- Tiêu đề (tuỳ chọn) --}}
+     
       <input class="title-input"
              wire:model="title"
              type="text"
              placeholder="Tiêu đề (tuỳ chọn)...">
  
-      {{-- Nội dung --}}
+    
       <textarea
         class="content-editor"
         wire:model="content"
@@ -115,7 +111,7 @@
       </textarea>
       @error('content')<div class="err">{{ $message }}</div>@enderror
  
-      {{-- Tag input --}}
+    
       @if(count($tags) < 5)
         <div class="tag-input-row">
           <span style="font-size:12px;color:#9ca3af">#</span>
@@ -129,23 +125,23 @@
  
     </div>
  
-    {{-- Footer --}}
+    
     <div class="modal-ft">
       <div class="action-row">
-        {{-- Upload ảnh --}}
+        
         <label class="action-btn" for="cover-file">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="#16a34a" stroke-width="1.5"/><circle cx="5" cy="6" r="1.2" stroke="#16a34a" stroke-width="1.2"/><path d="M1 11l4-4 3 3 2-2 4 4" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span class="action-label" style="color:#16a34a">Ảnh</span>
           <input type="file" id="cover-file" wire:model="coverImage" accept="image/*" style="display:none">
         </label>
  
-        {{-- Tag --}}
+        
         <button class="action-btn" onclick="this.closest('.modal-box').querySelector('.tag-input-el')?.focus()">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8L8 2l6 6-6 6-6-6z" stroke="#3b82f6" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="6" r="1" fill="#3b82f6"/></svg>
           <span class="action-label" style="color:#3b82f6">Tag</span>
         </button>
  
-        {{-- Cảm xúc --}}
+        
         <button class="action-btn">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#f59e0b" stroke-width="1.5"/><circle cx="6" cy="7" r=".8" fill="#f59e0b"/><circle cx="10" cy="7" r=".8" fill="#f59e0b"/><path d="M5.5 10c.5 1 4.5 1 5 0" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round"/></svg>
           <span class="action-label" style="color:#f59e0b">Cảm xúc</span>
@@ -167,9 +163,9 @@
             </div>
             <div class="nw-cp-sep"></div>
             <div class="nw-cp-ac">
-                <button class="nw-cpb">📷 Ảnh</button>
-                <button class="nw-cpb">💼 Tuyển dụng</button>
-                <button class="nw-cpb">📅 Sự kiện</button>
+                <button class="nw-cpb"><i class="fa-solid fa-camera"></i> Ảnh</button>
+                <button class="nw-cpb"><i class="fa-solid fa-briefcase"></i> Tuyển dụng</button>
+                <button class="nw-cpb"><i class="fa-solid fa-calendar"></i> Sự kiện</button>
                 <button class="nw-cpb nw-cpb-post">Đăng</button>
             </div>
         </div>
@@ -208,7 +204,7 @@
 
                     @if($post->category === 'job' && $post->job)
                         <div class="nw-jb">
-                            <div class="nw-jbt">💼 {{ $post->job->title }}</div>
+                            <div class="nw-jbt"><i class="fa-solid fa-briefcase"></i> {{ $post->job->title }}</div>
                             <div class="nw-jbm">
                                 {{ $post->job->type }}
                                 @if($post->job->salary) · {{ $post->job->salary }} @endif
@@ -224,9 +220,9 @@
                     <span>{{ number_format($post->comments_count) }} bình luận · {{ number_format($post->shares_count) }} chia sẻ</span>
                 </div>
                 <div class="nw-pac">
-                    <button class="nw-pab">👍 Thích</button>
-                    <button class="nw-pab">💬 Bình luận</button>
-                    <button class="nw-pab">↗ Chia sẻ</button>
+                    <button class="nw-pab"><i class="fa-solid fa-thumbs-up"></i>Thích</button>
+                    <button class="nw-pab"><i class="fa-solid fa-comment"></i> Bình luận</button>
+                    <button class="nw-pab"><i class="fa-solid fa-share"></i> Chia sẻ</button>
                 </div>
             </div>
         @empty

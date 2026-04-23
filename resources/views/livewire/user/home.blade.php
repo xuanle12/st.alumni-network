@@ -115,7 +115,7 @@ use Illuminate\Support\Str;
         </div>
         <div class="alumni-name">{{ $alumni->user->name ?? 'Cựu sinh viên' }}</div>
         <div class="alumni-class">{{ $alumni->lop }} · {{ $alumni->nganh ?? $alumni->khoa }}</div>
-        <div class="alumni-company">💼 {{ Str::limit($alumni->bio, 40) }}</div>
+        <div class="alumni-company"><i class="fa-solid fa-briefcase"></i>{{ Str::limit($alumni->bio, 40) }}</div>
       </div>
       @empty
         <p>Chưa có dữ liệu.</p>
@@ -145,9 +145,9 @@ use Illuminate\Support\Str;
         <div class="event-info">
           <h4>{{ $event->title }}</h4>
           <div class="event-meta">
-            <span>📍 {{ $event->location }}</span>
+            <span><i class="fa-solid fa-location-dot"></i> {{ $event->location }}</span>
             @if($event->time_range)
-              <span>🕘 {{ $event->time_range }}</span>
+              <span><i class="fa-solid fa-clock"></i>{{ $event->time_range }}</span>
             @endif
           </div>
         </div>
