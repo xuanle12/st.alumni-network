@@ -396,7 +396,7 @@
 
         {{-- Logo --}}
         <div class="reg-logo">
-            <div class="reg-logo-icon">🎓</div>
+            <div class="reg-logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
             <div>
                 <div class="reg-logo-text">Alumni HVNNA</div>
                 <div class="reg-logo-sub">Mạng lưới cựu sinh viên</div>
@@ -406,7 +406,7 @@
         <h2 class="reg-title">Tạo tài khoản</h2>
         <p class="reg-desc">Điền thông tin bên dưới để đăng ký.</p>
 
-        {{-- Họ tên --}}
+        
         <div class="reg-row">
             <div class="reg-field">
                 <label class="reg-label">Họ và tên đệm</label>
@@ -423,7 +423,7 @@
             </div>
         </div>
 
-        {{-- Email --}}
+        
         <div class="reg-field">
             <label class="reg-label">Email</label>
             <input class="reg-input @error('email') is-error @enderror"
@@ -431,7 +431,7 @@
             @error('email')<span class="reg-field-err">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Mật khẩu --}}
+       
         <div class="reg-row">
             <div class="reg-field">
                 <label class="reg-label">Mật khẩu</label>
@@ -446,7 +446,7 @@
             </div>
         </div>
 
-        {{-- Xác minh cựu SV --}}
+        
         <div class="reg-verify-box">
             <div class="reg-verify-title">
                 Xác minh cựu sinh viên
@@ -499,26 +499,26 @@
             </div>
         </div>
 
-        {{-- Lỗi xác minh --}}
+        
         @error('verify')
             <div class="reg-err-box">{{$message}}</div>
         @enderror
 
-        {{-- Submit --}}
+        
         <button class="reg-submit" wire:click="register" wire:loading.attr="disabled" wire:target="register">
           <span wire:loading.remove wire:target="register">Đăng ký</span>
           <span wire:loading wire:target="register" class="reg-spinner"></span>
         </button>
-        {{-- Divider --}}
+        
         <div class="reg-or">
             <div class="reg-or-line"></div>
             <span class="reg-or-text">hoặc</span>
             <div class="reg-or-line"></div>
         </div>
 
-        {{-- SSO --}}
+        
         <a href="#" class="reg-sso">
-            🔐 Đăng ký bằng SSO
+            <i class="fa-solid fa-lock"></i> Đăng ký bằng SSO
         </a>
 
         <p class="reg-login-text">

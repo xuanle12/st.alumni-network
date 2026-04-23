@@ -7,7 +7,7 @@
         <div class="corner corner-bl"></div>
         <div class="corner corner-br"></div>
 
-        {{-- Left panel --}}
+        
         <div class="login-left">
             <div class="fade1" style="margin-bottom:40px">
                 <div class="login-seal">
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        {{-- Right panel --}}
+        
         <div class="login-right">
             <div class="login-card">
                 <div class="fade1" style="margin-bottom:28px">
@@ -35,7 +35,7 @@
 
                 <form wire:submit="loginWithEmail">
                     <div class="form-group fade4">
-                        {{-- Email --}}
+                        
                         <div>
                             <label class="field-label">EMAIL</label>
                             <input
@@ -50,7 +50,7 @@
                             @enderror
                         </div>
 
-                        {{-- Password --}}
+                        
                         <div>
                             <div class="field-row">
                                 <label class="field-label" style="margin-bottom:0">MẬT KHẨU</label>
