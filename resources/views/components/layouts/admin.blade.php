@@ -54,6 +54,9 @@
             <span class="adm-item-ic" data-lucide="building-2"></span>
             Doanh nghiệp
         </a>
+        <a href="{{ route('admin.post') }}"
+            class="adm-item {{ request()->routeIs('admin.post') ? 'active' : '' }}">
+            <span class="adm-item-ic" data-lucide="file-text"></span>Bài viết</a>
 
         <div class="adm-div"></div>
         <div class="adm-sec">Hệ thống</div>

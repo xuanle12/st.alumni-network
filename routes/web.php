@@ -25,3 +25,4 @@ Route::get('/admin/Csv', \App\Livewire\Admin\csv::class)->name('admin.csv');
 Route::get('/admin/company', \App\Livewire\Admin\company::class)->name('admin.company');
 Route::get('/admin/job', \App\Livewire\Admin\job::class)->name('admin.job');
 Route::get('/admin/thongk', \App\Livewire\Admin\thongk::class)->name('admin.thongk');
+Route::get('/admin/post', \App\Livewire\Admin\posts::class)->name('admin.post');
