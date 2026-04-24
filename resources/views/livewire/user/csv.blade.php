@@ -13,8 +13,7 @@
         </a>
         <div class="nw-sep"></div>
         <a href="#" class="nw-li {{ request()->routeIs('home')    ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-house"></i></span> Trang chủ</a>
-        <a href="#" class="nw-li {{ request()->routeIs('network') ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-users"></i></span> Mạng lưới</a>
-        <a href="#" class="nw-li {{ request()->routeIs('jobs*')   ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-briefcase"></i></span> Tuyển dụng</a>
+        <a href="{{ route('job') }}" class="nw-li {{ request()->routeIs('jobs*')   ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-briefcase"></i></span> Tuyển dụng</a>
         <a href="{{ route('event') }}" class="nw-li {{ request()->routeIs('events*') ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-calendar"></i></span> Sự kiện</a>
         <a href="{{ route('profile') }}" class="nw-li {{ request()->routeIs('profile') ? 'on' : '' }}"><span class="nw-ic"><i class="fa-solid fa-user"></i></span> Hồ sơ</a>
         <div class="nw-sep"></div>
