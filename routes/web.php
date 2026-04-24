@@ -15,7 +15,7 @@ Route::get('/register', \App\Livewire\Auth\Register::class)->name('register');
 Route::get('/csv', \App\Livewire\User\Csv::class)->middleware('auth')->name('csv');
 Route::get('/job', \App\Livewire\User\Jobs::class)->name('job');
 Route::get('/event', \App\Livewire\User\Event::class)->name('event');
-Route::get('/event/{id}', \App\Livewire\User\EventDetail::class)->name('event.show');
+Route::get('/event/{id}', \App\Livewire\User\Eventdetail::class)->name('event.show');
 Route::get('/profile', \App\Livewire\User\Profile::class)->name('profile');
 Route::get('/post', \App\Livewire\User\Post::class)->name('post');
 
