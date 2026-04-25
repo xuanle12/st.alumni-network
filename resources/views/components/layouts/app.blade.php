@@ -182,7 +182,12 @@ nav a {
   white-space: nowrap;
 }
 nav a:hover { color: var(--text); background: #f1f5f2; }
-nav a.active { color: var(--green); background: var(--green-pale); }
+nav a.active{
+    color:#1a6b3a;
+    background:#e8f5ee;
+    font-weight:700;
+    border-radius:8px;
+}
 
 .header-right {
   margin-left: auto;
@@ -457,9 +462,9 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 
     <nav>
         @auth
-        <a href="{{ route('csv') }}" wire:navigate class="{{ request()->routeIs('home') ? 'active' : '' }}">Trang chủ</a>
-        <a href="{{ route('job') }}" wire:navigate class="{{ request()->routeIs('jobs*') ? 'active' : '' }}">Tuyển dụng</a>
-        <a href="{{ route('event') }}" wire:navigate class="{{ request()->routeIs('events*') ? 'active' : '' }}">Sự kiện</a>
+        <a href="{{ route('csv') }}"class="{{ request()->routeIs('csv') ? 'active' : '' }}">Trang chủ</a>
+        <a href="{{ route('job') }}"class="{{ request()->routeIs('job*') ? 'active' : '' }}">Tuyển dụng</a>
+        <a href="{{ route('event') }}"class="{{ request()->routeIs('event*') ? 'active' : '' }}">Sự kiện</a>
        @endauth
     </nav>
 

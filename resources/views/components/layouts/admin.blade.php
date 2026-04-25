@@ -72,7 +72,8 @@
             text-decoration: none;
         }
         .adm-item:hover { color: #94a3b8; background: #1e293b; }
-        .adm-item.active { background: #1e3a5f; color: #60a5fa; font-weight: 600; }
+        .adm-item.active{background:#1f3f6d;color:#60a5fa;font-weight:700;}
+        .adm-item.active .adm-item-ic{color:#60a5fa;}
         .adm-item-ic { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
         .adm-item-badge {
             margin-left: auto;
@@ -155,10 +156,9 @@
 
 <div class="adm-layout">
 
-    {{-- ══════════ SIDEBAR ══════════ --}}
+   
     <aside class="adm-sb">
 
-        {{-- Brand --}}
         <div class="adm-brand">
             <div class="adm-brand-dot">🎓</div>
             <div>
@@ -171,14 +171,12 @@
         {{-- Nav --}}
         <div class="adm-sec">Quản lý</div>
 
-        <a href="{{ route('admin') }}"
-           class="adm-item {{ request()->routeIs('admin.students') ? 'active' : '' }}">
+        <a href="{{ route('admin') }}"class="adm-item {{ request()->routeIs('admin') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="layout-dashboard"></span>
             Dashboard
         </a>
 
-        <a href="{{ route('admin.csv') }}"
-           class="adm-item {{ request()->routeIs('admin.alumni') ? 'active' : '' }}">
+        <a href="{{ route('admin.csv') }}"class="adm-item {{ request()->routeIs('admin.csv*') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="graduation-cap"></span>
             Cựu sinh viên
             @php $pendingAlumni = 0; @endphp
@@ -187,28 +185,24 @@
             @endif
         </a>
 
-        <a href="{{ route('admin.job') }}"
-           class="adm-item {{ request()->routeIs('admin.jobs') ? 'active' : '' }}">
+        <a href="{{ route('admin.job') }}"class="adm-item {{ request()->routeIs('admin.job*') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="briefcase"></span>
             Tuyển dụng
         </a>
 
-        <a href="{{ route('admin.company') }}"
-           class="adm-item {{ request()->routeIs('admin.companies') ? 'active' : '' }}">
+        <a href="{{ route('admin.company') }}"class="adm-item {{ request()->routeIs('admin.company*') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="building-2"></span>
             Doanh nghiệp
         </a>
-        <a href="{{ route('admin.post') }}"
-            class="adm-item {{ request()->routeIs('admin.post') ? 'active' : '' }}">
+        <a href="{{ route('admin.post') }}"class="adm-item {{ request()->routeIs('admin.post*') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="file-text"></span>
-    Bài viết
-</a>
+            Bài viết
+        </a>
 
         <div class="adm-div"></div>
         <div class="adm-sec">Hệ thống</div>
 
-        <a href="{{ route('admin.thongk') }}"
-           class="adm-item {{ request()->routeIs('admin.stats') ? 'active' : '' }}">
+        <a href="{{ route('admin.thongk') }}"class="adm-item {{ request()->routeIs('admin.thongk*') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="bar-chart-3"></span> 
             Thống kê
         </a>

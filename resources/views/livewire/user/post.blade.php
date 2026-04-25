@@ -17,7 +17,7 @@
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.1rem}
 .row2 .fi{margin-bottom:0}
  
-/* Editor */
+
 .editor-wrap{border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;transition:border .15s}
 .editor-wrap:focus-within{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.08)}
 .editor-toolbar{display:flex;gap:2px;padding:6px 8px;border-bottom:1px solid #f3f4f6;background:#fafafa;flex-wrap:wrap}
@@ -27,7 +27,7 @@
 .editor-area{padding:12px;min-height:280px;font-size:13px;color:#374151;line-height:1.8;outline:none}
 .char-count{font-size:11px;color:#9ca3af;text-align:right;padding:5px 10px;border-top:1px solid #f3f4f6}
  
-/* Tags */
+
 .tags-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px;border:1px solid #e2e8f0;border-radius:8px;min-height:42px;cursor:text;transition:border .15s}
 .tags-wrap:focus-within{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.08)}
 .tag-pill{display:flex;align-items:center;gap:4px;background:#eff6ff;color:#1e40af;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px}
@@ -35,7 +35,7 @@
 .tag-pill button:hover{color:#1d4ed8}
 .tag-input-el{border:none;outline:none;font-size:12px;color:#111;font-family:inherit;min-width:80px;flex:1;padding:2px 0}
  
-/* Cover */
+
 .cover-upload{border:2px dashed #e2e8f0;border-radius:8px;padding:1.5rem;text-align:center;cursor:pointer;transition:all .15s}
 .cover-upload:hover{border-color:#3b82f6;background:#f8fbff}
 .cover-preview{width:100%;height:160px;border-radius:8px;object-fit:cover;display:none}
@@ -43,8 +43,7 @@
 .cover-upload.has-img{padding:0;border:none}
 .change-cover{display:block;text-align:center;font-size:11px;color:#6b7280;margin-top:5px;cursor:pointer}
 .change-cover:hover{color:#3b82f6}
- 
-/* Sidebar */
+
 .side-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.1rem;margin-bottom:10px}
 .side-title{font-size:12px;font-weight:600;color:#374151;margin-bottom:.875rem}
 .pub-btn{width:100%;padding:10px;background:#111;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -79,7 +78,7 @@
  
 <div class="cp-wrap">
  
-  {{-- Topbar --}}
+ 
   <div class="cp-topbar">
     <a href="{{ route('csv') }}" class="back-btn">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -138,7 +137,7 @@
           <textarea wire:model="excerpt" rows="2" placeholder="Tóm tắt bài viết trong 1-2 câu..."></textarea>
         </div>
  
-        {{-- Editor nội dung --}}
+       
         <div class="fi">
           <label>Nội dung *</label>
           <div class="editor-wrap">
@@ -177,7 +176,7 @@
           @error('content')<div class="err">{{ $message }}</div>@enderror
         </div>
  
-        {{-- Tags --}}
+        
         <div class="fi">
           <label>Tags (tối đa 5)</label>
           <div class="tags-wrap" onclick="this.querySelector('.tag-input-el').focus()">
@@ -197,7 +196,7 @@
           </div>
         </div>
  
-        {{-- Ảnh bìa --}}
+     
         <div class="fi">
           <label>Ảnh bìa</label>
           <div>
@@ -219,10 +218,10 @@
       </div>
     </div>
  
-    {{-- Sidebar --}}
+    
     <div>
  
-      {{-- Publish --}}
+     
       <div class="side-card pub-card">
         <div class="side-title">Xuất bản</div>
         <button wire:click="publish" class="pub-btn">
@@ -235,7 +234,7 @@
         </button>
       </div>
  
-      {{-- Thông tin bài viết --}}
+      
       <div class="side-card">
         <div class="side-title">Cài đặt bài viết</div>
         <div class="meta-row">
@@ -263,7 +262,7 @@
         </div>
       </div>
  
-      {{-- Tips --}}
+      
       <div class="side-card">
         <div class="side-title">Gợi ý viết bài</div>
         <div class="tip-list">
