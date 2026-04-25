@@ -234,7 +234,7 @@ class Csv extends Component
             ? User::find($this->deleteId)?->name
             : '';
  
-        return view('livewire.admin.Csv', compact('users', 'stats', 'viewUser', 'deleteName')
+        return view('livewire.admin.csv', compact('users', 'stats', 'viewUser', 'deleteName')
         )->layout('components.layouts.admin');
     }
 }
