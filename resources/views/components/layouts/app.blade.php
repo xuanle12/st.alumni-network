@@ -10,6 +10,128 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   @livewireStyles
   <style>
+    
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:       #1a6b3a;
+  --green-light: #2d8a50;
+  --green-pale:  #e8f5ee;
+  --gold:        #c8912a;
+  --gold-light:  #f0c050;
+  --text:        #1a1f2e;
+  --text-muted:  #5c6470;
+  --border:      #e2e8f0;
+  --bg:          #ffffff;
+  --bg2:         #f8faf9;
+  --radius:      12px;
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:   0 6px 24px rgba(0,0,0,0.08);
+}
+
+html, body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+/* ── UTILITIES ──────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── BUTTONS ────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: .15s;
+  white-space: nowrap;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+.btn-ghost:hover { background: #f1f5f2; color: var(--text); }
+.btn-primary { background: var(--green); color: #fff; }
+.btn-primary:hover {
+  background: var(--green-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(26,107,58,0.25);
+}
+
+.btn-hero {
+  padding: 12px 26px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: .2s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-hero-primary { background: var(--gold); color: #fff; }
+.btn-hero-primary:hover {
+  background: #d4a040;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200,145,42,0.4);
+}
+.btn-hero-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.35);
+}
+.btn-hero-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.6);
+}
+/* ── MENU ICON BTN ──────────────────────── */
+.menu-icon-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: .15s;
+}
+.menu-icon-btn:hover { background: var(--green-pale); border-color: #b0d4bc; }
+.menu-icon-btn span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: .25s;
+}
+.menu-icon-btn span:nth-child(1) { width: 18px; }
+.menu-icon-btn span:nth-child(2) { width: 13px; }
+.menu-icon-btn span:nth-child(3) { width: 18px; }
+.menu-icon-btn.open span:nth-child(1) { width: 18px; transform: translateY(7px) rotate(45deg); }
+.menu-icon-btn.open span:nth-child(2) { opacity: 0; }
+.menu-icon-btn.open span:nth-child(3) { width: 18px; transform: translateY(-7px) rotate(-45deg); }
     header {
   position: sticky;
   top: 0;
