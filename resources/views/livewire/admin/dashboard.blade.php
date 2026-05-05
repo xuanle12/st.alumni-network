@@ -1,13 +1,12 @@
 <div>
-    <style>
+<style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 .dash{padding:1.75rem}
 .topbar{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.75rem}
 .page-title{font-size:20px;font-weight:600;color:#111;letter-spacing:-.3px}
 .page-sub{font-size:12px;color:#9ca3af;margin-top:3px}
 .flash-ok{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem}
- 
-/* Stats */
+
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
 .stat{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:.875rem 1rem}
 .stat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
@@ -17,7 +16,6 @@
 .stat-sub{font-size:11px;margin-top:5px}
 .up{color:#16a34a}.warn{color:#d97706}.muted{color:#9ca3af}
  
-/* Charts row */
 .row2{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;margin-bottom:10px}
 .card{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
 .card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
@@ -32,7 +30,7 @@
 .leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .leg-num{margin-left:auto;font-weight:600;color:#111;font-size:13px}
  
-/* Bottom row */
+
 .row3{display:grid;grid-template-columns:1.6fr 1fr;gap:10px}
 table{width:100%;border-collapse:collapse}
 thead th{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#9ca3af;padding:5px 8px;text-align:left;border-bottom:1px solid #eaecf0}
@@ -57,13 +55,120 @@ td{padding:8px;font-size:12px;color:#374151;vertical-align:middle}
 .act-txt{font-size:12px;color:#374151;line-height:1.4}
 .act-time{font-size:10px;color:#9ca3af;margin-top:1px}
  
-@media(max-width:900px){
-  .stats{grid-template-columns:1fr 1fr}
-  .row2,.row3{grid-template-columns:1fr}
+/* ===== RESPONSIVE FIX ===== */
+
+/* Tablet */
+@media (max-width: 1024px){
+  .stats{
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .row2{
+    grid-template-columns: 1fr;
+  }
+
+  .row3{
+    grid-template-columns: 1fr;
+  }
+
+  .chart-wrap{
+    height: 140px;
+  }
 }
-@media(max-width:480px){
-  .stats{grid-template-columns:1fr 1fr}
-  .dash{padding:1rem}
+
+/* Mobile */
+@media (max-width: 768px){
+
+  .dash{
+    padding: 1rem;
+  }
+
+  .topbar{
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .page-title{
+    font-size: 18px;
+  }
+
+  .stats{
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .stat{
+    padding: 0.75rem;
+  }
+
+  .stat-val{
+    font-size: 18px;
+  }
+
+  /* chart */
+  .chart-wrap{
+    height: 120px;
+    gap: 3px;
+  }
+
+  .bar-lbl{
+    font-size: 8px;
+  }
+
+  /* table scroll ngang */
+  table{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  thead th, td{
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  /* activity */
+  .act-row{
+    gap: 6px;
+  }
+
+  .act-txt{
+    font-size: 11px;
+  }
+
+  .act-time{
+    font-size: 9px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px){
+
+  .page-title{
+    font-size: 16px;
+  }
+
+  .stats{
+    grid-template-columns: 1fr;
+  }
+
+  .stat-val{
+    font-size: 16px;
+  }
+
+  .card{
+    padding: 0.75rem;
+  }
+
+  .card-title{
+    font-size: 10px;
+  }
+
+  .btn-xs{
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
 }
 </style>
 <div>

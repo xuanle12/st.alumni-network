@@ -30,14 +30,14 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* ── UTILITIES ──────────────────────────── */
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-/* ── BUTTONS ────────────────────────────── */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -588,6 +588,125 @@ section { padding: 72px 24px; }
 .cta p { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 34px; }
 .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
+/* ══════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════ */
+
+/* ── TABLET: ≤ 1024px ── */
+@media (max-width: 1024px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero h1 { font-size: 36px; }
+  .hero p  { max-width: 100%; }
+  .hero-card { max-width: 480px; }
+
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .alumni-grid   { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── MOBILE: ≤ 768px ── */
+@media (max-width: 768px) {
+  /* NAV */
+  .nav-links,
+  .nav-actions { display: none; }
+  .menu-icon-btn { display: flex; }
+
+  /* HERO */
+  .hero { padding: 52px 16px 48px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero h1 { font-size: 28px; letter-spacing: -.5px; }
+  .hero p  { font-size: 14px; }
+  .hero-actions { gap: 10px; }
+  .btn-hero { padding: 10px 18px; font-size: 13px; }
+  .hero-card { padding: 22px 18px; }
+  .stat-num { font-size: 26px; }
+
+  /* SECTIONS */
+  section { padding: 48px 16px; }
+  .section-title { font-size: 24px; }
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* FEATURES */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .feature-card { padding: 22px 20px; }
+
+  /* JOBS */
+  .jobs-grid { grid-template-columns: 1fr; }
+  .job-card  { padding: 16px 18px; }
+  .job-salary { display: none; }
+
+  /* ALUMNI */
+  .alumni-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  /* EVENTS */
+  .events-list { margin-top: 24px; }
+  .event-item {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+  .event-div   { display: none; }
+  .event-badge { margin-left: auto; }
+  .event-meta span { font-size: 11.5px; }
+
+  /* CTA */
+  .cta { padding: 52px 16px; }
+  .cta h2 { font-size: 26px; }
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cta-actions .btn-hero {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  /* SIDEBAR */
+  .sidebar-drawer { width: 85vw; }
+}
+
+/* ── SMALL MOBILE: ≤ 480px ── */
+@media (max-width: 480px) {
+  .hero h1 { font-size: 24px; }
+  .stats-grid-hero { gap: 12px; }
+  .stat-num { font-size: 22px; }
+  .hero-actions { flex-direction: column; }
+  .btn-hero {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-title { font-size: 22px; }
+
+  .job-card  { flex-direction: column; }
+  .job-tags  { display: none; }
+
+  .event-date {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    width: auto;
+  }
+  .event-date .day   { font-size: 18px; }
+  .event-badge       { display: none; }
+
+  .sidebar-drawer { width: 100%; }
+}
 
   </style>
   <section class="hero">
@@ -596,8 +715,8 @@ section { padding: 72px 24px; }
       <h1>Kết nối <em>cựu sinh viên</em><br>— Mở rộng tương lai</h1>
       <p>Nền tảng tập trung giúp kết nối sinh viên, cựu sinh viên và doanh nghiệp. Đăng nhập một lần — truy cập toàn bộ hệ sinh thái số của Học viện.</p>
       <div class="hero-actions">
-        <a href="#" class="btn-hero btn-hero-primary"> Tham gia ngay</a>
-        <a href="#" class="btn-hero btn-hero-outline">Xem tuyển dụng →</a>
+        <a href="{{ route('login') }}" class="btn-hero btn-hero-primary"> Tham gia ngay</a>
+        <a href="{{ route('login') }}" class="btn-hero btn-hero-outline">Xem tuyển dụng →</a>
       </div>
     </div>
 
@@ -751,7 +870,7 @@ section { padding: 72px 24px; }
   <h2>Sẵn sàng tham gia<br><em>mạng lưới</em> của chúng tôi?</h2>
   <p>Đăng ký ngay hôm nay để kết nối với hơn {{ number_format($stats['alumni']) }} cựu sinh viên và hàng trăm doanh nghiệp đối tác.</p>
   <div class="cta-actions">
-    <a href="#" class="btn-hero btn-hero-primary"> Đăng ký tài khoản</a>
+    <a href="{{ route('register') }}" class="btn-hero btn-hero-primary"> Đăng ký tài khoản</a>
     <a href="#" class="btn-hero btn-hero-outline">Tìm hiểu thêm</a>
   </div>
 </section>

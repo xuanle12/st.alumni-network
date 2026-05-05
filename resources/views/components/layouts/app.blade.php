@@ -42,8 +42,6 @@ html, body {
   margin: 0 auto;
   padding: 0 24px;
 }
-
-/* ── BUTTONS ────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -102,7 +100,7 @@ html, body {
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.6);
 }
-/* ── MENU ICON BTN ──────────────────────── */
+
 .menu-icon-btn {
   display: flex;
   flex-direction: column;
@@ -209,7 +207,7 @@ nav a.active{
 }
 .sidebar-overlay.open { opacity: 1; pointer-events: all; }
 
-/* ── SIDEBAR DRAWER ─────────────────────── */
+
 .sidebar-drawer {
   position: fixed;
   top: 0; right: 0;
@@ -355,7 +353,7 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 .footer-links a { font-size: 12.5px; color: rgba(255,255,255,.3); text-decoration: none; transition: .15s; }
 .footer-links a:hover { color: rgba(255,255,255,.6); }
 
-/* ── ANIMATIONS ─────────────────────────── */
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -384,7 +382,6 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
   .footer-desc  { max-width: 100%; }
 }
 
-/* ── TABLET SMALL (≤ 768px) ────────────── */
 @media (max-width: 768px) {
   nav { display: none; }
   .header-right .btn-ghost,
@@ -490,42 +487,43 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 <div class="sidebar-drawer" id="sidebarDrawer">
   <div class="sidebar-drawer-header">
     <a href="#" class="sidebar-drawer-logo" wire:navigate>
-      <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}">
+      <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}">
       <span>Alumni Network</span>
     </a>
     <button class="sidebar-close" id="sidebarClose">✕</button>
   </div>
+<div class="sidebar-drawer-body">
+  @guest
+    {{-- Chưa đăng nhập: không hiện menu, chỉ hiện nút ở footer --}}
+    <p style="font-size:13px;color:var(--text-muted);padding:12px 10px;line-height:1.6;">
+      Vui lòng đăng nhập để truy cập đầy đủ tính năng.
+    </p>
+  @endguest
 
-  <div class="sidebar-drawer-body">
+  @auth
     <div class="sidebar-nav-label">Menu chính</div>
-    <a href="#" class="sidebar-nav-item {{ request()->routeIs('home') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon">🏠</div> Trang chủ
+    <a href="{{ route('csv') }}" class="sidebar-nav-item {{ request()->routeIs('csv') ? 'active' : '' }}" wire:navigate>
+      <div class="nav-icon"><i class="fa-solid fa-house"></i></div> Trang chủ
     </a>
-    <a href="#" class="sidebar-nav-item {{ request()->routeIs('alumni*') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon">👥</div> Cựu sinh viên
+    <a href="{{ route('job') }}" class="sidebar-nav-item {{ request()->routeIs('job*') ? 'active' : '' }}" wire:navigate>
+      <div class="nav-icon"><i class="fa-solid fa-briefcase"></i></div> Tuyển dụng
     </a>
-    <a href="#" class="sidebar-nav-item {{ request()->routeIs('jobs*') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon">💼</div> Tuyển dụng
+    <a href="{{ route('event') }}" class="sidebar-nav-item {{ request()->routeIs('event*') ? 'active' : '' }}" wire:navigate>
+      <div class="nav-icon"><i class="fa-solid fa-calendar-days"></i></div> Sự kiện
     </a>
-    <a href="#" class="sidebar-nav-item {{ request()->routeIs('events*') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon">📅</div> Sự kiện
+    <a href="{{ route('profile') }}" class="sidebar-nav-item" wire:navigate>
+      <div class="nav-icon"><i class="fa-solid fa-user"></i></div> Hồ Sơ
     </a>
-    <a href="#" class="sidebar-nav-item {{ request()->routeIs('contact') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon">✉️</div> Liên hệ
-    </a>
-
     <div class="sidebar-divider"></div>
     <div class="sidebar-nav-label">Khám phá</div>
     <a href="#" class="sidebar-nav-item" wire:navigate>
-      <div class="nav-icon">📊</div> Thống kê & Báo cáo
+      <div class="nav-icon"><i class="fa-solid fa-chart-bar"></i></div> Thống kê & Báo cáo
     </a>
     <a href="#" class="sidebar-nav-item" wire:navigate>
-      <div class="nav-icon">🔔</div> Thông báo
+      <div class="nav-icon"><i class="fa-solid fa-bell"></i></div> Thông báo
     </a>
-    <a href="#" class="sidebar-nav-item" wire:navigate>
-      <div class="nav-icon">❓</div> FAQ
-    </a>
-  </div>
+  @endauth
+</div>
 
   <div class="sidebar-drawer-footer">
     @auth

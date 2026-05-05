@@ -2,8 +2,6 @@
     @push('styles')
 <style>
     .jl-wrap { display: flex; gap: 24px; align-items: flex-start; }
- 
-    /* ── SIDEBAR ── */
     .jl-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 80px; display: flex; flex-direction: column; gap: 14px; }
  
     .jl-filter-box { background: #fff; border: 1px solid #e9ecef; border-radius: 12px; overflow: hidden; }
@@ -77,12 +75,107 @@
     .jl-empty button:hover { text-decoration: underline; }
  
     .jl-pagination { margin-top: 20px; display: flex; justify-content: center; }
+@media (max-width: 1024px) {
+  .flex.gap-6.items-start {
+    gap: 16px;
+  }
+  .w-64 {
+    width: 210px;
+  }
+}
+
+@media (max-width: 768px) {
+  .flex.gap-6.items-start {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* Sidebar */
+  .w-64 {
+    width: 100% !important;
+    position: static !important;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 4px;
+  }
+  .w-64 > .bg-white:first-child { min-width: 280px; flex-shrink: 0; }
+  .w-64 > .bg-white:last-child  { min-width: 220px; flex-shrink: 0; }
+  .flex-1.min-w-0 { width: 100%; }
+
+  .bg-white.border.border-gray-100.rounded-xl.p-4.flex.gap-3 {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .bg-white.border.border-gray-100.rounded-xl.p-4.flex.gap-3 input,
+  .bg-white.border.border-gray-100.rounded-xl.p-4.flex.gap-3 select {
+    width: 100%;
+  }
+
+
+  .flex.items-center.justify-between.mb-3 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+ 
+  .flex.gap-4.items-start {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .flex-shrink-0.text-right.w-36 {
+    width: 100% !important;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .flex-shrink-0.text-right.w-36 p:first-child { /* salary */
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .flex-shrink-0.text-right.w-36 a,
+  .flex-shrink-0.text-right.w-36 button {
+    flex: 1;
+    width: auto !important;
+    margin-bottom: 0 !important;
+  }
+  .flex-shrink-0.text-right.w-36 .text-xs.text-gray-400 {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
+@media (max-width: 480px) {
+    .flex.gap-6.items-start {
+        gap: 12px;
+    }
+  .w-64 {
+    flex-direction: column;
+    overflow-x: unset;
+  }
+  .w-64 > .bg-white:first-child,
+  .w-64 > .bg-white:last-child {
+    min-width: unset;
+    width: 100%;
+  }
+  .flex-shrink-0.text-right.w-36 {
+    flex-direction: column;
+  }
+  .flex-shrink-0.text-right.w-36 a,
+  .flex-shrink-0.text-right.w-36 button {
+    width: 100% !important;
+  }
+}
+    
 </style>
 @endpush
 
 <div class="flex gap-6 items-start">
-
-    {{-- ───── SIDEBAR ───── --}}
     <aside class="w-64 flex-shrink-0 sticky top-20 space-y-4">
 
         <div class="bg-white border border-gray-100 rounded-xl overflow-hidden">
@@ -171,8 +264,6 @@
 
     
     <div class="flex-1 min-w-0">
-
-        {{-- Tìm kiếm --}}
         <div class="bg-white border border-gray-100 rounded-xl p-4 flex gap-3 mb-4">
             <input type="text"
                    wire:model.live.debounce.300ms="search"
@@ -214,7 +305,8 @@
                                     Nổi bật
                                 </span>
                             @endif
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">{{ $job->title }}</h3>
+                            <a href="{{ route('job.show', $job->id) }}">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">{{ $job->title }}</h3></a>
                             <p class="text-sm font-medium text-green-700 mb-3">{{ $job->company }}</p>
                             <div class="flex flex-wrap gap-2 mb-3">
                                 <span class="text-xs text-gray-500 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-md">{{ $job->location }}</span>
