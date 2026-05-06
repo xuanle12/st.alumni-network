@@ -44,6 +44,7 @@
 .change-cover{display:block;text-align:center;font-size:11px;color:#6b7280;margin-top:5px;cursor:pointer}
 .change-cover:hover{color:#3b82f6}
 
+.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:visible}
 .side-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.1rem;margin-bottom:10px}
 .side-title{font-size:12px;font-weight:600;color:#374151;margin-bottom:.875rem}
 .pub-btn{width:100%;padding:10px;background:#111;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:6px}

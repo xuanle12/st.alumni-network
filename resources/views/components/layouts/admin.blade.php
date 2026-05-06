@@ -6,7 +6,6 @@
     <title>Admin –  Cựu sinh viên #VNUA</title>
 @vite(['resources/css/app.css', 'resources/js/app.js'])   
  @livewireStyles
-    <!-- <link rel="stylesheet" href="{{ asset('css/admin.css') }}"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         
@@ -148,16 +147,57 @@
             width: 7px; height: 7px; border-radius: 50%;
             background: #dc2626; border: 1.5px solid #fff;
         }
+       
+
+        .adm-menu-btn{
+            display: none;
+            font-size: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #0f172a;
+        }
+@media (max-width: 1024px){
+    .adm-sb{
+        position: fixed;
+        left: -260px;
+        top: 0;
+        height: 100%;
+        z-index: 100;
+        transition: left .25s ease;
+    }
+
+    .adm-sb.open{
+        left: 0;
+    }
+
+    .adm-main{
+        width: 100%;
+    }
+
+    .adm-menu-btn{
+        display: block;
+    }
+}
+.adm-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 90;
+    display: none;
+}
+
+.adm-overlay.show{
+    display: block;
+}
         
    
     </style>
 </head>
 <body>
-
+<div id="overlay" class="adm-overlay" onclick="toggleSidebar()"></div>
 <div class="adm-layout">
-
-   
-    <aside class="adm-sb">
+    <aside id="sidebar" class="adm-sb">
 
         <div class="adm-brand">
             <div class="adm-brand-dot">🎓</div>
@@ -165,7 +205,6 @@
                 <div class="adm-brand-name"> Cựu sinh viên VNUA</div>
                 <div class="adm-brand-sub">Admin portal</div>
             </div>
-            
         </div>
             <a href="{{ route('csv') }}"class="adm-item adm-back"><span class="adm-item-ic">←</span>Trang người dùng</a>
         {{-- Nav --}}
@@ -207,7 +246,7 @@
             Thống kê
         </a>
 
-        {{-- Footer --}}
+       
         <div class="adm-foot">
             <div class="adm-user">
                 <div class="adm-uava">{{ auth()->user()?->initials ?? 'AD' }}</div>
@@ -225,15 +264,34 @@
         </div>
 
     </aside>
-
-    {{-- ══════════ MAIN ══════════ --}}
     <div class="adm-main">
-        {{ $slot }}
 
+    <div class="adm-topbar">
+        <div style="display:flex;align-items:center;gap:10px;">
+            <button class="adm-menu-btn" onclick="toggleSidebar()">☰</button>
+
+            <div>
+                <div class="adm-topbar-title">Admin</div>
+                <div class="adm-topbar-sub">Quản lý hệ thống</div>
+            </div>
+        </div>
     </div>
+
+    {{ $slot }}
+
+</div>
 
 </div>
 
 @livewireScripts
 </body>
+<script>
+function toggleSidebar(){
+    const sb = document.getElementById('sidebar');
+    const ov = document.getElementById('overlay');
+
+    sb.classList.toggle('open');
+    ov.classList.toggle('show');
+}
+</script>
 </html>

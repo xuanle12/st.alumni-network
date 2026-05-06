@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ $title ?? 'Mạng lưới cựu sinh viên ' }}</title>
+  <title>{{ $title ?? 'Mạng lưới cựu sinh viên khoa công nghệ thông tin ' }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -452,7 +452,7 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
     <a href="#" class="logo" wire:navigate>
       <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}">
       <div class="logo-text">
-        <strong>Alumni Network</strong>
+        <strong>Mạng lưới cựu sinh viên khoa Công nghệ Thông tin</strong>
         <span>Học viện Nông nghiệp Việt Nam</span>
       </div>
     </a>
