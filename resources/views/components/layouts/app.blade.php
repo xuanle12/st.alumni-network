@@ -525,7 +525,7 @@ a:focus-visible, button:focus-visible {
     <a href="{{ route('home') }}" class="logo" wire:navigate>
       <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}" loading="lazy">
       <div class="logo-text">
-        <strong>Mạng lưới cựu sinh viên khoa Công nghệ Thông tin</strong>
+        <strong>Mạng lưới cựu sinh viên khoa CNTT</strong>
         <span>Học viện Nông nghiệp Việt Nam</span>
       </div>
     </a>
