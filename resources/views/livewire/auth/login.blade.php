@@ -116,7 +116,7 @@
                 </form>
 
                 <p class="register-text">
-                    Chưa có tài khoản? <a href="#">Đăng ký ngay</a>
+                    Chưa có tài khoản? <a href="{{ route('register') }}" wire:navigate>Đăng ký ngay</a>
                 </p>
 
                 <div class="divider">

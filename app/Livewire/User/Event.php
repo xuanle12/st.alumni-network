@@ -83,8 +83,10 @@ class Event extends Component
         $gridEvents = EventModel::where('is_active', true)
 
             ->when($this->search, fn($q) =>
-                $q->where('title','like','%'.$this->search.'%')
-                  ->orWhere('location','like','%'.$this->search.'%')
+                $q->where(function ($w) {
+                    $w->where('title','like','%'.$this->search.'%')
+                      ->orWhere('location','like','%'.$this->search.'%');
+                })
             )
 
             ->when($this->activeTab == 'upcoming', fn($q) =>

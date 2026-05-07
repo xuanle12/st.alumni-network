@@ -190,11 +190,49 @@
 .adm-overlay.show{
     display: block;
 }
-        
-   
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.adm-flash {
+  position: fixed;
+  top: 76px;
+  right: 16px;
+  z-index: 200;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #16a34a;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: #0f172a;
+  box-shadow: 0 6px 24px rgba(15,23,42,0.12);
+  display: flex; align-items: center; gap: 10px;
+  max-width: calc(100vw - 32px);
+}
+.adm-flash.is-info  { border-left-color: #2563eb; }
+.adm-flash.is-error { border-left-color: #dc2626; }
+.adm-flash button {
+  background: transparent; border: none; cursor: pointer;
+  font-size: 16px; color: #64748b; line-height: 1;
+}
     </style>
 </head>
 <body>
+@if(session('success') || session('info') || session('error'))
+  @php
+    $flashType = session('error') ? 'is-error' : (session('info') ? 'is-info' : '');
+    $flashMsg  = session('error') ?? session('info') ?? session('success');
+  @endphp
+  <div class="adm-flash {{ $flashType }}" role="status" aria-live="polite" id="admFlash">
+    <span>{{ $flashMsg }}</span>
+    <button type="button" aria-label="Đóng" onclick="this.parentNode.remove()">✕</button>
+  </div>
+  <script>setTimeout(() => { const t=document.getElementById('admFlash'); if(t) t.remove(); }, 4000);</script>
+@endif
 <div id="overlay" class="adm-overlay" onclick="toggleSidebar()"></div>
 <div class="adm-layout">
     <aside id="sidebar" class="adm-sb">
@@ -255,9 +293,9 @@
                     <div class="adm-urole">Quản trị viên</div>
                 </div>
             </div>
-            <form action="#" method="POST">
+            <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="adm-logout" style="border:none;width:100%;text-align:left;font-family:inherit">
+                <button type="submit" class="adm-logout" style="border:none;width:100%;text-align:left;font-family:inherit;background:transparent;cursor:pointer;">
                     ← Đăng xuất
                 </button>
             </form>
@@ -268,7 +306,7 @@
 
     <div class="adm-topbar">
         <div style="display:flex;align-items:center;gap:10px;">
-            <button class="adm-menu-btn" onclick="toggleSidebar()">☰</button>
+            <button class="adm-menu-btn" onclick="toggleSidebar()" aria-label="Mở menu" type="button">☰</button>
 
             <div>
                 <div class="adm-topbar-title">Admin</div>
@@ -289,9 +327,22 @@
 function toggleSidebar(){
     const sb = document.getElementById('sidebar');
     const ov = document.getElementById('overlay');
-
+    if (!sb || !ov) return;
     sb.classList.toggle('open');
     ov.classList.toggle('show');
 }
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const sb = document.getElementById('sidebar');
+        const ov = document.getElementById('overlay');
+        if (sb && sb.classList.contains('open')) toggleSidebar();
+    }
+});
+document.addEventListener('livewire:navigated', () => {
+    const sb = document.getElementById('sidebar');
+    const ov = document.getElementById('overlay');
+    if (sb) sb.classList.remove('open');
+    if (ov) ov.classList.remove('show');
+});
 </script>
 </html>

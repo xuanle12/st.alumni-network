@@ -8,7 +8,7 @@ class Post extends Model
 {
     protected $table = 'post';
      protected $fillable = [
-        'user_id', 'content', 'image', 'category',
+        'user_id', 'content', 'image', 'category', 'status',
         'likes_count', 'comments_count', 'shares_count',
     ];
  

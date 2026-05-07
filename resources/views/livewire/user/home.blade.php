@@ -572,6 +572,18 @@ section { padding: 72px 24px; }
 .eb-green { background: var(--green-pale); color: var(--green); }
 .eb-gold  { background: #fdf3e0; color: var(--gold); }
 
+/* ── EMPTY STATE ────────────────────────── */
+.empty-note {
+  grid-column: 1 / -1;
+  background: var(--bg2);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
 /* ── CTA ────────────────────────────────── */
 .cta {
   background: linear-gradient(135deg, #0f3d22, #1a6b3a);
@@ -715,8 +727,13 @@ section { padding: 72px 24px; }
       <h1>Kết nối <em>cựu sinh viên</em><br>— Mở rộng tương lai</h1>
       <p>Nền tảng tập trung giúp kết nối sinh viên, cựu sinh viên và doanh nghiệp. Đăng nhập một lần — truy cập toàn bộ hệ sinh thái số của Học viện.</p>
       <div class="hero-actions">
-        <a href="{{ route('login') }}" class="btn-hero btn-hero-primary"> Tham gia ngay</a>
-        <a href="{{ route('login') }}" class="btn-hero btn-hero-outline">Xem tuyển dụng →</a>
+        @auth
+          <a href="{{ route('csv') }}" class="btn-hero btn-hero-primary" wire:navigate>Vào trang chủ</a>
+          <a href="{{ route('job') }}" class="btn-hero btn-hero-outline" wire:navigate>Xem tuyển dụng →</a>
+        @else
+          <a href="{{ route('register') }}" class="btn-hero btn-hero-primary" wire:navigate>Tham gia ngay</a>
+          <a href="{{ route('login') }}" class="btn-hero btn-hero-outline" wire:navigate>Đăng nhập →</a>
+        @endauth
       </div>
     </div>
 
@@ -783,7 +800,7 @@ section { padding: 72px 24px; }
         <div class="section-tag">Tuyển dụng</div>
         <h2 class="section-title">Cơ hội việc làm mới nhất</h2>
       </div>
-      <a href="#" class="btn btn-ghost">Xem tất cả →</a>
+      <a href="{{ route('job') }}" class="btn btn-ghost" wire:navigate>Xem tất cả →</a>
     </div>
     <div class="jobs-grid">
       @forelse($latestJobs as $job)
@@ -802,7 +819,7 @@ section { padding: 72px 24px; }
         <div class="job-salary">{{ $job->salary }}</div>
       </div>
       @empty
-        <p>Chưa có tin tuyển dụng.</p>
+        <p class="empty-note">Chưa có tin tuyển dụng. Quay lại sau bạn nhé!</p>
       @endforelse
     </div>
   </div>
@@ -825,7 +842,7 @@ section { padding: 72px 24px; }
         <div class="alumni-company"><i class="fa-solid fa-briefcase"></i>{{ Str::limit($alumni->bio, 40) }}</div>
       </div>
       @empty
-        <p>Chưa có dữ liệu.</p>
+        <p class="empty-note">Chưa có dữ liệu cựu sinh viên.</p>
       @endforelse
     </div>
   </div>
@@ -839,7 +856,7 @@ section { padding: 72px 24px; }
         <div class="section-tag">Sự kiện</div>
         <h2 class="section-title">Sắp diễn ra</h2>
       </div>
-      <a href="#" class="btn btn-ghost">Xem tất cả →</a>
+      <a href="{{ route('event') }}" class="btn btn-ghost" wire:navigate>Xem tất cả →</a>
     </div>
     <div class="events-list">
       @forelse($upcomingEvents as $event)
@@ -861,7 +878,7 @@ section { padding: 72px 24px; }
         <span class="event-badge {{ $event->badge_class }}">{{ $event->badge_label }}</span>
       </div>
       @empty
-        <p>Chưa có sự kiện sắp tới.</p>
+        <p class="empty-note">Chưa có sự kiện sắp tới.</p>
       @endforelse
     </div>
   </div>
@@ -870,8 +887,8 @@ section { padding: 72px 24px; }
   <h2>Sẵn sàng tham gia<br><em>mạng lưới</em> của chúng tôi?</h2>
   <p>Đăng ký ngay hôm nay để kết nối với hơn {{ number_format($stats['alumni']) }} cựu sinh viên và hàng trăm doanh nghiệp đối tác.</p>
   <div class="cta-actions">
-    <a href="{{ route('register') }}" class="btn-hero btn-hero-primary"> Đăng ký tài khoản</a>
-    <a href="#" class="btn-hero btn-hero-outline">Tìm hiểu thêm</a>
+    <a href="{{ route('register') }}" class="btn-hero btn-hero-primary" wire:navigate>Đăng ký tài khoản</a>
+    <a href="{{ route('login') }}" class="btn-hero btn-hero-outline" wire:navigate>Đăng nhập</a>
   </div>
 </section>
 </div>

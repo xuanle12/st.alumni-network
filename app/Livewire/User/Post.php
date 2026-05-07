@@ -5,12 +5,14 @@ namespace App\Livewire\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Post as PostModel;
+
 class Post extends Component
 {
     use WithFileUploads;
- 
+
     public string $title          = '';
-    public string $category       = '';
+    public string $category       = 'normal';
     public string $khoa           = '';
     public string $excerpt        = '';
     public string $content        = '';
@@ -23,8 +25,8 @@ class Post extends Component
     protected function rules(): array
     {
         return [
-            'title'       => 'required|string|max:200',
-            'category'    => 'required|string',
+            'title'       => 'nullable|string|max:200',
+            'category'    => 'required|in:normal,job,event',
             'content'     => 'required|string|min:10',
             'excerpt'     => 'nullable|string|max:300',
             'coverImage'  => 'nullable|image|max:2048',
@@ -69,31 +71,29 @@ class Post extends Component
     private function save(): void
     {
         $this->validate();
- 
+
         $coverPath = null;
         if ($this->coverImage) {
             $coverPath = $this->coverImage->store('posts/covers', 'public');
         }
- 
-        Post::create([
-            'user_id'        => Auth::id(),
-            'title'          => $this->title,
-            'slug'           => Post::generateSlug($this->title),
-            'category'       => $this->category,
-            'khoa'           => $this->khoa ?: null,
-            'excerpt'        => $this->excerpt ?: null,
-            'content'        => $this->content,
-            'cover_image'    => $coverPath,
-            'tags'           => $this->tags ?: null,
-            'status'         => $this->status,
-            'allow_comments' => $this->allow_comments,
+
+        $body = trim((string) $this->title) !== ''
+            ? $this->title."\n\n".$this->content
+            : $this->content;
+
+        PostModel::create([
+            'user_id'  => Auth::id(),
+            'content'  => $body,
+            'image'    => $coverPath,
+            'category' => $this->category,
+            'status'   => $this->status,
         ]);
- 
+
         session()->flash('success',
             $this->status === 'published' ? 'Bài viết đã được đăng!' : 'Đã lưu nháp.'
         );
- 
-        $this->redirect(route('forum'));
+
+        $this->redirect(route('csv'), navigate: true);
     }
     public function render()
     {

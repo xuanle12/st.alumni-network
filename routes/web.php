@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -8,8 +10,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', \App\Livewire\User\Home::class)->name('home');
 
 //Auth
-Route::get('/login', \App\Livewire\Auth\Login::class) ->name('login');
+Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
 Route::get('/register', \App\Livewire\Auth\Register::class)->name('register');
+
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('home');
+})->name('logout');
 
 //User
 Route::get('/csv', \App\Livewire\User\Csv::class)->middleware('auth')->name('csv');
@@ -21,9 +30,11 @@ Route::get('/profile', \App\Livewire\User\Profile::class)->name('profile');
 Route::get('/post', \App\Livewire\User\Post::class)->name('post');
 
 //Admin
-Route::get('/admin', \App\Livewire\Admin\Dashboard::class)->name('admin');
-Route::get('/admin/Csv', \App\Livewire\Admin\Csv::class)->name('admin.csv');
-Route::get('/admin/company', \App\Livewire\Admin\Company::class)->name('admin.company');
-Route::get('/admin/job', \App\Livewire\Admin\Job::class)->name('admin.job');
-Route::get('/admin/thongk', \App\Livewire\Admin\Thongk::class)->name('admin.thongk');
-Route::get('/admin/post', \App\Livewire\Admin\Posts::class)->name('admin.post');
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', \App\Livewire\Admin\Dashboard::class)->name('admin');
+    Route::get('/admin/Csv', \App\Livewire\Admin\Csv::class)->name('admin.csv');
+    Route::get('/admin/company', \App\Livewire\Admin\Company::class)->name('admin.company');
+    Route::get('/admin/job', \App\Livewire\Admin\Job::class)->name('admin.job');
+    Route::get('/admin/thongk', \App\Livewire\Admin\Thongk::class)->name('admin.thongk');
+    Route::get('/admin/post', \App\Livewire\Admin\Posts::class)->name('admin.post');
+});

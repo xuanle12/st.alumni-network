@@ -40,8 +40,8 @@ class Event extends Model
  
     public function getTimeRangeAttribute(): string
     {
-        $start = $this->start_time ? substr($this->start_time, 0, 5) : '';
-        $end   = $this->end_time   ? substr($this->end_time, 0, 5)   : '';
+        $start = $this->start_time ? $this->start_time->format('H:i') : '';
+        $end   = $this->end_time   ? $this->end_time->format('H:i')   : '';
         return $start && $end ? "{$start} – {$end}" : $start;
     }
     // -------------------------------------------------------

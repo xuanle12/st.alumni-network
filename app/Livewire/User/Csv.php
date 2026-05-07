@@ -26,7 +26,7 @@ class Csv extends Component
 
     public string $title = '';
     public string $content = '';
-    public string $category = 'discussion';
+    public string $category = 'normal';
 
     public array $tags = [];
     public string $tagInput = '';
@@ -175,20 +175,15 @@ class Csv extends Component
         }
 
 
+        $body = trim($this->title) !== ''
+            ? $this->title."\n\n".$this->content
+            : $this->content;
+
         Post::create([
-
             'user_id' => Auth::id(),
-
-            'title' => $this->title,
-
-            'content' => $this->content,
-
-            'category' => $this->category,
-
+            'content' => $body,
+            'category' => in_array($this->category, ['normal','job','event'], true) ? $this->category : 'normal',
             'image' => $path,
-
-            'tags' => $this->tags
-
         ]);
 
 
