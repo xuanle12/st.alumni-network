@@ -15,6 +15,11 @@ class Profile extends Model
         'tinh_thanh', 'que_quan',
         'linkedin', 'github', 'website',
         'status', 'admin_note',
+        'role', 'position', 'is_online', 'current_company',
+    ];
+
+    protected $casts = [
+        'is_online' => 'boolean',
     ];
  
     public function user()

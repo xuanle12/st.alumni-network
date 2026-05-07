@@ -441,16 +441,89 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 
   .container { padding: 0 16px; }
 }
+
+/* ── A11Y: Skip link ────────────────────── */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: var(--green);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 1000;
+}
+.skip-link:focus { left: 16px; outline: 3px solid var(--gold-light); outline-offset: 2px; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Flash toast ────────────────────────── */
+.flash-toast {
+  position: fixed;
+  top: 84px;
+  right: 16px;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green);
+  box-shadow: var(--shadow-md);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--text);
+  max-width: calc(100vw - 32px);
+  animation: flashIn .3s ease both;
+}
+.flash-toast.is-info  { border-left-color: #2563eb; }
+.flash-toast.is-error { border-left-color: #dc2626; }
+.flash-toast button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+@keyframes flashIn {
+  from { transform: translateY(-8px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@media (max-width: 480px) {
+  .flash-toast { left: 16px; right: 16px; top: 76px; }
+}
   </style>
  </head>
 <body>
+
+<a href="#main-content" class="skip-link">Bỏ qua tới nội dung chính</a>
+
+@if(session('success') || session('info') || session('error'))
+  @php
+    $flashType = session('error') ? 'is-error' : (session('info') ? 'is-info' : '');
+    $flashMsg  = session('error') ?? session('info') ?? session('success');
+  @endphp
+  <div class="flash-toast {{ $flashType }}" role="status" aria-live="polite" id="flashToast">
+    <span>{{ $flashMsg }}</span>
+    <button type="button" aria-label="Đóng thông báo" onclick="this.parentNode.remove()">✕</button>
+  </div>
+  <script>setTimeout(() => { const t=document.getElementById('flashToast'); if(t) t.remove(); }, 4000);</script>
+@endif
 
 <!-- ── HEADER ── -->
 <header>
   <div class="header-inner">  
 
-    <a href="#" class="logo" wire:navigate>
-      <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}">
+    <a href="{{ route('home') }}" class="logo" wire:navigate>
+      <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}" loading="lazy">
       <div class="logo-text">
         <strong>Mạng lưới cựu sinh viên khoa Công nghệ Thông tin</strong>
         <span>Học viện Nông nghiệp Việt Nam</span>
@@ -459,20 +532,24 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 
     <nav>
         @auth
-        <a href="{{ route('csv') }}"class="{{ request()->routeIs('csv') ? 'active' : '' }}">Trang chủ</a>
-        <a href="{{ route('job') }}"class="{{ request()->routeIs('job*') ? 'active' : '' }}">Tuyển dụng</a>
-        <a href="{{ route('event') }}"class="{{ request()->routeIs('event*') ? 'active' : '' }}">Sự kiện</a>
+        <a href="{{ route('csv') }}" class="{{ request()->routeIs('csv') ? 'active' : '' }}" wire:navigate>Trang chủ</a>
+        <a href="{{ route('job') }}" class="{{ request()->routeIs('job*') ? 'active' : '' }}" wire:navigate>Tuyển dụng</a>
+        <a href="{{ route('event') }}" class="{{ request()->routeIs('event*') ? 'active' : '' }}" wire:navigate>Sự kiện</a>
        @endauth
     </nav>
 
     <div class="header-right">
       @auth
-        <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
+        @if(auth()->user()->isAdmin())
+          <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
+        @else
+          <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
+        @endif
       @else
         <a href="{{ route('login') }}" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
-        <a href="#" class="btn btn-primary" wire:navigate>Đăng ký</a>
+        <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Đăng ký</a>
       @endauth
-      <button class="menu-icon-btn" id="menuBtn" aria-label="Mở menu">
+      <button class="menu-icon-btn" id="menuBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="sidebarDrawer">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -486,11 +563,11 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 <!-- Sidebar Drawer -->
 <div class="sidebar-drawer" id="sidebarDrawer">
   <div class="sidebar-drawer-header">
-    <a href="#" class="sidebar-drawer-logo" wire:navigate>
-      <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}">
+    <a href="{{ route('home') }}" class="sidebar-drawer-logo" wire:navigate>
+      <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}" loading="lazy">
       <span>Alumni Network</span>
     </a>
-    <button class="sidebar-close" id="sidebarClose">✕</button>
+    <button class="sidebar-close" id="sidebarClose" aria-label="Đóng menu">✕</button>
   </div>
 <div class="sidebar-drawer-body">
   @guest
@@ -514,29 +591,41 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
     <a href="{{ route('profile') }}" class="sidebar-nav-item" wire:navigate>
       <div class="nav-icon"><i class="fa-solid fa-user"></i></div> Hồ Sơ
     </a>
-    <div class="sidebar-divider"></div>
-    <div class="sidebar-nav-label">Khám phá</div>
-    <a href="#" class="sidebar-nav-item" wire:navigate>
-      <div class="nav-icon"><i class="fa-solid fa-chart-bar"></i></div> Thống kê & Báo cáo
-    </a>
-    <a href="#" class="sidebar-nav-item" wire:navigate>
-      <div class="nav-icon"><i class="fa-solid fa-bell"></i></div> Thông báo
-    </a>
+    @if(auth()->user()->isAdmin())
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-nav-label">Quản trị</div>
+      <a href="{{ route('admin') }}" class="sidebar-nav-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-gauge"></i></div> Dashboard
+      </a>
+      <a href="{{ route('admin.thongk') }}" class="sidebar-nav-item {{ request()->routeIs('admin.thongk') ? 'active' : '' }}" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-chart-bar"></i></div> Thống kê & Báo cáo
+      </a>
+    @endif
   @endauth
 </div>
 
   <div class="sidebar-drawer-footer">
     @auth
-      <a href="#" class="btn btn-primary" wire:navigate>Dashboard</a>
+      @if(auth()->user()->isAdmin())
+        <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
+      @else
+        <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ của tôi</a>
+      @endif
+      <form action="{{ route('logout') }}" method="POST" style="margin:0;">
+        @csrf
+        <button type="submit" class="btn btn-ghost" style="width:100%;justify-content:center;background:transparent;cursor:pointer;">
+          Đăng xuất
+        </button>
+      </form>
     @else
-      <a href="#" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
-      <a href="#" class="btn btn-primary" wire:navigate>Đăng ký ngay</a>
+      <a href="{{ route('login') }}" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
+      <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Đăng ký ngay</a>
     @endauth
   </div>
 </div>
 
 
-<main>
+<main id="main-content">
   {{ $slot }}
 </main>
 
@@ -600,26 +689,35 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
   const overlay      = document.getElementById('sidebarOverlay');
 
   function openSidebar() {
+    if (!drawer || !overlay || !menuBtn) return;
     drawer.classList.add('open');
     overlay.classList.add('open');
     menuBtn.classList.add('open');
+    menuBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   }
   function closeSidebar() {
+    if (!drawer || !overlay || !menuBtn) return;
     drawer.classList.remove('open');
     overlay.classList.remove('open');
     menuBtn.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
-  menuBtn.addEventListener('click', () => {
-    drawer.classList.contains('open') ? closeSidebar() : openSidebar();
-  });
-  sidebarClose.addEventListener('click', closeSidebar);
-  overlay.addEventListener('click', closeSidebar);
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      drawer.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+  }
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (overlay) overlay.addEventListener('click', closeSidebar);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeSidebar();
   });
+
+  // Close drawer after Livewire SPA navigation
+  document.addEventListener('livewire:navigated', closeSidebar);
 </script>
 
 </body>

@@ -283,9 +283,6 @@
             <p class="text-sm text-gray-500">
                 Tìm thấy <span class="font-semibold text-gray-800">{{ $jobs->total() }} tin</span> phù hợp
             </p>
-            <p class="text-sm text-gray-500">
-                Tìm thấy <span class="font-semibold text-gray-800"> tin</span> phù hợp
-            </p>
             <select wire:model.live="sort"
                     class="border border-gray-200 rounded-lg px-3 py-1.5 text-sm bg-white outline-none text-gray-700">
                 <option value="latest">Mới nhất</option>
@@ -325,8 +322,8 @@
                             @endif
                         </div>
                         <div class="flex-shrink-0 text-right w-36">
-                            <p class="text-sm font-semibold text-green-700 mb-3">{{ $job->salary_label }}</p>
-                            <a href="#"
+                            <p class="text-sm font-semibold text-green-700 mb-3">{{ $job->salary }}</p>
+                            <a href="{{ route('job.show', $job->id) }}" wire:navigate
                                class="block w-full py-2 text-center text-xs font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 transition mb-2">
                                 Ứng tuyển
                             </a>
