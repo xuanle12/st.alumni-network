@@ -15,14 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('company');
-            $table->foreignId('company_id')->nullable()->constrained('company')->nullOnDelete();
-            $table->foreignId('post_id')->nullable()->constrained('post')->cascadeOnDelete();
+            $table->foreignId('company_id')->nullable();
+            $table->foreignId('post_id')->nullable();
             $table->string('location')->nullable();
             $table->string('khoa')->nullable();
             $table->string('type')->default('full-time'); 
             $table->string('field')->nullable();          
             $table->string('salary')->nullable();        
-            $table->string('logo_emoji')->default('🏢');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

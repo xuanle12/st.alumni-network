@@ -20,7 +20,7 @@ class JobsSeeder extends Seeder
                 'type'        => 'full-time',
                 'field'       => 'Nông nghiệp',
                 'salary'      => '12–18 tr',
-                'logo_emoji'  => '🌿',
+                
             ],
             [
                 'title'       => 'Lập trình viên Backend PHP',
@@ -29,7 +29,7 @@ class JobsSeeder extends Seeder
                 'type'        => 'full-time',
                 'field'       => 'Công nghệ',
                 'salary'      => '18–30 tr',
-                'logo_emoji'  => '💻',
+               
             ],
             [
                 'title'       => 'Chuyên viên Phân tích Dữ liệu',
@@ -38,7 +38,7 @@ class JobsSeeder extends Seeder
                 'type'        => 'full-time',
                 'field'       => 'Thực phẩm',
                 'salary'      => '15–22 tr',
-                'logo_emoji'  => '🌾',
+                
             ],
             [
                 'title'       => 'Thực tập sinh Kỹ thuật Môi trường',
@@ -47,7 +47,7 @@ class JobsSeeder extends Seeder
                 'type'        => 'internship',
                 'field'       => 'Môi trường',
                 'salary'      => '3–5 tr',
-                'logo_emoji'  => '🏢',
+                
             ],
             [
                 'title'       => 'Kỹ sư Phần mềm Frontend',
@@ -56,7 +56,7 @@ class JobsSeeder extends Seeder
                 'type'        => 'full-time',
                 'field'       => 'Công nghệ',
                 'salary'      => '20–35 tr',
-                'logo_emoji'  => '🖥️',
+               
             ],
             [
                 'title'       => 'Chuyên viên Marketing Nông sản',
@@ -65,7 +65,7 @@ class JobsSeeder extends Seeder
                 'type'        => 'full-time',
                 'field'       => 'Marketing',
                 'salary'      => '10–15 tr',
-                'logo_emoji'  => '📣',
+                
             ],
         ];
  

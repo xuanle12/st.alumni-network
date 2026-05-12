@@ -20,14 +20,10 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->text('description')->nullable();
             $table->string('logo')->nullable();
- 
-            // Người liên hệ
             $table->string('contact_name')->nullable();
             $table->string('contact_position')->nullable();
             $table->string('contact_email')->nullable();
             $table->string('contact_phone')->nullable();
- 
-            // Trạng thái
             $table->enum('status', ['active', 'pending', 'inactive'])->default('pending');
             $table->text('admin_note')->nullable();
  

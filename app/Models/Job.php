@@ -8,7 +8,7 @@ class Job extends Model
 {
      protected $fillable =[
          'title', 'company', 'location', 'type',
-        'field', 'salary', 'logo_emoji', 'is_active','khoa',
+        'field', 'salary', 'is_active','khoa',
     ];
 
      // Label hiển thị cho loại công việc
