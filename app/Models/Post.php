@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\HasLikes;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use HasLikes;
     protected $table = 'post';
      protected $fillable = [
         'user_id', 'content', 'image', 'category', 'status',
@@ -41,24 +43,27 @@ class Post extends Model
     {
         return $this->hasOne(Job::class, 'post_id');
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)
+                    ->whereNull('parent_id')
+                    ->with(['user', 'replies.user'])
+                    ->latest();
+    }
+     public function getImageUrlAttribute(): ?string
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
  
-    // -------------------------------------------------------
-    // Scopes
-    // -------------------------------------------------------
- 
-    /** Lọc bài tuyển dụng */
     public function scopeRecruitment($query)
     {
         return $query->where('category', 'job');
     }
- 
-    /** Lọc bài của cựu sinh viên — check qua profile */
     public function scopeFromAlumni($query)
     {
         return $query->whereHas('author.profile', fn ($q) => $q->where('role', 'alumni'));
     }
-    
-    /** Lọc bài của bạn bè (contacts của user hiện tại) */
+
     public function scopeFromFriends($query, User $user)
     {
         $friendIds = $user->contacts()->pluck('users.id');

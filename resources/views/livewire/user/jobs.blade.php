@@ -175,8 +175,8 @@
 </style>
 @endpush
 
-<div class="flex gap-6 items-start">
-    <aside class="w-64 flex-shrink-0 sticky top-20 space-y-4">
+<div class="jl-wrap flex gap-6 items-start">
+    <aside class="jl-sidebar w-64 flex-shrink-0 sticky top-20 space-y-4">
 
         <div class="bg-white border border-gray-100 rounded-xl overflow-hidden">
             <div class="px-5 py-3 border-b border-gray-100 flex items-center justify-between">
@@ -263,8 +263,8 @@
     </aside>
 
     
-    <div class="flex-1 min-w-0">
-        <div class="bg-white border border-gray-100 rounded-xl p-4 flex gap-3 mb-4">
+    <div class="jl-main flex-1 min-w-0">
+        <div class="jl-card bg-white border border-gray-100 rounded-xl p-4 flex gap-3 mb-4">
             <input type="text"
                    wire:model.live.debounce.300ms="search"
                    placeholder="Tìm vị trí, kỹ năng, công ty..."

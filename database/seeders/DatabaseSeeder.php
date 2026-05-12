@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         ProfileSeeder::class,
         PostSeeder::class,
         CompanySeeder::class,
+        CommentSeeder::class,
     ]);
 
         User::factory()->create([
