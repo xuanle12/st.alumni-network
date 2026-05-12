@@ -14,9 +14,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --green:       #1a6b3a;
-  --green-light: #2d8a50;
-  --green-pale:  #e8f5ee;
+   --green:       #1a56db;  
+  --green-light: #1e69f5;   
+  --green-pale:  #e8f0fe; 
   --gold:        #c8912a;
   --gold-light:  #f0c050;
   --text:        #1a1f2e;
@@ -116,7 +116,7 @@ html, body {
   flex-shrink: 0;
   transition: .15s;
 }
-.menu-icon-btn:hover { background: var(--green-pale); border-color: #b0d4bc; }
+.menu-icon-btn:hover { background: var(--green-pale); border-color: #abc5ea; }
 .menu-icon-btn span {
   display: block;
   height: 2px;
@@ -181,8 +181,8 @@ nav a {
 }
 nav a:hover { color: var(--text); background: #f1f5f2; }
 nav a.active{
-    color:#1a6b3a;
-    background:#e8f5ee;
+    color:#1d4ed8;
+    background:#dbeafe;
     font-weight:700;
     border-radius:8px;
 }

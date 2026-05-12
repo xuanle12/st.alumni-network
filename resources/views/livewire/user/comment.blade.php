@@ -83,7 +83,7 @@
           <div class="nw-cmi-wrap">
             <div class="nw-bbl" style="padding:7px 12px">
               <div class="nw-bbl-name" style="font-size:11px">{{ $reply->user?->name ?? 'Người dùng' }}</div>
-              <div class="nw-bbl-text" style="font-size:12px"><span class="nw-mention">@{{ $comment->user?->name }}</span> {{ $reply->content }}</div>
+              <div class="nw-bbl-text" style="font-size:12px"><span class="nw-mention">@{{ $reply->parent?->user?->name ?? $comment->user?->name }}</span>{{ $reply->content }}</div>
             </div>
             <div class="nw-cmab">
               <span x-data="{ liked: {{ $reply->isLikedBy(auth()->id()) ? 'true' : 'false' }}, count: {{ $reply->likes_count }}, toggle() { this.liked=!this.liked; this.count=this.liked?this.count+1:this.count-1; } }">
