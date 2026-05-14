@@ -1,781 +1,470 @@
-
 <div>
-  @php
-  use Illuminate\Support\Str;
-  @endphp
-  <style>
-    
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --primary:       #0f4c81;
-  --primary-light: #1d6fb8;
-  --primary-pale:  #e8f2fb;
-
-  --secondary:     #2563eb;
-  --secondary-light:#60a5fa;
-
-  --text:          #1a1f2e;
-  --text-muted:    #5c6470;
-
-  --border:        #dbe7f3;
-
-  --bg:            #ffffff;
-  --bg-soft:       #f5f9fd;
-
-  --radius:        12px;
-
-  --shadow-sm:     0 2px 8px rgba(15,76,129,0.06);
-  --shadow-md:     0 6px 24px rgba(15,76,129,0.12);
+  --navy:  #1a5c9a;
+  --blue:  #2e86de;
+  --sky:   #74b9e8;
+  --pale:  #e8f4fd;
+  --cream: #faf8f4;
+  --cream2:#f5f1eb;
+  --line:  #e4ddd3;
+  --lineb: #b8d9f5;
+  --muted: #8a8278;
+  --mutedb:#5fa8d8;
+  --white: #ffffff;
 }
 
-/* RESET */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--navy); background: var(--cream); }
 
-html, body {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  scroll-behavior: smooth;
-}
-
-/* CONTAINER */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* BUTTON */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  border: 1px solid transparent;
-  transition: .2s;
-  white-space: nowrap;
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text-muted);
-  border-color: var(--border);
-}
-
-.btn-ghost:hover {
-  background: var(--primary-pale);
-  color: var(--primary);
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background: var(--primary-light);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(15,76,129,.25);
-}
-
-/* HERO BUTTON */
-.btn-hero {
-  padding: 12px 26px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  border: none;
-  transition: .2s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-hero-primary {
-  background: var(--secondary);
-  color: #fff;
-}
-
-.btn-hero-primary:hover {
-  background: var(--secondary-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(37,99,235,.3);
-}
-
-.btn-hero-outline {
-  background: transparent;
-  border: 2px solid rgba(255,255,255,.25);
-  color: #fff;
-}
-
-.btn-hero-outline:hover {
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.45);
-}
-
-/* HERO */
-.hero {
-  background: linear-gradient(
-    135deg,
-    #08263d 0%,
-    #0f4c81 50%,
-    #1d6fb8 100%
-  );
-  position: relative;
-  overflow: hidden;
-  padding: 90px 24px 80px;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top right,
-    rgba(255,255,255,.08),
-    transparent 40%);
-}
-
-.hero-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 60px;
-  align-items: center;
-  position: relative;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(34px, 4vw, 54px);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-.hero h1 em {
-  color: #93c5fd;
-  font-style: normal;
-}
-
-.hero p {
-  font-size: 15px;
-  line-height: 1.8;
-  color: rgba(255,255,255,.78);
-  max-width: 520px;
-  margin-bottom: 34px;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* HERO CARD */
-.hero-card {
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
-  backdrop-filter: blur(18px);
-  border-radius: 22px;
-  padding: 32px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.15);
-}
-
-.hero-card-title {
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.6);
-  margin-bottom: 24px;
-}
-
-.stats-grid-hero {
+/* ── HERO ── */
+.lp-hero {
+  min-height: calc(100vh - 60px);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 80px;
+  align-items: center;
+  padding: 80px 0 60px;
+}
+.lp-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; color: var(--navy);
+  background: var(--white); border: 1px solid var(--lineb);
+  padding: 6px 14px; border-radius: 20px;
+  margin-bottom: 32px; width: fit-content;
+  animation: fadeUp .5s ease both;
+}
+.lp-hero h1 {
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -2px; color: var(--navy);
+  animation: fadeUp .55s .05s ease both;
+}
+.lp-hero h1 span { color: var(--blue); }
+.lp-hero-right {
+  display: flex; flex-direction: column; gap: 0;
+  animation: fadeUp .6s .1s ease both;
+}
+.lp-hero-desc {
+  font-size: 15px; font-weight: 300; color: var(--muted);
+  line-height: 1.8; margin-bottom: 32px;
+}
+.lp-btns { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+
+.btn-main {
+  padding: 13px 28px; border-radius: 8px;
+  font-size: 14px; font-weight: 600; color: var(--white);
+  background: var(--blue); border: none; cursor: pointer;
+  text-decoration: none;
+  font-family: inherit; display: inline-flex; align-items: center; gap: 8px;
+  transition: background .2s, transform .18s, box-shadow .2s;
+}
+.btn-main:hover {
+  background: var(--navy);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46,134,222,0.3);
+}
+.btn-main:active { transform: translateY(0); }
+.btn-main svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.btn-ghost {
+  padding: 13px 28px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; color: var(--navy);
+  background: none; border: 1px solid var(--lineb);
+  cursor: pointer; text-decoration: none;
+  font-family: inherit;
+  transition: border-color .18s, transform .18s, background .18s;
+}
+.btn-ghost:hover {
+  border-color: var(--blue);
+  background: var(--pale);
+  transform: translateY(-2px);
 }
 
-.stat-item {
-  text-align: center;
+/* Stats */
+.lp-stats {
+  display: flex; gap: 0;
+  border: 1px solid var(--lineb); border-radius: 12px;
+  overflow: hidden; background: var(--white);
+  box-shadow: 0 2px 12px rgba(46,134,222,0.08);
 }
-
-.stat-num {
-  font-size: 34px;
-  font-weight: 800;
-  color: #fff;
+.lp-stat {
+  flex: 1; padding: 16px 20px;
+  border-right: 1px solid var(--lineb);
+  transition: background .18s;
 }
-
-.stat-num span {
-  color: #93c5fd;
+.lp-stat:hover { background: var(--pale); }
+.lp-stat:last-child { border-right: none; }
+.lp-stat-val {
+  font-size: 24px; font-weight: 700; color: var(--blue);
+  letter-spacing: -1px; line-height: 1; margin-bottom: 4px;
 }
+.lp-stat-lbl { font-size: 11px; color: var(--mutedb); font-weight: 400; }
 
-.stat-label {
-  font-size: 12px;
-  color: rgba(255,255,255,.65);
+/* ── DIVIDER ── */
+.lp-divider { height: 1px; background: var(--line); margin: 0; }
+
+/* ── FEATURES ── */
+.lp-features { padding: 72px 0; background: var(--cream); }
+.lp-sec-label {
+  font-size: 11px; font-weight: 600; color: var(--blue);
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;
 }
-
-.stat-divider {
-  grid-column: 1/-1;
-  height: 1px;
-  background: rgba(255,255,255,.12);
+.lp-sec-title {
+  font-size: clamp(22px, 3vw, 30px); font-weight: 700;
+  color: var(--navy); letter-spacing: -0.5px; margin-bottom: 40px;
+  line-height: 1.2;
 }
-
-/* SECTION */
-section {
-  padding: 72px 24px;
+.feat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
 }
-
-.section-inner {
-  max-width: 1200px;
-  margin: 0 auto;
+.feat-card {
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 26px; background: var(--white);
+  transition: border-color .2s, transform .22s, box-shadow .22s;
+  cursor: default;
 }
-
-.section-tag {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 10px;
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(24px,3vw,38px);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -.5px;
-  margin-bottom: 14px;
-}
-
-.section-desc {
-  font-size: 15px;
-  line-height: 1.8;
-  color: var(--text-muted);
-  max-width: 620px;
-}
-
-/* FEATURES */
-.features-bg {
-  background: var(--bg-soft);
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 20px;
-  margin-top: 48px;
-}
-
-.feature-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px 24px;
-  transition: .25s;
-}
-
-.feature-card:hover {
+.feat-card:hover {
+  border-color: var(--sky);
   transform: translateY(-4px);
-  border-color: #93c5fd;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 28px rgba(46,134,222,0.12);
 }
-
-.feature-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
-  font-size: 22px;
+.feat-ic {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--pale); border: 1px solid var(--lineb);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 16px; color: var(--blue);
+  transition: background .2s, transform .2s, color .2s;
 }
-
-.ic-green,
-.ic-gold,
-.ic-blue {
-  background: var(--primary-pale);
-  color: var(--primary);
+.feat-card:hover .feat-ic {
+  background: var(--blue);
+  color: var(--white);
+  transform: scale(1.08);
 }
+.feat-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+.feat-desc  { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
-.feature-card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 8px;
+/* ── WHY ── */
+.lp-why { background: var(--cream2); padding: 72px 0; }
+.why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.why-list { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+.why-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: transform .2s;
 }
-
-.feature-card p {
-  font-size: 13.5px;
-  line-height: 1.7;
-  color: var(--text-muted);
+.why-item:hover { transform: translateX(4px); }
+.why-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue); color: var(--white);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+  transition: background .2s, transform .2s;
 }
-
-/* JOBS */
-.jobs-grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 18px;
+.why-item:hover .why-num {
+  background: var(--sky);
+  transform: scale(1.1);
 }
-
-.job-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px;
-  display: flex;
-  gap: 16px;
-  transition: .2s;
+.why-item-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.why-item-desc  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.why-right {
+  background: var(--white); border: 1px solid var(--lineb);
+  border-radius: 16px; padding: 32px;
+  box-shadow: 0 4px 24px rgba(46,134,222,0.08);
 }
-
-.job-card:hover {
-  transform: translateY(-3px);
-  border-color: #93c5fd;
-  box-shadow: var(--shadow-sm);
+.why-card-title {
+  font-size: 13px; font-weight: 600; color: var(--mutedb);
+  text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 20px;
 }
-
-.job-logo {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  background: var(--primary-pale);
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 18px;
+.why-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
+  transition: background .15s, padding .15s; border-radius: 8px;
 }
-
-.job-title {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 4px;
+.why-row:hover { background: var(--pale); padding-left: 8px; padding-right: 8px; margin: 0 -8px; }
+.why-row:last-child { border-bottom: none; padding-bottom: 0; }
+.why-row-ic {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--pale); display: flex; align-items: center;
+  justify-content: center; font-size: 16px; flex-shrink: 0; color: var(--blue);
 }
-
-.job-company {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-}
-
-.job-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.tag {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.tag-green {
-  background: #dbeafe;
-  color: #1d4ed8;
-}
-
-.tag-gold {
-  background: #e0f2fe;
-  color: #0369a1;
-}
-
-.tag-gray {
-  background: #f1f5f9;
-  color: #64748b;
-}
-
-.job-salary {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--primary);
-  margin-left: auto;
+.why-row-name { font-size: 13px; font-weight: 500; color: var(--navy); }
+.why-row-sub  { font-size: 11px; color: var(--mutedb); }
+.why-row-tag  {
+  margin-left: auto; font-size: 11px; padding: 2px 9px;
+  border-radius: 20px; background: var(--pale);
+  color: var(--blue); border: 1px solid var(--lineb);
   white-space: nowrap;
 }
 
-/* ALUMNI */
-.alumni-bg {
-  background: var(--bg-soft);
+/* ── STEPS ── */
+.lp-steps { padding: 72px 0; background: var(--cream); }
+.steps-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 0; margin-top: 40px; position: relative;
+}
+.steps-grid::before {
+  content: ''; position: absolute;
+  top: 22px; left: calc(12.5%); right: calc(12.5%);
+  height: 1px; background: var(--lineb); z-index: 0;
+}
+.step-item { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.step-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--lineb);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: var(--blue);
+  margin: 0 auto 16px;
+  transition: background .2s, color .2s, border-color .2s, transform .2s, box-shadow .2s;
+}
+.step-item:hover .step-num {
+  background: var(--blue); color: var(--white);
+  border-color: var(--blue);
+  transform: scale(1.1);
+  box-shadow: 0 4px 14px rgba(46,134,222,0.25);
+}
+.step-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.step-desc  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ── CTA ── */
+.lp-cta { padding: 0 0 80px; background: var(--cream); }
+.cta-box {
+  background: var(--blue); border-radius: 20px;
+  padding: 56px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-box::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(255,255,255,0.12) 0%, transparent 65%),
+              radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.07) 0%, transparent 55%);
+  pointer-events: none;
+}
+.cta-box h2 {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 700;
+  color: var(--white); letter-spacing: -0.5px; margin-bottom: 10px;
+  position: relative;
+}
+.cta-box p {
+  font-size: 14px; color: rgba(255,255,255,0.7);
+  margin-bottom: 28px; font-weight: 300; position: relative;
+}
+.cta-btns { display: flex; gap: 10px; justify-content: center; position: relative; }
+.btn-white {
+  padding: 11px 24px; border-radius: 8px;
+  font-size: 14px; font-weight: 600; color: var(--blue);
+  background: var(--white); border: none; cursor: pointer;
+  text-decoration: none; font-family: inherit;
+  transition: opacity .15s, transform .18s, box-shadow .18s;
+}
+.btn-white:hover {
+  opacity: .95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.btn-outline-w {
+  padding: 11px 24px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85);
+  background: none; border: 1px solid rgba(255,255,255,0.35);
+  cursor: pointer; text-decoration: none; font-family: inherit;
+  transition: all .18s;
+}
+.btn-outline-w:hover {
+  border-color: rgba(255,255,255,0.8); color: #fff;
+  transform: translateY(-2px);
 }
 
-.alumni-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 20px;
-  margin-top: 48px;
+/* ── WRAP ── */
+.lp-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.alumni-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 26px;
-  text-align: center;
-  transition: .2s;
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .5s ease, transform .5s ease;
 }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-.alumni-card:hover {
-  transform: translateY(-4px);
-  border-color: #93c5fd;
-  box-shadow: var(--shadow-md);
-}
-
-.alumni-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin: 0 auto 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: 700;
-}
-
-.av1 {
-  background: linear-gradient(135deg,#0f4c81,#1d6fb8);
-}
-
-.av2 {
-  background: linear-gradient(135deg,#2563eb,#60a5fa);
-}
-
-.av3 {
-  background: linear-gradient(135deg,#0284c7,#38bdf8);
-}
-
-/* EVENTS */
-.events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 36px;
-}
-
-.event-item {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px 22px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: .2s;
-}
-
-.event-item:hover {
-  border-color: #93c5fd;
-  box-shadow: var(--shadow-sm);
-}
-
-.event-date .day {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--primary);
-}
-
-.event-date .month {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-.event-badge {
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.eb-green {
-  background: #dbeafe;
-  color: #1d4ed8;
-}
-
-.eb-gold {
-  background: #e0f2fe;
-  color: #0369a1;
-}
-
-/* CTA */
-.cta {
-  background: linear-gradient(
-    135deg,
-    #08263d,
-    #0f4c81
-  );
-  padding: 82px 24px;
-  text-align: center;
-}
-
-.cta h2 {
-  font-size: clamp(28px,4vw,46px);
-  color: #fff;
-  font-weight: 800;
-  margin-bottom: 16px;
-}
-
-.cta h2 em {
-  color: #93c5fd;
-  font-style: normal;
-}
-
-.cta p {
-  color: rgba(255,255,255,.72);
-  margin-bottom: 34px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-
-  .hero-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .features-grid,
-  .alumni-grid {
-    grid-template-columns: repeat(2,1fr);
-  }
-}
-
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-
-  .hero {
-    padding: 54px 16px 48px;
-  }
-
-  section {
-    padding: 52px 16px;
-  }
-
-  .hero h1 {
-    font-size: 30px;
-  }
-
-  .features-grid,
-  .jobs-grid,
-  .alumni-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-actions,
-  .cta-actions {
-    flex-direction: column;
-  }
-
-  .btn-hero {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .event-item {
-    flex-wrap: wrap;
-  }
+  .lp-wrap { padding: 0 20px; }
+  .lp-hero { grid-template-columns: 1fr; min-height: 100svh; padding: 48px 0 56px; gap: 32px; }
+  .lp-hero-right { display: none; }
+  .feat-grid { grid-template-columns: 1fr 1fr; }
+  .why-inner { grid-template-columns: 1fr; gap: 32px; }
+  .steps-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .steps-grid::before { display: none; }
+  .cta-box { padding: 36px 24px; }
 }
-
 @media (max-width: 480px) {
-
-  .hero h1 {
-    font-size: 24px;
-  }
-
-  .hero-card {
-    padding: 22px 18px;
-  }
-
-  .stat-num {
-    font-size: 24px;
-  }
-
-  .section-title {
-    font-size: 22px;
-  }
+  .feat-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
 }
+</style>
 
-  </style>
-  <section class="hero">
-  <div class="hero-inner">
-    <div class="fade-up">
-      <h1>Kết nối <em>cựu sinh viên</em><br>— Mở rộng tương lai</h1>
-      <p>Nền tảng tập trung giúp kết nối sinh viên, cựu sinh viên và doanh nghiệp. Đăng nhập một lần — truy cập toàn bộ hệ sinh thái số của Học viện.</p>
-      <div class="hero-actions">
-        @auth
-          <a href="{{ route('csv') }}" class="btn-hero btn-hero-primary" wire:navigate>Vào trang chủ</a>
-          <a href="{{ route('job') }}" class="btn-hero btn-hero-outline" wire:navigate>Xem tuyển dụng →</a>
-        @else
-          <a href="{{ route('register') }}" class="btn-hero btn-hero-primary" wire:navigate>Tham gia ngay</a>
-          <a href="{{ route('login') }}" class="btn-hero btn-hero-outline" wire:navigate>Đăng nhập →</a>
-        @endauth
+<div class="lp-wrap">
+
+  <div class="lp-hero">
+    <div>
+      <div class="lp-tag">Cộng đồng cựu sinh viên VNUA</div>
+      <h1>Kết nối.<br>Chia sẻ.<br><span>Phát triển.</span></h1>
+      <p class="lp-hero-desc">Nền tảng kết nối cộng đồng cựu sinh viên Học viện Nông nghiệp Việt Nam — cơ hội nghề nghiệp, tri thức chuyên môn và mạng lưới bền vững.</p>
+    </div>
+
+    <div class="lp-hero-right">
+      <div class="lp-btns">
+        <a href="{{ route('register') }}" class="btn-main">
+          Tham gia miễn phí
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
+        <a href="{{ route('login') }}" class="btn-ghost">Đăng nhập</a>
+      </div>
+      <div class="lp-stats">
+        <div class="lp-stat">
+          <div class="lp-stat-val">{{ number_format($stats['alumni']) }}+</div>
+          <div class="lp-stat-lbl">Cựu sinh viên</div>
+        </div>
+        <div class="lp-stat">
+          <div class="lp-stat-val">{{ number_format($stats['companies']) }}+</div>
+          <div class="lp-stat-lbl">Doanh nghiệp</div>
+        </div>
+        <div class="lp-stat">
+          <div class="lp-stat-val">{{ number_format($stats['jobs']) }}+</div>
+          <div class="lp-stat-lbl">Tin tuyển dụng</div>
+        </div>
       </div>
     </div>
 
-    <div class="hero-card fade-up delay-2">
-      <div class="hero-card-title">Tổng quan hệ thống</div>
-      <div class="stats-grid-hero">
-        <div class="stat-item">
-          <div class="stat-num">{{ number_format($stats['alumni'] ?? 0) }}<span>+</span></div>
-          <div class="stat-label">Cựu sinh viên</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">{{ number_format($stats['companies'] ?? 0) }}<span>+</span></div>
-          <div class="stat-label">Doanh nghiệp</div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <div class="stat-num">{{ number_format($stats['jobs'] ?? 0) }}<span>+</span></div>
-          <div class="stat-label">Tin tuyển dụng</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">{{ number_format($stats['events'] ?? 0) }}<span>+</span></div>
-          <div class="stat-label">Sự kiện / năm</div>
-        </div>
+  </div>
+
+</div>
+
+<div class="lp-divider"></div>
+
+{{-- FEATURES --}}
+<div class="lp-features">
+  <div class="lp-wrap">
+    <div class="lp-sec-label">Tính năng</div>
+    <div class="lp-sec-title">Mọi thứ bạn cần trong một nền tảng</div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-ic"><i class="fa-solid fa-handshake"></i></div>
+        <div class="feat-title">Mạng lưới chuyên gia</div>
+        <div class="feat-desc">Kết nối với cựu sinh viên đang làm việc tại hàng trăm doanh nghiệp trong và ngoài nước.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic"><i class="fa-solid fa-briefcase"></i></div>
+        <div class="feat-title">Cơ hội việc làm</div>
+        <div class="feat-desc">Tin tuyển dụng chất lượng cao từ doanh nghiệp đối tác, ưu tiên cựu sinh viên VNUA.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic"><i class="fa-solid fa-calendar-days"></i></div>
+        <div class="feat-title">Sự kiện & Hội thảo</div>
+        <div class="feat-desc">Cập nhật lịch hội thảo, workshop, buổi gặp mặt alumni thường xuyên trong và ngoài trường.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic"><i class="fa-solid fa-pen-to-square"></i></div>
+        <div class="feat-title">Chia sẻ bài viết</div>
+        <div class="feat-desc">Đăng bài, chia sẻ kinh nghiệm, kiến thức chuyên môn với cộng đồng cựu sinh viên.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic"><i class="fa-solid fa-building"></i></div>
+        <div class="feat-title">Hồ sơ doanh nghiệp</div>
+        <div class="feat-desc">Doanh nghiệp đăng tin tuyển dụng, tiếp cận trực tiếp nguồn nhân lực chất lượng từ VNUA.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic"><i class="fa-solid fa-bell"></i></div>
+        <div class="feat-title">Thông báo thông minh</div>
+        <div class="feat-desc">Nhận thông báo về tin tuyển dụng, sự kiện và bài viết phù hợp với lĩnh vực của bạn.</div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FEATURES -->
-<section class="features-bg">
-  <div class="section-inner">
-    <div class="section-tag">Tính năng</div>
-    <h2 class="section-title">Đầy đủ công cụ cho<br>mọi đối tượng người dùng</h2>
-    <p class="section-desc">
-      Từ sinh viên, cựu sinh viên cho đến doanh nghiệp — tất cả đều có không gian riêng trên một nền tảng thống nhất.
-    </p>
-
-    <div class="features-grid">
-      @foreach([
-        ['ic-green','fa-solid fa-users','Quản lý hồ sơ cựu sinh viên','Lưu trữ tập trung thông tin cựu sinh viên theo khóa, ngành. Tra cứu và lọc nhanh theo nhiều tiêu chí.'],
-        ['ic-gold','fa-solid fa-briefcase','Cổng tuyển dụng nội bộ','Doanh nghiệp đăng tin, sinh viên và cựu sinh viên tìm việc — tất cả ngay trên hệ thống của Học viện.'],
-        ['ic-green','fa-solid fa-shield-halved','Đăng nhập một lần (SSO)','Tích hợp SSO giúp người dùng chỉ cần một tài khoản để truy cập toàn bộ dịch vụ số của Học viện.'],
-        ['ic-blue','fa-solid fa-calendar-days','Sự kiện & Diễn đàn','Quản lý và thông báo sự kiện kết nối, hội thảo, gặp mặt cựu sinh viên theo khoa và toàn trường.'],
-        ['ic-gold','fa-solid fa-chart-column','Thống kê & Báo cáo','Dashboard admin với báo cáo trực quan về tình trạng việc làm, phân bố cựu sinh viên theo khu vực.'],
-        ['ic-green','fa-solid fa-bell','Thông báo realtime','Nhận thông báo ngay khi có tin tuyển dụng mới, sự kiện sắp diễn ra hoặc cập nhật từ mạng lưới.'],
-      ] as [$cls, $icon, $title, $desc])
-        <div class="feature-card">
-          <div class="feature-icon {{ $cls }}">
-            <i class="{{ $icon }}"></i>
+<div class="lp-divider"></div>
+<div class="lp-why">
+  <div class="lp-wrap">
+    <div class="why-inner">
+      <div class="why-left">
+        <div class="lp-sec-label">Tại sao chọn chúng tôi</div>
+        <div class="lp-sec-title">Được xây dựng dành riêng cho cộng đồng VNUA</div>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-num">1</div>
+            <div>
+              <div class="why-item-title">Cộng đồng chuyên biệt</div>
+              <div class="why-item-desc">Không gian riêng cho sinh viên và cựu sinh viên VNUA — kết nối đúng người, đúng ngành.</div>
+            </div>
           </div>
-          <h3>{{ $title }}</h3>
-          <p>{{ $desc }}</p>
-        </div>
-      @endforeach
-    </div>
-  </div>
-</section>
-
-<!-- JOBS -->
-<section>
-  <div class="section-inner">
-    <div class="jobs-header">
-      <div>
-        <div class="section-tag">Tuyển dụng</div>
-        <h2 class="section-title">Cơ hội việc làm mới nhất</h2>
-      </div>
-      <a href="{{ route('job') }}" class="btn btn-ghost" wire:navigate>Xem tất cả →</a>
-    </div>
-    <div class="jobs-grid">
-      @forelse($latestJobs as $job)
-      <div class="job-card">
-        <div class="job-logo">{{ $job->logo_emoji }}</div>
-        <div class="job-info">
-          <div class="job-title">{{ $job->title }}</div>
-          <div class="job-company">{{ $job->company }} — {{ $job->location }}</div>
-          <div class="job-tags">
-            <span class="tag {{ $job->type_class }}">{{ $job->type_label }}</span>
-            @if($job->field)
-              <span class="tag tag-gray">{{ $job->field }}</span>
-            @endif
+          <div class="why-item">
+            <div class="why-num">2</div>
+            <div>
+              <div class="why-item-title">Cơ hội thực tế</div>
+              <div class="why-item-desc">Doanh nghiệp đăng tin trực tiếp, không qua trung gian, tỷ lệ phản hồi cao hơn.</div>
+            </div>
           </div>
-        </div>
-        <div class="job-salary">{{ $job->salary }}</div>
-      </div>
-      @empty
-        <p class="empty-note">Chưa có tin tuyển dụng. Quay lại sau bạn nhé!</p>
-      @endforelse
-    </div>
-  </div>
-</section>
-
-
-<section class="alumni-bg">
-  <div class="section-inner">
-    <div class="section-tag">Cựu sinh viên tiêu biểu</div>
-    <h2 class="section-title">Những gương mặt thành công</h2>
-    <p class="section-desc">Hàng nghìn cựu sinh viên VNUA đang đóng góp tích cực cho xã hội ở nhiều lĩnh vực khác nhau.</p>
-    <div class="alumni-grid">
-      @forelse($spotlightAlumni as $index => $alumni)
-      <div class="alumni-card">
-        <div class="alumni-avatar av{{ ($index % 3) + 1 }}">
-          {{ strtoupper(substr($alumni->user->name ?? 'NA', 0, 3)) }}
-        </div>
-        <div class="alumni-name">{{ $alumni->user->name ?? 'Cựu sinh viên' }}</div>
-        <div class="alumni-class">{{ $alumni->lop }} · {{ $alumni->nganh ?? $alumni->khoa }}</div>
-        <div class="alumni-company"><i class="fa-solid fa-briefcase"></i>{{ Str::limit($alumni->bio, 40) }}</div>
-      </div>
-      @empty
-        <p class="empty-note">Chưa có dữ liệu cựu sinh viên.</p>
-      @endforelse
-    </div>
-  </div>
-</section>
-
-<!-- EVENTS -->
-<section>
-  <div class="section-inner">
-    <div class="jobs-header">
-      <div>
-        <div class="section-tag">Sự kiện</div>
-        <h2 class="section-title">Sắp diễn ra</h2>
-      </div>
-      <a href="{{ route('event') }}" class="btn btn-ghost" wire:navigate>Xem tất cả →</a>
-    </div>
-    <div class="events-list">
-      @forelse($upcomingEvents as $event)
-      <div class="event-item">
-        <div class="event-date">
-          <div class="day">{{ $event->event_date->format('d') }}</div>
-          <div class="month">Tháng {{ $event->event_date->format('n') }}</div>
-        </div>
-        <div class="event-div"></div>
-        <div class="event-info">
-          <h4>{{ $event->title }}</h4>
-          <div class="event-meta">
-            <span><i class="fa-solid fa-location-dot"></i> {{ $event->location }}</span>
-            @if($event->time_range)
-              <span><i class="fa-solid fa-clock"></i>{{ $event->time_range }}</span>
-            @endif
+          <div class="why-item">
+            <div class="why-num">3</div>
+            <div>
+              <div class="why-item-title">Hoàn toàn miễn phí</div>
+              <div class="why-item-desc">Toàn bộ tính năng dành cho sinh viên và cựu sinh viên đều miễn phí 100%.</div>
+            </div>
           </div>
         </div>
-        <span class="event-badge {{ $event->badge_class }}">{{ $event->badge_label }}</span>
       </div>
-      @empty
-        <p class="empty-note">Chưa có sự kiện sắp tới.</p>
-      @endforelse
     </div>
   </div>
-</section>
-<section class="cta">
-  <h2>Sẵn sàng tham gia<br><em>mạng lưới</em> của chúng tôi?</h2>
-  <p>Đăng ký ngay hôm nay để kết nối với hơn {{ number_format($stats['alumni']) }} cựu sinh viên và hàng trăm doanh nghiệp đối tác.</p>
-  <div class="cta-actions">
-    <a href="{{ route('register') }}" class="btn-hero btn-hero-primary" wire:navigate>Đăng ký tài khoản</a>
-    <a href="{{ route('login') }}" class="btn-hero btn-hero-outline" wire:navigate>Đăng nhập</a>
+</div>
+<div class="lp-steps">
+  <div class="lp-wrap">
+    <div class="lp-sec-label">Bắt đầu</div>
+    <div class="lp-sec-title">Chỉ 3 bước để tham gia</div>
+    <div class="steps-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-title">Đăng ký tài khoản</div>
+        <div class="step-desc">Tạo tài khoản miễn phí bằng email sinh viên hoặc email cá nhân của bạn.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-title">Hoàn thiện hồ sơ</div>
+        <div class="step-desc">Cập nhật thông tin học vấn, kinh nghiệm làm việc và kỹ năng chuyên môn.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-title">Kết nối & Khám phá</div>
+        <div class="step-desc">Tìm kiếm việc làm, tham gia sự kiện và kết nối với cộng đồng alumni.</div>
+      </div>
+    </div>
   </div>
-</section>
+</div>
+
+<div class="lp-divider"></div>
+
+{{-- CTA --}}
+<div class="lp-cta" style="padding-top:56px;">
+  <div class="lp-wrap">
+    <div class="cta-box">
+      <h2>Sẵn sàng tham gia cộng đồng?</h2>
+      <p>Đăng ký miễn phí — kết nối ngay với hàng nghìn cựu sinh viên VNUA.</p>
+      <div class="cta-btns">
+        <a href="{{ route('register') }}" class="btn-white">Đăng ký ngay</a>
+        <a href="{{ route('login') }}" class="btn-outline-w">Đã có tài khoản →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const obs = new IntersectionObserver(els => 
+  els.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+  { threshold: 0.12 }
+);
+document.querySelectorAll('.feat-card, .why-item, .step-item, .why-right')
+  .forEach(el => { el.classList.add('reveal'); obs.observe(el); });
+</script>
 </div>

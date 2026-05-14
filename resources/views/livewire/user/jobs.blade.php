@@ -1,5 +1,4 @@
 <div>
-    @push('styles')
 <style>
     .jl-wrap { display: flex; gap: 24px; align-items: flex-start; }
     .jl-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 80px; display: flex; flex-direction: column; gap: 14px; }
@@ -173,8 +172,6 @@
 }
     
 </style>
-@endpush
-
 <div class="jl-wrap flex gap-6 items-start">
     <aside class="jl-sidebar w-64 flex-shrink-0 sticky top-20 space-y-4">
 

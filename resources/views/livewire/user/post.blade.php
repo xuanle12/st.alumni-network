@@ -109,7 +109,6 @@
           @error('title')<div class="err">{{ $message }}</div>@enderror
         </div>
  
-        {{-- Danh mục + Khoa --}}
         <div class="row2">
           <div class="fi">
             <label>Danh mục *</label>
@@ -132,7 +131,6 @@
           </div>
         </div>
  
-        {{-- Mô tả ngắn --}}
         <div class="fi">
           <label>Mô tả ngắn</label>
           <textarea wire:model="excerpt" rows="2" placeholder="Tóm tắt bài viết trong 1-2 câu..."></textarea>
