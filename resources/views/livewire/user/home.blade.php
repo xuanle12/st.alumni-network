@@ -18,22 +18,23 @@
 
 body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--navy); background: var(--cream); }
 
-/* ── HERO ── */
 .lp-hero {
   min-height: calc(100vh - 60px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
-  padding: 80px 0 60px;
+  padding: 0 0 60px;
+   padding-top: 0;
 }
 .lp-tag {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; font-weight: 600; color: var(--navy);
+  font-size: 20px; font-weight: 600; color: var(--navy);
   background: var(--white); border: 1px solid var(--lineb);
   padding: 6px 14px; border-radius: 20px;
   margin-bottom: 32px; width: fit-content;
   animation: fadeUp .5s ease both;
+  
 }
 .lp-hero h1 {
   font-size: clamp(42px, 5vw, 64px);
@@ -290,7 +291,6 @@ body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--navy); background
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .lp-wrap { padding: 0 20px; }
   .lp-hero { grid-template-columns: 1fr; min-height: 100svh; padding: 48px 0 56px; gap: 32px; }
@@ -311,7 +311,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--navy); background
 
   <div class="lp-hero">
     <div>
-      <div class="lp-tag">Cộng đồng cựu sinh viên VNUA</div>
+      <div class="lp-tag">Cộng đồng cựu sinh viên khoa CNTT</div>
       <h1>Kết nối.<br>Chia sẻ.<br><span>Phát triển.</span></h1>
       <p class="lp-hero-desc">Nền tảng kết nối cộng đồng cựu sinh viên Học viện Nông nghiệp Việt Nam — cơ hội nghề nghiệp, tri thức chuyên môn và mạng lưới bền vững.</p>
     </div>
@@ -446,7 +446,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--navy); background
 
 <div class="lp-divider"></div>
 
-{{-- CTA --}}
+
 <div class="lp-cta" style="padding-top:56px;">
   <div class="lp-wrap">
     <div class="cta-box">

@@ -34,6 +34,7 @@ html, body {
   background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
+  
 }
 
 /* ── UTILITIES ──────────────────────────── */
@@ -49,7 +50,7 @@ html, body {
   padding: 8px 18px;
   border-radius: 8px;
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
@@ -74,7 +75,7 @@ html, body {
   padding: 12px 26px;
   border-radius: 9px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 30px;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
@@ -157,22 +158,22 @@ html, body {
   text-decoration: none;
   flex-shrink: 0;
 }
-.logo img { height: 38px; width: auto; }
+.logo img { height: 42px; width: auto; }
 .logo-text { line-height: 1.25; }
 .logo-text strong {
   display: block;
-  font-size: 13.5px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--green);
   letter-spacing: -0.2px;
 }
-.logo-text span { font-size: 11px; color: var(--text-muted); }
+.logo-text span { font-size: 15px; color: var(--text-muted); }
 
 nav { display: flex; align-items: center; gap: 2px; }
 nav a {
   padding: 6px 13px;
   border-radius: 7px;
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--text-muted);
   text-decoration: none;
@@ -277,7 +278,7 @@ nav a.active{
   gap: 12px;
   padding: 10px 12px;
   border-radius: 9px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
   color: var(--text-muted);
   text-decoration: none;
@@ -290,7 +291,7 @@ nav a.active{
   border-radius: 9px;
   background: #f3f4f6;
   display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
+  font-size: 20px;
   flex-shrink: 0;
   transition: .15s;
 }
@@ -309,12 +310,10 @@ nav a.active{
 }
 .sidebar-drawer-footer .btn { justify-content: center; }
 
-/* menu icon — ẩn trên desktop, hiện trên mobile */
 .menu-icon-btn { display: none; }
 
-/* old hamburger */
 .hamburger { display: none; }
-/* ── FOOTER ─────────────────────────────── */
+
 footer { background: #0f2218; padding: 48px 24px 28px; }
 .footer-inner { max-width: 1200px; margin: 0 auto; }
 .footer-top {
@@ -328,12 +327,12 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
   text-decoration: none; margin-bottom: 14px;
 }
 .footer-logo img {
-  height: 32px; width: auto;
+  height: 52px; width: auto;
   filter: brightness(0) invert(1); opacity: .85;
 }
-.footer-logo-text strong { display: block; font-size: 13px; font-weight: 700; color: rgba(255,255,255,.85); }
-.footer-logo-text span { font-size: 11px; color: rgba(255,255,255,.4); }
-.footer-desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 230px; }
+.footer-logo-text strong { display: block; font-size: 15px; font-weight: 700; color: rgba(255,255,255,.85); }
+.footer-logo-text span { font-size: 16px; color: rgba(255,255,255,.4); }
+.footer-desc { font-size: 15px; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 230px; }
 .footer-col h4 {
   font-size: 11px; font-weight: 700;
   letter-spacing: 1px; text-transform: uppercase;
@@ -402,17 +401,34 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
   .event-badge { order: -1; }
 
   .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .logo {
+    align-items: flex-start;
+  }
+
+  .logo-text strong,
+  .logo-text span {
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .logo-text strong {
+    font-size: 15px;
+    max-width: 180px;
+  }
+
+  .logo-text span {
+    font-size: 12px;
+  }
 }
 
-/* ── MOBILE (≤ 480px) ──────────────────── */
 @media (max-width: 480px) {
   .header-inner { padding: 0 16px; gap: 12px; }
   .logo-text span { display: none; }
 
   .hero { padding: 48px 16px 52px; }
-  .hero h1 { font-size: 28px; }
-  .hero p  { font-size: 14px; }
-  .hero-tag { font-size: 11px; }
+  .hero h1 { font-size: 20px; }
+  .hero p  { font-size: 20px; }
+  .hero-tag { font-size: 20px; }
   .hero-actions { flex-direction: column; }
   .btn-hero { justify-content: center; }
 
@@ -441,8 +457,6 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 
   .container { padding: 0 16px; }
 }
-
-/* ── A11Y: Skip link ────────────────────── */
 .skip-link {
   position: absolute;
   left: -999px;
@@ -462,8 +476,6 @@ a:focus-visible, button:focus-visible {
   outline-offset: 2px;
   border-radius: 6px;
 }
-
-/* ── Flash toast ────────────────────────── */
 .flash-toast {
   position: fixed;
   top: 84px;
@@ -518,7 +530,7 @@ a:focus-visible, button:focus-visible {
   <script>setTimeout(() => { const t=document.getElementById('flashToast'); if(t) t.remove(); }, 4000);</script>
 @endif
 
-<!-- ── HEADER ── -->
+
 <header>
   <div class="header-inner">  
 
@@ -557,10 +569,9 @@ a:focus-visible, button:focus-visible {
   </div>
 </header>
 
-<!-- Overlay -->
+
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- Sidebar Drawer -->
 <div class="sidebar-drawer" id="sidebarDrawer">
   <div class="sidebar-drawer-header">
     <a href="{{ route('home') }}" class="sidebar-drawer-logo" wire:navigate>
@@ -571,7 +582,6 @@ a:focus-visible, button:focus-visible {
   </div>
 <div class="sidebar-drawer-body">
   @guest
-    {{-- Chưa đăng nhập: không hiện menu, chỉ hiện nút ở footer --}}
     <p style="font-size:13px;color:var(--text-muted);padding:12px 10px;line-height:1.6;">
       Vui lòng đăng nhập để truy cập đầy đủ tính năng.
     </p>
@@ -629,7 +639,6 @@ a:focus-visible, button:focus-visible {
   {{ $slot }}
 </main>
 
-<!-- FOOTER  -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
