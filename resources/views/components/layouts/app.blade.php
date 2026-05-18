@@ -535,7 +535,7 @@ a:focus-visible, button:focus-visible {
   <div class="header-inner">  
 
     <a href="{{ route('home') }}" class="logo" wire:navigate>
-      <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}" loading="lazy">
+      <img src="{{ asset('img/fita.logo.png') }}"alt="{{ config('app.name') }}"loading="lazy">
       <div class="logo-text">
         <strong>Mạng lưới cựu sinh viên khoa CNTT</strong>
         <span>Học viện Nông nghiệp Việt Nam</span>
@@ -552,11 +552,12 @@ a:focus-visible, button:focus-visible {
 
     <div class="header-right">
       @auth
-        @if(auth()->user()->isAdmin())
+        <!-- @if(auth()->user()->isAdmin())
           <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
         @else
           <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
-        @endif
+        @endif -->
+        <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
       @else
         <a href="{{ route('login') }}" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
         <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Đăng ký</a>
@@ -644,7 +645,7 @@ a:focus-visible, button:focus-visible {
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#" class="logo" wire:navigate>
-          <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}">
+          <img src="{{ asset('img/fita.logo.png') }}"alt="{{ config('app.name') }}"loading="lazy">
           <div class="footer-logo-text">
             <strong>Alumni Network</strong>
             <span>Học viện Nông nghiệp Việt Nam</span>

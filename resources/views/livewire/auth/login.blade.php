@@ -9,18 +9,13 @@
         <div class="login-right">
             <div class="login-card">
                 <div class="logo-row fade1">
-                <div class="logo-slot" id="slot1" title="Nhấn để chèn logo 1">
-                    <span class="plus">+</span>
-                    <img id="img1" alt="Logo 1">
-                    <input type="file" accept="image/*" onchange="loadLogo(event,'img1','slot1')">
+                    <label class="logo-slot">
+                        <img src="{{ asset('img/fita.logo.png') }}" alt="Logo 1">
+                    </label>
+                    <label class="logo-slot">
+                        <img src="{{ asset('img/logoST.jpg') }}" alt="Logo 2">
+                    </label>
                 </div>
-                <div class="logo-slot" id="slot2" title="Nhấn để chèn logo 2">
-                    <span class="plus">+</span>
-                    <img id="img2" alt="Logo 2">
-                    <input type="file" accept="image/*" onchange="loadLogo(event,'img2','slot2')">
-                </div>
-            </div>
- 
                 <div class="fade1" style="margin-bottom:28px">
                     <h2>Đăng nhập</h2>
                     <p class="login-subtitle">Chào mừng trở lại, nhập thông tin để tiếp tục</p>
@@ -58,23 +53,20 @@
                                     placeholder="••••••••"
                                     autocomplete="current-password"
                                 />
-                                <button 
-    type="button"
-    class="toggle-pass-btn"
-    onclick="
-        const input = document.getElementById('passwordInput');
-        const eye = this.querySelector('.icon-eye');
-        const eyeOff = this.querySelector('.icon-eye-off');
+                                <button type="button"class="toggle-pass-btn"onclick="
+                                    const input = document.getElementById('passwordInput');
+                                    const eye = this.querySelector('.icon-eye');
+                                    const eyeOff = this.querySelector('.icon-eye-off');
 
-        if(input.type === 'password'){
-            input.type = 'text';
-            eye.style.display='none';
-            eyeOff.style.display='inline';
-        }else{
-            input.type = 'password';
-            eye.style.display='inline';
-            eyeOff.style.display='none';
-        }
+                                    if(input.type === 'password'){
+                                        input.type = 'text';
+                                        eye.style.display='none';
+                                        eyeOff.style.display='inline';
+                                    }else{
+                                        input.type = 'password';
+                                        eye.style.display='inline';
+                                        eyeOff.style.display='none';
+                                    }
     "
 >
 
@@ -207,29 +199,21 @@
     margin-bottom: 28px;
 }
  
-.logo-slot {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    border: 2px dashed #93c5fd;
-    background: #eff6ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-    transition: border-color .2s, box-shadow .2s;
+.logo-slot{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
-.logo-slot:hover {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 4px rgba(59,130,246,.1);
-}
-.logo-slot img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: none;
+
+.logo-slot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 .logo-slot .plus {
     font-size: 24px;

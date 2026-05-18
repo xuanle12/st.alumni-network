@@ -293,9 +293,9 @@ a:focus-visible, button:focus-visible {
                     <div class="adm-urole">Quản trị viên</div>
                 </div>
             </div>
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="{{ route('logout') }}" method="POST"onsubmit="return confirm('Bạn có muốn đăng xuất không?')">
                 @csrf
-                <button type="submit" class="adm-logout" style="border:none;width:100%;text-align:left;font-family:inherit;background:transparent;cursor:pointer;">
+                <button type="submit" class="adm-logout"style="border:none;width:100%;text-align:left;font-family:inherit;background:transparent;cursor:pointer;">
                     ← Đăng xuất
                 </button>
             </form>
