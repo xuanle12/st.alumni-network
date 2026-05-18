@@ -1,5 +1,5 @@
 <div>
-   <style>
+<style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 .aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;background:#f8fafc;min-height:100vh}
 .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
