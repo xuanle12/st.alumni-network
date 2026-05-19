@@ -19,6 +19,12 @@
         <a href="#" class="nw-sc"><span class="nw-sc-ic"><i class="fa-solid fa-school"></i></span> FITA - VNUA</a>
         <a href="#" class="nw-sc"><span class="nw-sc-ic"><i class="fa-solid fa-laptop"></i></span> CSV CNTT HVNNA</a>
         <a href="#" class="nw-sc"><span class="nw-sc-ic"><i class="fa-solid fa-leaf"></i></span> CSV Nông nghiệp</a>
+        <div class="nw-sep" style="margin-top:auto"></div>
+          <form action="{{ route('logout') }}" method="POST"onsubmit="return confirm('Bạn có muốn đăng xuất không?')">
+            @csrf
+            <button type="submit" class="nw-li adm-logout" style="width:100%;border:none;cursor:pointer;">
+              <span class="nw-ic"><i class="fa-solid fa-right-from-bracket"></i></span>Đăng xuất</button>
+            </form>
     </aside>
 
   
@@ -30,6 +36,7 @@
             <button wire:click="setFilter('alumni')"  class="nw-fb {{ $filter === 'alumni'  ? 'on' : '' }}">Cựu SV</button>
             <button wire:click="setFilter('recruit')" class="nw-fb {{ $filter === 'recruit' ? 'on' : '' }}">Tuyển dụng</button>
         </div>
+        
 
         <div class="nw-cp">
             <div class="nw-cp-row">
@@ -279,7 +286,13 @@
 
 .nw-page{display:grid;grid-template-columns:220px 1fr 240px;height:calc(100vh - 52px);overflow:hidden;font-family:'Be Vietnam Pro',sans-serif;background:var(--oc-p);}
  
-.nw-left{padding:12px 8px;border-right:1px solid rgba(255,255,255,0.12);background:var(--oc);overflow-y:auto;height:100%;}
+.nw-left{padding:12px 8px;
+        border-right:1px solid rgba(255,255,255,0.12);
+        background:var(--oc);overflow-y:auto;
+        height:100%;
+        display: flex;
+  flex-direction: column;
+}
 .nw-left::-webkit-scrollbar{width:3px;}
 .nw-left::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:99px;}
 
@@ -375,6 +388,21 @@
 .nw-online{position:relative;}
 .nw-online::after{content:'';position:absolute;bottom:0;right:0;width:8px;height:8px;background:#2563c4;border-radius:50%;border:2px solid #fff;}
 .nw-cn{font-size:13px;font-weight:500;color:var(--oc);}
+.adm-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  transition: .15s;
+  margin-top: 4px;
+}
+.adm-logout:hover {
+  background: rgba(220,38,38,0.2);
+  color: #fca5a5;
+}
 
  
 @media(max-width:1200px){.nw-page{grid-template-columns:200px 1fr 220px;}}

@@ -552,12 +552,11 @@ a:focus-visible, button:focus-visible {
 
     <div class="header-right">
       @auth
-        <!-- @if(auth()->user()->isAdmin())
+        @if(auth()->user()->isAdmin())
           <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
         @else
           <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
-        @endif -->
-        <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
+        @endif
       @else
         <a href="{{ route('login') }}" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
         <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Đăng ký</a>
@@ -620,7 +619,7 @@ a:focus-visible, button:focus-visible {
       @if(auth()->user()->isAdmin())
         <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
       @else
-        <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ của tôi</a>
+        <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
       @endif
       <form action="{{ route('logout') }}" method="POST" style="margin:0;">
         @csrf

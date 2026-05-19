@@ -253,6 +253,11 @@ a:focus-visible, button:focus-visible {
             Dashboard
         </a>
 
+        <a href="{{ route('admin.user') }}"class="adm-item {{ request()->routeIs('admin.user') ? 'active' : '' }}">
+            <span class="adm-item-ic" data-lucide="user"></span></span>
+            Người dùng
+        </a>
+
         <a href="{{ route('admin.csv') }}"class="adm-item {{ request()->routeIs('admin.csv*') ? 'active' : '' }}">
             <span class="adm-item-ic" data-lucide="graduation-cap"></span>
             Cựu sinh viên
