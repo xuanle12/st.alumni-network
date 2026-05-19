@@ -397,12 +397,6 @@
 .reg-login-text a:hover{
   text-decoration:underline;
 }
-
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
-
-/* TABLET */
 @media (max-width:600px){
 
   .register-page{
@@ -468,19 +462,7 @@
   </style>
   <div>
       <div class="register-page">
-
-      {{-- Card --}}
       <div class="reg-card">
-
-          {{-- Logo --}}
-          <div class="reg-logo">
-              <div class="reg-logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-              <div>
-                  <div class="reg-logo-text">Alumni HVNNA</div>
-                  <div class="reg-logo-sub">Mạng lưới cựu sinh viên</div>
-              </div>
-          </div>
-
           <h2 class="reg-title">Tạo tài khoản</h2>
           <p class="reg-desc">Điền thông tin bên dưới để đăng ký.</p>
 
