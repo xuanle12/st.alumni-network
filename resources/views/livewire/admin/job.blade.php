@@ -102,7 +102,6 @@ body {
 }
 .tb-sel:focus { outline: none; border-color: #3b82f6; }
 
-/* ── KEY FIX: overflow visible để dropdown không bị cắt ── */
 .card {
   background: #fff;
   border: 1px solid #eaecf0;
@@ -199,7 +198,7 @@ td {
 
 .dd-menu {
   position: absolute;
-  right: 0; top: calc(100% + 6px);
+  right: 0;
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 9px;
@@ -420,13 +419,27 @@ td {
                     class="tog {{ $job->is_active ? 'on' : 'off' }}"></button></td>
                 <td style="color:#9ca3af;white-space:nowrap">{{ $job->created_at->format('d/m/Y') }}</td>
                 <td>
-                  <div x-data="{ open:false }" class="dd-wrap">
-                    <button class="dd-btn" @click="open=!open">
+                  <div x-data="{
+                    open: false,
+                    above: false,
+                    toggle(btn) {
+                      const rect = btn.getBoundingClientRect();
+                      this.above = (window.innerHeight - rect.bottom) < 130;
+                      this.open = !this.open;
+                    }
+                  }" class="dd-wrap">
+                    <button class="dd-btn" @click="toggle($el)">
                       <span class="dd-dot"></span>
                       <span class="dd-dot"></span>
                       <span class="dd-dot"></span>
                     </button>
-                    <div class="dd-menu" x-show="open" @click.outside="open=false" x-transition>
+                    <div class="dd-menu"
+                         x-show="open"
+                         @click.outside="open=false"
+                         x-transition
+                         :style="above
+                           ? 'bottom: calc(100% + 6px); top: auto; right: 0;'
+                           : 'top: calc(100% + 6px); bottom: auto; right: 0;'">
                       <div class="dd-item" @click="open=false" wire:click="openDetail({{ $job->id }})"> <i class="fa-solid fa-eye"></i> Xem chi tiết</div>
                       <div class="dd-item" @click="open=false" wire:click="openEdit({{ $job->id }})"> <i class="fa-solid fa-edit"></i> Chỉnh sửa </div>
                       <div class="dd-sep"></div>

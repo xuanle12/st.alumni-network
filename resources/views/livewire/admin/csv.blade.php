@@ -1,24 +1,16 @@
-<div>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 .aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;background:#f8fafc;min-height:100vh}
 .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
-
-/* topbar */
 .topbar{display:flex;align-items:center;justify-content:space-between}
 .tt{font-size:17px;font-weight:700;color:#0f172a}.ts{font-size:12px;color:#64748b;margin-top:2px}
 .btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#1d4ed8;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
 .btn-add:hover{background:#1e40af}
-
-/* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem 1.1rem}
-.stat-ic{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:9px}
-.ic-b{background:#eff6ff}.ic-g{background:#f0fdf4}.ic-a{background:#fffbeb}.ic-p{background:#faf5ff}
+.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:14px;}
+.stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;margin-bottom:0;}.ic-b{background:#eff6ff}.ic-g{background:#f0fdf4}.ic-a{background:#fffbeb}.ic-p{background:#faf5ff}
 .stat-n{font-size:24px;font-weight:700}.stat-l{font-size:11px;color:#64748b;margin-top:3px}
 .n-b{color:#0f172a}.n-g{color:#16a34a}.n-a{color:#d97706}.n-p{color:#7c3aed}
-
-/* toolbar */
 .toolbar{display:flex;gap:10px}
 .sw{flex:1;position:relative}
 .sw input{width:100%;padding:9px 12px 9px 34px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit}
@@ -27,10 +19,7 @@
 .sw-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8}
 .sel{padding:9px 11px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#475569;font-family:inherit}
 .sel:focus{outline:none;border-color:#3b82f6}
-
-/* table */
-.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}
-.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:visible}.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
 .tbl th{padding:10px 14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;text-align:left;background:#f8fafc;border-bottom:1px solid #e2e8f0}
 .tbl td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}
@@ -46,24 +35,24 @@
 .bd-a{background:#fffbeb;color:#b45309}.bd-a::before{background:#d97706}
 .bd-r{background:#fef2f2;color:#b91c1c}.bd-r::before{background:#dc2626}
 
-/* 3 gạch */
+
 .dot-wrap{position:relative;display:inline-block}
 .dot-btn{width:32px;height:32px;border-radius:8px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#64748b;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3.5px}
 .dot-btn:hover{background:#f1f5f9}
 .dot-btn span{display:block;width:13px;height:1.5px;background:currentColor;border-radius:2px}
-.dropdown{display:none;position:absolute;top:36px;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:168px;z-index:50;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.dropdown{display:none;position:absolute;top:36px;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:168px;z-index:999;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1)}
 .dropdown.open{display:block}
+
+.dropdown.drop-up{top:auto;bottom:36px;}
+
 .dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155}
 .dd-item:hover{background:#f8fafc}
 .dd-item.green{color:#15803d}.dd-item.green:hover{background:#f0fdf4}
 .dd-item.red{color:#b91c1c}.dd-item.red:hover{background:#fef2f2}
 .dd-sep{height:1px;background:#f1f5f9;margin:3px 0}
 .dd-ic{font-size:14px;width:16px;text-align:center}
-
 .pgn{display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;border-top:1px solid #f1f5f9;background:#fafafa}
 .pgn-info{font-size:12px;color:#94a3b8}
-
-/* buttons */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s}
 .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}
 .btn-ghost:hover{background:#f8fafc}
@@ -71,8 +60,6 @@
 .btn-prim:hover{background:#1e40af}
 .btn-del{background:#fef2f2;color:#b91c1c;border-color:#fecaca}
 .btn-del:hover{background:#fee2e2}
-
-/* MODAL */
 .mo-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem}
 .mo{background:#fff;border-radius:14px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .mo-hd{padding:1.25rem 1.5rem;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
@@ -90,24 +77,19 @@
 .fi.full{grid-column:1/-1}
 .mdiv{border:none;border-top:1px solid #f1f5f9}
 .mo-ft{padding:1rem 1.5rem;border-top:1px solid #f1f5f9;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}
-
-/* VIEW MODAL */
 .vgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.875rem}
 .vi label{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;margin-bottom:3px}
 .vi p{font-size:13px;font-weight:600;color:#0f172a}
 .vi p.mt{color:#cbd5e1;font-style:italic;font-weight:400}
 .vi a{font-size:12px;color:#1d4ed8}
-
-/* CONFIRM */
 .cf-body{padding:2rem 1.5rem;text-align:center}
 .cf-ic{font-size:36px;margin-bottom:12px}
 .cf-title{font-size:16px;font-weight:700;color:#0f172a;margin-bottom:6px}
 .cf-sub{font-size:13px;color:#64748b;line-height:1.7;margin-bottom:1.5rem}
 .cf-btns{display:flex;gap:10px;justify-content:center}
-
-/* empty */
 .empty{text-align:center;padding:3rem;color:#cbd5e1;font-size:13px}
 </style>
+
 <div>
   <div class="aw">
 
@@ -115,13 +97,11 @@
     <div class="flash">✓ {{ session('success') }}</div>
   @endif
 
-  
   <div class="topbar">
     <div><div class="tt">Cựu sinh viên</div><div class="ts">Quản lý danh sách alumni</div></div>
     <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
   </div>
 
- 
   <div class="stats">
     <div class="stat"><div class="stat-ic ic-b"><i class="fa-solid fa-graduation-cap"></i></div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng cựu SV</div></div>
     <div class="stat"><div class="stat-ic ic-g"><i class="fa-solid fa-check-circle"></i></div><div class="stat-n n-g">{{ $stats['active'] }}</div><div class="stat-l">Đã xác minh</div></div>
@@ -129,7 +109,6 @@
     <div class="stat"><div class="stat-ic ic-p"><i class="fa-solid fa-briefcase"></i></div><div class="stat-n n-p">{{ $stats['hasJob'] }}</div><div class="stat-l">Có việc làm</div></div>
   </div>
 
-  
   <div class="toolbar">
     <div class="sw">
       <span class="sw-ic">🔍</span>
@@ -149,7 +128,6 @@
     </select>
   </div>
 
-  {{-- table --}}
   <div class="tcard">
     <table class="tbl">
       <thead>
@@ -185,9 +163,21 @@
           </td>
           <td><span class="bd {{ $bc }}">{{ $bl }}</span></td>
           <td>
-            {{-- 3 GẠCH DROPDOWN --}}
+            {{-- ← PHẦN ĐÃ SỬA: tự detect xổ lên hay xuống --}}
             <div class="dot-wrap" x-data="{ open: false }" @click.away="open = false">
-              <button class="dot-btn" @click="open = !open" title="Thao tác">
+              <button class="dot-btn" @click="
+                open = !open;
+                if (open) {
+                  const rect = $el.getBoundingClientRect();
+                  const spaceBelow = window.innerHeight - rect.bottom;
+                  const dd = $el.nextElementSibling;
+                  if (spaceBelow < 200) {
+                    dd.classList.add('drop-up');
+                  } else {
+                    dd.classList.remove('drop-up');
+                  }
+                }
+              " title="Thao tác">
                 <span></span><span></span><span></span>
               </button>
               <div class="dropdown" :class="{ open: open }">
@@ -224,7 +214,7 @@
 
 </div>
 
-{{-- ══ MODAL THÊM / SỬA ══ --}}
+{{-- MODAL THÊM / SỬA --}}
 @if($showModal)
 <div class="mo-bg" wire:click.self="closeModal">
   <div class="mo">
@@ -233,7 +223,6 @@
       <button class="mo-close" wire:click="closeModal">✕</button>
     </div>
     <div class="mo-body">
-
       <div class="mo-sec">Thông tin cơ bản</div>
       <div class="fg2">
         <div class="fi">
@@ -263,7 +252,6 @@
           @error('f_year')<div class="err">{{ $message }}</div>@enderror
         </div>
       </div>
-
       <hr class="mdiv">
       <div class="mo-sec">Công việc hiện tại</div>
       <div class="fg2">
@@ -276,7 +264,6 @@
           <input wire:model="f_cmp" placeholder="FPT Software">
         </div>
       </div>
-
       <hr class="mdiv">
       <div class="mo-sec">Phân loại & trạng thái</div>
       <div class="fg2">
@@ -287,13 +274,12 @@
         <div class="fi">
           <label>Trạng thái xác minh</label>
           <select wire:model="f_status">
-            <option value="active"> <i class="fa-solid fa-check"></i> Đã xác minh</option>
-            <option value="pending"> <i class="fa-solid fa-clock"></i> Chờ duyệt</option>
-            <option value="inactive"> <i class="fa-solid fa-times"></i> Từ chối</option>
+            <option value="active">Đã xác minh</option>
+            <option value="pending">Chờ duyệt</option>
+            <option value="inactive">Từ chối</option>
           </select>
         </div>
       </div>
-
     </div>
     <div class="mo-ft">
       <button wire:click="closeModal" class="btn btn-ghost">Huỷ</button>
@@ -306,7 +292,7 @@
 </div>
 @endif
 
-{{-- ══ MODAL XEM HỒ SƠ ══ --}}
+
 @if($showView && $viewUser)
 <div class="mo-bg" wire:click.self="closeView">
   <div class="mo">
@@ -337,7 +323,6 @@
           </span>
         </div>
       </div>
-
       @if($viewUser->profile?->github || $viewUser->profile?->linkedin)
       <hr class="mdiv">
       <div class="fg2">
@@ -349,7 +334,6 @@
         @endif
       </div>
       @endif
-
       @if($viewUser->cvs->count() > 0)
       <hr class="mdiv">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:8px">CV đính kèm</div>
@@ -373,7 +357,6 @@
 </div>
 @endif
 
-{{-- ══ CONFIRM XOÁ ══ --}}
 @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo" style="max-width:360px">
@@ -392,6 +375,4 @@
   </div>
 </div>
 @endif
-</div>
-</div>
 </div>

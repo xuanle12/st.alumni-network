@@ -1,17 +1,13 @@
 <div>
-<style>
+  <style>
 .aw{padding:1.75rem 2rem;display:flex;flex-direction:column;gap:1.25rem;min-height:100vh;background:#f0f4ff;font-family:'Be Vietnam Pro',system-ui,sans-serif;}
 .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:9px;font-size:13px;display:flex;align-items:center;gap:8px;}
-
-/* topbar */
 .topbar{display:flex;align-items:center;justify-content:space-between;}
 .tt{font-size:18px;font-weight:700;color:#0f172a;letter-spacing:-.3px;}
 .ts{font-size:12px;color:#64748b;margin-top:3px;}
 .topbar-btns{display:flex;gap:8px;}
 .btn-add{padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#1a56db;color:#fff;border:none;display:inline-flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(26,86,219,.25);transition:all .15s;}
 .btn-add:hover{background:#1e69f5;transform:translateY(-1px);}
-
-/* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .stat{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.1rem 1.25rem;display:flex;align-items:center;gap:14px;transition:box-shadow .15s;}
 .stat:hover{box-shadow:0 4px 16px rgba(26,86,219,.1);}
@@ -23,8 +19,6 @@
 .stat-val{font-size:24px;font-weight:700;line-height:1;}
 .stat-lbl{font-size:11px;color:#64748b;margin-top:3px;}
 .sv-b{color:#1a56db;}.sv-g{color:#16a34a;}.sv-a{color:#7c3aed;}.sv-o{color:#d97706;}
-
-/* toolbar */
 .toolbar{display:flex;gap:10px;align-items:center;}
 .sw{flex:1;position:relative;}
 .sw input{width:100%;padding:10px 12px 10px 36px;background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;color:#0f172a;font-family:inherit;transition:border .15s;}
@@ -35,8 +29,6 @@
 .sel:focus{outline:none;border-color:#1a56db;}
 .per-sel{display:flex;align-items:center;gap:8px;font-size:12px;color:#64748b;margin-left:auto;}
 .per-sel select{padding:7px 10px;background:#fff;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;color:#475569;font-family:inherit;cursor:pointer;}
-
-/* table */
 .tcard{background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(26,86,219,.06);}
 .tbl{width:100%;border-collapse:collapse;table-layout:fixed;}
 .tbl th{padding:11px 16px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;text-align:left;background:#f8fafc;border-bottom:1.5px solid #e2e8f0;}
@@ -44,33 +36,31 @@
 .tbl tr:last-child td{border-bottom:none;}
 .tbl tbody tr{transition:background .1s;}
 .tbl tbody tr:hover td{background:#fafbff;}
-
-/* user row */
 .urow{display:flex;align-items:center;gap:10px;}
 .uava{width:36px;height:36px;border-radius:10px;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .un{font-size:13px;font-weight:600;color:#0f172a;}
 .ue{font-size:11px;color:#94a3b8;margin-top:1px;}
-
-/* badges */
 .bd{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;}
 .bd::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-/* role */
 .bd-admin{background:#eff6ff;color:#1a56db;border:1px solid #bfdbfe;}.bd-admin::before{background:#1a56db;}
 .bd-alumni{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}.bd-alumni::before{background:#16a34a;}
 .bd-student{background:#faf5ff;color:#7c3aed;border:1px solid #ddd6fe;}.bd-student::before{background:#7c3aed;}
 .bd-lecturer{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}.bd-lecturer::before{background:#ea580c;}
-/* status */
 .bd-active{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}.bd-active::before{background:#16a34a;}
 .bd-pending{background:#fffbeb;color:#b45309;border:1px solid #fde68a;}.bd-pending::before{background:#d97706;}
 .bd-inactive{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;}.bd-inactive::before{background:#dc2626;}
 
-/* 3 chấm */
+/* ── 3 CHẤM DROPDOWN ── */
 .dot-wrap{position:relative;display:inline-block;}
 .dot-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;transition:all .15s;}
 .dot-btn:hover{background:#eff6ff;border-color:#1a56db;color:#1a56db;}
 .dot-btn span{display:block;width:3px;height:3px;background:currentColor;border-radius:50%;}
-.dropdown{display:none;position:absolute;top:38px;right:0;background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;min-width:180px;z-index:50;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);}
+.dropdown{display:none;position:absolute;top:38px;right:0;background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;min-width:180px;z-index:999;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);}
 .dropdown.open{display:block;}
+
+/* ← THÊM MỚI: xổ lên khi gần cuối trang */
+.dropdown.drop-up{top:auto;bottom:38px;}
+
 .dd-item{padding:10px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:10px;color:#334155;transition:background .1s;}
 .dd-item:hover{background:#f8fafc;}
 .dd-item.blue{color:#1a56db;}.dd-item.blue:hover{background:#eff6ff;}
@@ -79,11 +69,8 @@
 .dd-sep{height:1px;background:#f1f5f9;margin:3px 0;}
 .dd-ic{width:16px;text-align:center;font-size:13px;}
 
-/* pagination */
 .pgn{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-top:1px solid #f1f5f9;background:#fafafa;}
 .pgn-info{font-size:12px;color:#94a3b8;}
-
-/* MODAL */
 .mo-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem;}
 .mo{background:#fff;border-radius:16px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);}
 .mo-sm{max-width:380px;}
@@ -100,8 +87,6 @@
 .fi input:focus,.fi select:focus{outline:none;border-color:#1a56db;box-shadow:0 0 0 3px rgba(26,86,219,.08);}
 .fi .err{font-size:11px;color:#dc2626;margin-top:2px;}
 .mo-ft{padding:1rem 1.5rem;border-top:1px solid #f1f5f9;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff;}
-
-/* Role picker */
 .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .role-card{border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px;}
 .role-card:hover{border-color:#1a56db;background:#f8faff;}
@@ -109,15 +94,11 @@
 .role-ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
 .role-name{font-size:13px;font-weight:600;color:#0f172a;}
 .role-desc{font-size:11px;color:#94a3b8;margin-top:1px;}
-
-/* confirm */
 .cf-body{padding:2rem 1.5rem;text-align:center;}
 .cf-ic{font-size:36px;margin-bottom:12px;}
 .cf-title{font-size:16px;font-weight:700;color:#0f172a;margin-bottom:6px;}
 .cf-sub{font-size:13px;color:#64748b;line-height:1.7;margin-bottom:1.5rem;}
 .cf-btns{display:flex;gap:10px;justify-content:center;}
-
-/* buttons */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s;}
 .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569;}
 .btn-ghost:hover{background:#f8fafc;}
@@ -127,7 +108,6 @@
 .btn-del:hover{background:#fee2e2;}
 .btn-role{background:#f0fdf4;color:#15803d;border-color:#bbf7d0;}
 .btn-role:hover{background:#dcfce7;}
-
 .empty{text-align:center;padding:3rem;color:#cbd5e1;font-size:13px;}
 </style>
 
@@ -137,7 +117,6 @@
     <div class="flash"><i class="fa-solid fa-check-circle"></i> {{ session('success') }}</div>
   @endif
 
-  {{-- Topbar --}}
   <div class="topbar">
     <div>
       <div class="tt">Quản lý người dùng</div>
@@ -150,7 +129,6 @@
     </div>
   </div>
 
-  {{-- Stats --}}
   <div class="stats">
     <div class="stat">
       <div class="stat-ic ic-b"><i class="fa-solid fa-users"></i></div>
@@ -170,12 +148,10 @@
     </div>
   </div>
 
-  {{-- Toolbar --}}
   <div class="toolbar">
     <div class="sw">
       <i class="fa-solid fa-magnifying-glass sw-ic"></i>
-      <input wire:model.live.debounce.300ms="search" type="text"
-             placeholder="Tìm tên, email...">
+      <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tên, email...">
     </div>
     <select wire:model.live="filterRole" class="sel">
       <option value="">Tất cả vai trò</option>
@@ -200,7 +176,6 @@
     </div>
   </div>
 
-  {{-- Table --}}
   <div class="tcard">
     <table class="tbl">
       <thead>
@@ -238,16 +213,25 @@
             </div>
           </td>
           <td style="font-size:13px;color:#475569;">{{ $u->email }}</td>
-          <td>
-            <span class="bd bd-{{ $role }}">{{ $roleLabel }}</span>
-          </td>
-          <td>
-            <span class="bd bd-{{ $status }}">{{ $statusLabel }}</span>
-          </td>
+          <td><span class="bd bd-{{ $role }}">{{ $roleLabel }}</span></td>
+          <td><span class="bd bd-{{ $status }}">{{ $statusLabel }}</span></td>
           <td style="font-size:12px;color:#94a3b8;">{{ $u->created_at->format('d/m/Y') }}</td>
           <td>
+            {{-- ← PHẦN ĐÃ SỬA: tự detect xổ lên hay xuống --}}
             <div class="dot-wrap" x-data="{open:false}" @click.away="open=false">
-              <button class="dot-btn" @click="open=!open">
+              <button class="dot-btn" @click="
+                open = !open;
+                if (open) {
+                  const rect = $el.getBoundingClientRect();
+                  const spaceBelow = window.innerHeight - rect.bottom;
+                  const dd = $el.nextElementSibling;
+                  if (spaceBelow < 160) {
+                    dd.classList.add('drop-up');
+                  } else {
+                    dd.classList.remove('drop-up');
+                  }
+                }
+              ">
                 <span></span><span></span><span></span>
               </button>
               <div class="dropdown" :class="{open:open}">
@@ -307,7 +291,6 @@
         <input wire:model="f_password" type="password" placeholder="••••••••">
         @error('f_password')<div class="err">{{ $message }}</div>@enderror
       </div>
-
       <div class="mo-sec">Vai trò & Trạng thái</div>
       <div class="fg2">
         <div class="fi">
@@ -341,7 +324,6 @@
   </div>
 </div>
 @endif
-
 
 @if($showRole)
 <div class="mo-bg" wire:click.self="closeRole">
@@ -384,7 +366,6 @@
 </div>
 @endif
 
-
 @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo mo-sm">
@@ -408,3 +389,4 @@
   </div>
 </div>
 @endif
+</div>

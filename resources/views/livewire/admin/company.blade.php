@@ -18,11 +18,12 @@
 
 /* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem 1.1rem}
-.stat-ic{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:9px}
-.ic-b{background:#eff6ff}.ic-g{background:#f0fdf4}.ic-p{background:#faf5ff}.ic-a{background:#fffbeb}
-.stat-n{font-size:24px;font-weight:700}
-.stat-l{font-size:11px;color:#64748b;margin-top:3px}
+.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:box-shadow .15s;}
+.stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);}
+.stat-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.ic-b{background:#eff6ff;color:#1d4ed8}.ic-g{background:#f0fdf4;color:#16a34a}.ic-p{background:#faf5ff;color:#7c3aed}.ic-a{background:#fffbeb;color:#d97706}
+.stat-n{font-size:26px;font-weight:700;line-height:1;}
+.stat-l{font-size:11px;color:#64748b;margin-top:4px;}
 .n-b{color:#0f172a}.n-g{color:#16a34a}.n-p{color:#7c3aed}.n-a{color:#d97706}
 
 /* ── TOOLBAR ── */
@@ -314,7 +315,7 @@
 
 </div>
 
-{{-- ══ MODAL THÊM/SỬA ══ --}}
+
 @if($showModal)
 <div class="mo-bg" wire:click.self="closeModal">
   <div class="mo">
@@ -423,7 +424,7 @@
 </div>
 @endif
 
-{{-- ══ MODAL XEM ══ --}}
+
 @if($showView && $viewCompany)
 <div class="mo-bg" wire:click.self="closeView">
   <div class="mo">
@@ -502,7 +503,6 @@
 </div>
 @endif
 
-{{-- ══ CONFIRM XOÁ ══ --}}
 @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo" style="max-width:360px">
