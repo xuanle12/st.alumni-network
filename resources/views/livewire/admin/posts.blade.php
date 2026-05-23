@@ -1,20 +1,24 @@
+<div>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 .aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;min-height:100vh;background:#f8fafc}
 .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
- 
+
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .tt{font-size:17px;font-weight:700;color:#0f172a}.ts{font-size:12px;color:#64748b;margin-top:2px}
 .btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#1d4ed8;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
 .btn-add:hover{background:#1e40af}
- 
+
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem 1.1rem}
-.stat-ic{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:9px}
+.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:box-shadow .15s}
+.stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.stat-left{display:flex;flex-direction:column;gap:4px}
+.stat-l{font-size:12px;color:#64748b;font-weight:500}
+.stat-n{font-size:28px;font-weight:700;line-height:1.1}
+.stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#94a3b8}
 .ic-b{background:#eff6ff}.ic-g{background:#f0fdf4}.ic-o{background:#fff7ed}.ic-a{background:#fffbeb}
-.stat-n{font-size:24px;font-weight:700}.stat-l{font-size:11px;color:#64748b;margin-top:3px}
 .n-b{color:#0f172a}.n-g{color:#16a34a}.n-o{color:#ea580c}.n-a{color:#d97706}
- 
+
 .toolbar{display:flex;gap:8px;flex-wrap:wrap}
 .sw{flex:1;min-width:180px;position:relative}
 .sw input{width:100%;padding:9px 12px 9px 34px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit}
@@ -23,57 +27,61 @@
 .sw-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8}
 .sel{padding:9px 10px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#475569;font-family:inherit}
 .sel:focus{outline:none;border-color:#3b82f6}
- 
-.tcard{
-    background:#fff;
-    border:1px solid #e2e8f0;
-    border-radius:12px;
-    overflow:visible;}
-.tbl-wrap{
-    overflow-x:auto;
-    overflow-y:visible;
-}
+
+.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tbl{width:100%;border-collapse:collapse;table-layout:fixed;min-width:620px}
 .tbl th{padding:10px 14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;text-align:left;background:#f8fafc;border-bottom:1px solid #e2e8f0}
 .tbl td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tbody tr:hover td{background:#fafbfc}
 
- 
 .post-row{display:flex;align-items:center;gap:10px}
 .post-thumb{width:44px;height:36px;border-radius:7px;background:#f1f5f9;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;overflow:hidden}
 .post-thumb img{width:100%;height:100%;object-fit:cover}
 .post-title{font-size:13px;font-weight:600;color:#0f172a;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .post-meta{font-size:11px;color:#94a3b8;margin-top:2px}
- 
+
 .bd{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:20px}
 .bd::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .bd-g{background:#f0fdf4;color:#15803d}.bd-g::before{background:#16a34a}
 .bd-a{background:#fffbeb;color:#b45309}.bd-a::before{background:#d97706}
 .bd-r{background:#fef2f2;color:#b91c1c}.bd-r::before{background:#dc2626}
 .bd-o{background:#fff7ed;color:#c2410c}.bd-o::before{background:#ea580c}
- 
+
 .author-row{display:flex;align-items:center;gap:6px}
 .author-ava{width:26px;height:26px;border-radius:50%;background:#eff6ff;color:#1d4ed8;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
- 
 
+/* ── DOT BUTTON ── */
 .dot-wrap{position:relative;display:inline-block}
-.dot-btn{width:30px;height:30px;border-radius:7px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px}
-.dot-btn:hover{background:#f1f5f9}
+.dot-btn{width:30px;height:30px;border-radius:7px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;transition:background .15s,border-color .15s}
+.dot-btn:hover,.dot-btn[aria-expanded="true"]{background:#f1f5f9;border-color:#cbd5e1;color:#475569}
 .dot-btn span{display:block;width:13px;height:1.5px;background:currentColor;border-radius:2px}
-.dropdown{display:none;position:absolute;top:34px;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:172px;z-index:999;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1)}
-.dropdown.open{display:block}
-.dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155}
+
+/* ── DROPDOWN: position:fixed, tọa độ set bằng JS ── */
+.dropdown{
+    display:none;
+    position:fixed;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    min-width:176px;
+    z-index:9999;
+    overflow:hidden;
+    box-shadow:0 8px 28px rgba(0,0,0,.13);
+}
+.dropdown.open{display:block;animation:ddIn .14s ease}
+@keyframes ddIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155;user-select:none;transition:background .1s}
 .dd-item:hover{background:#f8fafc}
 .dd-item.green{color:#15803d}.dd-item.green:hover{background:#f0fdf4}
 .dd-item.amber{color:#b45309}.dd-item.amber:hover{background:#fffbeb}
 .dd-item.red{color:#b91c1c}.dd-item.red:hover{background:#fef2f2}
 .dd-sep{height:1px;background:#f1f5f9;margin:3px 0}
- 
+
 .pgn{display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;border-top:1px solid #f1f5f9;background:#fafafa;flex-wrap:wrap;gap:8px}
 .pgn-info{font-size:12px;color:#94a3b8}
- 
-/* buttons */
+
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
 .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}
 .btn-ghost:hover{background:#f8fafc}
@@ -81,8 +89,7 @@
 .btn-green{background:#15803d;color:#fff}.btn-green:hover{background:#166534}
 .btn-amber{background:#d97706;color:#fff}.btn-amber:hover{background:#b45309}
 .btn-del{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.btn-del:hover{background:#fee2e2}
- 
-/* MODAL */
+
 .mo-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem}
 .mo{background:#fff;border-radius:14px;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .mo-sm{max-width:380px}
@@ -91,8 +98,7 @@
 .mo-close{width:28px;height:28px;border-radius:8px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;font-size:16px;display:flex;align-items:center;justify-content:center}
 .mo-body{padding:1.4rem;display:flex;flex-direction:column;gap:12px}
 .mo-ft{padding:.875rem 1.4rem;border-top:1px solid #f1f5f9;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff;flex-wrap:wrap}
- 
-/* form fields */
+
 .fi{display:flex;flex-direction:column;gap:5px}
 .fi label{font-size:12px;font-weight:600;color:#475569}
 .fi input,.fi select,.fi textarea{width:100%;padding:9px 11px;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit;background:#fff}
@@ -104,8 +110,7 @@
 .mdiv{border:none;border-top:1px solid #f1f5f9}
 .check-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#374151}
 .check-row input[type=checkbox]{width:16px;height:16px;cursor:pointer}
- 
-/* preview */
+
 .pv-thumb{width:100%;height:160px;background:#f1f5f9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:1rem;border:1px solid #e2e8f0;overflow:hidden}
 .pv-thumb img{width:100%;height:100%;object-fit:cover}
 .pv-cat{font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
@@ -113,59 +118,78 @@
 .pv-meta{display:flex;align-items:center;gap:12px;font-size:12px;color:#94a3b8;margin-bottom:14px;flex-wrap:wrap}
 .pv-excerpt{font-size:13px;color:#374151;font-style:italic;margin-bottom:12px;padding:10px 12px;background:#f8fafc;border-radius:8px;border-left:3px solid #e2e8f0;line-height:1.7}
 .pv-body{font-size:13px;color:#64748b;line-height:1.8}
- 
-/* approve modal */
+
 .ap-info{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:1rem;margin-bottom:1rem}
 .ap-title{font-size:14px;font-weight:600;color:#92400e;margin-bottom:4px}
 .ap-meta{font-size:12px;color:#b45309}
- 
-/* confirm */
+
 .cf-wrap{padding:2rem 1.5rem;text-align:center}
 .cf-ic{font-size:34px;margin-bottom:10px}
 .cf-t{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px}
 .cf-s{font-size:13px;color:#64748b;line-height:1.7;margin-bottom:1.25rem}
 .cf-btns{display:flex;gap:10px;justify-content:center}
- 
+
 .empty{text-align:center;padding:3rem;color:#cbd5e1;font-size:13px}
 .spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
- 
-/* responsive */
-@media(max-width:1024px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:1024px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:768px){
   .aw{padding:1rem}
   .stats{grid-template-columns:repeat(2,1fr)}
+  .stat-n{font-size:22px}
   .toolbar{flex-direction:column}
   .sw,.sel{width:100%}
   .topbar{flex-direction:column;align-items:flex-start}
   .btn-add{width:100%;justify-content:center}
   .fg2{grid-template-columns:1fr}
   .tbl th:nth-child(3),.tbl td:nth-child(3){display:none}
+  .dropdown{min-width:190px}
 }
 @media(max-width:480px){
+  .stats{grid-template-columns:1fr 1fr;gap:8px}
+  .stat{padding:.85rem 1rem}
+  .stat-n{font-size:20px}
+  .stat-ic{width:36px;height:36px;font-size:16px}
   .tbl th:nth-child(5),.tbl td:nth-child(5){display:none}
+  .mo{border-radius:12px 12px 0 0;max-width:100%;align-self:flex-end}
+  .mo-bg{align-items:flex-end;padding:0}
+  .dropdown{min-width:200px}
 }
 </style>
- 
-<div>
+
 <div class="aw">
- 
+
 @if(session('success'))
   <div class="flash">✓ {{ session('success') }}</div>
 @endif
- 
+
 <div class="topbar">
   <div><div class="tt">Bài viết</div><div class="ts">Quản lý nội dung & tin tức</div></div>
   <button wire:click="openAdd" class="btn-add">＋ Viết bài mới</button>
 </div>
- 
+
 <div class="stats">
-  <div class="stat"><div class="stat-ic ic-b"><i class="fa-solid fa-pen-to-square"></i></div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng bài viết</div></div>
-  <div class="stat"><div class="stat-ic ic-g"><i class="fa-solid fa-check-circle"></i></div><div class="stat-n n-g">{{ $stats['published'] }}</div><div class="stat-l">Đã đăng</div></div>
-  <div class="stat"><div class="stat-ic ic-o"><i class="fa-solid fa-bell"></i></div><div class="stat-n n-o">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
-  <div class="stat"><div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div><div class="stat-n n-a">{{ $stats['draft'] }}</div><div class="stat-l">Bản nháp</div></div>
+  <div class="stat">
+    <div class="stat-left"><div class="stat-l">Tổng bài viết</div><div class="stat-n n-b">{{ $stats['total'] }}</div></div>
+    <div class="stat-ic ic-b"><i class="fa-solid fa-pen-to-square"></i></div>
+  </div>
+  <div class="stat">
+    <div class="stat-left"><div class="stat-l">Đã đăng</div><div class="stat-n n-g">{{ $stats['published'] }}</div></div>
+    <div class="stat-ic ic-g"><i class="fa-solid fa-check-circle"></i></div>
+  </div>
+  <div class="stat">
+    <div class="stat-left"><div class="stat-l">Chờ duyệt</div><div class="stat-n n-o">{{ $stats['pending'] }}</div></div>
+    <div class="stat-ic ic-o"><i class="fa-solid fa-bell"></i></div>
+  </div>
+  <div class="stat">
+    <div class="stat-left"><div class="stat-l">Bản nháp</div><div class="stat-n n-a">{{ $stats['draft'] }}</div></div>
+    <div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div>
+  </div>
 </div>
- 
+
 <div class="toolbar">
   <div class="sw">
     <span class="sw-ic"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -186,7 +210,7 @@
     <option value="Chia sẻ">Chia sẻ</option>
   </select>
 </div>
- 
+
 <div class="tcard">
   <div class="tbl-wrap">
     <table class="tbl">
@@ -216,14 +240,13 @@
             default     => 'Ẩn'
           };
           $catIcons = [
-            'Sự kiện'   => '<i class="fa-solid fa-calendar-days"></i>',
-            'Tuyển dụng'=> '<i class="fa-solid fa-briefcase"></i>',
-            'Chia sẻ'   => '<i class="fa-solid fa-comments"></i>',
-            'Tin tức'   => '<i class="fa-solid fa-newspaper"></i>',
+            'Sự kiện'    => '<i class="fa-solid fa-calendar-days"></i>',
+            'Tuyển dụng' => '<i class="fa-solid fa-briefcase"></i>',
+            'Chia sẻ'    => '<i class="fa-solid fa-comments"></i>',
+            'Tin tức'    => '<i class="fa-solid fa-newspaper"></i>',
           ];
-
-          $ico = $catIcons[$post->category] ?? '<i class="fa-solid fa-file-lines"></i>';        
-      @endphp
+          $ico = $catIcons[$post->category] ?? '<i class="fa-solid fa-file-lines"></i>';
+        @endphp
         <tr>
           <td>
             <div class="post-row">
@@ -250,59 +273,52 @@
           <td><span class="bd {{ $bc }}">{{ $bl }}</span></td>
           <td><span style="font-size:12px;color:#94a3b8">{{ $post->published_date }}</span></td>
           <td style="text-align:right">
-            <div class="dot-wrap" x-data="{ open: false }" @click.away="open = false">
-              <button type="button" class="dot-btn" @click.stop="open = !open">
+            {{-- Dùng data-* + JS position:fixed, bỏ Alpine hoàn toàn --}}
+            <div class="dot-wrap" data-dropdown>
+              <button type="button" class="dot-btn" data-trigger
+                      aria-haspopup="true" aria-expanded="false"
+                      aria-label="Thao tác">
                 <span></span><span></span><span></span>
               </button>
-              <div class="dropdown" :class="{ open: open }">
- 
-                {{-- Xem trước --}}
-                <div class="dd-item" @click="open=false" wire:click="openView({{ $post->id }})">
+              <div class="dropdown" data-menu role="menu">
+
+                <div class="dd-item" data-close wire:click="openView({{ $post->id }})">
                   <i class="fa-solid fa-eye"></i> Xem trước
                 </div>
- 
-               
+
                 @if($post->status === 'pending')
-                <div class="dd-item green" @click="open=false" wire:click="openApprove({{ $post->id }})">
+                <div class="dd-item green" data-close wire:click="openApprove({{ $post->id }})">
                   <i class="fa-solid fa-check"></i> Duyệt bài
                 </div>
                 @endif
- 
-                
+
                 @if(in_array($post->status, ['draft', 'hidden']))
-                <div class="dd-item green" @click="open=false" wire:click="openApprove({{ $post->id }})"">
+                <div class="dd-item green" data-close wire:click="openApprove({{ $post->id }})">
                   <i class="fa-solid fa-check"></i> Duyệt & Đăng
                 </div>
                 @endif
- 
-                
+
                 @if($post->status === 'published')
-                <div class="dd-item amber" @click="open=false" wire:click="toDraft({{ $post->id }})">
-                  <i class="fa-solid fa-clock"></i> Chờ duyệt 
+                <div class="dd-item amber" data-close wire:click="toDraft({{ $post->id }})">
+                  <i class="fa-solid fa-clock"></i> Về bản nháp
+                </div>
+                <div class="dd-item amber" data-close wire:click="hidePost({{ $post->id }})">
+                  <i class="fa-solid fa-eye-slash"></i> Ẩn bài
                 </div>
                 @endif
- 
-                
-                @if($post->status === 'published')
-                <div class="dd-item amber" @click="open=false" wire:click="hidePost({{ $post->id }})">
-                  <i class="fa-solid fa-eye-slash"></i> Từ chối 
-                </div>
-                @endif
- 
+
                 <div class="dd-sep"></div>
- 
-                
-                <div class="dd-item" @click="open=false" wire:click="openEdit({{ $post->id }})">
+
+                <div class="dd-item" data-close wire:click="openEdit({{ $post->id }})">
                   <i class="fa-solid fa-edit"></i> Chỉnh sửa
                 </div>
- 
+
                 <div class="dd-sep"></div>
- 
-                
-                <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $post->id }})">
+
+                <div class="dd-item red" data-close wire:click="confirmDelete({{ $post->id }})">
                   <i class="fa-solid fa-trash"></i> Xoá
                 </div>
- 
+
               </div>
             </div>
           </td>
@@ -320,10 +336,10 @@
     {{ $posts->links() }}
   </div>
 </div>
- 
-</div>
- 
 
+</div>
+
+{{-- ══ MODAL THÊM/SỬA ══ --}}
 @if($showModal)
 <div class="mo-bg" wire:click.self="closeModal">
   <div class="mo">
@@ -332,59 +348,49 @@
       <button class="mo-close" wire:click="closeModal">✕</button>
     </div>
     <div class="mo-body">
- 
       <div class="mo-sec">Thông tin cơ bản</div>
- 
       <div class="fi">
         <label>Tiêu đề *</label>
         <input wire:model="f_title" type="text" placeholder="Nhập tiêu đề bài viết...">
         @error('f_title')<div class="err">{{ $message }}</div>@enderror
       </div>
- 
       <div class="fg2">
         <div class="fi">
           <label>Danh mục *</label>
           <select wire:model="f_category">
             <option value="">-- Chọn danh mục --</option>
-            <option value="Tin tức"><i class="fa-solid fa-newspaper"></i> Tin tức</option>
-            <option value="Sự kiện"><i class="fa-solid fa-calendar"></i> Sự kiện</option>
-            <option value="Tuyển dụng"><i class="fa-solid fa-briefcase"></i> Tuyển dụng</option>
-            <option value="Chia sẻ"><i class="fa-solid fa-comments"></i> Chia sẻ</option>
+            <option value="Tin tức">Tin tức</option>
+            <option value="Sự kiện">Sự kiện</option>
+            <option value="Tuyển dụng">Tuyển dụng</option>
+            <option value="Chia sẻ">Chia sẻ</option>
           </select>
           @error('f_category')<div class="err">{{ $message }}</div>@enderror
         </div>
         <div class="fi">
           <label>Trạng thái</label>
           <select wire:model="f_status">
-            <option value="draft"><i class="fa-solid fa-clock"></i> Chờ duyệt</option>
-            <option value="pending"><i class="fa-solid fa-paper-plane"></i> Gửi duyệt</option>
-            <option value="published"><i class="fa-solid fa-check"></i> Đăng luôn</option>
-            <option value="hidden"><i class="fa-solid fa-eye-slash"></i> Từ chối</option>
+            <option value="draft">Bản nháp</option>
+            <option value="pending">Gửi duyệt</option>
+            <option value="published">Đăng luôn</option>
+            <option value="hidden">Ẩn</option>
           </select>
         </div>
       </div>
- 
       <div class="fi">
         <label>Mô tả ngắn</label>
         <textarea wire:model="f_excerpt" rows="2" placeholder="Tóm tắt nội dung bài viết..."></textarea>
       </div>
- 
       <hr class="mdiv">
       <div class="mo-sec">Nội dung *</div>
- 
       <div class="fi">
-        <textarea wire:model="f_content" rows="8"
-          placeholder="Viết nội dung bài viết tại đây...&#10;&#10;(Hỗ trợ văn bản thường. Sau này sẽ tích hợp editor rich text.)"></textarea>
+        <textarea wire:model="f_content" rows="8" placeholder="Viết nội dung bài viết tại đây..."></textarea>
         @error('f_content')<div class="err">{{ $message }}</div>@enderror
       </div>
- 
       <hr class="mdiv">
- 
       <div class="check-row">
         <input type="checkbox" wire:model="f_featured" id="featured">
         <label for="featured"><i class="fa-solid fa-star"></i> Đánh dấu là bài viết nổi bật</label>
       </div>
- 
     </div>
     <div class="mo-ft">
       <button wire:click="closeModal" class="btn btn-ghost">Huỷ</button>
@@ -396,8 +402,8 @@
   </div>
 </div>
 @endif
- 
 
+{{-- ══ MODAL XEM ══ --}}
 @if($showView && $viewPost)
 <div class="mo-bg" wire:click.self="closeView">
   <div class="mo">
@@ -406,19 +412,19 @@
       <button class="mo-close" wire:click="closeView">✕</button>
     </div>
     <div class="mo-body" style="gap:0">
-    @php
-      $catIcons = [
-        'Sự kiện'    => '<i class="fa-solid fa-calendar-days"></i>',
-        'Tuyển dụng' => '<i class="fa-solid fa-briefcase"></i>',
-        'Chia sẻ'    => '<i class="fa-solid fa-comments"></i>',
-        'Tin tức'    => '<i class="fa-solid fa-newspaper"></i>',
-      ];
-    @endphp      
-    <div class="pv-thumb">
+      @php
+        $catIcons2 = [
+          'Sự kiện'    => '<i class="fa-solid fa-calendar-days"></i>',
+          'Tuyển dụng' => '<i class="fa-solid fa-briefcase"></i>',
+          'Chia sẻ'    => '<i class="fa-solid fa-comments"></i>',
+          'Tin tức'    => '<i class="fa-solid fa-newspaper"></i>',
+        ];
+      @endphp
+      <div class="pv-thumb">
         @if($viewPost->thumbnail)
           <img src="{{ asset('storage/'.$viewPost->thumbnail) }}" alt="">
         @else
-          {!! $catIcons[$viewPost->category] ?? '<i class="fa-solid fa-file-lines"></i>' !!}
+          {!! $catIcons2[$viewPost->category] ?? '<i class="fa-solid fa-file-lines"></i>' !!}
         @endif
       </div>
       <div class="pv-cat">{{ $viewPost->category ?: 'Chưa phân loại' }}</div>
@@ -450,8 +456,8 @@
   </div>
 </div>
 @endif
- 
 
+{{-- ══ MODAL DUYỆT ══ --}}
 @if($showApprove && $approvePost)
 <div class="mo-bg" wire:click.self="closeApprove">
   <div class="mo mo-sm">
@@ -483,8 +489,8 @@
   </div>
 </div>
 @endif
- 
 
+{{-- ══ CONFIRM XOÁ ══ --}}
 @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo mo-sm">
@@ -507,5 +513,72 @@
   </div>
 </div>
 @endif
- 
+
+</div>
+
+{{-- ══ JS: Smart dropdown — xổ lên khi gần cuối trang ══ --}}
+<script>
+(function () {
+    'use strict';
+    var active = null;
+
+    function openMenu(wrap) {
+        var btn  = wrap.querySelector('[data-trigger]');
+        var menu = wrap.querySelector('[data-menu]');
+        if (!btn || !menu) return;
+
+        closeAll();
+
+        /* Đo kích thước menu trước khi show */
+        menu.style.visibility = 'hidden';
+        menu.style.display    = 'block';
+        var mH = menu.offsetHeight;
+        var mW = menu.offsetWidth || 176;
+        menu.style.display    = '';
+        menu.style.visibility = '';
+
+        var r          = btn.getBoundingClientRect();
+        var spaceBelow = window.innerHeight - r.bottom;
+        var spaceAbove = r.top;
+        var goUp       = spaceBelow < mH + 8 && spaceAbove >= mH + 8;
+
+        var top  = goUp ? r.top - mH - 4 : r.bottom + 4;
+        var left = r.right - mW;
+        if (left < 8)                          left = 8;
+        if (left + mW > window.innerWidth - 8) left = window.innerWidth - mW - 8;
+
+        menu.style.top   = top  + 'px';
+        menu.style.left  = left + 'px';
+        menu.style.width = mW   + 'px';
+        menu.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        active = { wrap: wrap, btn: btn, menu: menu };
+    }
+
+    function closeAll() {
+        if (!active) return;
+        active.menu.classList.remove('open');
+        active.btn.setAttribute('aria-expanded', 'false');
+        active = null;
+    }
+
+    document.addEventListener('click', function (e) {
+        var trigger = e.target.closest('[data-trigger]');
+        var closer  = e.target.closest('[data-close]');
+        if (trigger) {
+            var wrap = trigger.closest('[data-dropdown]');
+            if (active && active.wrap === wrap) { closeAll(); } else { openMenu(wrap); }
+            return;
+        }
+        if (closer)  { closeAll(); return; }
+        if (active && !e.target.closest('[data-menu]')) { closeAll(); }
+    }, true);
+
+    window.addEventListener('scroll',  closeAll, true);
+    window.addEventListener('resize',  closeAll);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+    document.addEventListener('livewire:navigated', closeAll);
+    document.addEventListener('livewire:update',    closeAll);
+})();
+</script>
 </div>

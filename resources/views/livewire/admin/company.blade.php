@@ -1,5 +1,5 @@
 <div>
-    <style>
+<style>
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -18,12 +18,30 @@
 
 /* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:box-shadow .15s;}
-.stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);}
-.stat-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.ic-b{background:#eff6ff;color:#1d4ed8}.ic-g{background:#f0fdf4;color:#16a34a}.ic-p{background:#faf5ff;color:#7c3aed}.ic-a{background:#fffbeb;color:#d97706}
-.stat-n{font-size:26px;font-weight:700;line-height:1;}
-.stat-l{font-size:11px;color:#64748b;margin-top:4px;}
+.stat{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:1.1rem 1.4rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    transition:box-shadow .15s;
+}
+.stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.stat-left{display:flex;flex-direction:column;gap:4px}
+.stat-l{font-size:12px;color:#64748b;font-weight:500}
+.stat-n{font-size:28px;font-weight:700;line-height:1.1}
+.stat-ic{
+    width:44px;height:44px;
+    border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+    flex-shrink:0;
+    color:#94a3b8;
+}
+.ic-b{background:#eff6ff}.ic-g{background:#f0fdf4}.ic-p{background:#faf5ff}.ic-a{background:#fffbeb}
 .n-b{color:#0f172a}.n-g{color:#16a34a}.n-p{color:#7c3aed}.n-a{color:#d97706}
 
 /* ── TOOLBAR ── */
@@ -64,14 +82,17 @@
 .jc{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:#0f172a}
 .jc-dot{width:20px;height:20px;border-radius:6px;background:#eff6ff;color:#1d4ed8;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
 
-/* ── 3 GẠCH ── */
+/* ── DOT BUTTON ── */
 .dot-wrap{position:relative;display:inline-block}
-.dot-btn{width:30px;height:30px;border-radius:7px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px}
-.dot-btn:hover{background:#f1f5f9}
+.dot-btn{width:30px;height:30px;border-radius:7px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;transition:background .15s,border-color .15s}
+.dot-btn:hover,.dot-btn[aria-expanded="true"]{background:#f1f5f9;border-color:#cbd5e1;color:#475569}
 .dot-btn span{display:block;width:13px;height:1.5px;background:currentColor;border-radius:2px}
-.dropdown{display:none;position:absolute;top:34px;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:168px;z-index:999;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1)}
-.dropdown.open{display:block}
-.dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155}
+
+/* ── DROPDOWN ── */
+.dropdown{display:none;position:fixed;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:172px;z-index:9999;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.13)}
+.dropdown.open{display:block;animation:ddIn .14s ease}
+@keyframes ddIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155;user-select:none;transition:background .1s}
 .dd-item:hover{background:#f8fafc}
 .dd-item.green{color:#15803d}.dd-item.green:hover{background:#f0fdf4}
 .dd-item.red{color:#b91c1c}.dd-item.red:hover{background:#fef2f2}
@@ -132,46 +153,37 @@
 /* ════════════════════════════
    RESPONSIVE
 ════════════════════════════ */
-
-/* Tablet: 2 cột stat, ẩn cột ít quan trọng */
 @media(max-width:1024px){
   .aw{padding:1.25rem}
   .stats{grid-template-columns:repeat(2,1fr);gap:10px}
 }
-
-/* Tablet nhỏ */
 @media(max-width:768px){
   .aw{padding:1rem}
   .stats{grid-template-columns:repeat(2,1fr);gap:8px}
-  .stat-n{font-size:20px}
+  .stat-n{font-size:22px}
   .toolbar{flex-direction:column}
   .sw{width:100%}
   .sel{width:100%}
-  /* ẩn cột liên hệ trên tablet */
   .tbl th:nth-child(5),.tbl td:nth-child(5){display:none}
+  .dropdown{min-width:190px}
 }
-
-/* Mobile */
 @media(max-width:480px){
   .aw{padding:.875rem}
   .stats{grid-template-columns:1fr 1fr;gap:8px}
-  .stat{padding:.75rem .875rem}
-  .stat-n{font-size:18px}
-  .stat-l{font-size:10px}
+  .stat{padding:.85rem 1rem}
+  .stat-n{font-size:20px}
+  .stat-l{font-size:11px}
+  .stat-ic{width:36px;height:36px;font-size:16px}
   .topbar{flex-direction:column;align-items:flex-start;gap:8px}
   .btn-add{width:100%;justify-content:center}
-  /* ẩn thêm cột lĩnh vực */
   .tbl th:nth-child(2),.tbl td:nth-child(2){display:none}
-  /* modal full width */
   .mo{border-radius:12px 12px 0 0;max-width:100%;align-self:flex-end}
   .mo-bg{align-items:flex-end;padding:0}
-  /* modal view grid 1 cột */
   .vg3{grid-template-columns:1fr 1fr}
   .vg2{grid-template-columns:1fr}
-  /* form 1 cột */
   .fg2{grid-template-columns:1fr}
+  .dropdown{min-width:200px}
 }
-
 @media(max-width:360px){
   .stats{grid-template-columns:1fr 1fr}
   .tbl th:nth-child(3),.tbl td:nth-child(3){display:none}
@@ -194,14 +206,37 @@
   <button class="btn-add" wire:click="openAdd">＋ Thêm doanh nghiệp</button>
 </div>
 
-
+{{-- stats: label + số bên trái, icon bên phải --}}
 <div class="stats">
-  <div class="stat"><div class="stat-ic ic-b"><i class="fa-solid fa-building"></i></div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng doanh nghiệp</div></div>
-  <div class="stat"><div class="stat-ic ic-g"><i class="fa-solid fa-circle-check"></i></div><div class="stat-n n-g">{{ $stats['active'] }}</div><div class="stat-l">Đang hợp tác</div></div>
-  <div class="stat"><div class="stat-ic ic-p"><i class="fa-solid fa-list"></i></div><div class="stat-n n-p">{{ $stats['jobs'] }}</div><div class="stat-l">Tin tuyển dụng</div></div>
-  <div class="stat"><div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div><div class="stat-n n-a">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
+  <div class="stat">
+    <div class="stat-left">
+      <div class="stat-l">Tổng doanh nghiệp</div>
+      <div class="stat-n n-b">{{ $stats['total'] }}</div>
+    </div>
+    <div class="stat-ic ic-b"><i class="fa-solid fa-building"></i></div>
+  </div>
+  <div class="stat">
+    <div class="stat-left">
+      <div class="stat-l">Đang hợp tác</div>
+      <div class="stat-n n-g">{{ $stats['active'] }}</div>
+    </div>
+    <div class="stat-ic ic-g"><i class="fa-solid fa-circle-check"></i></div>
+  </div>
+  <div class="stat">
+    <div class="stat-left">
+      <div class="stat-l">Tin tuyển dụng</div>
+      <div class="stat-n n-p">{{ $stats['jobs'] }}</div>
+    </div>
+    <div class="stat-ic ic-p"><i class="fa-solid fa-list"></i></div>
+  </div>
+  <div class="stat">
+    <div class="stat-left">
+      <div class="stat-l">Chờ duyệt</div>
+      <div class="stat-n n-a">{{ $stats['pending'] }}</div>
+    </div>
+    <div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div>
+  </div>
 </div>
-
 
 <div class="toolbar">
   <div class="sw">
@@ -270,27 +305,36 @@
             <div class="ce">{{ $c->contact_email ?: '—' }}</div>
           </td>
           <td style="text-align:right">
-            <div class="dot-wrap" x-data="{ open: false }" @click.away="open = false">
-              <button class="dot-btn" @click="open = !open">
+            <div class="dot-wrap" data-dropdown>
+              <button class="dot-btn" data-trigger
+                      aria-haspopup="true" aria-expanded="false"
+                      aria-label="Thao tác với {{ $c->name }}">
                 <span></span><span></span><span></span>
               </button>
-              <div class="dropdown" :class="{ open: open }">
-                <div class="dd-item" @click="open=false" wire:click="openView({{ $c->id }})">
+              <div class="dropdown" data-menu role="menu">
+                <div class="dd-item" role="menuitem" data-close
+                     wire:click="openView({{ $c->id }})">
+                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                   Xem chi tiết
                 </div>
                 @if($c->status === 'pending')
-                <div class="dd-item green" @click="open=false"
+                <div class="dd-item green" role="menuitem" data-close
                      wire:click="quickApprove({{ $c->id }})"
                      wire:confirm="Duyệt doanh nghiệp {{ $c->name }}?">
+                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                   Duyệt
                 </div>
                 @endif
                 <div class="dd-sep"></div>
-                <div class="dd-item" @click="open=false" wire:click="openEdit({{ $c->id }})">
-                   Chỉnh sửa
+                <div class="dd-item" role="menuitem" data-close
+                     wire:click="openEdit({{ $c->id }})">
+                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Chỉnh sửa
                 </div>
                 <div class="dd-sep"></div>
-                <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $c->id }})">
+                <div class="dd-item red" role="menuitem" data-close
+                     wire:click="confirmDelete({{ $c->id }})">
+                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
                   Xoá
                 </div>
               </div>
@@ -299,7 +343,7 @@
         </tr>
         @empty
         <tr>
-          <td colspan="6"><div class="empty"> Không tìm thấy doanh nghiệp nào.</div></td>
+          <td colspan="6"><div class="empty">Không tìm thấy doanh nghiệp nào.</div></td>
         </tr>
         @endforelse
       </tbody>
@@ -315,7 +359,7 @@
 
 </div>
 
-
+{{-- ══ MODAL THÊM/SỬA ══ --}}
 @if($showModal)
 <div class="mo-bg" wire:click.self="closeModal">
   <div class="mo">
@@ -324,7 +368,6 @@
       <button class="mo-close" wire:click="closeModal">✕</button>
     </div>
     <div class="mo-body">
-
       <div class="mo-sec">Thông tin cơ bản</div>
       <div class="fg2">
         <div class="fi">
@@ -370,7 +413,6 @@
         <label>Mô tả</label>
         <textarea wire:model="f_desc" placeholder="Mô tả ngắn về doanh nghiệp..."></textarea>
       </div>
-
       <hr class="mdiv">
       <div class="mo-sec">Người liên hệ</div>
       <div class="fg2">
@@ -394,14 +436,13 @@
           <input wire:model="f_phone" placeholder="0912 345 678">
         </div>
       </div>
-
       <hr class="mdiv">
       <div class="mo-sec">Trạng thái</div>
       <div class="fg2">
         <div class="fi">
           <label>Trạng thái hợp tác</label>
           <select wire:model="f_status">
-            <option value="active"> Đang hợp tác</option>
+            <option value="active">Đang hợp tác</option>
             <option value="pending">Chờ duyệt</option>
             <option value="inactive">Ngừng hợp tác</option>
           </select>
@@ -411,7 +452,6 @@
           <input wire:model="f_note" placeholder="Ghi chú thêm...">
         </div>
       </div>
-
     </div>
     <div class="mo-ft">
       <button wire:click="closeModal" class="btn btn-ghost">Huỷ</button>
@@ -424,7 +464,7 @@
 </div>
 @endif
 
-
+{{-- ══ MODAL XEM ══ --}}
 @if($showView && $viewCompany)
 <div class="mo-bg" wire:click.self="closeView">
   <div class="mo">
@@ -446,7 +486,6 @@
         $bl2 = match($viewCompany->status) { 'active' => 'Đang hợp tác', 'pending' => 'Chờ duyệt', default => 'Ngừng HT' };
       @endphp
       <span class="bd {{ $bc2 }}">{{ $bl2 }}</span>
-
       <div class="vg3">
         <div class="vi"><label>Quy mô</label><p>{{ $viewCompany->size ?: '—' }}</p></div>
         <div class="vi"><label>Website</label>
@@ -456,14 +495,12 @@
         </div>
         <div class="vi"><label>Địa chỉ</label><p class="{{ $viewCompany->address ? '' : 'mt' }}">{{ $viewCompany->address ?: 'Chưa cập nhật' }}</p></div>
       </div>
-
       @if($viewCompany->description)
       <div class="vi">
         <label>Mô tả</label>
         <p style="font-weight:400;color:#374151;line-height:1.7">{{ $viewCompany->description }}</p>
       </div>
       @endif
-
       <hr class="mdiv">
       <div class="mo-sec" style="margin-bottom:8px">Người liên hệ</div>
       <div class="vg2">
@@ -472,7 +509,6 @@
         <div class="vi"><label>Email</label><p class="{{ $viewCompany->contact_email ? '' : 'mt' }}">{{ $viewCompany->contact_email ?: 'Chưa cập nhật' }}</p></div>
         <div class="vi"><label>Điện thoại</label><p class="{{ $viewCompany->contact_phone ? '' : 'mt' }}">{{ $viewCompany->contact_phone ?: 'Chưa cập nhật' }}</p></div>
       </div>
-
       @if($viewCompany->job->count() > 0)
       <hr class="mdiv">
       <div class="mo-sec" style="margin-bottom:8px">Tin tuyển dụng ({{ $viewCompany->job_postings_count }})</div>
@@ -488,10 +524,9 @@
       </div>
       @endforeach
       @endif
-
       @if($viewCompany->admin_note)
       <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 12px;font-size:13px;color:#92400e">
-        <i class="fa-solid fa-pen-to-square"></i>{{ $viewCompany->admin_note }}
+        <i class="fa-solid fa-pen-to-square"></i> {{ $viewCompany->admin_note }}
       </div>
       @endif
     </div>
@@ -503,6 +538,7 @@
 </div>
 @endif
 
+{{-- ══ CONFIRM XOÁ ══ --}}
 @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo" style="max-width:360px">
@@ -524,3 +560,58 @@
 
 </div>
 </div>
+
+<script>
+(function () {
+    'use strict';
+    var active = null;
+    function open(wrap) {
+        var btn  = wrap.querySelector('[data-trigger]');
+        var menu = wrap.querySelector('[data-menu]');
+        if (!btn || !menu) return;
+        closeAll();
+        menu.style.visibility = 'hidden';
+        menu.style.display    = 'block';
+        var mH = menu.offsetHeight;
+        var mW = menu.offsetWidth || 172;
+        menu.style.display    = '';
+        menu.style.visibility = '';
+        var r          = btn.getBoundingClientRect();
+        var spaceBelow = window.innerHeight - r.bottom;
+        var spaceAbove = r.top;
+        var goUp       = spaceBelow < mH + 8 && spaceAbove >= mH + 8;
+        var top  = goUp ? r.top - mH - 4 : r.bottom + 4;
+        var left = r.right - mW;
+        if (left < 8)                          left = 8;
+        if (left + mW > window.innerWidth - 8) left = window.innerWidth - mW - 8;
+        menu.style.top   = top  + 'px';
+        menu.style.left  = left + 'px';
+        menu.style.width = mW   + 'px';
+        menu.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        active = { wrap: wrap, btn: btn, menu: menu };
+    }
+    function closeAll() {
+        if (!active) return;
+        active.menu.classList.remove('open');
+        active.btn.setAttribute('aria-expanded', 'false');
+        active = null;
+    }
+    document.addEventListener('click', function (e) {
+        var trigger = e.target.closest('[data-trigger]');
+        var closer  = e.target.closest('[data-close]');
+        if (trigger) {
+            var wrap = trigger.closest('[data-dropdown]');
+            if (active && active.wrap === wrap) { closeAll(); } else { open(wrap); }
+            return;
+        }
+        if (closer) { closeAll(); return; }
+        if (active && !e.target.closest('[data-menu]')) { closeAll(); }
+    }, true);
+    window.addEventListener('scroll',  closeAll, true);
+    window.addEventListener('resize',  closeAll);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+    document.addEventListener('livewire:navigated', closeAll);
+    document.addEventListener('livewire:update',    closeAll);
+})();
+</script>
