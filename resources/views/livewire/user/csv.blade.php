@@ -241,7 +241,7 @@
         <div class="nw-rs-lbl">Sự kiện sắp tới</div>
 
         @foreach($events as $event)
-            <a href="{{ $event->url ?? '#' }}" class="nw-ev">
+            <a href="{{ route('event.show', $event->id) }}" class="nw-ev" wire:navigate>
                 <div class="nw-evd">
                     <div class="nw-evdy">{{ $event->day }}</div>
                     <div class="nw-evmo">{{ $event->month }}</div>
@@ -284,7 +284,7 @@
 }
 
 
-.nw-page{display:grid;grid-template-columns:220px 1fr 240px;height:calc(100vh - 52px);overflow:hidden;font-family:'Be Vietnam Pro',sans-serif;background:var(--oc-p);}
+.nw-page{display:grid;grid-template-columns:220px 1fr 240px;height:calc(100vh - 52px);overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--oc-p);}
  
 .nw-left{padding:12px 8px;
         border-right:1px solid rgba(255,255,255,0.12);
@@ -321,18 +321,18 @@
 .nw-filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
 .nw-title{font-size:18px;font-weight:700;color:var(--oc);margin-right:6px;}
 
-.nw-fb{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:#fff;font-size:12px;font-weight:500;color:var(--oc-m);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s;}
+.nw-fb{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:#fff;font-size:12px;font-weight:500;color:var(--oc-m);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;transition:.15s;}
 .nw-fb:hover{background:var(--oc-s);}
 .nw-fb.on{background:var(--oc-m);color:#fff;border-color:var(--oc-m);}
 
  
 .nw-cp{background:#fff;border-radius:14px;border:1px solid var(--bd);padding:14px 16px;margin-bottom:12px;}
 .nw-cp-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.nw-cp-in{flex:1;padding:9px 16px;border:1px solid var(--bd);border-radius:20px;font-size:13px;color:var(--oc-m);background:var(--oc-s);outline:none;font-family:'Be Vietnam Pro',sans-serif;}
+.nw-cp-in{flex:1;padding:9px 16px;border:1px solid var(--bd);border-radius:20px;font-size:13px;color:var(--oc-m);background:var(--oc-s);outline:none;font-family:'Barlow',system-ui,sans-serif;}
 .nw-cp-in:focus{border-color:var(--oc-m);}
 .nw-cp-sep{height:1px;background:var(--oc-p);margin-bottom:10px;}
 .nw-cp-ac{display:flex;}
-.nw-cpb{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px;border-radius:8px;border:none;background:none;font-size:12px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s;}
+.nw-cpb{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px;border-radius:8px;border:none;background:none;font-size:12px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;transition:.15s;}
 .nw-cpb:hover{background:var(--oc-s);color:var(--oc);}
 .nw-cpb-post{color:var(--oc-m);font-weight:700;}
 
@@ -357,7 +357,7 @@
 
 .nw-rr{display:flex;justify-content:space-between;padding:8px 16px;border-top:1px solid var(--oc-p);font-size:12px;color:var(--muted);}
 .nw-pac{display:flex;border-top:1px solid var(--oc-p);}
-.nw-pab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;border:none;background:none;font-size:13px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s;}
+.nw-pab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;border:none;background:none;font-size:13px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;transition:.15s;}
 .nw-pab:hover{background:var(--oc-s);color:var(--oc);}
 
 .nw-empty{text-align:center;padding:40px 20px;font-size:14px;color:var(--muted);background:#fff;border-radius:14px;border:1px solid var(--bd);}

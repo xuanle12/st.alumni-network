@@ -6,7 +6,7 @@
   <title>{{ $title ?? 'Mạng lưới cựu sinh viên khoa CNTT ' }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   @livewireStyles
   <style>
@@ -14,9 +14,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-   --green:       #1a56db;  
-  --green-light: #1e69f5;   
-  --green-pale:  #e8f0fe; 
+   --blue:        #0961AA;  
+  --blue-light:  #0c83d8;   
+  --blue-pale:   #e8f0fe; 
   --gold:        #c8912a;
   --gold-light:  #f0c050;
   --text:        #1a1f2e;
@@ -30,7 +30,7 @@
 }
 
 html, body {
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: 'Barlow', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
@@ -63,12 +63,12 @@ html, body {
   color: var(--text-muted);
   border-color: var(--border);
 }
-.btn-ghost:hover { background: #f1f5f2; color: var(--text); }
-.btn-primary { background: var(--green); color: #fff; }
+.btn-ghost:hover { background: #f1f5f9; color: var(--text); }
+.btn-primary { background: var(--blue); color: #fff; }
 .btn-primary:hover {
-  background: var(--green-light);
+  background: var(--blue-light);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(26,107,58,0.25);
+  box-shadow: 0 4px 14px rgba(9,97,170,0.28);
 }
 
 .btn-hero {
@@ -117,7 +117,7 @@ html, body {
   flex-shrink: 0;
   transition: .15s;
 }
-.menu-icon-btn:hover { background: var(--green-pale); border-color: #abc5ea; }
+.menu-icon-btn:hover { background: var(--blue-pale); border-color: #abc5ea; }
 .menu-icon-btn span {
   display: block;
   height: 2px;
@@ -131,21 +131,37 @@ html, body {
 .menu-icon-btn.open span:nth-child(1) { width: 18px; transform: translateY(7px) rotate(45deg); }
 .menu-icon-btn.open span:nth-child(2) { opacity: 0; }
 .menu-icon-btn.open span:nth-child(3) { width: 18px; transform: translateY(-7px) rotate(-45deg); }
-    header {
+/* ── TOP BAR (giống fita) ── */
+.topbar {
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  justify-content: space-between;
+}
+.topbar-left { font-weight: 500; letter-spacing: 0.2px; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topbar-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.topbar-right a { color: rgba(255,255,255,.75); font-size: 12.5px; text-decoration: none; transition: .15s; white-space: nowrap; }
+.topbar-right a:hover { color: #fff; }
+.topbar-sep { color: rgba(255,255,255,.3); }
+
+/* ── MAIN HEADER (nền trắng, giống nav dưới của fita) ── */
+header {
   position: sticky;
   top: 0;
   z-index: 200;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
 }
 
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-  height: 66px;
+  height: 72px;
   display: flex;
   align-items: center;
   gap: 28px;
@@ -158,35 +174,49 @@ html, body {
   text-decoration: none;
   flex-shrink: 0;
 }
-.logo img { height: 42px; width: auto; }
+.logo img { height: 44px; width: auto; }
 .logo-text { line-height: 1.25; }
 .logo-text strong {
   display: block;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--green);
+  color: var(--blue);
   letter-spacing: -0.2px;
 }
-.logo-text span { font-size: 15px; color: var(--text-muted); }
+.logo-text span { font-size: 12px; color: var(--text-muted); }
 
-nav { display: flex; align-items: center; gap: 2px; }
+/* Nav giống fita: chữ đen, hover màu fita + gạch chân dưới */
+nav { display: flex; align-items: center; gap: 0; height: 72px; }
 nav a {
-  padding: 6px 13px;
-  border-radius: 7px;
+  position: relative;
+  padding: 0 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
   font-size: 15px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text);
   text-decoration: none;
-  transition: .15s;
+  transition: color .15s;
   white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
-nav a:hover { color: var(--text); background: #f1f5f2; }
-nav a.active{
-    color:#1d4ed8;
-    background:#dbeafe;
-    font-weight:700;
-    border-radius:8px;
+nav a::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 3px;
+  background: var(--blue-light);
+  transition: width .25s;
 }
+nav a:hover { color: var(--blue-light); }
+nav a:hover::before { width: 100%; }
+nav a.active {
+  color: var(--blue);
+  font-weight: 700;
+}
+nav a.active::before { width: 100%; background: var(--blue); }
 
 .header-right {
   margin-left: auto;
@@ -239,7 +269,7 @@ nav a.active{
   text-decoration: none;
 }
 .sidebar-drawer-logo img { height: 30px; width: auto; }
-.sidebar-drawer-logo span { font-size: 13px; font-weight: 700; color: var(--green); }
+.sidebar-drawer-logo span { font-size: 13px; font-weight: 700; color: var(--blue); }
 
 .sidebar-close {
   width: 32px; height: 32px;
@@ -284,8 +314,8 @@ nav a.active{
   text-decoration: none;
   transition: .15s;
 }
-.sidebar-nav-item:hover { background: var(--green-pale); color: var(--green); }
-.sidebar-nav-item.active { background: var(--green-pale); color: var(--green); font-weight: 600; }
+.sidebar-nav-item:hover { background: var(--blue-pale); color: var(--blue); }
+.sidebar-nav-item.active { background: var(--blue-pale); color: var(--blue); font-weight: 600; }
 .sidebar-nav-item .nav-icon {
   width: 34px; height: 34px;
   border-radius: 9px;
@@ -296,7 +326,7 @@ nav a.active{
   transition: .15s;
 }
 .sidebar-nav-item:hover .nav-icon,
-.sidebar-nav-item.active .nav-icon { background: rgba(26,107,58,0.12); }
+.sidebar-nav-item.active .nav-icon { background: rgba(9,97,170,0.1); }
 
 .sidebar-divider { height: 1px; background: var(--border); margin: 10px 0; }
 
@@ -314,43 +344,82 @@ nav a.active{
 
 .hamburger { display: none; }
 
-footer { background: #0f2218; padding: 48px 24px 28px; }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-top {
-  display: grid;
-  grid-template-columns: 1.6fr repeat(3, 1fr);
-  gap: 40px;
-  margin-bottom: 40px;
+/* ── FOOTER (y hệt fita) ── */
+.footer-stripe { display: flex; flex-direction: column; }
+.footer-stripe-gold  { height: 6px; background: #F6A309; }
+.footer-stripe-green { height: 6px; background: #066140; }
+.footer-stripe-brown { height: 6px; background: #4E3636; box-shadow: 0 0 6px #4E3636; }
+
+footer {
+  background: var(--blue);
+  padding: 48px 16px;
 }
+
+/* Grid 8 cột giống fita */
+.footer-grid {
+  grid-template-columns: 3fr 2fr 1fr 2fr !important;
+}
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr !important; }
+}
+
+
 .footer-logo {
   display: flex; align-items: center; gap: 10px;
-  text-decoration: none; margin-bottom: 14px;
+  text-decoration: none; margin-bottom: 20px;
 }
 .footer-logo img {
-  height: 52px; width: auto;
-  filter: brightness(0) invert(1); opacity: .85;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,.25);
 }
-.footer-logo-text strong { display: block; font-size: 15px; font-weight: 700; color: rgba(255,255,255,.85); }
-.footer-logo-text span { font-size: 16px; color: rgba(255,255,255,.4); }
-.footer-desc { font-size: 15px; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 230px; }
-.footer-col h4 {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase;
-  color: rgba(255,255,255,.35); margin-bottom: 14px;
+.footer-logo strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
+.footer-logo span { font-size: 12px; color: rgba(255,255,255,.5); }
+
+
+.footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-contact-list li,
+.footer-contact-list a { display: flex; align-items: flex-start; gap: 8px; color: rgba(255,255,255,.65); font-size: 14px; text-decoration: none; transition: .15s; }
+.footer-contact-list a:hover { color: #fff; }
+.footer-contact-list i { font-size: 14px; margin-top: 2px; flex-shrink: 0; color: rgba(255,255,255,.4); }
+
+
+.footer-col-links h5,
+.footer-col-social h5 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 20px; }
+
+.footer-link-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-link-list li { transition: transform .2s; }
+.footer-link-list li:hover { transform: translateX(4px); }
+.footer-link-list a { display: flex; align-items: center; gap: 7px; font-size: 14px; color: rgba(255,255,255,.65); text-decoration: none; transition: color .15s; }
+.footer-link-list a:hover { color: #fff; }
+.footer-link-list i { font-size: 11px; color: rgba(255,255,255,.35); }
+
+
+.footer-social-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.footer-social-list li { transition: transform .2s; }
+.footer-social-list li:hover { transform: translateX(4px); }
+.footer-social-list a { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.65); text-decoration: none; transition: color .15s; }
+.footer-social-list a:hover { color: #fff; }
+
+
+.footer-col-map { border-radius: 8px; overflow: hidden; min-height: 200px; }
+
+
+.footer-copyright {
+  background: var(--blue);
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding: 12px 0;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
 }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-.footer-col ul a { font-size: 13.5px; color: rgba(255,255,255,.55); text-decoration: none; transition: .15s; }
-.footer-col ul a:hover { color: rgba(255,255,255,.9); }
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,.08);
-  padding-top: 22px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px;
-}
-.footer-copy { font-size: 12.5px; color: rgba(255,255,255,.3); }
-.footer-links { display: flex; gap: 18px; }
-.footer-links a { font-size: 12.5px; color: rgba(255,255,255,.3); text-decoration: none; transition: .15s; }
-.footer-links a:hover { color: rgba(255,255,255,.6); }
+.footer-copyright a { color: rgba(255,255,255,.7); text-decoration: none; font-weight: 500; transition: .15s; }
+.footer-copyright a:hover { color: #fff; }
 
 
 @keyframes fadeUp {
@@ -461,7 +530,7 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
   position: absolute;
   left: -999px;
   top: 8px;
-  background: var(--green);
+  background: var(--blue);
   color: #fff;
   padding: 8px 14px;
   border-radius: 8px;
@@ -472,7 +541,7 @@ footer { background: #0f2218; padding: 48px 24px 28px; }
 .skip-link:focus { left: 16px; outline: 3px solid var(--gold-light); outline-offset: 2px; }
 
 a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--green);
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -486,7 +555,7 @@ a:focus-visible, button:focus-visible {
   gap: 10px;
   background: #fff;
   border: 1px solid var(--border);
-  border-left: 4px solid var(--green);
+  border-left: 4px solid var(--blue);
   box-shadow: var(--shadow-md);
   border-radius: 10px;
   padding: 12px 16px;
@@ -531,25 +600,41 @@ a:focus-visible, button:focus-visible {
 @endif
 
 
-<header>
-  <div class="header-inner">  
+<div class="topbar">
+  <span class="topbar-left">Học viện Nông nghiệp Việt Nam — Vietnam National University of Agriculture</span>
+  <div class="topbar-right">
+    @guest
+      <a href="{{ route('login') }}" wire:navigate>Đăng nhập</a>
+      <span class="topbar-sep">|</span>
+      <a href="{{ route('register') }}" wire:navigate>Đăng ký</a>
+    @endguest
+    @auth
+      <a href="{{ route('profile') }}" wire:navigate>{{ auth()->user()->name }}</a>
+      <span class="topbar-sep">|</span>
+      <form action="{{ route('logout') }}" method="POST" style="margin:0;display:inline">
+        @csrf
+        <button type="submit" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.75);font-size:12.5px;padding:0;font-family:inherit;transition:.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Đăng xuất</button>
+      </form>
+    @endauth
+  </div>
+</div>
 
+<header>
+  <div class="header-inner">
     <a href="{{ route('home') }}" class="logo" wire:navigate>
-      <img src="{{ asset('img/fita.logo.png') }}"alt="{{ config('app.name') }}"loading="lazy">
+      <img src="{{ asset('img/fita-logo.png') }}" alt="{{ config('app.name') }}" loading="lazy">
       <div class="logo-text">
         <strong>Mạng lưới cựu sinh viên khoa CNTT</strong>
         <span>Học viện Nông nghiệp Việt Nam</span>
       </div>
     </a>
-
     <nav>
-        @auth
-        <a href="{{ route('csv') }}" class="{{ request()->routeIs('csv') ? 'active' : '' }}" wire:navigate>Trang chủ</a>
-        <a href="{{ route('job') }}" class="{{ request()->routeIs('job*') ? 'active' : '' }}" wire:navigate>Tuyển dụng</a>
-        <a href="{{ route('event') }}" class="{{ request()->routeIs('event*') ? 'active' : '' }}" wire:navigate>Sự kiện</a>
-       @endauth
+      @auth
+        <a href="{{ route('csv') }}"   class="{{ request()->routeIs('csv')   ? 'active' : '' }}" wire:navigate>Trang chủ</a>
+        <a href="{{ route('job') }}"   class="{{ request()->routeIs('job*')  ? 'active' : '' }}" wire:navigate>Tuyển dụng</a>
+        <a href="{{ route('event') }}" class="{{ request()->routeIs('event*')? 'active' : '' }}" wire:navigate>Sự kiện</a>
+      @endauth
     </nav>
-
     <div class="header-right">
       @auth
         @if(auth()->user()->isAdmin())
@@ -558,7 +643,7 @@ a:focus-visible, button:focus-visible {
           <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
         @endif
       @else
-        <a href="{{ route('login') }}" class="btn btn-ghost" wire:navigate>Đăng nhập</a>
+        <a href="{{ route('login') }}"    class="btn btn-ghost"   wire:navigate>Đăng nhập</a>
         <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Đăng ký</a>
       @endauth
       <button class="menu-icon-btn" id="menuBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="sidebarDrawer">
@@ -575,8 +660,8 @@ a:focus-visible, button:focus-visible {
 <div class="sidebar-drawer" id="sidebarDrawer">
   <div class="sidebar-drawer-header">
     <a href="{{ route('home') }}" class="sidebar-drawer-logo" wire:navigate>
-      <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoc-Vien-Nong-Nghiep-Viet-Nam-VNUA-1024x1024.png" alt="{{ config('app.name') }}" loading="lazy">
-      <span>Alumni Network</span>
+  <img src="{{ asset('img/logo-vnua.png') }}" alt="{{ config('app.name') }}" loading="lazy">     
+   <span>Alumni Network</span>
     </a>
     <button class="sidebar-close" id="sidebarClose" aria-label="Đóng menu">✕</button>
   </div>
@@ -639,55 +724,107 @@ a:focus-visible, button:focus-visible {
   {{ $slot }}
 </main>
 
+
+<div class="footer-stripe">
+  <div class="footer-stripe-gold"></div>
+  <div class="footer-stripe-green"></div>
+  <div class="footer-stripe-brown"></div>
+</div>
+
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#" class="logo" wire:navigate>
-          <img src="{{ asset('img/fita.logo.png') }}"alt="{{ config('app.name') }}"loading="lazy">
-          <div class="footer-logo-text">
-            <strong>Alumni Network</strong>
-            <span>Học viện Nông nghiệp Việt Nam</span>
-          </div>
-        </a>
-        <p class="footer-desc">Nền tảng kết nối sinh viên, cựu sinh viên và doanh nghiệp.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Hệ thống</h4>
-        <ul>
-          <li><a href="#" wire:navigate>Trang chủ</a></li>
-          <li><a href="#" wire:navigate>Cựu sinh viên</a></li>
-          <li><a href="#" wire:navigate>Tuyển dụng</a></li>
-          <li><a href="#" wire:navigate>Sự kiện</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Tài khoản</h4>
-        <ul>
-          <li><a href="#" wire:navigate>Đăng ký</a></li>
-          <li><a href="#" wire:navigate>Đăng nhập SSO</a></li>
-          <li><a href="#" wire:navigate>Hồ sơ cá nhân</a></li>
-          <li><a href="#" wire:navigate>Cài đặt</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Hỗ trợ</h4>
-        <ul>
-          <li><a href="#" wire:navigate>Hướng dẫn sử dụng</a></li>
-          <li><a href="#" wire:navigate>Câu hỏi thường gặp</a></li>
-          <li><a href="#" wire:navigate>Liên hệ Khoa CNTT</a></li>
-        </ul>
-      </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:repeat(1,1fr);gap:32px 40px;"
+       class="footer-grid">
+    <div class="footer-col-contact">
+      <a href="{{ route('home') }}" class="footer-logo" wire:navigate>
+      <img src="{{ asset('img/fita-logo.png') }}" alt="logo">
+    <div>
+          <strong>Mạng lưới cựu sinh viên Khoa CNTT</strong>
+          <span>Khoa Công nghệ Thông tin</span>
+        </div>
+      </a>
+      <ul class="footer-contact-list">
+        <li>
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Trâu Quỳ, Gia Lâm, Hà Nội</span>
+        </li>
+        <li>
+          <a href="tel:02438276473">
+            <i class="fa-solid fa-phone"></i>
+            <span>(024) 3827 6473</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:fita@vnua.edu.vn">
+            <i class="fa-solid fa-envelope"></i>
+            <span>fita@vnua.edu.vn</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('home') }}" wire:navigate>
+            <i class="fa-solid fa-globe"></i>
+            <span>{{ request()->getSchemeAndHttpHost() }}</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© {{ date('Y') }} Alumni Network — Học viện Nông nghiệp Việt Nam. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="#">Chính sách bảo mật</a>
-        <a href="#">Điều khoản sử dụng</a>
-      </div>
+
+    
+    <div class="footer-col-links">
+      <h5>Liên kết nhanh</h5>
+      <ul class="footer-link-list">
+        <li><a href="{{ route('home') }}" wire:navigate><i class="fa-solid fa-chevron-right"></i> Trang chủ</a></li>
+        <li><a href="{{ route('csv') }}" wire:navigate><i class="fa-solid fa-chevron-right"></i> Diễn đàn</a></li>
+        <li><a href="{{ route('job') }}" wire:navigate><i class="fa-solid fa-chevron-right"></i> Tuyển dụng</a></li>
+        <li><a href="{{ route('event') }}" wire:navigate><i class="fa-solid fa-chevron-right"></i> Sự kiện</a></li>
+        @guest
+        <li><a href="{{ route('register') }}" wire:navigate><i class="fa-solid fa-chevron-right"></i> Đăng ký</a></li>
+        <li><a href="{{ route('login') }}" wire:navigate><i class="fa-solid fa-chevron-right"></i> Đăng nhập</a></li>
+        @endguest
+      </ul>
+    </div>
+
+    <div class="footer-col-social">
+      <h5>Kết nối</h5>
+      <ul class="footer-social-list">
+        <li>
+          <a href="https://facebook.com/fitavnua" target="_blank">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/></svg>
+            <span>Facebook</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://youtube.com/@fitavnua" target="_blank">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></svg>
+            <span>YouTube</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://tiktok.com/@fitavnua" target="_blank">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/></svg>
+            <span>TikTok</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d232.79335334283132!2d105.9314793!3d21.0049137!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a8d01169441f%3A0x588113cbf27a61f0!2zS2hvYSBDw7RuZyBuZ2jhu4cgdGjDtG5nIHRpbg!5e0!3m2!1svi!2s!4v1777305347149!5m2!1svi!2s"
+        style="width:100%;height:100%;min-height:200px;border:0;border-radius:8px;"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
   </div>
 </footer>
+
+
+<div class="footer-copyright">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+    Copyright &copy; {{ date('Y') }}:
+    <a href="{{ route('home') }}" wire:navigate>Mạng lưới Cựu sinh viên Khoa CNTT</a>,
+    <a href="https://vnua.edu.vn" target="_blank">Học viện Nông nghiệp Việt Nam</a>
+  </div>
+</div>
 
 @livewireScripts
 

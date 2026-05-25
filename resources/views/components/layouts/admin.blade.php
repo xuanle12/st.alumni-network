@@ -3,28 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin –  Cựu sinh viên #VNUA</title>
-@vite(['resources/css/app.css', 'resources/js/app.js'])   
- @livewireStyles
+    <title>Admin – Cựu sinh viên VNUA</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; min-height: 100vh; }
+        body { font-family: 'Barlow', system-ui, sans-serif; background: #f1f5f9; min-height: 100vh; }
         a { text-decoration: none; }
 
-        /* ── LAYOUT ── */
-        .adm-layout {
-            display: flex;
-            min-height: 100vh;
+        :root {
+            --adm-bg:      #1D232A;
+            --adm-bg2:     #252d36;
+            --adm-border:  rgba(255,255,255,0.07);
+            --adm-text:    rgba(255,255,255,0.55);
+            --adm-text-h:  #fff;
+            --adm-active:  rgba(9,97,170,0.35);
+            --adm-active-c:#60a5fa;
+            --blue:        #0961AA;
+            --blue-light:  #0c83d8;
         }
+
+        /* ── LAYOUT ── */
+        .adm-layout { display: flex; min-height: 100vh; }
 
         /* ══════════ SIDEBAR ══════════ */
         .adm-sb {
-            width: 220px;
+            width: 240px;
             flex-shrink: 0;
-            background: #0f172a;
-            border-right: 1px solid #1e293b;
+            background: var(--adm-bg);
+            border-right: 1px solid var(--adm-border);
             display: flex;
             flex-direction: column;
             position: sticky;
@@ -32,264 +40,293 @@
             height: 100vh;
             overflow-y: auto;
         }
+        .adm-sb::-webkit-scrollbar { width: 3px; }
+        .adm-sb::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
 
         /* brand */
         .adm-brand {
-            padding: 1.25rem 1.25rem 1rem;
+            padding: 18px 20px 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid #1e293b;
+            gap: 12px;
+            border-bottom: 1px solid var(--adm-border);
+            flex-shrink: 0;
         }
-        .adm-brand-dot {
-            width: 30px; height: 30px;
-            border-radius: 9px;
-            background: #1d4ed8;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 15px; flex-shrink: 0;
+        .adm-brand img { height: 38px; width: auto; opacity: .9; filter: brightness(0) invert(1); }
+        .adm-brand-name { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.3; }
+        .adm-brand-sub  { font-size: 10.5px; color: var(--adm-text); margin-top: 2px; }
+
+        /* back to site */
+        .adm-back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 12px 12px 4px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            color: var(--adm-text);
+            transition: .15s;
+            border: 1px solid var(--adm-border);
         }
-        .adm-brand-name { font-size: 14px; font-weight: 700; color: #f1f5f9; line-height: 1.2; }
-        .adm-brand-sub  { font-size: 10px; color: #475569; margin-top: 1px; }
+        .adm-back-btn:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
+        .adm-back-btn i { font-size: 11px; }
 
         /* nav section title */
         .adm-sec {
-            padding: .875rem 1.25rem .35rem;
+            padding: 16px 20px 5px;
             font-size: 10px; font-weight: 700;
-            letter-spacing: .09em; text-transform: uppercase;
-            color: #334155;
+            letter-spacing: 1.1px; text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
         }
 
         /* nav item */
         .adm-item {
-            margin: 1px .75rem;
-            padding: 8px 10px;
+            margin: 1px 10px;
+            padding: 9px 12px;
             border-radius: 9px;
-            font-size: 13px; color: #64748b;
+            font-size: 13.5px;
+            color: var(--adm-text);
             cursor: pointer;
-            display: flex; align-items: center; gap: 9px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             transition: all .15s;
-            text-decoration: none;
         }
-        .adm-item:hover { color: #94a3b8; background: #1e293b; }
-        .adm-item.active{background:#1f3f6d;color:#60a5fa;font-weight:700;}
-        .adm-item.active .adm-item-ic{color:#60a5fa;}
-        .adm-item-ic { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+        .adm-item:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
+        .adm-item.active { background: var(--adm-active); color: var(--adm-active-c); font-weight: 600; }
+        .adm-item.active .adm-item-ic { color: var(--adm-active-c); }
+        .adm-item-ic { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.35); }
+        .adm-item:hover .adm-item-ic { color: rgba(255,255,255,0.7); }
         .adm-item-badge {
             margin-left: auto;
             font-size: 10px; font-weight: 700;
             padding: 2px 7px; border-radius: 20px;
-            background: #92400e22; color: #fbbf24;
+            background: rgba(251,191,36,0.15); color: #fbbf24;
         }
-        .adm-item-badge.blue { background: #1e3a5f; color: #60a5fa; }
+        .adm-item-badge.blue { background: rgba(9,97,170,0.2); color: #60a5fa; }
 
         /* divider */
-        .adm-div { height: 1px; background: #1e293b; margin: .5rem .75rem; }
+        .adm-div { height: 1px; background: var(--adm-border); margin: 6px 10px; }
 
         /* footer user */
         .adm-foot {
             margin-top: auto;
-            padding: 1rem 1.25rem;
-            border-top: 1px solid #1e293b;
+            padding: 14px 12px 16px;
+            border-top: 1px solid var(--adm-border);
+            flex-shrink: 0;
         }
         .adm-user {
-            display: flex; align-items: center; gap: 10px;
-            padding: 8px 10px; border-radius: 9px;
-            cursor: pointer; transition: background .15s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 9px;
+            cursor: default;
+            margin-bottom: 6px;
         }
-        .adm-user:hover { background: #1e293b; }
         .adm-uava {
-            width: 30px; height: 30px; border-radius: 50%;
-            background: #1d4ed8; color: #fff;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: #fff;
             font-size: 11px; font-weight: 700;
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
-        .adm-uname { font-size: 12px; color: #94a3b8; font-weight: 600; }
-        .adm-urole { font-size: 10px; color: #475569; margin-top: 1px; }
+        .adm-uname { font-size: 12.5px; color: #e2e8f0; font-weight: 600; }
+        .adm-urole { font-size: 10.5px; color: var(--adm-text); margin-top: 1px; }
         .adm-logout {
             display: flex; align-items: center; gap: 8px;
-            padding: 7px 10px; border-radius: 8px;
-            font-size: 12px; color: #475569;
-            cursor: pointer; margin-top: 4px;
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            color: var(--adm-text);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
             transition: all .15s;
+            text-align: left;
         }
-        .adm-logout:hover { color: #f87171; background: #1e293b; }
+        .adm-logout:hover { color: #f87171; background: rgba(248,113,113,0.1); }
 
-        /* ══════════ MAIN ══════════ */
-        .adm-main {
-            flex: 1;
-            background: #f8fafc;
-            overflow-y: auto;
-            min-width: 0;
-        }
-
-        /* topbar */
+        /* ══════════ TOPBAR ══════════ */
+        .adm-main { flex: 1; background: #f1f5f9; overflow-y: auto; min-width: 0; }
         .adm-topbar {
-            background: #fff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: .875rem 1.75rem;
-            display: flex; align-items: center; justify-content: space-between;
-            position: sticky; top: 0; z-index: 40;
+            background: var(--adm-bg);
+            padding: 0 24px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            border-bottom: 1px solid var(--adm-border);
         }
-        .adm-topbar-title { font-size: 15px; font-weight: 700; color: #0f172a; }
-        .adm-topbar-sub   { font-size: 12px; color: #64748b; margin-top: 2px; }
+        .adm-topbar-left { display: flex; align-items: center; gap: 12px; }
+        .adm-topbar-title { font-size: 14.5px; font-weight: 700; color: #fff; }
+        .adm-topbar-sub   { font-size: 11.5px; color: var(--adm-text); margin-top: 1px; }
         .adm-topbar-right { display: flex; align-items: center; gap: 10px; }
+
         .adm-notif {
-            width: 34px; height: 34px; border-radius: 9px;
-            border: 1px solid #e2e8f0; background: transparent;
-            cursor: pointer; font-size: 15px;
+            width: 34px; height: 34px;
+            border-radius: 8px;
+            border: 1px solid var(--adm-border);
+            background: transparent;
+            cursor: pointer;
+            font-size: 15px;
             display: flex; align-items: center; justify-content: center;
-            color: #64748b; position: relative;
+            color: var(--adm-text);
+            position: relative;
+            transition: .15s;
         }
-        .adm-notif:hover { background: #f8fafc; }
+        .adm-notif:hover { background: var(--adm-bg2); color: #fff; }
         .adm-notif-dot {
             position: absolute; top: 6px; right: 7px;
-            width: 7px; height: 7px; border-radius: 50%;
-            background: #dc2626; border: 1.5px solid #fff;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #dc2626;
+            border: 1.5px solid var(--adm-bg);
         }
-       
+        .adm-topbar-user {
+            display: flex; align-items: center; gap: 8px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--adm-border);
+            cursor: pointer;
+            transition: .15s;
+        }
+        .adm-topbar-user:hover { background: var(--adm-bg2); }
+        .adm-topbar-uname { font-size: 12.5px; color: #e2e8f0; font-weight: 600; }
 
-        .adm-menu-btn{
+        .adm-menu-btn {
             display: none;
-            font-size: 20px;
+            font-size: 18px;
             background: none;
             border: none;
             cursor: pointer;
-            color: #0f172a;
+            color: var(--adm-text);
+            padding: 6px;
+            border-radius: 6px;
+            transition: .15s;
         }
-@media (max-width: 1024px){
-    .adm-sb{
-        position: fixed;
-        left: -260px;
-        top: 0;
-        height: 100%;
-        z-index: 100;
-        transition: left .25s ease;
-    }
+        .adm-menu-btn:hover { color: #fff; background: var(--adm-bg2); }
 
-    .adm-sb.open{
-        left: 0;
-    }
+        /* ── FLASH ── */
+        .adm-flash {
+            position: fixed;
+            top: 68px; right: 16px;
+            z-index: 200;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #16a34a;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: #0f172a;
+            box-shadow: 0 6px 24px rgba(15,23,42,0.12);
+            display: flex; align-items: center; gap: 10px;
+            max-width: calc(100vw - 32px);
+        }
+        .adm-flash.is-info  { border-left-color: var(--blue); }
+        .adm-flash.is-error { border-left-color: #dc2626; }
+        .adm-flash button { background: transparent; border: none; cursor: pointer; font-size: 16px; color: #64748b; line-height: 1; }
 
-    .adm-main{
-        width: 100%;
-    }
+        /* ── OVERLAY ── */
+        .adm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; display: none; }
+        .adm-overlay.show { display: block; }
 
-    .adm-menu-btn{
-        display: block;
-    }
-}
-.adm-overlay{
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 90;
-    display: none;
-}
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .adm-sb {
+                position: fixed;
+                left: -260px;
+                top: 0; height: 100%;
+                z-index: 100;
+                transition: left .25s ease;
+            }
+            .adm-sb.open { left: 0; }
+            .adm-main { width: 100%; }
+            .adm-menu-btn { display: flex; align-items: center; justify-content: center; }
+        }
 
-.adm-overlay.show{
-    display: block;
-}
-
-a:focus-visible, button:focus-visible {
-  outline: 2px solid #60a5fa;
-  outline-offset: 2px;
-  border-radius: 6px;
-}
-
-.adm-flash {
-  position: fixed;
-  top: 76px;
-  right: 16px;
-  z-index: 200;
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-left: 4px solid #16a34a;
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 13.5px;
-  color: #0f172a;
-  box-shadow: 0 6px 24px rgba(15,23,42,0.12);
-  display: flex; align-items: center; gap: 10px;
-  max-width: calc(100vw - 32px);
-}
-.adm-flash.is-info  { border-left-color: #2563eb; }
-.adm-flash.is-error { border-left-color: #dc2626; }
-.adm-flash button {
-  background: transparent; border: none; cursor: pointer;
-  font-size: 16px; color: #64748b; line-height: 1;
-}
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 2px;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
+
+{{-- Flash --}}
 @if(session('success') || session('info') || session('error'))
-  @php
-    $flashType = session('error') ? 'is-error' : (session('info') ? 'is-info' : '');
-    $flashMsg  = session('error') ?? session('info') ?? session('success');
-  @endphp
-  <div class="adm-flash {{ $flashType }}" role="status" aria-live="polite" id="admFlash">
-    <span>{{ $flashMsg }}</span>
-    <button type="button" aria-label="Đóng" onclick="this.parentNode.remove()">✕</button>
-  </div>
-  <script>setTimeout(() => { const t=document.getElementById('admFlash'); if(t) t.remove(); }, 4000);</script>
+    @php
+        $flashType = session('error') ? 'is-error' : (session('info') ? 'is-info' : '');
+        $flashMsg  = session('error') ?? session('info') ?? session('success');
+    @endphp
+    <div class="adm-flash {{ $flashType }}" role="status" aria-live="polite" id="admFlash">
+        <span>{{ $flashMsg }}</span>
+        <button type="button" aria-label="Đóng" onclick="this.parentNode.remove()">✕</button>
+    </div>
+    <script>setTimeout(() => { const t=document.getElementById('admFlash'); if(t) t.remove(); }, 4000);</script>
 @endif
+
 <div id="overlay" class="adm-overlay" onclick="toggleSidebar()"></div>
+
 <div class="adm-layout">
+
+    {{-- ══════ SIDEBAR ══════ --}}
     <aside id="sidebar" class="adm-sb">
 
+        {{-- Brand --}}
         <div class="adm-brand">
-            <div class="adm-brand-dot">🎓</div>
+            <img src="{{ asset('img/fita.logo.png') }}" alt="Logo">
             <div>
-                <div class="adm-brand-name"> Cựu sinh viên VNUA</div>
-                <div class="adm-brand-sub">Admin portal</div>
+                <div class="adm-brand-name">Cựu sinh viên VNUA</div>
+                <div class="adm-brand-sub">Admin Portal</div>
             </div>
         </div>
-            <a href="{{ route('csv') }}"class="adm-item adm-back"><span class="adm-item-ic">←</span>Trang người dùng</a>
+
+        {{-- Back to site --}}
+        <a href="{{ route('csv') }}" class="adm-back-btn" wire:navigate>
+            <i class="fa-solid fa-arrow-left"></i>
+            Trang người dùng
+        </a>
+
         {{-- Nav --}}
         <div class="adm-sec">Quản lý</div>
 
-        <a href="{{ route('admin') }}"class="adm-item {{ request()->routeIs('admin') ? 'active' : '' }}">
-            <span class="adm-item-ic" data-lucide="layout-dashboard"></span>
-            Dashboard
+        <a href="{{ route('admin') }}" class="adm-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-gauge adm-item-ic"></i> Dashboard
         </a>
-
-        <a href="{{ route('admin.user') }}"class="adm-item {{ request()->routeIs('admin.user') ? 'active' : '' }}">
-            <span class="adm-item-ic" data-lucide="user"></span></span>
-            Người dùng
+        <a href="{{ route('admin.user') }}" class="adm-item {{ request()->routeIs('admin.user') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-users adm-item-ic"></i> Người dùng
         </a>
-
-        <a href="{{ route('admin.csv') }}"class="adm-item {{ request()->routeIs('admin.csv*') ? 'active' : '' }}">
-            <span class="adm-item-ic" data-lucide="graduation-cap"></span>
-            Cựu sinh viên
-            @php $pendingAlumni = 0; @endphp
-            @if($pendingAlumni > 0)
-                <span class="adm-item-badge">{{ $pendingAlumni }}</span>
-            @endif
+        <a href="{{ route('admin.csv') }}" class="adm-item {{ request()->routeIs('admin.csv*') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-graduation-cap adm-item-ic"></i> Cựu sinh viên
         </a>
-
-        <a href="{{ route('admin.job') }}"class="adm-item {{ request()->routeIs('admin.job*') ? 'active' : '' }}">
-            <span class="adm-item-ic" data-lucide="briefcase"></span>
-            Tuyển dụng
+        <a href="{{ route('admin.job') }}" class="adm-item {{ request()->routeIs('admin.job*') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-briefcase adm-item-ic"></i> Tuyển dụng
         </a>
-
-        <a href="{{ route('admin.company') }}"class="adm-item {{ request()->routeIs('admin.company*') ? 'active' : '' }}">
-            <span class="adm-item-ic" data-lucide="building-2"></span>
-            Doanh nghiệp
+        <a href="{{ route('admin.company') }}" class="adm-item {{ request()->routeIs('admin.company*') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-building adm-item-ic"></i> Doanh nghiệp
         </a>
-        <a href="{{ route('admin.post') }}"class="adm-item {{ request()->routeIs('admin.post*') ? 'active' : '' }}">
-            <span class="adm-item-ic" data-lucide="file-text"></span>
-            Bài viết
+        <a href="{{ route('admin.post') }}" class="adm-item {{ request()->routeIs('admin.post*') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-file-lines adm-item-ic"></i> Bài viết
         </a>
 
         <div class="adm-div"></div>
         <div class="adm-sec">Hệ thống</div>
 
-        <a href="{{ route('admin.thongk') }}"class="adm-item {{ request()->routeIs('admin.thongk*') ? 'active' : '' }}">
-            <span class="adm-item-ic" data-lucide="bar-chart-3"></span> 
-            Thống kê
+        <a href="{{ route('admin.thongk') }}" class="adm-item {{ request()->routeIs('admin.thongk*') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-chart-bar adm-item-ic"></i> Thống kê
         </a>
 
-       
+        {{-- User footer --}}
         <div class="adm-foot">
             <div class="adm-user">
                 <div class="adm-uava">{{ auth()->user()?->initials ?? 'AD' }}</div>
@@ -298,36 +335,48 @@ a:focus-visible, button:focus-visible {
                     <div class="adm-urole">Quản trị viên</div>
                 </div>
             </div>
-            <form action="{{ route('logout') }}" method="POST"onsubmit="return confirm('Bạn có muốn đăng xuất không?')">
+            <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Đăng xuất?')">
                 @csrf
-                <button type="submit" class="adm-logout"style="border:none;width:100%;text-align:left;font-family:inherit;background:transparent;cursor:pointer;">
-                    ← Đăng xuất
+                <button type="submit" class="adm-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
                 </button>
             </form>
         </div>
 
     </aside>
+
+    {{-- ══════ MAIN ══════ --}}
     <div class="adm-main">
 
-    <div class="adm-topbar">
-        <div style="display:flex;align-items:center;gap:10px;">
-            <button class="adm-menu-btn" onclick="toggleSidebar()" aria-label="Mở menu" type="button">☰</button>
-
-            <div>
-                <div class="adm-topbar-title">Admin</div>
-                <div class="adm-topbar-sub">Quản lý hệ thống</div>
+        {{-- Topbar --}}
+        <div class="adm-topbar">
+            <div class="adm-topbar-left">
+                <button class="adm-menu-btn" onclick="toggleSidebar()" aria-label="Mở menu" type="button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div>
+                    <div class="adm-topbar-title">Admin Dashboard</div>
+                    <div class="adm-topbar-sub">Quản lý hệ thống Alumni Network</div>
+                </div>
+            </div>
+            <div class="adm-topbar-right">
+                <button class="adm-notif" title="Thông báo">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="adm-notif-dot"></span>
+                </button>
+                <a href="{{ route('csv') }}" class="adm-topbar-user" wire:navigate>
+                    <div class="adm-uava" style="width:28px;height:28px;font-size:10px">{{ auth()->user()?->initials ?? 'AD' }}</div>
+                    <span class="adm-topbar-uname">{{ auth()->user()?->name ?? 'Admin' }}</span>
+                </a>
             </div>
         </div>
+
+        {{ $slot }}
+
     </div>
-
-    {{ $slot }}
-
-</div>
-
 </div>
 
 @livewireScripts
-</body>
 <script>
 function toggleSidebar(){
     const sb = document.getElementById('sidebar');
@@ -339,7 +388,6 @@ function toggleSidebar(){
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         const sb = document.getElementById('sidebar');
-        const ov = document.getElementById('overlay');
         if (sb && sb.classList.contains('open')) toggleSidebar();
     }
 });
@@ -350,4 +398,5 @@ document.addEventListener('livewire:navigated', () => {
     if (ov) ov.classList.remove('show');
 });
 </script>
+</body>
 </html>
