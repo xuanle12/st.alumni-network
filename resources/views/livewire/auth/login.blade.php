@@ -1,431 +1,320 @@
 <div>
-<div>
-     <div class="login-page">
-        <div class="login-bg"></div>
-        <div class="corner corner-tl"></div>
-        <div class="corner corner-tr"></div>
-        <div class="corner corner-bl"></div>
-        <div class="corner corner-br"></div>
-        <div class="login-right">
-            <div class="login-card">
-                <div class="logo-row fade1">
-                    <label class="logo-slot">
-                        <img src="{{ asset('img/fita.logo.png') }}" alt="Logo 1">
-                    </label>
-                    <label class="logo-slot">
-                        <img src="{{ asset('img/logoST.jpg') }}" alt="Logo 2">
-                    </label>
-                </div>
-                <div class="fade1" style="margin-bottom:28px">
-                    <h2>Đăng nhập</h2>
-                    <p class="login-subtitle">Chào mừng trở lại, nhập thông tin để tiếp tục</p>
-                </div>
-
-                <form wire:submit="loginWithEmail">
-                    <div class="form-group fade4">
-                        
-                        <div>
-                            <label class="field-label">EMAIL</label>
-                            <input
-                                wire:model="email"
-                                class="input-field"
-                                type="email"
-                                placeholder="ten@gmail.com"
-                                autocomplete="email"
-                            />
-                            @error('email')
-                                <span class="field-error">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        
-                        <div>
-                            <div class="field-row">
-                                <label class="field-label" style="margin-bottom:0">MẬT KHẨU</label>
-                                <a href="#" class="forgot-link" onclick="event.preventDefault()">Quên mật khẩu?</a>
-                            </div>
-                            <div class="input-wrap">
-                                <input
-                                    wire:model="password"
-                                    class="input-field has-icon"
-                                    id="passwordInput"
-                                    type="password"
-                                    placeholder="••••••••"
-                                    autocomplete="current-password"
-                                />
-                                <button type="button"class="toggle-pass-btn"onclick="
-                                    const input = document.getElementById('passwordInput');
-                                    const eye = this.querySelector('.icon-eye');
-                                    const eyeOff = this.querySelector('.icon-eye-off');
-
-                                    if(input.type === 'password'){
-                                        input.type = 'text';
-                                        eye.style.display='none';
-                                        eyeOff.style.display='inline';
-                                    }else{
-                                        input.type = 'password';
-                                        eye.style.display='inline';
-                                        eyeOff.style.display='none';
-                                    }
-    "
->
-
-<i data-lucide="eye" class="icon-eye"></i>
-<i data-lucide="eye-off" class="icon-eye-off" style="display:none"></i>
-
-</button>
-                            </div>
-                            @error('password')
-                                <span class="field-error">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        {{-- Remember Me --}}
-                        <div style="margin-top: 10px;">
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                <input type="checkbox" wire:model="remember" style="width: 16px; height: 16px;">
-                                <span style="font-family: 'Courier Prime', monospace; font-size: 12px; color: #4a6e50;">Ghi nhớ đăng nhập</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    {{-- Submit button --}}
-                    <div class="fade5">
-                        <button type="submit" class="submit-btn" wire:loading.attr="disabled">
-                            <span wire:loading.remove>ĐĂNG NHẬP</span>
-                            <span wire:loading>
-                                <div class="spinner-white"></div>
-                            </span>
-                        </button>
-                    </div>
-                </form>
-
-                <p class="register-text">
-                    Chưa có tài khoản? <a href="{{ route('register') }}" wire:navigate>Đăng ký ngay</a>
-                </p>
-
-                <div class="divider">
-                    <div class="divider-line"></div>
-                    <span class="divider-text">hoặc</span>
-                    <div class="divider-line"></div>
-                </div>
-
-                <button
-                    type="button"
-                    class="sso-btn"
-                    onclick="window.location.href='#'"
-                >
-                    <i data-lucide="lock"></i>
-                    Đăng nhập bằng SSO
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime:wght@400;700&display=swap');
-* { box-sizing: border-box; margin: 0; padding: 0; }
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes spin { to { transform: rotate(360deg); } }
- 
-.fade1 { animation: fadeUp .5s ease both; }
-.fade4 { animation: fadeUp .5s .3s ease both; }
-.fade5 { animation: fadeUp .5s .4s ease both; }
- 
-.login-page {
-    min-height: 100vh;
-    background: #f5f7fa;
-    display: flex;
-    font-family: 'Crimson Pro', Georgia, serif;
-    position: relative;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-}
- 
-.login-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-image:
-        radial-gradient(circle at 20% 50%, rgba(23,92,186,.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(37,99,235,.05) 0%, transparent 40%);
-}
- 
-.corner {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-color: #93c5fd;
-    border-style: solid;
-    opacity: .5;
-}
-.corner-tl { top: 20px; left: 20px;   border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
-.corner-tr { top: 20px; right: 20px;  border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; }
-.corner-bl { bottom: 20px; left: 20px;  border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; }
-.corner-br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
- 
-.login-right {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 48px;
-    position: relative;
-    z-index: 1;
-}
- 
-.login-card {
-    width: 100%;
-    max-width: 420px;
-    background: rgba(255,255,255,.92);
-    backdrop-filter: blur(12px);
-    border-radius: 12px;
-    border: 1.5px solid #bfdbfe;
-    padding: 40px 36px;
-    box-shadow: 0 8px 40px rgba(37,99,235,.08);
-}
- 
-/* ── Logo tròn ── */
-.logo-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 28px;
-}
- 
-.logo-slot{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    overflow:hidden;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+body{font-family:'Barlow',system-ui,sans-serif;}
+
+.lp{
+    min-height:100vh;
+    background:#f1f5f9;
     display:flex;
     align-items:center;
     justify-content:center;
+    padding:24px 16px;
+    animation:fadeUp .4s ease both;
 }
 
-.logo-slot img{
+/* ── CARD ── */
+.lcard{
     width:100%;
-    height:100%;
-    object-fit:cover;
+    max-width:448px;
+    background:#fff;
+    border-radius:16px;
+    border:1px solid #e2e8f0;
+    padding:40px 36px;
+    box-shadow:0 10px 40px rgba(15,23,42,.08);
+}
+
+/* ── HEADER: back btn ── */
+.lcard-back{
+    position:absolute;
+    top:-8px;left:-8px;
+}
+.lcard-back a{
+    display:flex;align-items:center;justify-content:center;
+    width:32px;height:32px;
+    border-radius:8px;
+    border:1px solid #e2e8f0;
+    color:#64748b;
+    text-decoration:none;
+    font-size:14px;
+    transition:.15s;
+    background:#fff;
+}
+.lcard-back a:hover{background:#f8fafc;color:#0f172a;}
+.lcard-head{position:relative;text-align:center;margin-bottom:24px;}
+
+/* ── LOGOS ── */
+.llogos{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:18px;
+}
+.llogos img{
+    width:64px;height:64px;
+    object-fit:contain;
+    border-radius:8px;
+}
+.lcard-title{
+    font-size:17px;font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    color:#0f172a;
+    line-height:1.25;
+    margin-bottom:4px;
+}
+.lcard-sub{
+    font-size:13px;font-weight:500;
+    color:#64748b;
+    text-transform:uppercase;
+    letter-spacing:.3px;
+}
+
+/* ── ERRORS ── */
+.lerr{
+    background:#fef2f2;border:1px solid #fecaca;
+    color:#b91c1c;
+    border-radius:10px;padding:10px 14px;
+    font-size:13px;margin-bottom:16px;
+    display:flex;align-items:center;gap:8px;
+}
+
+/* ── FORM ── */
+.lform{display:flex;flex-direction:column;gap:16px;}
+
+.lfield label{
     display:block;
+    font-size:13px;font-weight:600;
+    color:#374151;margin-bottom:6px;
 }
-.logo-slot .plus {
-    font-size: 24px;
-    color: #93c5fd;
-    line-height: 1;
-    user-select: none;
+.lfield-row{
+    display:flex;justify-content:space-between;
+    align-items:center;margin-bottom:6px;
 }
-.logo-slot input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
+.lfield-row label{margin-bottom:0;}
+.lfield-row a{
+    font-size:12.5px;color:#0961AA;
+    text-decoration:none;transition:.15s;
 }
- 
-/* ── Tiêu đề ── */
-.login-card h2 {
-    font-family: 'IM Fell English', Georgia, serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: #1e3a5f;
-    margin-bottom: 6px;
+.lfield-row a:hover{text-decoration:underline;}
+
+.linput{
+    width:100%;
+    padding:11px 14px;
+    border:1.5px solid #e2e8f0;
+    border-radius:10px;
+    background:#fff;
+    font-family:'Barlow',sans-serif;
+    font-size:14px;color:#0f172a;
+    outline:none;
+    transition:border-color .15s,box-shadow .15s;
 }
-.login-subtitle {
-    font-size: 14px;
-    color: #6b8ec4;
-    font-style: italic;
+.linput:focus{
+    border-color:#0961AA;
+    box-shadow:0 0 0 3px rgba(9,97,170,.1);
 }
- 
-/* ── Form ── */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 20px;
+.linput::placeholder{color:#94a3b8;}
+
+.linput-wrap{position:relative;}
+.linput-wrap .linput{padding-right:44px;}
+.ltoggle{
+    position:absolute;right:12px;top:50%;
+    transform:translateY(-50%);
+    background:none;border:none;cursor:pointer;
+    padding:0;color:#94a3b8;font-size:15px;
+    transition:.15s;
 }
- 
-.field-label {
-    display: block;
-    font-family: 'Courier Prime', monospace;
-    font-size: 11px;
-    color: #2563eb;
-    letter-spacing: .5px;
-    margin-bottom: 6px;
+.ltoggle:hover{color:#0961AA;}
+
+.lfield-err{font-size:12px;color:#dc2626;margin-top:4px;display:block;}
+
+/* Remember */
+.lremember{
+    display:flex;align-items:center;gap:8px;
+    cursor:pointer;font-size:13.5px;color:#64748b;
 }
- 
-.field-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
+.lremember input{
+    width:16px;height:16px;
+    accent-color:#0961AA;cursor:pointer;
 }
- 
-.forgot-link {
-    font-size: 12px;
-    color: #2563eb;
-    text-decoration: none;
-    font-style: italic;
+
+/* Submit */
+.lbtn-submit{
+    width:100%;
+    padding:13px;
+    background:#0961AA;
+    color:#fff;border:none;
+    border-radius:10px;
+    font-family:'Barlow',sans-serif;
+    font-size:15px;font-weight:700;
+    letter-spacing:.3px;
+    cursor:pointer;
+    transition:.18s;
+    box-shadow:0 2px 12px rgba(9,97,170,.25);
+    display:flex;align-items:center;justify-content:center;gap:8px;
 }
- 
-.input-wrap { position: relative; }
- 
-.input-field {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid #bfdbfe;
-    border-radius: 6px;
-    background: #fff;
-    font-family: 'Courier Prime', monospace;
-    font-size: 13px;
-    color: #1e3a5f;
-    outline: none;
-    transition: border-color .18s, box-shadow .18s;
+.lbtn-submit:hover:not(:disabled){
+    background:#0c83d8;
+    transform:translateY(-1px);
+    box-shadow:0 4px 18px rgba(9,97,170,.35);
 }
-.input-field:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+.lbtn-submit:disabled{opacity:.7;cursor:not-allowed;}
+
+.lspinner{
+    width:18px;height:18px;
+    border:2px solid rgba(255,255,255,.3);
+    border-top-color:#fff;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
 }
-.input-field::placeholder { color: #93c5fd; }
-.input-field.has-icon { padding-right: 42px; }
- 
-.toggle-pass-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    color: #6b8ec4;
+
+/* Register link */
+.lregister{
+    text-align:center;margin-top:4px;
+    font-size:13.5px;color:#64748b;
 }
- 
-.field-error {
-    font-size: 12px;
-    color: #c0392b;
-    margin-top: 4px;
-    display: block;
+.lregister a{
+    color:#0961AA;font-weight:600;
+    text-decoration:none;transition:.15s;
 }
- 
-/* ── Remember me ── */
-.remember-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+.lregister a:hover{text-decoration:underline;}
+
+/* Divider */
+.ldivider{
+    display:flex;align-items:center;gap:12px;
+    margin:20px 0;
 }
-.remember-label input {
-    width: 16px;
-    height: 16px;
-    accent-color: #2563eb;
+.ldivider::before,.ldivider::after{
+    content:'';flex:1;height:1px;background:#e2e8f0;
 }
-.remember-label span {
-    font-family: 'Courier Prime', monospace;
-    font-size: 12px;
-    color: #2563eb;
+.ldivider span{
+    font-size:12px;color:#94a3b8;
+    white-space:nowrap;font-weight:500;
 }
- 
-/* ── Nút đăng nhập ── */
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #1d4ed8, #2563eb);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-family: 'IM Fell English', Georgia, serif;
-    font-size: 15px;
-    letter-spacing: .8px;
-    cursor: pointer;
-    transition: all .18s ease;
-    box-shadow: 0 2px 12px rgba(37,99,235,.3);
+
+/* SSO btn */
+.lbtn-sso{
+    width:100%;
+    padding:13px 16px;
+    border-radius:10px;
+    border:1.5px solid #0961AA;
+    background:#e8f0fe;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    font-family:'Barlow',sans-serif;
+    font-size:14px;font-weight:700;
+    color:#0961AA;
+    transition:.18s;
+    text-decoration:none;
 }
-.submit-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #1e40af, #1d4ed8);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(37,99,235,.4);
+.lbtn-sso:hover{
+    background:#d1e3f8;
+    transform:translateY(-1px);
 }
-.submit-btn:active:not(:disabled) { transform: translateY(0); }
-.submit-btn:disabled { opacity: .7; cursor: not-allowed; }
- 
-.spinner-white {
-    width: 18px; height: 18px;
-    border: 2px solid rgba(255,255,255,.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin .7s linear infinite;
-    margin: 0 auto;
-    display: block;
-}
- 
-/* ── Đăng ký ── */
-.register-text {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 13px;
-    color: #6b8ec4;
-    font-style: italic;
-}
-.register-text a {
-    color: #2563eb;
-    text-decoration: none;
-    font-style: normal;
-    font-weight: 600;
-}
- 
-/* ── Divider ── */
-.divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 24px 0;
-}
-.divider-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #bfdbfe, transparent);
-}
-.divider-text {
-    font-family: 'Courier Prime', monospace;
-    font-size: 11px;
-    color: #93c5fd;
-    letter-spacing: 1px;
-}
- 
-/* ── Nút SSO ── */
-.sso-btn {
-    width: 100%;
-    padding: 13px 16px;
-    border-radius: 6px;
-    border: 1.5px solid #2563eb;
-    background: #eff6ff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-family: 'Courier Prime', monospace;
-    font-size: 14px;
-    color: #1d4ed8;
-    font-weight: 700;
-    transition: all .18s ease;
-}
-.sso-btn:hover {
-    background: #dbeafe;
-    transform: translateY(-1px);
-}
- 
-@media (max-width: 768px) {
-    .login-right { padding: 40px 20px; }
-    .corner { display: none; }
+
+@media(max-width:480px){
+    .lcard{padding:32px 22px;}
+    .llogos img{width:52px;height:52px;}
 }
 </style>
+
+<div class="lp">
+  <div class="lcard">
+
+    {{-- Header --}}
+    <div class="lcard-head">
+      <div class="lcard-back">
+        <a href="{{ route('home') }}" wire:navigate title="Trang chủ">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+
+      <div class="llogos">
+        <img src="{{ asset('img/fita.logo.png') }}" alt="Logo VNUA">
+        <img src="{{ asset('img/logoST.jpg') }}"   alt="Logo ST">
+      </div>
+
+      <div class="lcard-title">Khoa Công nghệ Thông tin</div>
+      <div class="lcard-sub">Học viện Nông nghiệp Việt Nam</div>
+    </div>
+
+    {{-- Errors --}}
+    @if(session('status'))
+      <div class="lerr" style="background:#f0fdf4;border-color:#86efac;color:#166534;">
+        <i class="fa-solid fa-check"></i> {{ session('status') }}
+      </div>
+    @endif
+    @error('email')
+      <div class="lerr"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</div>
+    @enderror
+
+     
+    <form wire:submit="loginWithEmail" class="lform">
+
+      <div class="lfield">
+        <label for="lemail">Email</label>
+        <input
+          id="lemail"
+          wire:model="email"
+          class="linput"
+          type="email"
+          placeholder="ten@gmail.com"
+          autocomplete="email"
+        >
+        @error('email') <span class="lfield-err">{{ $message }}</span> @enderror
+      </div>
+
+      <div class="lfield">
+        <div class="lfield-row">
+          <label for="lpassword">Mật khẩu</label>
+          <a href="#" onclick="event.preventDefault()">Quên mật khẩu?</a>
+        </div>
+        <div class="linput-wrap">
+          <input
+            id="lpassword"
+            wire:model="password"
+            class="linput"
+            type="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+          >
+          <button type="button" class="ltoggle" onclick="
+            const i=document.getElementById('lpassword');
+            const ico=this.querySelector('i');
+            if(i.type==='password'){i.type='text';ico.className='fa-solid fa-eye-slash';}
+            else{i.type='password';ico.className='fa-solid fa-eye';}
+          ">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+        @error('password') <span class="lfield-err">{{ $message }}</span> @enderror
+      </div>
+
+      <label class="lremember">
+        <input type="checkbox" wire:model="remember">
+        Ghi nhớ đăng nhập
+      </label>
+
+      <button type="submit" class="lbtn-submit" wire:loading.attr="disabled">
+        <span wire:loading.remove>Đăng nhập</span>
+        <span wire:loading><div class="lspinner"></div></span>
+      </button>
+
+    </form>
+
+    <div class="lregister" style="margin-top:16px;">
+      Chưa có tài khoản? <a href="{{ route('register') }}" wire:navigate>Đăng ký ngay</a>
+    </div>
+
+    <div class="ldivider"><span>hoặc đăng nhập bằng</span></div>
+
+    <a href="{{ route('sso.login') }}" class="btn btn-primary">
+    Đăng nhập bằng SSO
+</a>
+  </div>
+</div>
 </div>

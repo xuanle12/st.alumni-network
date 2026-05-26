@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
-
+use Laravel\Socialite\Facades\Socialite;
+use App\Providers\MySSOProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (app()->environment('production')) {URL::forceScheme('https');}
+        $socialite = $this->app->make(\Laravel\Socialite\Contracts\Factory::class);
+        $socialite->extend('sso', function ($app) use ($socialite) {
+            $config = $app['config']['services.sso'];
+            return $socialite->buildProvider(MySSOProvider::class, $config);
+        });
     }
 }

@@ -89,6 +89,13 @@ return [
         'octane' => [
             'driver' => 'octane',
         ],
+        'failover' => [
+            'driver' => 'failover',
+            'stores' => [
+                'database',
+                'array',
+            ],
+        ],
 
     ],
 

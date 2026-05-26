@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SSOController;
 
 Route::get('/', \App\Livewire\User\Home::class)->name('home');
 
@@ -38,3 +39,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/post', \App\Livewire\Admin\Posts::class)->name('admin.post');
     Route::get('/admin/user', \App\Livewire\Admin\User::class)->name('admin.user');
 });
+// Route để bắt đầu quá trình redirect sang SSO
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('sso')->with(['?client_id' => env('SSO_CLIENT_ID'), '&redirect_uri' => env('SSO_REDIRECT_URL')])->redirect();
+})->name('sso.login');
+
+// Route nhận callback từ SSO trả về
+Route::get('/auth/callback', [SSOController::class, 'Callback']);

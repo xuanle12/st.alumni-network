@@ -31,15 +31,27 @@ body {
 
 .btn-prim {
   padding: 8px 18px;
-  background: #111; color: #fff;
-  border: none; border-radius: 8px;
-  font-size: 13px; font-weight: 600;
-  cursor: pointer; font-family: inherit;
-  display: inline-flex; align-items: center; gap: 6px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   transition: background .15s, transform .1s;
 }
-.btn-prim:hover  { background: #2d2d2d; }
-.btn-prim:active { transform: scale(.98); }
+
+.btn-prim:hover {
+  background: #1d4ed8;
+}
+
+.btn-prim:active {
+  transform: scale(.98);
+}
 
 .btn-xs {
   font-size: 12px; padding: 7px 13px;
@@ -327,7 +339,7 @@ td {
           <div class="ptitle">Tuyển dụng</div>
           <div class="psub">Quản lý tin tuyển dụng · {{ now()->format('d/m/Y') }}</div>
         </div>
-        <button class="btn-prim" wire:click="openCreate">+ Thêm tin</button>
+        <button class="btn-prim" wire:click="openCreate">+ Thêm tin mới </button>
       </div>
 
       @if(session('success'))
