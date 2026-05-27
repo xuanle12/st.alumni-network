@@ -34,11 +34,12 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-     'sso' => [
+     'mysso' => [
     'client_id' => env('SSO_CLIENT_ID'),
     'client_secret' => env('SSO_CLIENT_SECRET'),
     'redirect' => env('SSO_REDIRECT_URI'),
-    'base_url' => 'https://sso.your-company.com', // Đường dẫn cổng SSO của bạn
+    'base_url' => env('SSO_BASE_URL'),
+    'userinfo_url' => env('SSO_USERINFO_URL'),
 ],
 
 ];
