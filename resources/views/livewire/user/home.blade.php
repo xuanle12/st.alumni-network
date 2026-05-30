@@ -21,10 +21,6 @@
 body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(--bg);}
 
 .lp{max-width:1200px;margin:0 auto;padding:0 24px;}
-
-/* ══════════════════════════════
-   HERO
-══════════════════════════════ */
 .hero{
   background:linear-gradient(135deg,#043a6e 0%,#0961AA 55%,#0c83d8 100%);
   padding:80px 24px 0;
@@ -94,8 +90,6 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
   transition:.18s;display:inline-flex;align-items:center;gap:8px;
 }
 .btn-hero-o:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.6);}
-
-/* Hero stats bar */
 .hero-stats-bar{
   display:flex;gap:0;background:rgba(255,255,255,.07);
   border-top:1px solid rgba(255,255,255,.12);
@@ -114,8 +108,6 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
 }
 .hero-stat-val span{font-size:18px;color:var(--gold);}
 .hero-stat-lbl{font-size:12px;color:rgba(255,255,255,.5);font-weight:500;}
-
-/* Hero right card */
 .hero-card{
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(20px);
@@ -152,10 +144,6 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
 .hc-tag.new{background:rgba(246,163,9,.2);color:var(--gold);}
 .hc-tag.hot{background:rgba(239,68,68,.2);color:#f87171;}
 .hc-tag.open{background:rgba(16,185,129,.2);color:#34d399;}
-
-/* ══════════════════════════════
-   SECTIONS CHUNG
-══════════════════════════════ */
 section{padding:72px 24px;}
 .sec-tag{
   font-size:11.5px;font-weight:700;
@@ -180,10 +168,6 @@ section{padding:72px 24px;}
   white-space:nowrap;flex-shrink:0;transition:.15s;
 }
 .sec-link:hover{color:var(--blue2);}
-
-/* ══════════════════════════════
-   FEATURES
-══════════════════════════════ */
 .feat-bg{background:var(--white);}
 .feat-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
@@ -208,10 +192,6 @@ section{padding:72px 24px;}
 .feat-card:hover .feat-ic{background:var(--blue);color:#fff;border-color:var(--blue);}
 .feat-title{font-size:14.5px;font-weight:700;color:var(--text);margin-bottom:8px;}
 .feat-desc{font-size:13.5px;color:var(--muted);line-height:1.7;}
-
-/* ══════════════════════════════
-   JOBS
-══════════════════════════════ */
 .jobs-bg{background:var(--bg);}
 .jobs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .job-card{
@@ -247,10 +227,6 @@ section{padding:72px 24px;}
   font-size:13px;font-weight:700;color:var(--blue);
   white-space:nowrap;flex-shrink:0;margin-top:2px;
 }
-
-/* ══════════════════════════════
-   EVENTS
-══════════════════════════════ */
 .events-bg{background:var(--white);}
 .events-list{display:flex;flex-direction:column;gap:12px;}
 .ev-card{
@@ -287,10 +263,6 @@ section{padding:72px 24px;}
 }
 .ev-badge-blue{background:var(--pale);color:var(--blue);}
 .ev-badge-gold{background:#fdf3e0;color:#b87400;}
-
-/* ══════════════════════════════
-   POSTS
-══════════════════════════════ */
 .posts-bg{background:var(--bg);}
 .posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .post-card{
@@ -334,10 +306,6 @@ section{padding:72px 24px;}
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .post-date{margin-left:auto;}
-
-/* ══════════════════════════════
-   STEPS
-══════════════════════════════ */
 .steps-bg{background:var(--white);}
 .steps-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
@@ -364,10 +332,6 @@ section{padding:72px 24px;}
 }
 .step-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;}
 .step-desc{font-size:13.5px;color:var(--muted);line-height:1.7;}
-
-/* ══════════════════════════════
-   CTA
-══════════════════════════════ */
 .cta-bg{background:var(--bg);}
 .cta-box{
   background:linear-gradient(135deg,#043a6e,#0961AA);
@@ -391,21 +355,11 @@ section{padding:72px 24px;}
   margin-bottom:32px;position:relative;
 }
 .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;}
-
-/* ══════════════════════════════
-   DIVIDER
-══════════════════════════════ */
 .lp-div{height:1px;background:var(--border);}
 
-/* ══════════════════════════════
-   REVEAL
-══════════════════════════════ */
+
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr;gap:0;}
   .hero-card{display:none;}
@@ -433,7 +387,6 @@ section{padding:72px 24px;}
 }
 </style>
 
-{{-- ══════ HERO ══════ --}}
 <div class="hero">
   <div class="hero-inner">
     <div>
@@ -478,7 +431,6 @@ section{padding:72px 24px;}
     </div>
   </div>
 
-  {{-- Stats bar --}}
   <div style="max-width:1200px;margin:0 auto;">
     <div class="hero-stats-bar">
       <div class="hero-stat">
@@ -501,7 +453,6 @@ section{padding:72px 24px;}
   </div>
 </div>
 
-{{-- ══════ FEATURES ══════ --}}
 <section class="feat-bg">
   <div class="lp">
     <div class="sec-hd">
@@ -547,7 +498,6 @@ section{padding:72px 24px;}
 
 <div class="lp-div"></div>
 
-{{-- ══════ JOBS ══════ --}}
 <section class="jobs-bg">
   <div class="lp">
     <div class="sec-hd">
@@ -605,7 +555,6 @@ section{padding:72px 24px;}
 
 <div class="lp-div"></div>
 
-{{-- ══════ EVENTS ══════ --}}
 <section class="events-bg">
   <div class="lp">
     <div class="sec-hd">
@@ -667,7 +616,6 @@ section{padding:72px 24px;}
 
 <div class="lp-div"></div>
 
-{{-- ══════ POSTS ══════ --}}
 <section class="posts-bg">
   <div class="lp">
     <div class="sec-hd">
@@ -726,7 +674,6 @@ section{padding:72px 24px;}
 
 <div class="lp-div"></div>
 
-{{-- ══════ STEPS ══════ --}}
 <section class="steps-bg">
   <div class="lp">
     <div class="sec-hd">
@@ -755,7 +702,6 @@ section{padding:72px 24px;}
   </div>
 </section>
 
-{{-- ══════ CTA ══════ --}}
 <section class="cta-bg">
   <div class="lp">
     <div class="cta-box">

@@ -197,7 +197,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
       </a>
     </div>
 
-    {{-- Header logos giống fita --}}
     <div class="reg-head">
       <div class="reg-logos">
         <img src="{{ asset('img/fita.logo.png') }}" alt="Logo VNUA">

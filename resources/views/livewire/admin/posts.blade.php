@@ -339,7 +339,6 @@
 
 </div>
 
-{{-- ══ MODAL THÊM/SỬA ══ --}}
 @if($showModal)
 <div class="mo-bg" wire:click.self="closeModal">
   <div class="mo">
@@ -403,7 +402,6 @@
 </div>
 @endif
 
-{{-- ══ MODAL XEM ══ --}}
 @if($showView && $viewPost)
 <div class="mo-bg" wire:click.self="closeView">
   <div class="mo">
@@ -457,7 +455,6 @@
 </div>
 @endif
 
-{{-- ══ MODAL DUYỆT ══ --}}
 @if($showApprove && $approvePost)
 <div class="mo-bg" wire:click.self="closeApprove">
   <div class="mo mo-sm">
@@ -490,8 +487,7 @@
 </div>
 @endif
 
-{{-- ══ CONFIRM XOÁ ══ --}}
-@if($showDelete)
+ @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo mo-sm">
     <div class="cf-wrap">
@@ -516,8 +512,7 @@
 
 </div>
 
-{{-- ══ JS: Smart dropdown — xổ lên khi gần cuối trang ══ --}}
-<script>
+ <script>
 (function () {
     'use strict';
     var active = null;

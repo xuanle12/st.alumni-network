@@ -2,7 +2,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ── PAGE WRAPPER ── */
 .pf-page{
   min-height:100vh;
   background:#f0f4f8;
@@ -17,7 +16,6 @@
   gap:1.25rem;
 }
 
-/* ── HERO CARD (avatar + name + badge) ── */
 .pf-hero{
   background:#fff;
   border-radius:16px;
@@ -64,15 +62,12 @@
 .badge-amber{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
 .badge-blue {background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
 .badge-gray {background:#f3f4f6;color:#4b5563;border:1px solid #e5e7eb}
-
-/* progress bar */
 .pf-prog-wrap{margin-top:14px}
 .pf-prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
 .pf-prog-pct{color:var(--blue,#0961AA);font-weight:700}
 .pf-prog-bg{height:5px;background:#e5e7eb;border-radius:99px;overflow:hidden}
 .pf-prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue,#0961AA),#0c83d8);transition:width .4s ease}
 
-/* ── SECTION CARDS ── */
 .pf-card{
   background:#fff;
   border-radius:16px;
@@ -97,7 +92,6 @@
 .pf-card-title{font-size:14px;font-weight:700;color:#111827;letter-spacing:.01em}
 .pf-card-body{padding:1.5rem}
 
-/* ── BUTTONS ── */
 .btn-edit{
   display:inline-flex;align-items:center;gap:5px;
   padding:6px 14px;border-radius:8px;
@@ -149,7 +143,6 @@
 .btn-sm-blue:hover{background:#dbeafe}
 .form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:1.25rem}
 
-/* ── INFO GRID (view mode) ── */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem 2.5rem}
 .info-item label{
   display:block;font-size:10px;font-weight:700;
@@ -178,7 +171,6 @@
 .fi .err{font-size:11px;color:#dc2626;margin-top:2px}
 .fi.full{grid-column:1/-1}
 
-/* ── SOCIAL ── */
 .soc-list{display:flex;flex-direction:column;gap:8px}
 .soc-item{
   display:flex;align-items:center;gap:12px;
@@ -206,7 +198,6 @@
 }
 .sf-row input:focus{outline:none;border-color:var(--blue,#0961AA);box-shadow:0 0 0 3px rgba(9,97,170,.1)}
 
-/* ── CV SECTION ── */
 .cv-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
 .cv-item{
   display:flex;align-items:center;gap:12px;
@@ -230,7 +221,6 @@
 .cv-meta{font-size:11px;color:#9ca3af;margin-top:2px}
 .cv-acts{display:flex;gap:6px;flex-shrink:0}
 
-/* ── DROP ZONE ── */
 .dropzone{
   border:2px dashed #cbd5e1;border-radius:12px;
   padding:1.5rem 1rem;text-align:center;cursor:pointer;
@@ -251,7 +241,6 @@
 .cv-preview p{font-size:13px;color:#1e40af;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .empty-cv{text-align:center;padding:1.5rem;color:#94a3b8;font-size:13px}
 
-/* ── FLASH ── */
 .flash{
   background:#f0fdf4;border:1px solid #86efac;
   color:#166534;padding:10px 16px;border-radius:10px;
@@ -259,7 +248,6 @@
   display:flex;align-items:center;gap:8px;
 }
 
-/* ── RESPONSIVE ── */
 @media(max-width:640px){
   .pf-page{padding:1rem}
   .pf-hero{flex-direction:column;align-items:flex-start;gap:1rem;padding:1.5rem}
@@ -278,7 +266,6 @@
     </div>
   @endif
 
-  {{-- ═══ HERO CARD ═══ --}}
   <div class="pf-hero">
     {{-- Avatar --}}
     <div class="pf-ava-wrap">
@@ -295,7 +282,6 @@
       </label>
     </div>
 
-    {{-- Info --}}
     <div class="pf-info">
       <div class="pf-name">{{ $user->name ?? 'Chưa đặt tên' }}</div>
       <div class="pf-meta">
@@ -328,7 +314,6 @@
         @endif
       </div>
 
-      {{-- Progress --}}
       <div class="pf-prog-wrap">
         <div class="pf-prog-lbl">
           <span>Hoàn thiện hồ sơ</span>
@@ -341,7 +326,6 @@
     </div>
   </div>
 
-  {{-- ═══ THÔNG TIN CƠ BẢN ═══ --}}
   <div class="pf-card">
     <div class="pf-card-hd">
       <div class="pf-card-hd-left">
@@ -357,7 +341,6 @@
     <div class="pf-card-body">
 
       @if($edit)
-        {{-- EDIT MODE --}}
         <div class="form-grid">
           <div class="fi">
             <label>Họ và Tên *</label>
@@ -399,7 +382,6 @@
         </div>
 
       @else
-        {{-- VIEW MODE --}}
         <div class="info-grid">
           <div class="info-item">
             <label>Họ và Tên</label>

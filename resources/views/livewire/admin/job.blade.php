@@ -325,11 +325,32 @@ td {
   padding-top: 1rem; border-top: 1px solid #eaecf0;
 }
 
-@media (max-width: 900px) { .stats-sm { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 600px) {
-  .fg { grid-template-columns: 1fr; }
-  .fi.full { grid-column: 1; }
-  .dash { padding: 1rem; }
+@media(max-width:1024px){
+  .dash{padding:1.25rem}
+  .stats-sm{grid-template-columns:repeat(2,1fr);gap:10px}
+}
+@media(max-width:768px){
+  .dash{padding:1rem}
+  .stats-sm{grid-template-columns:repeat(2,1fr);gap:8px}
+  .toolbar{flex-wrap:wrap}
+  .tb-in{min-width:100%}
+  .tb-sel{flex:1;min-width:120px}
+  .card{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{min-width:640px}
+}
+@media(max-width:600px){
+  .stats-sm{grid-template-columns:1fr 1fr}
+  .stat-sm-val{font-size:18px}
+  .topbar{flex-direction:column;align-items:flex-start;gap:8px}
+  .btn-prim[wire\\:click="openCreate"]{width:100%;justify-content:center}
+  .modal{border-radius:12px 12px 0 0;max-width:100%;align-self:flex-end}
+  .modal-bg{align-items:flex-end;padding:0}
+  .fg{grid-template-columns:1fr}
+  .fi.full{grid-column:1}
+}
+@media(max-width:400px){
+  .stat-sm-val{font-size:16px}
+  table th:nth-child(5),table td:nth-child(5){display:none}
 }
   </style>
   <div>

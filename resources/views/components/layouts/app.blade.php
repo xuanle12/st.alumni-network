@@ -37,8 +37,7 @@ html, body {
   
 }
 
-/* ── UTILITIES ──────────────────────────── */
-.container {
+ .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
@@ -131,8 +130,7 @@ html, body {
 .menu-icon-btn.open span:nth-child(1) { width: 18px; transform: translateY(7px) rotate(45deg); }
 .menu-icon-btn.open span:nth-child(2) { opacity: 0; }
 .menu-icon-btn.open span:nth-child(3) { width: 18px; transform: translateY(-7px) rotate(-45deg); }
-/* ── TOP BAR (giống fita) ── */
-.topbar {
+ .topbar {
   background: var(--blue);
   color: #fff;
   font-size: 13px;
@@ -148,8 +146,7 @@ html, body {
 .topbar-right a:hover { color: #fff; }
 .topbar-sep { color: rgba(255,255,255,.3); }
 
-/* ── MAIN HEADER (nền trắng, giống nav dưới của fita) ── */
-header {
+ header {
   position: sticky;
   top: 0;
   z-index: 200;
@@ -185,8 +182,7 @@ header {
 }
 .logo-text span { font-size: 12px; color: var(--text-muted); }
 
-/* Nav giống fita: chữ đen, hover màu fita + gạch chân dưới */
-nav { display: flex; align-items: center; gap: 0; height: 72px; margin-left: auto; }
+ nav { display: flex; align-items: center; gap: 0; height: 72px; margin-left: auto; }
 nav a {
   position: relative;
   padding: 0 14px;
@@ -225,8 +221,7 @@ nav a.active::before { width: 100%; background: var(--blue); }
   flex-shrink: 0;
   margin-left: 16px;
 }
-/* ── SIDEBAR OVERLAY ────────────────────── */
-.sidebar-overlay {
+ .sidebar-overlay {
   position: fixed;
   inset: 0;
   background: rgba(15, 34, 24, 0.45);
@@ -344,7 +339,6 @@ nav a.active::before { width: 100%; background: var(--blue); }
 
 .hamburger { display: none; }
 
-/* ── FOOTER (y hệt fita) ── */
 .footer-stripe { display: flex; flex-direction: column; }
 .footer-stripe-gold  { height: 6px; background: #F6A309; }
 .footer-stripe-green { height: 6px; background: #066140; }
@@ -355,7 +349,6 @@ footer {
   padding: 48px 16px;
 }
 
-/* Grid 8 cột giống fita */
 .footer-grid {
   grid-template-columns: 3fr 2fr 1fr 2fr !important;
 }

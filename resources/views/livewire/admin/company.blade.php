@@ -164,7 +164,6 @@
   <div class="flash">✓ {{ session('success') }}</div>
 @endif
 
-{{-- topbar --}}
 <div class="topbar">
   <div>
     <div class="tt">Doanh nghiệp</div>
@@ -173,7 +172,6 @@
   <button class="btn-add" wire:click="openAdd">＋ Thêm doanh nghiệp</button>
 </div>
 
-{{-- stats: label + số bên trái, icon bên phải --}}
 <div class="stats">
   <div class="stat">
     <div class="stat-left">
@@ -226,7 +224,6 @@
   </select>
 </div>
 
-{{-- table --}}
 <div class="tcard">
   <div class="tbl-wrap">
     <table class="tbl">
@@ -326,7 +323,6 @@
 
 </div>
 
-{{-- ══ MODAL THÊM/SỬA ══ --}}
 @if($showModal)
 <div class="mo-bg" wire:click.self="closeModal">
   <div class="mo">
@@ -431,7 +427,6 @@
 </div>
 @endif
 
-{{-- ══ MODAL XEM ══ --}}
 @if($showView && $viewCompany)
 <div class="mo-bg" wire:click.self="closeView">
   <div class="mo">
@@ -505,7 +500,6 @@
 </div>
 @endif
 
-{{-- ══ CONFIRM XOÁ ══ --}}
 @if($showDelete)
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo" style="max-width:360px">

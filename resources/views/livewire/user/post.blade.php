@@ -102,7 +102,6 @@
     <div>
       <div class="form-card">
  
-        {{-- Tiêu đề --}}
         <div class="fi">
           <label>Tiêu đề *</label>
           <input wire:model="title" type="text" placeholder="Nhập tiêu đề hấp dẫn cho bài viết...">

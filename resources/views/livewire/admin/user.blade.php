@@ -1,7 +1,6 @@
 <div>
   <style>
-.aw{padding:1.75rem 2rem;display:flex;flex-direction:column;gap:1.25rem;min-height:100vh;background:#f0f4ff;font-family:'Be Vietnam Pro',system-ui,sans-serif;}
-.flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:9px;font-size:13px;display:flex;align-items:center;gap:8px;}
+.aw{padding:1.75rem 2rem;display:flex;flex-direction:column;gap:1.25rem;min-height:100vh;background:#f8fafc;font-family:'Be Vietnam Pro',system-ui,sans-serif;}.flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:9px;font-size:13px;display:flex;align-items:center;gap:8px;}
 .topbar{display:flex;align-items:center;justify-content:space-between;}
 .tt{font-size:18px;font-weight:700;color:#0f172a;letter-spacing:-.3px;}
 .ts{font-size:12px;color:#64748b;margin-top:3px;}
@@ -58,7 +57,6 @@
 .dropdown{display:none;position:absolute;top:38px;right:0;background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;min-width:180px;z-index:999;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);}
 .dropdown.open{display:block;}
 
-/* ← THÊM MỚI: xổ lên khi gần cuối trang */
 .dropdown.drop-up{top:auto;bottom:38px;}
 
 .dd-item{padding:10px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:10px;color:#334155;transition:background .1s;}
@@ -109,6 +107,34 @@
 .btn-role{background:#f0fdf4;color:#15803d;border-color:#bbf7d0;}
 .btn-role:hover{background:#dcfce7;}
 .empty{text-align:center;padding:3rem;color:#cbd5e1;font-size:13px;}
+@media(max-width:1024px){
+  .aw{padding:1.25rem}
+  .stats{grid-template-columns:repeat(2,1fr);gap:10px}
+}
+@media(max-width:768px){
+  .aw{padding:1rem}
+  .stats{grid-template-columns:repeat(2,1fr);gap:8px}
+  .toolbar{flex-wrap:wrap}
+  .sw{min-width:100%}
+  .sel{flex:1;min-width:120px}
+  .per-sel{margin-left:0}
+  .tcard{overflow:hidden}
+}
+@media(max-width:600px){
+  .stats{grid-template-columns:1fr 1fr;gap:8px}
+  .stat-val{font-size:20px}
+  .topbar{flex-direction:column;align-items:flex-start;gap:8px}
+  .btn-add{width:100%;justify-content:center}
+  .tbl{min-width:620px}
+  .tcard{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .mo{border-radius:12px 12px 0 0;max-width:100%;align-self:flex-end}
+  .mo-bg{align-items:flex-end;padding:0}
+  .fg2{grid-template-columns:1fr}
+}
+@media(max-width:400px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat-ic{width:36px;height:36px;font-size:15px}
+}
 </style>
 
 <div class="aw">
@@ -130,6 +156,7 @@
   </div>
 
   <div class="stats">
+    
     <div class="stat">
       <div class="stat-ic ic-b"><i class="fa-solid fa-users"></i></div>
       <div><div class="stat-val sv-b">{{ $stats['total'] }}</div><div class="stat-lbl">Tổng người dùng</div></div>

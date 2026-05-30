@@ -24,11 +24,9 @@
             --blue-light:  #0c83d8;
         }
 
-        /* ── LAYOUT ── */
-        .adm-layout { display: flex; min-height: 100vh; }
+         .adm-layout { display: flex; min-height: 100vh; }
 
-        /* ══════════ SIDEBAR ══════════ */
-        .adm-sb {
+          .adm-sb {
             width: 240px;
             flex-shrink: 0;
             background: var(--adm-bg);
@@ -43,8 +41,7 @@
         .adm-sb::-webkit-scrollbar { width: 3px; }
         .adm-sb::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
 
-        /* brand */
-        .adm-brand {
+         .adm-brand {
             padding: 18px 20px 16px;
             display: flex;
             align-items: center;
@@ -52,12 +49,17 @@
             border-bottom: 1px solid var(--adm-border);
             flex-shrink: 0;
         }
-        .adm-brand img { height: 38px; width: auto; opacity: .9; filter: brightness(0) invert(1); }
-        .adm-brand-name { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.3; }
+        .adm-brand img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            padding: 4px;
+        }   
+       .adm-brand-name { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.3; }
         .adm-brand-sub  { font-size: 10.5px; color: var(--adm-text); margin-top: 2px; }
 
-        /* back to site */
-        .adm-back-btn {
+         .adm-back-btn {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -72,16 +74,14 @@
         .adm-back-btn:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
         .adm-back-btn i { font-size: 11px; }
 
-        /* nav section title */
-        .adm-sec {
+         .adm-sec {
             padding: 16px 20px 5px;
             font-size: 10px; font-weight: 700;
             letter-spacing: 1.1px; text-transform: uppercase;
             color: rgba(255,255,255,0.25);
         }
 
-        /* nav item */
-        .adm-item {
+          .adm-item {
             margin: 1px 10px;
             padding: 9px 12px;
             border-radius: 9px;
@@ -106,11 +106,9 @@
         }
         .adm-item-badge.blue { background: rgba(9,97,170,0.2); color: #60a5fa; }
 
-        /* divider */
-        .adm-div { height: 1px; background: var(--adm-border); margin: 6px 10px; }
+         .adm-div { height: 1px; background: var(--adm-border); margin: 6px 10px; }
 
-        /* footer user */
-        .adm-foot {
+         .adm-foot {
             margin-top: auto;
             padding: 14px 12px 16px;
             border-top: 1px solid var(--adm-border);
@@ -152,8 +150,7 @@
         }
         .adm-logout:hover { color: #f87171; background: rgba(248,113,113,0.1); }
 
-        /* ══════════ TOPBAR ══════════ */
-        .adm-main { flex: 1; background: #f1f5f9; overflow-y: auto; min-width: 0; }
+         .adm-main { flex: 1; background: #f1f5f9; overflow-y: auto; min-width: 0; }
         .adm-topbar {
             background: var(--adm-bg);
             padding: 0 24px;
@@ -215,8 +212,7 @@
         }
         .adm-menu-btn:hover { color: #fff; background: var(--adm-bg2); }
 
-        /* ── FLASH ── */
-        .adm-flash {
+         .adm-flash {
             position: fixed;
             top: 68px; right: 16px;
             z-index: 200;
@@ -235,12 +231,10 @@
         .adm-flash.is-error { border-left-color: #dc2626; }
         .adm-flash button { background: transparent; border: none; cursor: pointer; font-size: 16px; color: #64748b; line-height: 1; }
 
-        /* ── OVERLAY ── */
-        .adm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; display: none; }
+         .adm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; display: none; }
         .adm-overlay.show { display: block; }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 1024px) {
+         @media (max-width: 1024px) {
             .adm-sb {
                 position: fixed;
                 left: -260px;
@@ -262,8 +256,7 @@
 </head>
 <body>
 
-{{-- Flash --}}
-@if(session('success') || session('info') || session('error'))
+ @if(session('success') || session('info') || session('error'))
     @php
         $flashType = session('error') ? 'is-error' : (session('info') ? 'is-info' : '');
         $flashMsg  = session('error') ?? session('info') ?? session('success');
@@ -279,25 +272,21 @@
 
 <div class="adm-layout">
 
-    {{-- ══════ SIDEBAR ══════ --}}
     <aside id="sidebar" class="adm-sb">
 
-        {{-- Brand --}}
         <div class="adm-brand">
-            <img src="{{ asset('img/fita.logo.png') }}" alt="Logo">
+      <img src="{{ asset('img/fita-logo.png') }}" alt="{{ config('admin.name') }}" loading="lazy">
             <div>
                 <div class="adm-brand-name">Cựu sinh viên VNUA</div>
-                <div class="adm-brand-sub">Admin Portal</div>
+                <div class="adm-brand-sub">Admin</div>
             </div>
         </div>
 
-        {{-- Back to site --}}
         <a href="{{ route('csv') }}" class="adm-back-btn" wire:navigate>
             <i class="fa-solid fa-arrow-left"></i>
             Trang người dùng
         </a>
 
-        {{-- Nav --}}
         <div class="adm-sec">Quản lý</div>
 
         <a href="{{ route('admin') }}" class="adm-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
@@ -326,7 +315,7 @@
             <i class="fa-solid fa-chart-bar adm-item-ic"></i> Thống kê
         </a>
 
-        {{-- User footer --}}
+       
         <div class="adm-foot">
             <div class="adm-user">
                 <div class="adm-uava">{{ auth()->user()?->initials ?? 'AD' }}</div>
@@ -345,10 +334,8 @@
 
     </aside>
 
-    {{-- ══════ MAIN ══════ --}}
-    <div class="adm-main">
+     <div class="adm-main">
 
-        {{-- Topbar --}}
         <div class="adm-topbar">
             <div class="adm-topbar-left">
                 <button class="adm-menu-btn" onclick="toggleSidebar()" aria-label="Mở menu" type="button">

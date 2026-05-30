@@ -9,7 +9,6 @@
 }
 .jd-inner{ max-width:960px; margin:0 auto; }
 
-/* BACK */
 .jd-back{
   display:inline-flex;align-items:center;gap:7px;
   font-size:14px;font-weight:600;color:#64748b;
@@ -18,14 +17,12 @@
 }
 .jd-back:hover{color:#0961AA}
 
-/* FLASH */
 .jd-flash{
   background:#f0fdf4;border:1px solid #86efac;color:#166534;
   padding:10px 16px;border-radius:12px;font-size:13px;font-weight:500;
   display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;
 }
 
-/* LAYOUT */
 .jd-layout{
   display:grid;
   grid-template-columns:1fr 288px;
@@ -33,7 +30,6 @@
   align-items:start;
 }
 
-/* FITA-STYLE CARD */
 .jd-card{
   background:#fff;
   border:1px solid #cbd5e1;
@@ -43,7 +39,6 @@
 }
 .jd-card:last-child{margin-bottom:0}
 
-/* ── HERO ── */
 .jd-hero-body{ padding:1.5rem 1.5rem 0; }
 .jd-hero-top{
   display:flex;align-items:flex-start;gap:16px;
@@ -63,7 +58,6 @@
 }
 .jd-company-row strong{color:#0f172a;font-weight:700}
 
-/* TAGS */
 .tag-row{display:flex;gap:6px;flex-wrap:wrap}
 .tag{
   font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px;
@@ -75,7 +69,6 @@
 .tag-gray  {background:#f1f5f9;color:#475569}
 .tag-purple{background:#ede9fe;color:#6d28d9}
 
-/* INFO GRID */
 .jd-info-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:0;
@@ -97,7 +90,6 @@
 .ig-val{font-size:13px;font-weight:700;color:#0f172a}
 .ig-val.green{color:#15803d}
 
-/* CONTENT SECTIONS */
 .jd-section{ padding:1.25rem 1.5rem; }
 .jd-section + .jd-section{ border-top:1px solid #f1f5f9; padding-top:1.25rem; }
 .jd-sec-title{
@@ -119,10 +111,8 @@
 }
 .jd-contact-link:hover{background:#dbeafe}
 
-/* ══ SIDEBAR ══ */
 .side-body{ padding:1.25rem; }
 
-/* Apply */
 .btn-apply{
   width:100%;padding:12px;
   background:#0961AA;color:#fff;
@@ -152,7 +142,6 @@
 .btn-save:hover{background:#f8fafc;border-color:#94a3b8}
 .btn-save.saved{border-color:#fca5a5;color:#dc2626;background:#fef2f2}
 
-/* Meta rows */
 .side-sec-title{
   font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
   color:#94a3b8;margin-bottom:.75rem;
@@ -165,7 +154,6 @@
 .meta-key{color:#64748b;font-weight:500}
 .meta-val{color:#0f172a;font-weight:700;text-align:right}
 
-/* Company card */
 .side-co{text-align:center;padding-top:.5rem}
 .side-co-logo{
   width:52px;height:52px;border-radius:12px;
@@ -176,7 +164,6 @@
 .side-co-name{font-size:14px;font-weight:800;color:#0f172a;margin-bottom:3px}
 .side-co-field{font-size:12px;color:#64748b}
 
-/* Related — FITA post-card style */
 .rel-item{
   display:flex;align-items:flex-start;gap:12px;
   padding:.75rem 0;border-bottom:1px solid #f1f5f9;
@@ -198,7 +185,6 @@
 .rel-meta{font-size:11px;color:#94a3b8;margin-top:3px}
 .rel-salary{font-size:11px;font-weight:700;color:#15803d;flex-shrink:0;margin-top:2px}
 
-/* RESPONSIVE */
 @media(max-width:768px){
   .jd-layout{grid-template-columns:1fr}
   .jd-info-grid{grid-template-columns:1fr 1fr}
@@ -224,11 +210,9 @@
 
   <div class="jd-layout">
 
-    {{-- ═══ MAIN ═══ --}}
     <div>
       <div class="jd-card">
 
-        {{-- Hero --}}
         <div class="jd-hero-body">
           <div class="jd-hero-top">
             <div class="jd-logo">{{ $job->logo_emoji }}</div>
@@ -256,7 +240,6 @@
           </div>
         </div>
 
-        {{-- Info bar --}}
         <div class="jd-info-grid">
           <div class="ig">
             <div class="ig-icon" style="background:#dbeafe;color:#1e40af"><i class="fa-solid fa-file-lines"></i></div>
@@ -288,7 +271,6 @@
           </div>
         </div>
 
-        {{-- Mô tả --}}
         <div class="jd-section">
           <div class="jd-sec-title">Mô tả công việc</div>
           @if($job->description)
@@ -300,7 +282,6 @@
           @endif
         </div>
 
-        {{-- Liên hệ --}}
         @if($job->contact_email)
         <div class="jd-section">
           <div class="jd-sec-title">Liên hệ ứng tuyển</div>
@@ -313,10 +294,8 @@
       </div>
     </div>
 
-    {{-- ═══ SIDEBAR ═══ --}}
     <div>
 
-      {{-- Apply --}}
       <div class="jd-card">
         <div class="side-body">
           @if($applied)
@@ -338,7 +317,6 @@
         </div>
       </div>
 
-      {{-- Meta --}}
       <div class="jd-card">
         <div class="side-body">
           <div class="side-sec-title">Thông tin chi tiết</div>
@@ -363,7 +341,6 @@
         </div>
       </div>
 
-      {{-- Company --}}
       <div class="jd-card">
         <div class="side-body">
           <div class="side-sec-title">Về công ty</div>

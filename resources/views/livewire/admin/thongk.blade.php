@@ -8,7 +8,6 @@
 .f-sel{padding:6px 10px;border:1px solid #d1d5db;border-radius:7px;font-size:12px;color:#374151;background:#fff}
 .f-sel:focus{outline:none;border-color:#3b82f6}
  
-/* Stats */
 .stats4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
 .sc{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
 .sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
@@ -18,35 +17,30 @@
 .sc-sub{font-size:11px}
 .up{color:#16a34a}.muted{color:#9ca3af}
  
-/* Layout rows */
 .row2{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .card{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
 .card-title{font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
 .card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
  
-/* Bar chart */
 .bar-wrap{height:130px;display:flex;align-items:flex-end;gap:4px}
 .bc{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
 .bar{width:100%;border-radius:3px 3px 0 0;cursor:pointer;transition:opacity .15s}
 .bar:hover{opacity:.75}
 .bl{font-size:9px;color:#9ca3af}
  
-/* Donut */
 .donut-row{display:flex;align-items:center;gap:1.25rem}
 .leg{display:flex;flex-direction:column;gap:9px;flex:1}
 .leg-row{display:flex;align-items:center;gap:7px;font-size:12px;color:#374151}
 .leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .leg-pct{margin-left:auto;font-weight:600;font-size:13px;color:#111}
  
-/* Horizontal bars */
 .hbar-list{display:flex;flex-direction:column;gap:10px}
 .hbar-top{display:flex;justify-content:space-between;font-size:12px;color:#374151;margin-bottom:4px}
 .hbar-val{font-weight:600;color:#111}
 .hbar-bg{height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden}
 .hbar-fill{height:100%;border-radius:3px}
  
-/* Table */
 table{width:100%;border-collapse:collapse}
 thead th{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#9ca3af;padding:8px 10px;text-align:left;border-bottom:1px solid #eaecf0;background:#fafafa}
 tbody tr{border-bottom:1px solid #f3f4f6;transition:background .1s}
@@ -58,7 +52,6 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
 .by{background:#fef9c3;color:#92400e}
 .bc2{background:#eff6ff;color:#1e40af}
  
-/* Sparkline */
 .spark{display:flex;align-items:flex-end;gap:2px;height:28px}
 .sp{width:6px;border-radius:2px 2px 0 0;background:#bfdbfe}
 .sp.hi{background:#3b82f6}
@@ -88,7 +81,6 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
     </div>
   </div>
  
-  {{-- Stats 4 --}}
   <div class="stats4">
     <div class="sc">
       <div class="sc-top">

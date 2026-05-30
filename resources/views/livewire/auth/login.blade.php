@@ -16,7 +16,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     animation:fadeUp .4s ease both;
 }
 
-/* ── CARD ── */
 .lcard{
     width:100%;
     max-width:448px;
@@ -27,7 +26,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     box-shadow:0 10px 40px rgba(15,23,42,.08);
 }
 
-/* ── HEADER: back btn ── */
 .lcard-back{
     position:absolute;
     top:-8px;left:-8px;
@@ -46,7 +44,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 .lcard-back a:hover{background:#f8fafc;color:#0f172a;}
 .lcard-head{position:relative;text-align:center;margin-bottom:24px;}
 
-/* ── LOGOS ── */
 .llogos{
     display:flex;
     align-items:center;
@@ -74,7 +71,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     letter-spacing:.3px;
 }
 
-/* ── ERRORS ── */
 .lerr{
     background:#fef2f2;border:1px solid #fecaca;
     color:#b91c1c;
@@ -83,7 +79,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     display:flex;align-items:center;gap:8px;
 }
 
-/* ── FORM ── */
 .lform{display:flex;flex-direction:column;gap:16px;}
 
 .lfield label{
@@ -132,7 +127,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 
 .lfield-err{font-size:12px;color:#dc2626;margin-top:4px;display:block;}
 
-/* Remember */
 .lremember{
     display:flex;align-items:center;gap:8px;
     cursor:pointer;font-size:13.5px;color:#64748b;
@@ -142,7 +136,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     accent-color:#0961AA;cursor:pointer;
 }
 
-/* Submit */
 .lbtn-submit{
     width:100%;
     padding:13px;
@@ -172,7 +165,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     animation:spin .7s linear infinite;
 }
 
-/* Register link */
 .lregister{
     text-align:center;margin-top:4px;
     font-size:13.5px;color:#64748b;
@@ -183,7 +175,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 }
 .lregister a:hover{text-decoration:underline;}
 
-/* Divider */
 .ldivider{
     display:flex;align-items:center;gap:12px;
     margin:20px 0;
@@ -196,7 +187,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     white-space:nowrap;font-weight:500;
 }
 
-/* SSO btn */
 .lbtn-sso{
     width:100%;
     padding:13px 16px;
