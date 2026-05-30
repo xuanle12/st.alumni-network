@@ -1,259 +1,372 @@
 <div>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:100vh}
-.fi input,
-.fi textarea,
-.sf-row input,
-.btn{
-    font-family: "Times New Roman", Times, serif;
-}
-/* ── LAYOUT ── */
-.page{display:flex;min-height:100vh}
 
-/* ══════════ SIDEBAR ══════════ */
-.sb{
-  width:240px;flex-shrink:0;
-  background:#1a2332;
-  border-right:1px solid #222d40;
-  padding:1.75rem 1.25rem;
-  display:flex;flex-direction:column;
-  position:sticky;top:0;height:100vh;overflow-y:auto;
+/* ── PAGE WRAPPER ── */
+.pf-page{
+  min-height:100vh;
+  background:#f0f4f8;
+  font-family:'Barlow',system-ui,sans-serif;
+  padding:2rem 1.5rem;
 }
-.sb-ava{
-  width:72px;height:72px;border-radius:50%;
-  background:linear-gradient(135deg,#1c6b3a,#28a35a);
-  color:#fff;font-size:26px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 10px;border:3px solid #1f3d2a;
-}
-.sb-name{color:#e8eaf0;font-size:15px;font-weight:600;text-align:center;margin-bottom:3px}
-.sb-meta{color:#4a5a6a;font-size:11px;text-align:center;line-height:1.7;margin-bottom:10px}
-.sb-badge{
-  display:block;width:fit-content;margin:0 auto 1.5rem;
-  font-size:11px;font-weight:600;padding:4px 14px;border-radius:20px;
-}
-.badge-amber{background:#2a1a08;color:#f59e0b;border:1px solid #6b3d08}
-.badge-green{background:#0c2e1a;color:#4ade80;border:1px solid #145a30}
-.badge-gray {background:#1e2538;color:#9ca3af;border:1px solid #374151}
-
-.sb-sec{margin-bottom:1.5rem}
-.sb-sec-title{
-  font-size:10px;font-weight:700;letter-spacing:.1em;
-  color:#334155;text-transform:uppercase;margin-bottom:10px;
-}
-.sb-row{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:6px;padding:6px 0;border-bottom:1px solid #1e2a38;
-}
-.sb-row:last-child{border-bottom:none}
-.sb-lbl{color:#4a5a6a;font-size:12px;flex-shrink:0}
-.sb-val{color:#b0bec8;font-size:12px;text-align:right;word-break:break-all;font-weight:500}
-.sb-val-green{color:#4ade80;font-size:12px;font-weight:600}
-
-.sb-plbl{display:flex;justify-content:space-between;font-size:12px;color:#4a5a6a;margin-bottom:6px}
-.sb-ppct{color:#4ade80;font-weight:700}
-.sb-pbg{height:5px;background:#1a2538;border-radius:3px;overflow:hidden}
-.sb-pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,#1c6b3a,#4ade80);transition:width .5s}
-
-/* ══════════ MAIN ══════════ */
-.main{
-  flex:1;background:#eef0f5;
-  padding:1.5rem 1.75rem;
-  display:flex;flex-direction:column;gap:1rem;
-  overflow-y:auto;min-width:0;
+.pf-inner{
+  max-width:820px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
 }
 
-.flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
-
-
-.card{background:#fff;border:1px solid #e0e4ee;border-radius:12px;padding:1.25rem 1.5rem}
-.card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.card-title{font-size:15px;font-weight:700;color:#111827}
-
-.btn{
-  display:inline-flex;
+/* ── HERO CARD (avatar + name + badge) ── */
+.pf-hero{
+  background:#fff;
+  border-radius:16px;
+  border:1px solid #e2e8f0;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  padding:2rem 2rem 1.5rem;
+  display:flex;
   align-items:center;
-  justify-content:center;
-  gap:5px;
-  min-width:90px;
+  gap:1.75rem;
+  position:relative;
 }
-.btn span{
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.pf-ava-wrap{position:relative;flex-shrink:0}
+.pf-ava{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue,#0961AA),#0c83d8);
+  color:#fff;font-size:32px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  border:3px solid #e2e8f0;
+  overflow:hidden;
 }
-.btn-out{background:#fff;border-color:#d1d5db;color:#374151}
-.btn-out:hover{background:#f9fafb;border-color:#9ca3af}
-.btn-prim{background:#1e5fa8;color:#fff;border-color:#1e5fa8}
-.btn-prim:hover{background:#1a4e8a}
-.btn-ghost{background:transparent;border-color:transparent;color:#6b7280;padding:6px 10px}
+.pf-ava img{width:100%;height:100%;object-fit:cover}
+.pf-ava-upload{
+  position:absolute;bottom:0;right:0;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--blue,#0961AA);color:#fff;
+  border:2px solid #fff;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:12px;
+  transition:background .15s;
+}
+.pf-ava-upload:hover{background:#0c83d8}
+.pf-ava-upload input{display:none}
+.pf-info{flex:1;min-width:0}
+.pf-name{font-size:20px;font-weight:700;color:#111827;margin-bottom:4px}
+.pf-meta{font-size:13px;color:#6b7280;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pf-meta span{display:flex;align-items:center;gap:5px}
+.pf-badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;
+  letter-spacing:.03em;
+}
+.badge-green{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+.badge-amber{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
+.badge-blue {background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+.badge-gray {background:#f3f4f6;color:#4b5563;border:1px solid #e5e7eb}
+
+/* progress bar */
+.pf-prog-wrap{margin-top:14px}
+.pf-prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.pf-prog-pct{color:var(--blue,#0961AA);font-weight:700}
+.pf-prog-bg{height:5px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.pf-prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue,#0961AA),#0c83d8);transition:width .4s ease}
+
+/* ── SECTION CARDS ── */
+.pf-card{
+  background:#fff;
+  border-radius:16px;
+  border:1px solid #e2e8f0;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+  overflow:hidden;
+}
+.pf-card-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.5rem;
+  border-bottom:1px solid #f0f4f8;
+}
+.pf-card-hd-left{display:flex;align-items:center;gap:10px}
+.pf-card-icon{
+  width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;flex-shrink:0;
+}
+.icon-blue{background:#dbeafe;color:var(--blue,#0961AA)}
+.icon-purple{background:#ede9fe;color:#7c3aed}
+.icon-green{background:#dcfce7;color:#15803d}
+.pf-card-title{font-size:14px;font-weight:700;color:#111827;letter-spacing:.01em}
+.pf-card-body{padding:1.5rem}
+
+/* ── BUTTONS ── */
+.btn-edit{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:6px 14px;border-radius:8px;
+  font-size:12px;font-weight:600;cursor:pointer;
+  border:1px solid #d1d5db;background:#fff;color:#374151;
+  transition:all .15s;font-family:inherit;
+}
+.btn-edit:hover{background:#f9fafb;border-color:#9ca3af}
+.btn-prim{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:8px 20px;border-radius:9px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  border:1px solid var(--blue,#0961AA);
+  background:var(--blue,#0961AA);color:#fff;
+  transition:all .15s;font-family:inherit;
+}
+.btn-prim:hover{background:#0c83d8}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:8px 16px;border-radius:9px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  border:1px solid transparent;background:transparent;color:#6b7280;
+  transition:all .15s;font-family:inherit;
+}
 .btn-ghost:hover{background:#f3f4f6;color:#111}
-.btn-del{background:transparent;border-color:transparent;color:#dc2626;padding:6px 10px}
-.btn-del:hover{background:#fef2f2}
-.btn-sm{padding:5px 12px;font-size:12px}
-
-/* ── INFO GRID (hiển thị) ── */
-.igrid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem 3rem}
-.iitem label{
-  display:block;font-size:11px;font-weight:700;letter-spacing:.05em;
-  text-transform:uppercase;color:#9ca3af;margin-bottom:4px;
+.btn-danger{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:5px 10px;border-radius:7px;
+  font-size:11px;font-weight:600;cursor:pointer;
+  border:1px solid #fecaca;background:#fff;color:#dc2626;
+  transition:all .15s;font-family:inherit;
 }
-.iitem p{font-size:14px;color:#111827;font-weight:500}
-.iitem p.mt{color:#d1d5db;font-style:italic;font-weight:400;font-size:13px}
-.iitem.full{grid-column:1/-1}
+.btn-danger:hover{background:#fef2f2}
+.btn-sm-out{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:5px 12px;border-radius:7px;
+  font-size:11px;font-weight:600;cursor:pointer;
+  border:1px solid #d1d5db;background:#fff;color:#374151;
+  transition:all .15s;font-family:inherit;
+}
+.btn-sm-out:hover{background:#f9fafb}
+.btn-sm-blue{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:5px 12px;border-radius:7px;
+  font-size:11px;font-weight:600;cursor:pointer;
+  border:1px solid #bfdbfe;background:#eff6ff;color:#1e40af;
+  transition:all .15s;font-family:inherit;
+}
+.btn-sm-blue:hover{background:#dbeafe}
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:1.25rem}
 
-/* ── FORM GRID (chỉnh sửa) ── */
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 1.5rem}
+/* ── INFO GRID (view mode) ── */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem 2.5rem}
+.info-item label{
+  display:block;font-size:10px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;
+  color:#9ca3af;margin-bottom:4px;
+}
+.info-item p{font-size:14px;color:#111827;font-weight:500;line-height:1.5}
+.info-item p.muted{color:#d1d5db;font-style:italic;font-weight:400;font-size:13px}
+.info-item.full{grid-column:1/-1}
+
+/* ── FORM GRID ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 1.5rem}
 .fi{display:flex;flex-direction:column;gap:4px}
 .fi label{font-size:12px;font-weight:600;color:#6b7280}
-.fi input,.fi textarea{
-  padding:8px 11px;border:1px solid #d1d5db;border-radius:8px;
-  font-size:13px;color:#111827;font-family:inherit;transition:border-color .15s;
+.fi input,.fi textarea,.fi select{
+  padding:9px 12px;border:1px solid #d1d5db;border-radius:9px;
+  font-size:13px;color:#111827;font-family:inherit;
+  transition:border-color .15s;background:#fff;
 }
-.fi input:focus,.fi textarea:focus{outline:none;border-color:#1e5fa8;box-shadow:0 0 0 3px #dbeafe44}
+.fi input:focus,.fi textarea:focus,.fi select:focus{
+  outline:none;border-color:var(--blue,#0961AA);
+  box-shadow:0 0 0 3px rgba(9,97,170,.1);
+}
 .fi input:disabled{background:#f9fafb;color:#9ca3af;cursor:not-allowed}
-.fi textarea{resize:vertical;min-height:72px}
-.fi .err{font-size:11px;color:#dc2626}
+.fi textarea{resize:vertical;min-height:80px}
+.fi .err{font-size:11px;color:#dc2626;margin-top:2px}
 .fi.full{grid-column:1/-1}
-.fa{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
 
 /* ── SOCIAL ── */
 .soc-list{display:flex;flex-direction:column;gap:8px}
 .soc-item{
   display:flex;align-items:center;gap:12px;
-  padding:10px 14px;background:#f8f9fc;
-  border:1px solid #e8ecf5;border-radius:9px;
+  padding:10px 14px;background:#f8faff;
+  border:1px solid #e8ecf5;border-radius:10px;
 }
-.soc-ico{font-size:16px;width:20px;text-align:center;flex-shrink:0;opacity:.7}
+.soc-ico{width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.soc-ico.gh{background:#24292e;color:#fff}
+.soc-ico.li{background:#0077b5;color:#fff}
+.soc-ico.wb{background:#6d28d9;color:#fff}
 .soc-text{flex:1;min-width:0}
 .soc-lbl{font-size:10px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
-.soc-url{font-size:13px;color:#1e5fa8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
-.soc-url.mt{color:#d1d5db;font-style:italic;font-size:12px}
+.soc-url{font-size:13px;color:var(--blue,#0961AA);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;text-decoration:none}
+.soc-url:hover{text-decoration:underline}
+.soc-url.muted{color:#d1d5db;font-style:italic;font-size:12px}
 
 .sf-list{display:flex;flex-direction:column;gap:8px}
 .sf-row{display:flex;align-items:center;gap:10px}
-.sf-ico{font-size:16px;width:20px;text-align:center;flex-shrink:0;opacity:.6}
+.sf-ico{width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .sf-row input{
-  flex:1;padding:8px 11px;border:1px solid #d1d5db;
-  border-radius:8px;font-size:13px;color:#111827;font-family:inherit;
+  flex:1;padding:9px 12px;border:1px solid #d1d5db;
+  border-radius:9px;font-size:13px;color:#111827;font-family:inherit;
 }
-.sf-row input:focus{outline:none;border-color:#1e5fa8}
+.sf-row input:focus{outline:none;border-color:var(--blue,#0961AA);box-shadow:0 0 0 3px rgba(9,97,170,.1)}
 
-/* ── CV ── */
+/* ── CV SECTION ── */
+.cv-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
 .cv-item{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 14px;background:#f8f9fc;
-  border:1px solid #e8ecf5;border-radius:9px;margin-bottom:8px;
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;background:#f8faff;
+  border:1px solid #e8ecf5;border-radius:10px;
 }
-.cv-ico{font-size:22px;flex-shrink:0}
+.cv-ico{
+  width:38px;height:38px;border-radius:9px;
+  background:#fee2e2;color:#dc2626;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.cv-ico.doc{background:#dbeafe;color:#1e40af}
 .cv-inf{flex:1;min-width:0}
 .cv-name{
   font-size:13px;font-weight:600;color:#111827;
   display:flex;align-items:center;gap:6px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
+.cv-prim-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#dcfce7;color:#166534;flex-shrink:0}
 .cv-meta{font-size:11px;color:#9ca3af;margin-top:2px}
-.cv-prim{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#dcfce7;color:#166534;flex-shrink:0}
-.cv-acts{display:flex;gap:4px;flex-shrink:0}
+.cv-acts{display:flex;gap:6px;flex-shrink:0}
 
-.upzone{
-  border:2px dashed #cdd2de;border-radius:10px;
-  padding:2rem 1rem;text-align:center;cursor:pointer;
-  transition:all .2s;margin-top:6px;display:block;
+/* ── DROP ZONE ── */
+.dropzone{
+  border:2px dashed #cbd5e1;border-radius:12px;
+  padding:1.5rem 1rem;text-align:center;cursor:pointer;
+  transition:all .2s;background:#fafbfe;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:100%;
 }
-.upzone:hover{border-color:#1e5fa8;background:#f0f6ff}
-.upzone input[type=file]{display:none}
-.up-ico{font-size:30px;margin-bottom:8px}
-.up-title{font-size:13px;font-weight:600;color:#374151;margin-bottom:4px}
-.up-sub{font-size:12px;color:#9ca3af;margin-bottom:14px}
-.up-prev{
+.dropzone:hover{border-color:var(--blue,#0961AA);background:#eff6ff}
+.dropzone input[type=file]{display:none}
+.dz-icon{font-size:28px;color:#94a3b8;margin-bottom:8px}
+.dz-title{font-size:13px;font-weight:600;color:#374151;margin-bottom:4px}
+.dz-sub{font-size:11px;color:#9ca3af;margin-bottom:12px}
+.cv-preview{
   display:flex;align-items:center;gap:8px;
   padding:10px 13px;background:#eff6ff;
-  border:1px solid #bfdbfe;border-radius:8px;margin-top:10px;
+  border:1px solid #bfdbfe;border-radius:9px;margin-top:10px;
 }
-.up-prev p{font-size:13px;color:#1e40af;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.empty-cv{text-align:center;padding:1.5rem;color:#d1d5db;font-size:13px}
-.err{font-size:11px;color:#dc2626}
+.cv-preview p{font-size:13px;color:#1e40af;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty-cv{text-align:center;padding:1.5rem;color:#94a3b8;font-size:13px}
 
-/* ══════════ RESPONSIVE ══════════ */
-@media(max-width:960px){
-  .sb{width:210px;padding:1.5rem 1rem}
+/* ── FLASH ── */
+.flash{
+  background:#f0fdf4;border:1px solid #86efac;
+  color:#166534;padding:10px 16px;border-radius:10px;
+  font-size:13px;font-weight:500;
+  display:flex;align-items:center;gap:8px;
 }
-@media(max-width:700px){
-  .page{flex-direction:column}
-  .sb{
-    width:100%;height:auto;position:static;
-    flex-direction:row;flex-wrap:wrap;
-    align-items:center;padding:1rem 1.25rem;
-    border-right:none;border-bottom:1px solid #222d40;gap:0;
-  }
-  .sb-ava{width:48px;height:48px;font-size:18px;margin:0 12px 0 0;flex-shrink:0}
-  .sb-name{text-align:left;font-size:14px}
-  .sb-meta{text-align:left;font-size:11px}
-  .sb-badge{margin:0}
-  .sb-sec{display:none}
-  .main{padding:1rem}
-}
-@media(max-width:480px){
-  .igrid,.fgrid{grid-template-columns:1fr}
-  .card{padding:1rem}
-  .cv-item{flex-wrap:wrap}
-  .cv-acts{width:100%;justify-content:flex-end;margin-top:6px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .pf-page{padding:1rem}
+  .pf-hero{flex-direction:column;align-items:flex-start;gap:1rem;padding:1.5rem}
+  .info-grid,.form-grid{grid-template-columns:1fr}
+  .pf-card-body{padding:1rem}
 }
 </style>
 
-<div class="page">
-   
-  
-  <aside class="sb">
-  <div class="sb-ava">{{ auth()->user()?->initials ?? '?' }}</div>
-  <div class="sb-name">{{ auth()->user()?->name ?? 'Guest' }}</div>
-  <div class="sb-meta">
-    MSV: {{ auth()->user()?->profile?->msv ?? '—' }}<br>
-    {{ auth()->user()?->profile?->lop ?? '—' }}
-  </div>
-    @php
-      $st = $user->profile?->status ?? 'pending';
-      $bc = match($st) { 'active' => 'badge-green', 'pending' => 'badge-amber', default => 'badge-gray' };
-      $bl = match($st) { 'active' => 'Đang hoạt động', 'pending' => 'Chờ duyệt', default => 'Không hoạt động' };
-    @endphp
-    <span class="sb-badge {{ $bc }}">{{ $bl }}</span>
+<div class="pf-page">
+<div class="pf-inner">
 
-    <div class="sb-sec">
-      <div class="sb-sec-title">Thông tin nhanh</div>
-      <div class="sb-row"><span class="sb-lbl">Khoa</span><span class="sb-val">{{ $user->profile?->khoa ?? '—' }}</span></div>
-      <div class="sb-row"><span class="sb-lbl">Ngành</span><span class="sb-val">{{ $user->profile?->nganh ?? '—' }}</span></div>
-      <div class="sb-row"><span class="sb-lbl">Email</span><span class="sb-val">{{ $user->email ?? '—' }}</span></div>
-      <div class="sb-row"><span class="sb-lbl">Năm TN</span><span class="sb-val">{{ $user->profile?->nam_tot_nghiep ?? '—' }}</span></div>
+  @if(session('success'))
+    <div class="flash">
+      <i class="fa-solid fa-circle-check"></i>
+      {{ session('success') }}
     </div>
-  </aside>
-   
+  @endif
 
-  <div class="main">
-
-    @if(session('success'))
-      <div class="flash">✓ {{ session('success') }}</div>
-    @endif
-
-    <div class="card">
-      <div class="card-hd">
-        <div class="card-title">Thông tin cơ bản</div>
-        @if(isset($edit) && !$edit) 
-          <button wire:click="$set('edit',true)" class="btn btn-out">Chỉnh sửa</button>
+  {{-- ═══ HERO CARD ═══ --}}
+  <div class="pf-hero">
+    {{-- Avatar --}}
+    <div class="pf-ava-wrap">
+      <div class="pf-ava">
+        @if($user->profile?->avatar)
+          <img src="{{ asset('storage/'.$user->profile->avatar) }}" alt="avatar">
+        @else
+          {{ strtoupper(substr($user->name ?? 'U', 0, 1)) }}
         @endif
-      </div>    
+      </div>
+      <label class="pf-ava-upload" title="Đổi ảnh">
+        <input type="file" wire:model="avatarFile" accept="image/*">
+        <i class="fa-solid fa-camera"></i>
+      </label>
+    </div>
 
-      @if(isset($edit) && !$edit)
-        <div class="fgrid">
+    {{-- Info --}}
+    <div class="pf-info">
+      <div class="pf-name">{{ $user->name ?? 'Chưa đặt tên' }}</div>
+      <div class="pf-meta">
+        @if($user->profile?->msv)
+          <span><i class="fa-solid fa-id-card" style="color:#9ca3af"></i> {{ $user->profile->msv }}</span>
+        @endif
+        @if($user->profile?->lop)
+          <span><i class="fa-solid fa-users" style="color:#9ca3af"></i> {{ $user->profile->lop }}</span>
+        @endif
+        @if($user->email)
+          <span><i class="fa-solid fa-envelope" style="color:#9ca3af"></i> {{ $user->email }}</span>
+        @endif
+      </div>
+
+      <div class="pf-badges">
+        @php
+          $st = $user->profile?->status ?? 'pending';
+          $bc = match($st) { 'active' => 'badge-green', 'pending' => 'badge-amber', default => 'badge-gray' };
+          $bl = match($st) { 'active' => 'Đang hoạt động', 'pending' => 'Chờ duyệt', default => 'Không hoạt động' };
+          $role = $user->profile?->role ?? '';
+          $rc = match($role) { 'alumni' => 'badge-blue', 'student' => 'badge-green', 'lecturer' => 'badge-purple', 'admin' => 'badge-gray', default => 'badge-gray' };
+          $rl = match($role) { 'alumni' => 'Cựu SV', 'student' => 'Sinh viên', 'lecturer' => 'Giảng viên', 'admin' => 'Quản trị viên', default => '' };
+        @endphp
+        <span class="badge {{ $bc }}">{{ $bl }}</span>
+        @if($rl)
+          <span class="badge {{ $rc }}">{{ $rl }}</span>
+        @endif
+        @if($user->profile?->khoa)
+          <span class="badge badge-gray"><i class="fa-solid fa-building-columns"></i> {{ $user->profile->khoa }}</span>
+        @endif
+      </div>
+
+      {{-- Progress --}}
+      <div class="pf-prog-wrap">
+        <div class="pf-prog-lbl">
+          <span>Hoàn thiện hồ sơ</span>
+          <span class="pf-prog-pct">{{ $pct }}%</span>
+        </div>
+        <div class="pf-prog-bg">
+          <div class="pf-prog-fill" style="width:{{ $pct }}%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{-- ═══ THÔNG TIN CƠ BẢN ═══ --}}
+  <div class="pf-card">
+    <div class="pf-card-hd">
+      <div class="pf-card-hd-left">
+        <div class="pf-card-icon icon-blue"><i class="fa-solid fa-user"></i></div>
+        <span class="pf-card-title">Thông tin cơ bản</span>
+      </div>
+      @if(!$edit)
+        <button wire:click="$set('edit',true)" class="btn-edit">
+          <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+        </button>
+      @endif
+    </div>
+    <div class="pf-card-body">
+
+      @if($edit)
+        {{-- EDIT MODE --}}
+        <div class="form-grid">
           <div class="fi">
-            <label>Họ và tên *</label>
+            <label>Họ và Tên *</label>
             <input wire:model="name" type="text" placeholder="Nhập họ tên">
             @error('name')<div class="err">{{ $message }}</div>@enderror
           </div>
           <div class="fi">
-            <label>Mã sinh viên</label>
-            <input type="text" value="{{ $user->profile?->msv ?? '—' }}" disabled style="background:#f3f4f6;color:#9ca3af">
+            <label>Mã SV/GV</label>
+            <input type="text" value="{{ $user->profile?->msv ?? '—' }}" disabled>
           </div>
           <div class="fi">
             <label>Số điện thoại</label>
@@ -262,194 +375,234 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;min-height:1
           </div>
           <div class="fi">
             <label>Quê quán</label>
-            <input wire:model="que_quan" type="text" placeholder="VD: Quảng Ninh">
+            <input wire:model="que_quan" type="text" placeholder="VD: Hưng Yên">
           </div>
           <div class="fi">
-            <label>Tỉnh / Thành phố</label>
+            <label>Tỉnh / Thành phố hiện tại</label>
             <input wire:model="tinh_thanh" type="text" placeholder="VD: Hà Nội">
           </div>
-          <div class="fi fi-full">
+          <div class="fi">
+            <label>Năm tốt nghiệp</label>
+            <input type="text" value="{{ $user->profile?->nam_tot_nghiep ?? '' }}" disabled placeholder="—">
+          </div>
+          <div class="fi full">
             <label>Giới thiệu bản thân</label>
-            <textarea wire:model="bio" placeholder="Mô tả ngắn về bản thân..."></textarea>
+            <textarea wire:model="bio" placeholder="Một vài dòng giới thiệu về bản thân bạn..."></textarea>
           </div>
         </div>
-        <div class="fa">
-          <button wire:click="cancelInfo" class="btn btn-ghost">Huỷ</button>
-          <button wire:click="saveInfo" class="btn btn-prim">
-            <span wire:loading.remove wire:target="saveInfo">Lưu</span>
+        <div class="form-actions">
+          <button wire:click="cancelInfo" class="btn-ghost">Huỷ</button>
+          <button wire:click="saveInfo" class="btn-prim">
+            <span wire:loading.remove wire:target="saveInfo"><i class="fa-solid fa-floppy-disk"></i> Lưu</span>
             <span wire:loading wire:target="saveInfo">Đang lưu...</span>
           </button>
         </div>
 
       @else
-        <div class="igrid">
-          <div class="iitem">
-            <label>Họ và tên</label>
-            <p>{{ $user->name ?? '' }}</p>
+        {{-- VIEW MODE --}}
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Họ và Tên</label>
+            <p>{{ $user->name }}</p>
           </div>
-          <div class="iitem">
-            <label>Mã sinh viên</label>
+          <div class="info-item">
+            <label>Mã SV/GV</label>
             <p>{{ $user->profile?->msv ?? '—' }}</p>
           </div>
-          <div class="iitem">
-            <label>Số điện thoại</label>
-              <p class="{{ auth()->user()?->profile?->phone ? '' : 'mt' }}">{{ auth()->user()?->profile?->phone ?? 'Chưa cập nhật' }}</p>          
-          </div>
-          <div class="iitem">
+          <div class="info-item">
             <label>Lớp</label>
             <p>{{ $user->profile?->lop ?? '—' }}</p>
           </div>
-          <div class="iitem">
+          <div class="info-item">
+            <label>Số điện thoại</label>
+            <p class="{{ $user->profile?->phone ? '' : 'muted' }}">{{ $user->profile?->phone ?: 'Chưa cập nhật' }}</p>
+          </div>
+          <div class="info-item">
             <label>Quê quán</label>
-            <p class="{{ auth()->user()?->profile?->que_quan ? '' : 'mt' }}">{{ auth()->user()?->profile?->que_quan ?: 'Chưa cập nhật' }}</p>
+            <p class="{{ $user->profile?->que_quan ? '' : 'muted' }}">{{ $user->profile?->que_quan ?: 'Chưa cập nhật' }}</p>
           </div>
-          <div class="iitem">
+          <div class="info-item">
             <label>Địa chỉ hiện tại</label>
-            <p class="{{ auth()->user()?->profile?->tinh_thanh ? '' : 'mt' }}">{{ auth()->user()?->profile?->tinh_thanh ?: 'Chưa cập nhật' }}</p>
+            <p class="{{ $user->profile?->tinh_thanh ? '' : 'muted' }}">{{ $user->profile?->tinh_thanh ?: 'Chưa cập nhật' }}</p>
           </div>
-          @if(auth()->user()?->profile?->bio)
-          <div class="iitem" style="grid-column:1/-1">
+          <div class="info-item">
+            <label>Năm tốt nghiệp</label>
+            <p>{{ $user->profile?->nam_tot_nghiep ?? '—' }}</p>
+          </div>
+          <div class="info-item">
+            <label>Email</label>
+            <p>{{ $user->email }}</p>
+          </div>
+          @if($user->profile?->bio)
+          <div class="info-item full">
             <label>Giới thiệu</label>
-            <p style="font-weight:400;color:#374151;line-height:1.6">{{ $user->profile->bio }}</p>
+            <p style="font-weight:400;color:#374151;line-height:1.65">{{ $user->profile->bio }}</p>
           </div>
           @endif
         </div>
       @endif
+
     </div>
+  </div>
 
-   
-    <div class="card">
-      <div class="card-hd">
-        <div class="card-title">Mạng xã hội &amp; Liên kết</div>
-        @if(isset($editingSocial) && !$editingSocial)
-          <button wire:click="$set('editingSocial',true)" class="btn btn-out">Chỉnh sửa</button>
-        @endif
+  {{-- ═══ MẠNG XÃ HỘI ═══ --}}
+  <div class="pf-card">
+    <div class="pf-card-hd">
+      <div class="pf-card-hd-left">
+        <div class="pf-card-icon icon-purple"><i class="fa-solid fa-link"></i></div>
+        <span class="pf-card-title">Mạng xã hội &amp; Liên kết</span>
       </div>
+      @if(!$editingSocial)
+        <button wire:click="$set('editingSocial',true)" class="btn-edit">
+          <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+        </button>
+      @endif
+    </div>
+    <div class="pf-card-body">
 
-       @if(isset($editingSocial) && !$editingSocial)
+      @if($editingSocial)
         <div class="sf-list">
           <div class="sf-row">
-            <span><i class="fa-brands fa-github"></i></span>
+            <div class="sf-ico gh"><i class="fa-brands fa-github"></i></div>
             <input wire:model="github" type="url" placeholder="https://github.com/username">
           </div>
-          @error('github')<div class="err" style="margin-left:32px">{{ $message }}</div>@enderror
+          @error('github')<div class="err" style="margin-left:42px">{{ $message }}</div>@enderror
           <div class="sf-row">
-            <span><i class="fa-brands fa-linkedin"></i></span>
+            <div class="sf-ico li"><i class="fa-brands fa-linkedin"></i></div>
             <input wire:model="linkedin" type="url" placeholder="https://linkedin.com/in/username">
           </div>
-          @error('linkedin')<div class="err" style="margin-left:32px">{{ $message }}</div>@enderror
+          @error('linkedin')<div class="err" style="margin-left:42px">{{ $message }}</div>@enderror
           <div class="sf-row">
-            <span><i class="fa-brands fa-globe"></i></span>
+            <div class="sf-ico wb"><i class="fa-solid fa-globe"></i></div>
             <input wire:model="website" type="url" placeholder="https://yourwebsite.com">
           </div>
-          @error('website')<div class="err" style="margin-left:32px">{{ $message }}</div>@enderror
+          @error('website')<div class="err" style="margin-left:42px">{{ $message }}</div>@enderror
         </div>
-        <div class="fa">
-          <button wire:click="cancelSocial" class="btn btn-ghost">Huỷ</button>
-          <button wire:click="saveSocial" class="btn btn-prim">
+        <div class="form-actions">
+          <button wire:click="cancelSocial" class="btn-ghost">Huỷ</button>
+          <button wire:click="saveSocial" class="btn-prim">
+            <span wire:loading.remove wire:target="saveSocial"><i class="fa-solid fa-floppy-disk"></i> Lưu</span>
             <span wire:loading wire:target="saveSocial">Đang lưu...</span>
-            <span wire:loading.remove wire:target="saveSocial">Lưu</span>
           </button>
         </div>
 
       @else
         <div class="soc-list">
           <div class="soc-item">
-            <div class="soc-ico"><i class="fa-brands fa-github"></i></div>
+            <div class="soc-ico gh"><i class="fa-brands fa-github"></i></div>
             <div class="soc-text">
               <div class="soc-lbl">GitHub</div>
-              @if(auth()->user()?->profile?->github)
-                <a href="{{auth()->user()?->profile->github }}" target="_blank" class="soc-url">{{ auth()->user()?->profile->github }}</a>
+              @if($user->profile?->github)
+                <a href="{{ $user->profile->github }}" target="_blank" class="soc-url">{{ $user->profile->github }}</a>
               @else
-                <span class="soc-url mt">Chưa cập nhật</span>
+                <span class="soc-url muted">Chưa cập nhật</span>
               @endif
             </div>
           </div>
           <div class="soc-item">
-            <div class="soc-ico"><i class="fa-brands fa-linkedin"></i></div>
+            <div class="soc-ico li"><i class="fa-brands fa-linkedin"></i></div>
             <div class="soc-text">
               <div class="soc-lbl">LinkedIn</div>
-              @if(auth()->user()?->profile?->linkedin)
-                <a href="{{ auth()->user()?->profile->linkedin }}" target="_blank" class="soc-url">{{ auth()->user()?->profile->linkedin }}</a>
+              @if($user->profile?->linkedin)
+                <a href="{{ $user->profile->linkedin }}" target="_blank" class="soc-url">{{ $user->profile->linkedin }}</a>
               @else
-                <span class="soc-url mt">Chưa cập nhật</span>
+                <span class="soc-url muted">Chưa cập nhật</span>
               @endif
             </div>
           </div>
           <div class="soc-item">
-            <div class="soc-ico"><i class="fa-brands fa-globe"></i></div>
+            <div class="soc-ico wb"><i class="fa-solid fa-globe"></i></div>
             <div class="soc-text">
               <div class="soc-lbl">Website</div>
-              @if(auth()->user()?->profile?->website)
-                <a href="{{ auth()->user()?->profile->website }}" target="_blank" class="soc-url">{{ auth()->user()?->profile->website }}</a>
+              @if($user->profile?->website)
+                <a href="{{ $user->profile->website }}" target="_blank" class="soc-url">{{ $user->profile->website }}</a>
               @else
-                <span class="soc-url mt">Chưa cập nhật</span>
+                <span class="soc-url muted">Chưa cập nhật</span>
               @endif
             </div>
           </div>
         </div>
       @endif
+
     </div>
+  </div>
 
-  
-    <div class="card">
-      <div class="card-hd">
-        <div class="card-title">CV / Hồ sơ đính kèm</div>
+  {{-- ═══ CV ═══ --}}
+  <div class="pf-card">
+    <div class="pf-card-hd">
+      <div class="pf-card-hd-left">
+        <div class="pf-card-icon icon-green"><i class="fa-solid fa-file-lines"></i></div>
+        <span class="pf-card-title">CV / Hồ sơ đính kèm</span>
       </div>
+    </div>
+    <div class="pf-card-body">
 
-      
-      @php
-        $cvs = auth()->user()?->cv()->get() ?? collect();
-      @endphp
+      @php $cvs = $user->cv ?? collect(); @endphp
 
-      @forelse($cvs as $cv)
-        <div class="cv-item">
-          <div class="cv-ico"><i class="fa-solid fa-file-lines"></i></div>
-          <div class="cv-inf">
-            <div class="cv-name">
-              {{ $cv->file_name }}
-              @if($cv->is_primary)<span class="cv-prim">Chính</span>@endif
+      @if($cvs->count())
+        <div class="cv-list">
+          @foreach($cvs as $cv)
+            <div class="cv-item">
+              @php $isDoc = in_array(pathinfo($cv->file_name, PATHINFO_EXTENSION), ['doc','docx']); @endphp
+              <div class="cv-ico {{ $isDoc ? 'doc' : '' }}">
+                <i class="fa-solid {{ $isDoc ? 'fa-file-word' : 'fa-file-pdf' }}"></i>
+              </div>
+              <div class="cv-inf">
+                <div class="cv-name">
+                  {{ $cv->file_name }}
+                  @if($cv->is_primary)<span class="cv-prim-badge">Chính</span>@endif
+                </div>
+                <div class="cv-meta">
+                  {{ number_format($cv->file_size / 1024, 0) }} KB
+                  &middot; {{ $cv->created_at->format('d/m/Y') }}
+                </div>
+              </div>
+              <div class="cv-acts">
+                <a href="{{ $cv->url }}" download class="btn-sm-out"><i class="fa-solid fa-download"></i> Tải</a>
+                @if(!$cv->is_primary)
+                  <button wire:click="setPrimary({{ $cv->id }})" class="btn-sm-blue">Đặt chính</button>
+                @endif
+                <button wire:click="deleteCv({{ $cv->id }})" wire:confirm="Xoá CV này?" class="btn-danger"><i class="fa-solid fa-trash"></i></button>
+              </div>
             </div>
-            <div class="cv-meta">{{ $cv->file_size }} · {{ $cv->created_at->format('d/m/Y') }}</div>
-          </div>
-          <div class="cv-acts">
-            <a href="{{ $cv->url }}" download class="btn btn-sm btn-out">↓ Tải</a>
-            @if(!$cv->is_primary)
-              <button wire:click="setPrimary({{ $cv->id }})" class="btn btn-sm btn-ghost">Đặt chính</button>
-            @endif
-            <button wire:click="deleteCv({{ $cv->id }})" wire:confirm="Xoá CV này?" class="btn btn-sm btn-del">✕</button>
-          </div>
+          @endforeach
         </div>
-      @empty
-        <div class="empty-cv"><i class="fa-solid fa-folder-open"></i> Chưa có CV nào. Tải lên bên dưới.</div>
-      @endforelse
+      @else
+        <div class="empty-cv">
+          <i class="fa-solid fa-folder-open" style="font-size:24px;display:block;margin-bottom:6px"></i>
+          Chưa có CV nào. Tải lên bên dưới.
+        </div>
+      @endif
 
-      {{-- Upload --}}
-      <label class="upzone">
+      {{-- Upload drop zone --}}
+      <label class="dropzone">
         <input wire:model="cvFile" type="file" accept=".pdf,.doc,.docx">
-        <div class="up-ico"><i class="fa-solid fa-cloud-upload-alt"></i></div>
-        <div class="up-title">Tải lên CV (PDF)</div>
-        <div class="up-sub">PDF, DOC, DOCX · Tối đa 5MB</div>
-        <span class="btn btn-out btn-sm" style="pointer-events:none">Chọn file</span>
+        <div class="dz-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+        <div class="dz-title">Tải lên CV</div>
+        <div class="dz-sub">PDF, DOC, DOCX · Tối đa 5MB</div>
+        <span class="btn-sm-out" style="pointer-events:none">Chọn file</span>
       </label>
 
-      @if(!empty($errors->get('cvFile')) == false && request()->hasFile('cvFile'))
-        <div class="up-prev">
-          <span style="font-size:18px"><i class="fa-solid fa-paperclip"></i></span>
+      @if($cvFile)
+        <div class="cv-preview">
+          <i class="fa-solid fa-paperclip" style="color:#60a5fa"></i>
           <p>{{ is_object($cvFile) ? $cvFile->getClientOriginalName() : 'File đã chọn' }}</p>
         </div>
-        @error('cvFile')<div class="err" style="margin-top:5px;font-size:12px">{{ $message }}</div>@enderror
-        @if(!$errors->has('cvFile'))
+        @error('cvFile')
+          <div class="err" style="margin-top:5px">{{ $message }}</div>
+        @else
           <div style="text-align:right;margin-top:10px">
-            <button wire:click="uploadCv" class="btn btn-prim">
-              <span wire:loading wire:target="uploadCv">Đang tải...</span>
-              <span wire:loading.remove wire:target="uploadCv">↑ Xác nhận tải lên</span>
+            <button wire:click="uploadCv" class="btn-prim">
+              <span wire:loading wire:target="uploadCv">Đang tải lên...</span>
+              <span wire:loading.remove wire:target="uploadCv"><i class="fa-solid fa-upload"></i> Xác nhận tải lên</span>
             </button>
           </div>
-        @endif
+        @enderror
       @endif
-    </div>
 
+    </div>
   </div>
+
+</div>
 </div>
 </div>

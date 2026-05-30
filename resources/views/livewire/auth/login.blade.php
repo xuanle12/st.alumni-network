@@ -234,7 +234,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
       </div>
 
       <div class="llogos">
-        <img src="{{ asset('img/fita.logo.png') }}" alt="Logo VNUA">
+        <img src="{{ asset('img/fita-logo.png') }}" alt="Logo VNUA">
         <img src="{{ asset('img/logoST.jpg') }}"   alt="Logo ST">
       </div>
 
@@ -312,9 +312,10 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 
     <div class="ldivider"><span>hoặc đăng nhập bằng</span></div>
 
-    <a href="{{ route('sso.login') }}" class="btn btn-primary">
-    Đăng nhập bằng SSO
-</a>
+    <a href="{{ route('sso.login') }}" class="lbtn-sso">
+      <i class="fa-solid fa-building-columns"></i>
+      Đăng nhập bằng SSO
+    </a>
   </div>
 </div>
 </div>

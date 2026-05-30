@@ -31,6 +31,7 @@ class Profile extends Component
 
     /* upload */
     public $cvFile;
+    public $avatarFile;
 
     public function mount()
     {
@@ -106,6 +107,30 @@ class Profile extends Component
     {
         $this->loadData();
         $this->editingSocial = false;
+    }
+
+    /* auto upload avatar when file selected */
+    public function updatedAvatarFile()
+    {
+        $this->uploadAvatar();
+    }
+
+    /* upload avatar */
+    public function uploadAvatar()
+    {
+        $this->validate([
+            'avatarFile' => 'image|mimes:jpg,jpeg,png,webp|max:2048'
+        ]);
+
+        $path = $this->avatarFile->store('avatars', 'public');
+
+        ProfileModel::updateOrCreate(
+            ['user_id' => Auth::id()],
+            ['avatar' => $path]
+        );
+
+        $this->avatarFile = null;
+        session()->flash('success', 'Đã cập nhật ảnh đại diện');
     }
 
     /* upload cv */

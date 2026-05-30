@@ -1,353 +1,624 @@
 <div>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#f7f8fa}
-.wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── FLASH ── */
-.flash-s{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem}
-.flash-e{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem}
-.flash-i{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem}
-
-/* ── HERO ── */
-.hero{background:#1a2035;border-radius:12px;padding:2rem 2.5rem;margin-bottom:1.75rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(59,130,246,.08)}
-.hero::after{content:'';position:absolute;bottom:-60px;right:80px;width:140px;height:140px;border-radius:50%;background:rgba(99,102,241,.06)}
-.hero-label{font-size:11px;font-weight:600;color:#60a5fa;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
-.hero-title{font-size:24px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3}
-.hero-sub{font-size:13px;color:#94a3b8;margin-bottom:1.5rem}
-.hero-stats{display:flex;gap:2rem;flex-wrap:wrap}
-.hs-num{font-size:20px;font-weight:700;color:#fff}
-.hs-lbl{font-size:11px;color:#64748b;margin-top:2px}
-
-/* ── FILTER BAR ── */
-.filter-bar{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
-.search-box{flex:1;min-width:180px;position:relative}
-.search-box input{width:100%;padding:9px 12px 9px 36px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;background:#fff;color:#111;font-family:inherit}
-.search-box input:focus{outline:none;border-color:#3b82f6}
-.search-ico{position:absolute;left:11px;top:50%;transform:translateY(-50%)}
-.filter-tabs{display:flex;gap:4px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:3px;flex-wrap:wrap}
-.ftab{padding:5px 14px;border-radius:6px;font-size:12px;color:#6b7280;cursor:pointer;border:none;background:none;font-family:inherit;transition:all .15s}
-.ftab.active{background:#111;color:#fff}
-.ftab:hover:not(.active){background:#f3f4f6}
-
-/* ── SECTION TITLE ── */
-.section-title{font-size:13px;font-weight:600;color:#374151;margin-bottom:.875rem;display:flex;align-items:center;gap:8px}
-.section-title::after{content:'';flex:1;height:1px;background:#e2e8f0}
-
-/* ── EVENTS GRID ── */
-.events-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem}
-.event-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;transition:all .15s}
-.event-card:hover{border-color:#cbd5e1;transform:translateY(-1px)}
-.event-card.featured{border-color:#3b82f6;grid-column:1/-1}
-
-/* card header */
-.ec-header{padding:1.1rem 1.1rem .75rem;display:flex;gap:12px;align-items:flex-start}
-.ec-date{min-width:48px;text-align:center;background:#f8fafc;border-radius:8px;padding:8px 6px;border:1px solid #e2e8f0;flex-shrink:0}
-.ec-day{font-size:20px;font-weight:700;color:#111;line-height:1}
-.ec-month{font-size:10px;color:#94a3b8;margin-top:1px}
-.ec-info{flex:1;min-width:0}
-.ec-title{font-size:13px;font-weight:600;color:#111;line-height:1.4;margin-bottom:4px}
-.ec-featured .ec-title{font-size:15px}
-.ec-loc{font-size:11px;color:#6b7280;display:flex;align-items:center;gap:4px;margin-bottom:6px}
-.ec-tags{display:flex;gap:5px;flex-wrap:wrap}
-
-/* tags */
-.tag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px}
-.tag-green{background:#f0fdf4;color:#166634}
-.tag-amber{background:#fffbeb;color:#92400e}
-.tag-blue{background:#eff6ff;color:#1e40af}
-.tag-gray{background:#f3f4f6;color:#6b7280}
-.tag-red{background:#fef2f2;color:#b91c1c}
-
-/* card footer */
-.ec-footer{padding:.75rem 1.1rem;border-top:1px solid #f3f4f6;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.ec-time{font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:4px;flex-shrink:0}
-
-/* featured body */
-.featured-body{padding:0 1.1rem .875rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
-.fb-item{background:#f8fafc;border-radius:7px;padding:.625rem .875rem}
-.fb-label{font-size:10px;color:#94a3b8;margin-bottom:2px}
-.fb-val{font-size:12px;font-weight:600;color:#374151}
-
-/* ── BUTTONS ── */
-.btn-reg{padding:5px 14px;background:#111;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
-.btn-reg:hover{background:#333}
-.btn-reg.free{background:#166534}
-.btn-reg.free:hover{background:#15803d}
-.btn-reg.done{background:#f3f4f6;color:#9ca3af;cursor:default}
-.btn-reg.registered{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
-.btn-reg.registered:hover{background:#dbeafe}
-
-/* ── UPCOMING LIST ── */
-.upcoming-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
-.up-item{background:#fff;border:1px solid #e2e8f0;border-radius:9px;padding:.875rem 1rem;display:flex;align-items:center;gap:14px;transition:all .15s}
-.up-item:hover{border-color:#cbd5e1;background:#fafafa}
-.up-date{min-width:40px;text-align:center;flex-shrink:0}
-.up-day{font-size:18px;font-weight:700;color:#111;line-height:1}
-.up-month{font-size:9px;color:#94a3b8}
-.up-divider{width:1px;height:36px;background:#e2e8f0;flex-shrink:0}
-.up-info{flex:1;min-width:0}
-.up-title{font-size:13px;font-weight:500;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.up-meta{font-size:11px;color:#94a3b8;margin-top:2px}
-.up-right{flex-shrink:0;display:flex;align-items:center;gap:8px}
-
-/* ── EMPTY ── */
-.empty{text-align:center;padding:3rem;color:#94a3b8;font-size:13px}
-
-/* ── LOADING ── */
-.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* ═══════════════════
-   RESPONSIVE
-═══════════════════ */
-@media(max-width:768px){
-  .wrap{padding:1.25rem 1rem}
-  .hero{padding:1.5rem 1.25rem}
-  .hero-title{font-size:20px}
-  .hero-stats{gap:1.25rem}
-  .events-grid{grid-template-columns:1fr}
-  .event-card.featured{grid-column:1}
-  .featured-body{grid-template-columns:1fr 1fr}
-  .filter-bar{flex-direction:column;align-items:stretch}
-  .search-box{width:100%}
-  .filter-tabs{justify-content:center}
+:root {
+  --fita:      #0961AA;
+  --fita2:     #0c83d8;
+  --fita-pale: #e8f0fe;
+  --gold:      #F6A309;
+  --green:     #066140;
+  --brown:     #4E3636;
+  --text:      #1a1f2e;
+  --muted:     #5c6470;
+  --border:    #e2e8f0;
+  --bg:        #f8fafc;
 }
 
-@media(max-width:480px){
-  .wrap{padding:1rem .875rem}
-  .hero{padding:1.25rem 1rem}
-  .hero-title{font-size:18px}
-  .hero-stats{gap:1rem}
-  .hs-num{font-size:17px}
-  .featured-body{grid-template-columns:1fr}
-  .up-item{flex-wrap:wrap;gap:8px}
-  .up-right{width:100%;justify-content:flex-end}
-  .up-divider{display:none}
-  .ftab{padding:5px 10px;font-size:11px}
+body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); color: var(--text); }
+
+/* ── stripe VNUA ── */
+.stripe { display: flex; flex-direction: column; margin-bottom: 0; }
+.stripe-gold  { height: 5px; background: var(--gold); }
+.stripe-green { height: 5px; background: var(--green); }
+.stripe-brown { height: 5px; background: var(--brown); box-shadow: 0 0 5px var(--brown); }
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+.breadcrumb-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.breadcrumb-inner a { color: var(--fita); text-decoration: none; font-weight: 500; }
+.breadcrumb-inner a:hover { text-decoration: underline; }
+.breadcrumb-inner span { color: var(--muted); }
+
+/* ── PAGE TITLE BANNER ── */
+.page-banner {
+  background: #fff;
+  padding: 22px 0 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.page-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 18px;
+}
+.page-banner-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--fita);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-family: 'Barlow', sans-serif;
+  margin-bottom: 4px;
+}
+.page-banner-sub { font-size: 14px; color: var(--muted); }
+
+/* ── MAIN CONTAINER ── */
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px 48px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* ── MAIN CONTENT ── */
+.main-col { min-width: 0; }
+
+/* Flash */
+.flash-s { background: #f0fdf4; border: 1px solid #86efac; color: #166534; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; }
+.flash-e { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; }
+
+
+
+/* Filter tabs */
+.filter-row {
+  display: flex;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 22px;
+  width: fit-content;
+}
+.ftab {
+  padding: 7px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: 'Barlow', sans-serif;
+  transition: .15s;
+  letter-spacing: .01em;
+}
+.ftab:hover:not(.active) { background: #f1f5f9; color: var(--text); }
+.ftab.active { background: var(--fita); color: #fff; }
+
+/* Section heading (giống fita: uppercase + gạch chân xanh) */
+.sec-heading {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--fita);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--fita);
+  display: inline-block;
+}
+
+/* ── FEATURED EVENT ── */
+.featured-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  margin-bottom: 8px;
+  transition: .15s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.featured-card:hover { border-color: var(--fita2); box-shadow: 0 6px 24px rgba(9,97,170,0.1); transform: translateY(-2px); }
+.featured-img {
+  width: 100%; height: 220px; background: var(--fita-pale);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fita2); font-size: 48px; position: relative; overflow: hidden;
+}
+.featured-img img { width: 100%; height: 100%; object-fit: cover; }
+.featured-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--gold); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px; letter-spacing: .03em;
+}
+.featured-date-box {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(255,255,255,.95);
+  border-radius: 10px; padding: 8px 12px;
+  text-align: center; min-width: 52px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.featured-date-box .day { font-size: 22px; font-weight: 800; color: var(--fita); line-height: 1; }
+.featured-date-box .mon { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-top: 2px; }
+.featured-body { padding: 18px 20px; }
+.featured-title {
+  font-size: 18px; font-weight: 700; color: var(--text);
+  margin-bottom: 8px; line-height: 1.45;
+}
+.featured-title:hover { color: var(--fita); }
+.featured-meta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+.meta-item { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--muted); }
+.meta-item i { font-size: 13px; color: var(--fita2); }
+.featured-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #f1f5f9;
+  display: flex; align-items: center; justify-content: space-between;
+  background: #fafcff;
+}
+.tag-pill {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px;
+}
+.tag-free   { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+.tag-paid   { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
+.tag-online { background: var(--fita-pale); color: var(--fita); border: 1px solid #bfdbfe; }
+.tag-gray   { background: #f3f4f6; color: #6b7280; border: 1px solid #e2e8f0; }
+
+/* ── EVENT LIST (post-style giống fita) ── */
+.events-list {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+.event-row {
+  display: flex;
+  gap: 16px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  text-decoration: none;
+  color: inherit;
+  transition: .15s;
+  align-items: flex-start;
+}
+.event-row:last-child { border-bottom: none; }
+.event-row:hover { background: #f8fbff; }
+.event-row:first-child { border-radius: 16px 16px 0 0; }
+.event-row:last-child:hover { border-radius: 0 0 16px 16px; }
+
+/* Thumbnail giống post fita: w-44 h-28 */
+.event-thumb {
+  width: 140px; min-width: 140px; height: 96px;
+  border-radius: 10px; overflow: hidden; position: relative;
+  background: var(--fita-pale); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fita2); font-size: 28px;
+}
+.event-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+.event-row:hover .event-thumb img { transform: scale(1.05); }
+.thumb-date {
+  position: absolute; bottom: 6px; left: 6px;
+  background: rgba(9,97,170,.9); color: #fff;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 6px;
+}
+.thumb-new {
+  position: absolute; top: 0; left: 0;
+  background: var(--gold); color: #fff;
+  font-size: 9px; font-weight: 700;
+  padding: 2px 7px; border-radius: 0 0 7px 0;
+}
+
+.event-content { flex: 1; min-width: 0; }
+.event-cats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.cat-badge {
+  background: var(--fita); color: #fff;
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 4px;
+}
+.event-title {
+  font-size: 15px; font-weight: 700;
+  color: var(--text); line-height: 1.4;
+  margin-bottom: 5px;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.event-row:hover .event-title { color: var(--fita); }
+.event-desc {
+  font-size: 13px; color: var(--muted);
+  line-height: 1.6; margin-bottom: 7px;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.event-info-row { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); }
+.ei { display: flex; align-items: center; gap: 4px; }
+.ei i { color: var(--fita2); font-size: 12px; }
+
+/* Register button */
+.btn-reg {
+  padding: 6px 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 700;
+  border: none; cursor: pointer; white-space: nowrap;
+  font-family: 'Barlow', sans-serif; transition: .15s;
+  flex-shrink: 0; align-self: center;
+}
+.btn-reg-prim  { background: var(--fita); color: #fff; }
+.btn-reg-prim:hover { background: #064d86; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(9,97,170,.3); }
+.btn-reg-done  { background: #f3f4f6; color: #9ca3af; cursor: default; }
+.btn-reg-ok    { background: var(--fita-pale); color: var(--fita); border: 1px solid #bfdbfe; }
+.btn-reg-ok:hover { background: #dbeafe; }
+.btn-reg-free  { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+.btn-reg-free:hover { background: #dcfce7; }
+
+/* Spinning loader */
+.spin { display: inline-block; width: 11px; height: 11px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Empty */
+.empty { text-align: center; padding: 48px 20px; color: var(--muted); font-size: 14px; background: #fff; border-radius: 16px; border: 1px solid var(--border); }
+
+/* ── RIGHT SIDEBAR ── */
+.sidebar-col { display: flex; flex-direction: column; gap: 20px; }
+
+.sb-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.sb-card-head {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px; font-weight: 800;
+  color: var(--fita); text-transform: uppercase;
+  letter-spacing: .04em; font-family: 'Barlow', sans-serif;
+}
+.sb-card-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; }
+
+
+.sb-search {
+  padding: 9px 12px 9px 36px;
+  border: 1px solid var(--border); border-radius: 9px;
+  font-size: 13px; color: var(--text);
+  font-family: 'Barlow', sans-serif; width: 100%; transition: .15s;
+}
+.sb-search:focus { outline: none; border-color: var(--fita2); box-shadow: 0 0 0 3px rgba(9,97,170,.08); }
+.sb-search-wrap { position: relative; }
+.sb-search-wrap i { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); }
+
+/* Category list */
+.cat-btn {
+  width: 100%; text-align: left;
+  padding: 9px 12px; border-radius: 8px;
+  border: none; background: transparent;
+  font-size: 13px; font-weight: 500;
+  color: var(--muted); cursor: pointer;
+  font-family: 'Barlow', sans-serif; transition: .15s;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.cat-btn:hover { background: #f1f5f9; color: var(--text); }
+.cat-btn.active { background: var(--fita); color: #fff; font-weight: 700; }
+.cat-btn .cnt { font-size: 11px; opacity: .7; }
+
+
+.mini-ev {
+  display: flex; gap: 10px; padding: 9px 0;
+  border-bottom: 1px solid #f1f5f9; text-decoration: none; color: inherit; transition: .15s;
+}
+.mini-ev:last-child { border-bottom: none; }
+.mini-ev:hover .mini-ev-title { color: var(--fita); }
+.mini-date {
+  width: 38px; height: 38px; border-radius: 9px;
+  background: var(--fita-pale); border: 1px solid #bfdbfe;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.mini-date .d { font-size: 14px; font-weight: 800; color: var(--fita); line-height: 1; }
+.mini-date .m { font-size: 9px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+.mini-ev-title { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 2px; }
+.mini-ev-loc { font-size: 11px; color: var(--muted); }
+
+ .btn-reset {
+  width: 100%; padding: 8px; border-radius: 8px;
+  border: 1px solid var(--border); background: #f8fafc;
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  cursor: pointer; font-family: 'Barlow', sans-serif; transition: .15s;
+  margin-top: 6px;
+}
+.btn-reset:hover { background: #fee2e2; border-color: #fca5a5; color: #dc2626; }
+
+ .pagination { display: flex; gap: 5px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.pg-btn {
+  padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  border: 1px solid var(--border); background: #fff; color: var(--muted);
+  cursor: pointer; font-family: 'Barlow', sans-serif; transition: .15s;
+}
+.pg-btn:hover { border-color: var(--fita2); color: var(--fita); }
+.pg-btn.active { background: var(--fita); color: #fff; border-color: var(--fita); }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 900px) {
+  .page-wrap { grid-template-columns: 1fr; }
+  .sidebar-col { order: -1; }
+  .stats-row { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media(max-width: 640px) {
+  .page-wrap { padding: 16px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .filter-row { flex-wrap: wrap; }
+  .event-thumb { width: 90px; min-width: 90px; height: 72px; }
+  .featured-img { height: 160px; }
 }
 </style>
-
-<div class="wrap">
-
-  
-  @if(session('success'))
-    <div class="flash-s"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
-  @endif
-  @if(session('error'))
-    <div class="flash-e"><i class="fa-solid fa-times"></i> {{ session('error') }}</div>
-  @endif
-  @if(session('info'))
-    <div class="flash-i"><i class="fa-solid fa-info-circle"></i> {{ session('info') }}</div>
-  @endif
-
-  
-  <div class="hero">
-    <div class="hero-label">Sự kiện & Hoạt động</div>
-    <div class="hero-title">Kết nối — Chia sẻ — Phát triển</div>
-    <div class="hero-sub">Tham gia các sự kiện kết nối cựu sinh viên, hội thảo nghề nghiệp và hoạt động cộng đồng của Học viện.</div>
-    <div class="hero-stats">
-      <div>
-        <div class="hs-num">{{ $stats['year_total'] }}</div>
-        <div class="hs-lbl">Sự kiện năm nay</div>
-      </div>
-      <div>
-        <div class="hs-num">{{ $stats['upcoming'] }}</div>
-        <div class="hs-lbl">Sắp diễn ra</div>
-      </div>
-      <div>
-        <div class="hs-num">{{ number_format($stats['total_regs']) }}+</div>
-        <div class="hs-lbl">Lượt đăng ký</div>
-      </div>
-    </div>
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{{ route('home') }}" wire:navigate>Trang chủ</a>
+    <span>›</span>
+    <span>Sự kiện & Hoạt động</span>
   </div>
+</div>
+
+
+<div class="page-banner">
+  <div class="page-banner-inner">
+    <div class="page-banner-title">Sự kiện &amp; Hoạt động</div>
+    <div class="page-banner-sub">Các sự kiện kết nối cựu sinh viên, hội thảo nghề nghiệp và hoạt động cộng đồng</div>
+  </div>
+</div>
+
+
+<div class="page-wrap">
+
+  <div class="main-col">
 
   
-  <div class="filter-bar">
-    <div class="search-box">
-      <svg class="search-ico" width="14" height="14" viewBox="0 0 16 16" fill="none">
-        <circle cx="7" cy="7" r="5" stroke="#94a3b8" stroke-width="1.5"/>
-        <path d="M11 11l3 3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm sự kiện...">
-    </div>
-    <div class="filter-tabs">
+    @if(session('success'))
+      <div class="flash-s"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
+    @endif
+    @if(session('error'))
+      <div class="flash-e"><i class="fa-solid fa-times"></i> {{ session('error') }}</div>
+    @endif
+
+    <div class="filter-row">
       <button wire:click="setTab('all')"      class="ftab {{ $activeTab === 'all'      ? 'active' : '' }}">Tất cả</button>
       <button wire:click="setTab('upcoming')" class="ftab {{ $activeTab === 'upcoming' ? 'active' : '' }}">Sắp tới</button>
       <button wire:click="setTab('free')"     class="ftab {{ $activeTab === 'free'     ? 'active' : '' }}">Miễn phí</button>
       <button wire:click="setTab('past')"     class="ftab {{ $activeTab === 'past'     ? 'active' : '' }}">Đã qua</button>
     </div>
-  </div>
 
-  
-  @if($featured && $activeTab === 'all' && !$search)
-  <div class="section-title">Sự kiện nổi bật</div>
-  <div class="events-grid" style="margin-bottom:1.5rem">
-    @php $isReg = in_array($featured->id, $registeredIds); @endphp
-    <a href="{{ route('event.show', $featured->id) }}" class="event-card featured" style="text-decoration:none;color:inherit">
-      <div class="ec-header ec-featured">
-        <div class="ec-date" style="background:#eff6ff;border-color:#bfdbfe">
-          <div class="ec-day" style="color:#1d4ed8">{{ $featured->day }}</div>
-          <div class="ec-month">{{ $featured->month_label }}</div>
-        </div>
-        <div class="ec-info">
-          <div class="ec-title">{{ $featured->title }}</div>
-          <div class="ec-loc">
-            <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.24 1 3 3.24 3 6c0 4.25 5 9 5 9s5-4.75 5-9c0-2.76-2.24-5-5-5z" stroke="#94a3b8" stroke-width="1.5"/><circle cx="8" cy="6" r="1.5" stroke="#94a3b8" stroke-width="1.5"/></svg>
-            {{ $featured->location }}
+     
+    @if($featured && $activeTab === 'all' && !$search)
+    <div style="margin-bottom: 24px;">
+      <div class="sec-heading">Sự kiện nổi bật</div>
+      @php $isReg = in_array($featured->id, $registeredIds); @endphp
+      <a href="{{ route('event.show', $featured->id) }}" class="featured-card" wire:navigate>
+        <div class="featured-img">
+          @if($featured->image)
+            <img src="{{ asset('storage/'.$featured->image) }}" alt="{{ $featured->title }}">
+          @else
+            <i class="fa-solid fa-calendar-star"></i>
+          @endif
+          <div class="featured-badge">⭐ Nổi bật</div>
+          <div class="featured-date-box">
+            <div class="day">{{ $featured->day }}</div>
+            <div class="mon">{{ $featured->month_label }}</div>
           </div>
-          <div class="ec-tags">
-            @if($featured->is_free)<span class="tag tag-green">Miễn phí</span>@endif
-            <span class="tag tag-blue">{{ $featured->format_label }}</span>
+        </div>
+        <div class="featured-body">
+          <div class="featured-title">{{ $featured->title }}</div>
+          <div class="featured-meta">
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> {{ $featured->location ?: 'TBA' }}</div>
+            <div class="meta-item"><i class="fa-regular fa-clock"></i> {{ $featured->time_range }}</div>
+            <div class="meta-item"><i class="fa-solid fa-users"></i> {{ $featured->target_audience ?: 'Tất cả' }}</div>
+            <div class="meta-item"><i class="fa-solid fa-tag"></i> {{ $featured->format_label }}</div>
+          </div>
+          @if($featured->description)
+            <p style="font-size:13px;color:#5c6470;line-height:1.7;">{{ Str::limit(strip_tags($featured->description), 160) }}</p>
+          @endif
+        </div>
+        <div class="featured-footer">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            @if($featured->is_free)
+              <span class="tag-pill tag-free">Miễn phí</span>
+            @else
+              <span class="tag-pill tag-paid">Có phí</span>
+            @endif
+            <span class="tag-pill tag-online">{{ $featured->format_label }}</span>
             @foreach(($featured->tags ?? []) as $tag)
-              <span class="tag tag-gray">{{ $tag }}</span>
+              <span class="tag-pill tag-gray">{{ $tag }}</span>
             @endforeach
           </div>
+          @if($isReg)
+            <button wire:click.prevent="unregister({{ $featured->id }})" class="btn-reg btn-reg-ok">
+              <span wire:loading.remove wire:target="unregister({{ $featured->id }})">✓ Đã đăng ký</span>
+              <span wire:loading wire:target="unregister({{ $featured->id }})"><span class="spin"></span></span>
+            </button>
+          @elseif($featured->registration_status === 'open')
+            <button wire:click.prevent="register({{ $featured->id }})" class="btn-reg btn-reg-prim">
+              <span wire:loading.remove wire:target="register({{ $featured->id }})">Đăng ký ngay →</span>
+              <span wire:loading wire:target="register({{ $featured->id }})"><span class="spin"></span></span>
+            </button>
+          @else
+            <button class="btn-reg btn-reg-done" disabled>Đã đóng</button>
+          @endif
         </div>
-      </div>
-      <div class="featured-body">
-        <div class="fb-item">
-          <div class="fb-label">Thời gian</div>
-          <div class="fb-val">{{ $featured->time_range }}</div>
-        </div>
-        <div class="fb-item">
-          <div class="fb-label">Hình thức</div>
-          <div class="fb-val">{{ $featured->format_label }}</div>
-        </div>
-        <div class="fb-item">
-          <div class="fb-label">Đối tượng</div>
-          <div class="fb-val">{{ $featured->target_audience ?: 'Tất cả' }}</div>
-        </div>
-      </div>
-      <div class="ec-footer">
-        <div class="ec-time">
-          <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#94a3b8" stroke-width="1.5"/><path d="M8 5v3.5l2 2" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
-          {{ $featured->days_until_label }}
-        </div>
-        @if($isReg)
-          <button wire:click="unregister({{ $featured->id }})" class="btn-reg registered">
-            <span wire:loading.remove wire:target="unregister({{ $featured->id }})">✓ Đã đăng ký</span>
-            <span wire:loading wire:target="unregister({{ $featured->id }})"><span class="spin"></span></span>
-          </button>
-        @elseif($featured->registration_status === 'open')
-          <button wire:click="register({{ $featured->id }})" class="btn-reg free">
-            <span wire:loading.remove wire:target="register({{ $featured->id }})">Đăng ký ngay →</span>
-            <span wire:loading wire:target="register({{ $featured->id }})"><span class="spin"></span></span>
-          </button>
-        @else
-          <button class="btn-reg done" disabled>Đã đóng</button>
-        @endif
-      </div>
-    </a>
-  </div>
-  @endif
+      </a>
+    </div>
+    @endif
 
-  <div class="section-title">
-    {{ $activeTab === 'past' ? 'Sự kiện đã qua' : 'Sự kiện ' . ($search ? 'tìm thấy' : 'sắp diễn ra') }}
-  </div>
+     
+    <div class="sec-heading">
+      {{ $activeTab === 'past' ? 'Sự kiện đã qua' : ($search ? 'Kết quả tìm kiếm' : 'Danh sách sự kiện') }}
+    </div>
 
-  @if($gridEvents->count())
-  <div class="events-grid">
-    @foreach($gridEvents as $event)
-    @php
-      $isReg = in_array($event->id, $registeredIds);
-      $btnClass = match(true) {
-        $isReg                               => 'registered',
-        $event->registration_status !== 'open' => 'done',
-        $event->is_free                      => 'free',
-        default                              => '',
-      };
-      $btnText = match(true) {
-        $isReg                               => '✓ Đã đăng ký',
-        $event->registration_status === 'closed' => 'Đã đóng',
-        $event->registration_status === 'full'   => 'Hết chỗ',
-        default                              => 'Đăng ký',
-      };
-    @endphp
-    <a href="{{ route('event.show', $event->id) }}" class="event-card">
-      <div class="ec-header">
-        <div class="ec-date">
-          <div class="ec-day">{{ $event->day }}</div>
-          <div class="ec-month">{{ $event->month_label }}</div>
-        </div>
-        <div class="ec-info">
-          <div class="ec-title">{{ $event->title }}</div>
-          <div class="ec-loc">
-            <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.24 1 3 3.24 3 6c0 4.25 5 9 5 9s5-4.75 5-9c0-2.76-2.24-5-5-5z" stroke="#94a3b8" stroke-width="1.5"/><circle cx="8" cy="6" r="1.5" stroke="#94a3b8" stroke-width="1.5"/></svg>
-            {{ $event->location ?: 'TBA' }}
+    @if($gridEvents->count())
+      <div class="events-list">
+        @foreach($gridEvents as $event)
+        @php
+          $isReg = in_array($event->id, $registeredIds);
+        @endphp
+        <a href="{{ route('event.show', $event->id) }}" class="event-row" wire:navigate>
+
+        
+          <div class="event-thumb">
+            @if($event->image)
+              <img src="{{ asset('storage/'.$event->image) }}" alt="{{ $event->title }}">
+            @else
+              <i class="fa-solid fa-calendar-days"></i>
+            @endif
+            <div class="thumb-date">{{ $event->day }} {{ $event->month_label }}</div>
+            @if($event->is_new ?? false)
+              <div class="thumb-new">Mới</div>
+            @endif
           </div>
-          <div class="ec-tags">
-            @if($event->is_free)<span class="tag tag-green">Miễn phí</span>@endif
-            @if($event->is_internal)<span class="tag tag-gray">Nội bộ</span>@endif
-            @if(!$event->is_free && !$event->is_internal)<span class="tag tag-amber">Có phí</span>@endif
-            @foreach(($event->tags ?? []) as $tag)
-              <span class="tag tag-blue">{{ $tag }}</span>
-            @endforeach
-          </div>
-        </div>
-      </div>
-      <div class="ec-footer">
-        <div class="ec-time">
-          <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#94a3b8" stroke-width="1.5"/><path d="M8 5v3.5l2 2" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
-          {{ $event->time_range }}
-        </div>
-        @if($isReg)
-          <button wire:click="unregister({{ $event->id }})" class="btn-reg registered">
-            <span wire:loading.remove wire:target="unregister({{ $event->id }})">✓ Đã đăng ký</span>
-            <span wire:loading wire:target="unregister({{ $event->id }})"><span class="spin"></span></span>
-          </button>
-        @elseif($event->registration_status === 'open' && !$event->is_internal)
-          <button wire:click="register({{ $event->id }})" class="btn-reg {{ $event->is_free ? 'free' : '' }}">
-            <span wire:loading.remove wire:target="register({{ $event->id }})">Đăng ký</span>
-            <span wire:loading wire:target="register({{ $event->id }})"><span class="spin"></span></span>
-          </button>
-        @else
-          <button class="btn-reg done" disabled>{{ $btnText }}</button>
-        @endif
-      </div>
-    </a>
-    @endforeach
-  </div>
-  @else
-    <div class="empty">📭 Không tìm thấy sự kiện nào.</div>
-  @endif
 
-  
-  @if($upcomingEvents->count() && $activeTab === 'all' && !$search)
-  <div class="section-title">Sắp diễn ra</div>
-  <div class="upcoming-list">
-    @foreach($upcomingEvents as $event)
-    @php $isReg = in_array($event->id, $registeredIds); @endphp
-    <a href="{{ route('event.show', $event->id) }}" class="up-item" style="text-decoration:none;color:inherit">
-      <div class="up-date">
-        <div class="up-day">{{ $event->day }}</div>
-        <div class="up-month">{{ $event->month_label }}</div>
+          
+          <div class="event-content">
+            <div class="event-cats">
+              @if($event->is_free)
+                <span class="tag-pill tag-free" style="font-size:10px;padding:2px 7px;">Miễn phí</span>
+              @else
+                <span class="tag-pill tag-paid" style="font-size:10px;padding:2px 7px;">Có phí</span>
+              @endif
+              @if($event->is_internal ?? false)
+                <span class="tag-pill tag-gray" style="font-size:10px;padding:2px 7px;">Nội bộ</span>
+              @endif
+              @if($event->category)
+                <span class="cat-badge">{{ $event->category }}</span>
+              @endif
+            </div>
+
+            <div class="event-title">{{ $event->title }}</div>
+
+            @if($event->description)
+              <div class="event-desc">{{ Str::limit(strip_tags($event->description), 120) }}</div>
+            @endif
+
+            <div class="event-info-row">
+              <span class="ei"><i class="fa-solid fa-location-dot"></i>{{ $event->location ?: 'TBA' }}</span>
+              <span class="ei"><i class="fa-regular fa-clock"></i>{{ $event->time_range }}</span>
+              <span class="ei"><i class="fa-solid fa-tag"></i>{{ $event->format_label ?? 'Trực tiếp' }}</span>
+            </div>
+          </div>
+
+           
+          <div>
+            @if($isReg)
+              <button wire:click.prevent="unregister({{ $event->id }})" class="btn-reg btn-reg-ok">
+                <span wire:loading.remove wire:target="unregister({{ $event->id }})">✓ Đã đăng ký</span>
+                <span wire:loading wire:target="unregister({{ $event->id }})"><span class="spin"></span></span>
+              </button>
+            @elseif(($event->registration_status ?? '') === 'open' && !($event->is_internal ?? false))
+              <button wire:click.prevent="register({{ $event->id }})" class="btn-reg {{ $event->is_free ? 'btn-reg-free' : 'btn-reg-prim' }}">
+                <span wire:loading.remove wire:target="register({{ $event->id }})">Đăng ký</span>
+                <span wire:loading wire:target="register({{ $event->id }})"><span class="spin"></span></span>
+              </button>
+            @else
+              <button class="btn-reg btn-reg-done" disabled>
+                {{ ($event->registration_status ?? '') === 'full' ? 'Hết chỗ' : 'Đã đóng' }}
+              </button>
+            @endif
+          </div>
+
+        </a>
+        @endforeach
       </div>
-      <div class="up-divider"></div>
-      <div class="up-info">
-        <div class="up-title">{{ $event->title }}</div>
-        <div class="up-meta"><i class="fa-solid fa-location-dot"></i>{{ $event->location ?: 'TBA' }} · {{ $event->time_range }}</div>
+
+      
+      @if(method_exists($gridEvents, 'links'))
+        <div class="pagination">{{ $gridEvents->links() }}</div>
+      @endif
+
+    @else
+      <div class="empty">
+        <i class="fa-solid fa-calendar-xmark" style="font-size:36px;color:#cbd5e1;margin-bottom:12px;display:block;"></i>
+        Không tìm thấy sự kiện nào.
       </div>
-      <div class="up-right">
-        @if($event->is_internal)
-          <span class="tag tag-gray">Nội bộ</span>
-          <button class="btn-reg done" disabled>Đã đóng</button>
-        @elseif($isReg)
-          <span class="tag tag-blue">Đã đăng ký</span>
-          <button wire:click="unregister({{ $event->id }})" class="btn-reg registered">Huỷ</button>
-        @elseif($event->is_free)
-          <span class="tag tag-green">Miễn phí</span>
-          <button wire:click="register({{ $event->id }})" class="btn-reg free">Đăng ký</button>
-        @elseif($event->registration_status === 'open')
-          <span class="tag tag-amber">Có phí</span>
-          <button wire:click="register({{ $event->id }})" class="btn-reg">Đăng ký</button>
-        @else
-          <button class="btn-reg done" disabled>Đã đóng</button>
+    @endif
+
+  </div> 
+
+  <aside class="sidebar-col">
+
+    <div class="sb-card">
+      <div class="sb-card-head">Tìm kiếm</div>
+      <div class="sb-card-body">
+        <div class="sb-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input class="sb-search" wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm sự kiện...">
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">Danh mục</div>
+      <div class="sb-card-body">
+        <button wire:click="setTab('all')" class="cat-btn {{ $activeTab === 'all' ? 'active' : '' }}">
+          Tất cả sự kiện <span class="cnt">{{ $stats['year_total'] }}</span>
+        </button>
+        <button wire:click="setTab('upcoming')" class="cat-btn {{ $activeTab === 'upcoming' ? 'active' : '' }}">
+          Sắp diễn ra <span class="cnt">{{ $stats['upcoming'] }}</span>
+        </button>
+        <button wire:click="setTab('free')" class="cat-btn {{ $activeTab === 'free' ? 'active' : '' }}">
+          Miễn phí
+        </button>
+        <button wire:click="setTab('past')" class="cat-btn {{ $activeTab === 'past' ? 'active' : '' }}">
+          Đã qua
+        </button>
+        @if($search)
+          <button wire:click="$set('search', '')" class="btn-reset">✕ Xoá tìm kiếm</button>
         @endif
       </div>
-    </a>
-    @endforeach
-  </div>
-  @endif
+    </div>
+
+    @if($upcomingEvents->count())
+    <div class="sb-card">
+      <div class="sb-card-head">Sắp diễn ra</div>
+      <div class="sb-card-body" style="padding:12px 16px;">
+        @foreach($upcomingEvents->take(5) as $ev)
+        <a href="{{ route('event.show', $ev->id) }}" class="mini-ev" wire:navigate>
+          <div class="mini-date">
+            <div class="d">{{ $ev->day }}</div>
+            <div class="m">{{ $ev->month_label }}</div>
+          </div>
+          <div>
+            <div class="mini-ev-title">{{ Str::limit($ev->title, 52) }}</div>
+            <div class="mini-ev-loc"><i class="fa-solid fa-location-dot" style="color:var(--fita2);margin-right:3px;"></i>{{ $ev->location ?: 'TBA' }}</div>
+          </div>
+        </a>
+        @endforeach
+      </div>
+    </div>
+    @endif
+
+  </aside>
+
+</div>
+
 </div>

@@ -29,7 +29,7 @@ class Job extends Component
     public string $f_type = 'full-time';
     public string $field = '';
     public string $salary = '';
-    public string $logo_emoji = '🏢';
+    
     public string $description = '';
     public string $contact_email = '';
     public string $f_khoa = '';
@@ -39,14 +39,12 @@ class Job extends Component
     public function updatedType() { $this->resetPage(); }
     public function updatedKhoa() { $this->resetPage(); }
 
-    /* mở form tạo */
     public function openCreate()
     {
         $this->resetForm();
         $this->showForm = true;
     }
 
-    /* mở form edit */
     public function openEdit($id)
     {
         $job = JobModel::findOrFail($id);
@@ -58,7 +56,6 @@ class Job extends Component
         $this->f_type = $job->type;
         $this->field = $job->field ?? '';
         $this->salary = $job->salary ?? '';
-        $this->logo_emoji = $job->logo_emoji ?? '🏢';
         $this->description = $job->description ?? '';
         $this->contact_email = $job->contact_email ?? '';
         $this->f_khoa = $job->khoa ?? '';
@@ -67,14 +64,12 @@ class Job extends Component
         $this->showDetail = false;
     }
 
-    /* xem chi tiết */
     public function openDetail($id)
     {
         $this->detailId = $id;
         $this->showDetail = true;
     }
 
-    /* lưu */
     public function save()
     {
         $this->validate([
@@ -91,7 +86,6 @@ class Job extends Component
             'type' => $this->f_type,
             'field' => $this->field ?: null,
             'salary' => $this->salary ?: null,
-            'logo_emoji' => $this->logo_emoji ?: '🏢',
             'description' => $this->description ?: null,
             'contact_email' => $this->contact_email ?: null,
             'khoa' => $this->f_khoa ?: null,
@@ -116,7 +110,6 @@ class Job extends Component
         $this->showForm = false;
     }
 
-    /* bật tắt active */
     public function toggleActive($id)
     {
         $job = JobModel::findOrFail($id);
@@ -152,7 +145,6 @@ class Job extends Component
         ]);
 
         $this->f_type = 'full-time';
-        $this->logo_emoji = '🏢';
     }
 
     public function render()

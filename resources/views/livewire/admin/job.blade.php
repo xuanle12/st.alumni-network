@@ -408,7 +408,7 @@ td {
               <tr wire:key="job-{{ $job->id }}">
                 <td>
                   <div style="display:flex;align-items:center;gap:9px">
-                    <span style="font-size:20px;flex-shrink:0">{{ $job->logo_emoji }}</span>
+                    <!-- <span style="font-size:20px;flex-shrink:0">{{ $job->logo_emoji }}</span> -->
                     <div style="min-width:0">
                       <div
                         style="font-weight:500;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">
@@ -480,7 +480,7 @@ td {
           <div class="modal-title">Chi tiết tin tuyển dụng<button class="close-btn"
               wire:click="$set('showDetail', false)">×</button></div>
           <div class="d-hero">
-            <div class="d-ico">{{ $detail->logo_emoji }}</div>
+            <!-- <div class="d-ico">{{ $detail->logo_emoji }}</div> -->
             <div>
               <div style="font-size:15px;font-weight:600;color:#111">{{ $detail->title }}</div>
               <div style="font-size:12px;color:#6b7280;margin-top:2px">{{ $detail->company }}@if($detail->location) ·
@@ -555,7 +555,8 @@ td {
             <div class="fi"><label>Ngành nghề</label><input wire:model="field" type="text" placeholder="Công nghệ...">
             </div>
             <div class="fi"><label>Mức lương</label><input wire:model="salary" type="text" placeholder="18–30 tr"></div>
-            <div class="fi"><label>Icon</label><input wire:model="logo_emoji" type="text" placeholder="<i class='fa-solid fa-laptop'></i>"></div>            <div class="fi"><label>Email liên hệ</label><input wire:model="contact_email" type="email"
+            <!-- <div class="fi"><label>Icon</label><input wire:model="logo_emoji" type="text" placeholder="<i class='fa-solid fa-laptop'></i>"></div>             -->
+            <div class="fi"><label>Email liên hệ</label><input wire:model="contact_email" type="email"
                 placeholder="hr@congty.com">@error('contact_email')<div class="err">{{ $message }}</div>@enderror</div>
             <div class="fi full"><label>Mô tả công việc</label><textarea wire:model="description"
                 placeholder="Mô tả yêu cầu, quyền lợi..."></textarea></div>

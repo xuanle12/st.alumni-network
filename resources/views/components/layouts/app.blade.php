@@ -164,7 +164,7 @@ header {
   height: 72px;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 0;
 }
 
 .logo {
@@ -186,7 +186,7 @@ header {
 .logo-text span { font-size: 12px; color: var(--text-muted); }
 
 /* Nav giống fita: chữ đen, hover màu fita + gạch chân dưới */
-nav { display: flex; align-items: center; gap: 0; height: 72px; }
+nav { display: flex; align-items: center; gap: 0; height: 72px; margin-left: auto; }
 nav a {
   position: relative;
   padding: 0 14px;
@@ -219,11 +219,11 @@ nav a.active {
 nav a.active::before { width: 100%; background: var(--blue); }
 
 .header-right {
-  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+  margin-left: 16px;
 }
 /* ── SIDEBAR OVERLAY ────────────────────── */
 .sidebar-overlay {
@@ -585,8 +585,6 @@ a:focus-visible, button:focus-visible {
  </head>
 <body>
 
-<a href="#main-content" class="skip-link">Bỏ qua tới nội dung chính</a>
-
 @if(session('success') || session('info') || session('error'))
   @php
     $flashType = session('error') ? 'is-error' : (session('info') ? 'is-info' : '');
@@ -624,7 +622,7 @@ a:focus-visible, button:focus-visible {
     <a href="{{ route('home') }}" class="logo" wire:navigate>
       <img src="{{ asset('img/fita-logo.png') }}" alt="{{ config('app.name') }}" loading="lazy">
       <div class="logo-text">
-        <strong>Mạng lưới cựu sinh viên khoa CNTT</strong>
+        <strong>  MẠNG LƯỚI CỰU SINH VIÊN KHOA CNTT</strong>
         <span>Học viện Nông nghiệp Việt Nam</span>
       </div>
     </a>
@@ -738,7 +736,7 @@ a:focus-visible, button:focus-visible {
       <a href="{{ route('home') }}" class="footer-logo" wire:navigate>
       <img src="{{ asset('img/fita-logo.png') }}" alt="logo">
     <div>
-          <strong>Mạng lưới cựu sinh viên Khoa CNTT</strong>
+          <strong>MẠNG LƯỚI CỰU SINH VIÊN KHOA CNTT</strong>
           <span>Khoa Công nghệ Thông tin</span>
         </div>
       </a>
@@ -862,7 +860,6 @@ a:focus-visible, button:focus-visible {
     if (e.key === 'Escape') closeSidebar();
   });
 
-  // Close drawer after Livewire SPA navigation
   document.addEventListener('livewire:navigated', closeSidebar);
 </script>
 
