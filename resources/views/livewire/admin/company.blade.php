@@ -172,36 +172,7 @@
   <button class="btn-add" wire:click="openAdd">＋ Thêm doanh nghiệp</button>
 </div>
 
-<div class="stats">
-  <div class="stat">
-    <div class="stat-left">
-      <div class="stat-l">Tổng doanh nghiệp</div>
-      <div class="stat-n n-b">{{ $stats['total'] }}</div>
-    </div>
-    <div class="stat-ic ic-b"><i class="fa-solid fa-building"></i></div>
-  </div>
-  <div class="stat">
-    <div class="stat-left">
-      <div class="stat-l">Đang hợp tác</div>
-      <div class="stat-n n-g">{{ $stats['active'] }}</div>
-    </div>
-    <div class="stat-ic ic-g"><i class="fa-solid fa-circle-check"></i></div>
-  </div>
-  <div class="stat">
-    <div class="stat-left">
-      <div class="stat-l">Tin tuyển dụng</div>
-      <div class="stat-n n-p">{{ $stats['jobs'] }}</div>
-    </div>
-    <div class="stat-ic ic-p"><i class="fa-solid fa-list"></i></div>
-  </div>
-  <div class="stat">
-    <div class="stat-left">
-      <div class="stat-l">Chờ duyệt</div>
-      <div class="stat-n n-a">{{ $stats['pending'] }}</div>
-    </div>
-    <div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div>
-  </div>
-</div>
+
 
 <div class="toolbar">
   <div class="sw">
@@ -231,7 +202,7 @@
         <tr>
           <th style="width:30%">Doanh nghiệp</th>
           <th style="width:14%">Lĩnh vực</th>
-          <th style="width:11%">Tin đăng</th>
+          <!-- <th style="width:11%">Tin đăng</th> -->
           <th style="width:13%">Trạng thái</th>
           <th style="width:22%">Liên hệ</th>
           <th style="width:10%;text-align:right">Thao tác</th>
@@ -257,12 +228,12 @@
             <div class="ct">{{ $c->field ?: '—' }}</div>
             <div class="cs">{{ $c->size ?: '—' }}</div>
           </td>
-          <td>
+          <!-- <td>
             <div class="jc">
               <div class="jc-dot">{{ $c->job_postings_count }}</div>
               tin
             </div>
-          </td>
+          </td> -->
           <td><span class="bd {{ $bc }}">{{ $bl }}</span></td>
           <td>
             <div class="ct">{{ $c->contact_name ?: '—' }}</div>
@@ -494,7 +465,7 @@
     </div>
     <div class="mo-ft">
       <button wire:click="closeView" class="btn btn-ghost">Đóng</button>
-      <button wire:click="openEdit({{ $viewCompany->id }})" class="btn btn-prim">✎ Chỉnh sửa</button>
+      <button wire:click="openEdit({{ $viewCompany->id }})" class="btn btn-prim"> Chỉnh sửa</button>
     </div>
   </div>
 </div>

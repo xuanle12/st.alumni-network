@@ -171,24 +171,6 @@
   <button wire:click="openAdd" class="btn-add">＋ Viết bài mới</button>
 </div>
 
-<div class="stats">
-  <div class="stat">
-    <div class="stat-left"><div class="stat-l">Tổng bài viết</div><div class="stat-n n-b">{{ $stats['total'] }}</div></div>
-    <div class="stat-ic ic-b"><i class="fa-solid fa-pen-to-square"></i></div>
-  </div>
-  <div class="stat">
-    <div class="stat-left"><div class="stat-l">Đã đăng</div><div class="stat-n n-g">{{ $stats['published'] }}</div></div>
-    <div class="stat-ic ic-g"><i class="fa-solid fa-check-circle"></i></div>
-  </div>
-  <div class="stat">
-    <div class="stat-left"><div class="stat-l">Chờ duyệt</div><div class="stat-n n-o">{{ $stats['pending'] }}</div></div>
-    <div class="stat-ic ic-o"><i class="fa-solid fa-bell"></i></div>
-  </div>
-  <div class="stat">
-    <div class="stat-left"><div class="stat-l">Bản nháp</div><div class="stat-n n-a">{{ $stats['draft'] }}</div></div>
-    <div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div>
-  </div>
-</div>
 
 <div class="toolbar">
   <div class="sw">

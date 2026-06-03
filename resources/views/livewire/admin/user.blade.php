@@ -155,25 +155,7 @@
     </div>
   </div>
 
-  <div class="stats">
-    
-    <div class="stat">
-      <div class="stat-ic ic-b"><i class="fa-solid fa-users"></i></div>
-      <div><div class="stat-val sv-b">{{ $stats['total'] }}</div><div class="stat-lbl">Tổng người dùng</div></div>
-    </div>
-    <div class="stat">
-      <div class="stat-ic ic-g"><i class="fa-solid fa-graduation-cap"></i></div>
-      <div><div class="stat-val sv-g">{{ $stats['alumni'] }}</div><div class="stat-lbl">Cựu sinh viên</div></div>
-    </div>
-    <div class="stat">
-      <div class="stat-ic ic-a"><i class="fa-solid fa-shield-halved"></i></div>
-      <div><div class="stat-val sv-a">{{ $stats['admin'] }}</div><div class="stat-lbl">Quản trị viên</div></div>
-    </div>
-    <div class="stat">
-      <div class="stat-ic ic-o"><i class="fa-solid fa-clock"></i></div>
-      <div><div class="stat-val sv-o">{{ $stats['pending'] }}</div><div class="stat-lbl">Chờ duyệt</div></div>
-    </div>
-  </div>
+ 
 
   <div class="toolbar">
     <div class="sw">

@@ -34,14 +34,15 @@ html, body {
   background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
-  
+  padding-top: 102px; /* 35 topbar + 67 header */
 }
 
- .container {
+.container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -130,15 +131,23 @@ html, body {
 .menu-icon-btn.open span:nth-child(1) { width: 18px; transform: translateY(7px) rotate(45deg); }
 .menu-icon-btn.open span:nth-child(2) { opacity: 0; }
 .menu-icon-btn.open span:nth-child(3) { width: 18px; transform: translateY(-7px) rotate(-45deg); }
- .topbar {
+
+/* ===== TOPBAR ===== */
+.topbar {
   background: var(--blue);
   color: #fff;
   font-size: 13px;
-  height: 32px;
+  height: 35px;
   display: flex;
   align-items: center;
   padding: 0 24px;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  will-change: transform;
 }
 .topbar-left { font-weight: 500; letter-spacing: 0.2px; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
@@ -146,43 +155,50 @@ html, body {
 .topbar-right a:hover { color: #fff; }
 .topbar-sep { color: rgba(255,255,255,.3); }
 
- header {
-  position: sticky;
-  top: 0;
-  z-index: 200;
+/* ===== HEADER ===== */
+header {
+  position: fixed;
+  top: 35px;
+  left: 0;
+  right: 0;
+  z-index: 299;
+  height: 67px;
   background: #fff;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  will-change: transform;
 }
 
 .header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  height: 72px;
+  width: 100%;
+  padding: 0 24px 0 8px;
+  height: 67px;
   display: flex;
   align-items: center;
-  gap: 0;
+  overflow: hidden;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
   text-decoration: none;
   flex-shrink: 0;
 }
-.logo img { height: 44px; width: auto; }
+.logo img { height: 52px; width: auto; flex-shrink: 0; }
 .logo-text { line-height: 1.25; }
 .logo-text strong {
   display: block;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
   color: var(--blue);
   letter-spacing: -0.2px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
-.logo-text span { font-size: 12px; color: var(--text-muted); }
+.logo-text span { font-size: 13px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
 
- nav { display: flex; align-items: center; gap: 0; height: 72px; margin-left: auto; }
+/* ===== NAV — chiều cao khớp với header ===== */
+nav { display: flex; align-items: center; gap: 0; height: 67px; margin-left: auto; }
 nav a {
   position: relative;
   padding: 0 14px;
@@ -221,7 +237,9 @@ nav a.active::before { width: 100%; background: var(--blue); }
   flex-shrink: 0;
   margin-left: 16px;
 }
- .sidebar-overlay {
+
+/* ===== SIDEBAR ===== */
+.sidebar-overlay {
   position: fixed;
   inset: 0;
   background: rgba(15, 34, 24, 0.45);
@@ -232,7 +250,6 @@ nav a.active::before { width: 100%; background: var(--blue); }
   transition: opacity .3s ease;
 }
 .sidebar-overlay.open { opacity: 1; pointer-events: all; }
-
 
 .sidebar-drawer {
   position: fixed;
@@ -336,9 +353,9 @@ nav a.active::before { width: 100%; background: var(--blue); }
 .sidebar-drawer-footer .btn { justify-content: center; }
 
 .menu-icon-btn { display: none; }
-
 .hamburger { display: none; }
 
+/* ===== FOOTER ===== */
 .footer-stripe { display: flex; flex-direction: column; }
 .footer-stripe-gold  { height: 6px; background: #F6A309; }
 .footer-stripe-green { height: 6px; background: #066140; }
@@ -359,7 +376,6 @@ footer {
   .footer-grid { grid-template-columns: 1fr !important; }
 }
 
-
 .footer-logo {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none; margin-bottom: 20px;
@@ -374,13 +390,11 @@ footer {
 .footer-logo strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
 .footer-logo span { font-size: 12px; color: rgba(255,255,255,.5); }
 
-
 .footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .footer-contact-list li,
 .footer-contact-list a { display: flex; align-items: flex-start; gap: 8px; color: rgba(255,255,255,.65); font-size: 14px; text-decoration: none; transition: .15s; }
 .footer-contact-list a:hover { color: #fff; }
 .footer-contact-list i { font-size: 14px; margin-top: 2px; flex-shrink: 0; color: rgba(255,255,255,.4); }
-
 
 .footer-col-links h5,
 .footer-col-social h5 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 20px; }
@@ -392,16 +406,13 @@ footer {
 .footer-link-list a:hover { color: #fff; }
 .footer-link-list i { font-size: 11px; color: rgba(255,255,255,.35); }
 
-
 .footer-social-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
 .footer-social-list li { transition: transform .2s; }
 .footer-social-list li:hover { transform: translateX(4px); }
 .footer-social-list a { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.65); text-decoration: none; transition: color .15s; }
 .footer-social-list a:hover { color: #fff; }
 
-
 .footer-col-map { border-radius: 8px; overflow: hidden; min-height: 200px; }
-
 
 .footer-copyright {
   background: var(--blue);
@@ -414,7 +425,7 @@ footer {
 .footer-copyright a { color: rgba(255,255,255,.7); text-decoration: none; font-weight: 500; transition: .15s; }
 .footer-copyright a:hover { color: #fff; }
 
-
+/* ===== ANIMATIONS ===== */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -424,20 +435,14 @@ footer {
 .delay-2   { animation-delay: .2s; }
 .delay-3   { animation-delay: .3s; }
 
-
-
+/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
   .hero p { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: center; }
   .hero-card { display: none; }
-
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .alumni-grid   { grid-template-columns: repeat(3, 1fr); }
-
   .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
   .footer-brand { grid-column: 1 / -1; }
   .footer-desc  { max-width: 100%; }
@@ -463,24 +468,9 @@ footer {
   .event-badge { order: -1; }
 
   .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
-  .logo {
-    align-items: flex-start;
-  }
-
-  .logo-text strong,
-  .logo-text span {
-    white-space: normal;
-    line-height: 1.3;
-  }
-
-  .logo-text strong {
-    font-size: 15px;
-    max-width: 180px;
-  }
-
-  .logo-text span {
-    font-size: 12px;
-  }
+  .logo { align-items: center; }
+  .logo-text strong { white-space: normal; line-height: 1.3; font-size: 15px; max-width: 180px; }
+  .logo-text span { font-size: 12px; white-space: normal; }
 }
 
 @media (max-width: 480px) {
@@ -519,6 +509,7 @@ footer {
 
   .container { padding: 0 16px; }
 }
+
 .skip-link {
   position: absolute;
   left: -999px;
@@ -538,9 +529,10 @@ a:focus-visible, button:focus-visible {
   outline-offset: 2px;
   border-radius: 6px;
 }
+
 .flash-toast {
   position: fixed;
-  top: 84px;
+  top: 112px;
   right: 16px;
   z-index: 400;
   display: flex;
@@ -572,7 +564,7 @@ a:focus-visible, button:focus-visible {
   to   { transform: translateY(0);    opacity: 1; }
 }
 @media (max-width: 480px) {
-  .flash-toast { left: 16px; right: 16px; top: 76px; }
+  .flash-toast { left: 16px; right: 16px; top: 112px; }
 }
   </style>
  </head>
@@ -589,7 +581,6 @@ a:focus-visible, button:focus-visible {
   </div>
   <script>setTimeout(() => { const t=document.getElementById('flashToast'); if(t) t.remove(); }, 4000);</script>
 @endif
-
 
 <div class="topbar">
   <span class="topbar-left">Học viện Nông nghiệp Việt Nam — Vietnam National University of Agriculture</span>
@@ -615,7 +606,7 @@ a:focus-visible, button:focus-visible {
     <a href="{{ route('home') }}" class="logo" wire:navigate>
       <img src="{{ asset('img/fita-logo.png') }}" alt="{{ config('app.name') }}" loading="lazy">
       <div class="logo-text">
-        <strong>  MẠNG LƯỚI CỰU SINH VIÊN KHOA CNTT</strong>
+        <strong>MẠNG LƯỚI CỰU SINH VIÊN KHOA CNTT</strong>
         <span>Học viện Nông nghiệp Việt Nam</span>
       </div>
     </a>
@@ -633,63 +624,58 @@ a:focus-visible, button:focus-visible {
         @else
           <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
         @endif
-      @else
-        <a href="{{ route('login') }}"    class="btn btn-ghost"   wire:navigate>Đăng nhập</a>
-        <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Đăng ký</a>
       @endauth
-      <button class="menu-icon-btn" id="menuBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="sidebarDrawer">
-        <span></span><span></span><span></span>
+      <button class="menu-icon-btn" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
-
   </div>
 </header>
-
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="sidebar-drawer" id="sidebarDrawer">
   <div class="sidebar-drawer-header">
     <a href="{{ route('home') }}" class="sidebar-drawer-logo" wire:navigate>
-  <img src="{{ asset('img/logo-vnua.png') }}" alt="{{ config('app.name') }}" loading="lazy">     
-   <span>Alumni Network</span>
+      <img src="{{ asset('img/logo-vnua.png') }}" alt="{{ config('app.name') }}" loading="lazy">
+      <span>Alumni Network</span>
     </a>
     <button class="sidebar-close" id="sidebarClose" aria-label="Đóng menu">✕</button>
   </div>
-<div class="sidebar-drawer-body">
-  @guest
-    <p style="font-size:13px;color:var(--text-muted);padding:12px 10px;line-height:1.6;">
-      Vui lòng đăng nhập để truy cập đầy đủ tính năng.
-    </p>
-  @endguest
-
-  @auth
-    <div class="sidebar-nav-label">Menu chính</div>
-    <a href="{{ route('csv') }}" class="sidebar-nav-item {{ request()->routeIs('csv') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon"><i class="fa-solid fa-house"></i></div> Trang chủ
-    </a>
-    <a href="{{ route('job') }}" class="sidebar-nav-item {{ request()->routeIs('job*') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon"><i class="fa-solid fa-briefcase"></i></div> Tuyển dụng
-    </a>
-    <a href="{{ route('event') }}" class="sidebar-nav-item {{ request()->routeIs('event*') ? 'active' : '' }}" wire:navigate>
-      <div class="nav-icon"><i class="fa-solid fa-calendar-days"></i></div> Sự kiện
-    </a>
-    <a href="{{ route('profile') }}" class="sidebar-nav-item" wire:navigate>
-      <div class="nav-icon"><i class="fa-solid fa-user"></i></div> Hồ Sơ
-    </a>
-    @if(auth()->user()->isAdmin())
-      <div class="sidebar-divider"></div>
-      <div class="sidebar-nav-label">Quản trị</div>
-      <a href="{{ route('admin') }}" class="sidebar-nav-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
-        <div class="nav-icon"><i class="fa-solid fa-gauge"></i></div> Dashboard
+  <div class="sidebar-drawer-body">
+    @guest
+      <p style="font-size:13px;color:var(--text-muted);padding:12px 10px;line-height:1.6;">
+        Vui lòng đăng nhập để truy cập đầy đủ tính năng.
+      </p>
+    @endguest
+    @auth
+      <div class="sidebar-nav-label">Menu chính</div>
+      <a href="{{ route('csv') }}" class="sidebar-nav-item {{ request()->routeIs('csv') ? 'active' : '' }}" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-house"></i></div> Trang chủ
       </a>
-      <a href="{{ route('admin.thongk') }}" class="sidebar-nav-item {{ request()->routeIs('admin.thongk') ? 'active' : '' }}" wire:navigate>
-        <div class="nav-icon"><i class="fa-solid fa-chart-bar"></i></div> Thống kê & Báo cáo
+      <a href="{{ route('job') }}" class="sidebar-nav-item {{ request()->routeIs('job*') ? 'active' : '' }}" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-briefcase"></i></div> Tuyển dụng
       </a>
-    @endif
-  @endauth
-</div>
-
+      <a href="{{ route('event') }}" class="sidebar-nav-item {{ request()->routeIs('event*') ? 'active' : '' }}" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-calendar-days"></i></div> Sự kiện
+      </a>
+      <a href="{{ route('profile') }}" class="sidebar-nav-item" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-user"></i></div> Hồ Sơ
+      </a>
+      @if(auth()->user()->isAdmin())
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-nav-label">Quản trị</div>
+        <a href="{{ route('admin') }}" class="sidebar-nav-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
+          <div class="nav-icon"><i class="fa-solid fa-gauge"></i></div> Dashboard
+        </a>
+        <a href="{{ route('admin.thongk') }}" class="sidebar-nav-item {{ request()->routeIs('admin.thongk') ? 'active' : '' }}" wire:navigate>
+          <div class="nav-icon"><i class="fa-solid fa-chart-bar"></i></div> Thống kê & Báo cáo
+        </a>
+      @endif
+    @endauth
+  </div>
   <div class="sidebar-drawer-footer">
     @auth
       @if(auth()->user()->isAdmin())
@@ -710,11 +696,9 @@ a:focus-visible, button:focus-visible {
   </div>
 </div>
 
-
 <main id="main-content">
   {{ $slot }}
 </main>
-
 
 <div class="footer-stripe">
   <div class="footer-stripe-gold"></div>
@@ -727,8 +711,8 @@ a:focus-visible, button:focus-visible {
        class="footer-grid">
     <div class="footer-col-contact">
       <a href="{{ route('home') }}" class="footer-logo" wire:navigate>
-      <img src="{{ asset('img/fita-logo.png') }}" alt="logo">
-    <div>
+        <img src="{{ asset('img/fita-logo.png') }}" alt="logo">
+        <div>
           <strong>MẠNG LƯỚI CỰU SINH VIÊN KHOA CNTT</strong>
           <span>Khoa Công nghệ Thông tin</span>
         </div>
@@ -759,7 +743,6 @@ a:focus-visible, button:focus-visible {
       </ul>
     </div>
 
-    
     <div class="footer-col-links">
       <h5>Liên kết nhanh</h5>
       <ul class="footer-link-list">
@@ -807,7 +790,6 @@ a:focus-visible, button:focus-visible {
     </div>
   </div>
 </footer>
-
 
 <div class="footer-copyright">
   <div style="max-width:1280px;margin:0 auto;padding:0 24px;">

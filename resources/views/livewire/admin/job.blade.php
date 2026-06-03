@@ -367,33 +367,7 @@ td {
         <div class="flash-ok"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
       @endif
 
-      <div class="stats-sm">
-        <div class="stat-sm">
-          <div>
-            <div class="stat-sm-label">Tổng tin</div>
-            <div class="stat-sm-val">{{ \App\Models\Job::count() }}</div>
-          </div><span style="font-size:20px"><i class="fa-solid fa-briefcase"></i></span>
-        </div>
-        <div class="stat-sm">
-          <div>
-            <div class="stat-sm-label">Đang hiển thị</div>
-            <div class="stat-sm-val">{{ \App\Models\Job::where('is_active', true)->count() }}</div>
-          </div><span style="font-size:20px"><i class="fa-solid fa-eye"></i></span>
-        </div>
-        <div class="stat-sm">
-          <div>
-            <div class="stat-sm-label">Thực tập</div>
-            <div class="stat-sm-val">{{ \App\Models\Job::where('type', 'internship')->count() }}</div>
-          </div><span style="font-size:20px"><i class="fa-solid fa-graduation-cap"></i></span>
-        </div>
-        <div class="stat-sm">
-          <div>
-            <div class="stat-sm-label">Tất cả khoa</div>
-            <div class="stat-sm-val">{{ \App\Models\Job::whereNull('khoa')->count() }}</div>
-          </div><span style="font-size:20px"><i class="fa-solid fa-globe"></i></span>
-        </div>
-      </div>
-
+     
       <div class="toolbar">
       <input class="tb-in" wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm theo tiêu đề, công ty...">       
         <select class="tb-sel" wire:model.live="type">

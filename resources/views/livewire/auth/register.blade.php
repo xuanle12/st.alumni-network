@@ -199,7 +199,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 
     <div class="reg-head">
       <div class="reg-logos">
-        <img src="{{ asset('img/fita.logo.png') }}" alt="Logo VNUA">
+        <img src="{{ asset('img/fita-logo.png') }}" alt="Logo VNUA">
         <img src="{{ asset('img/logoST.jpg') }}"   alt="Logo ST">
       </div>
       <div class="reg-head-title">Khoa Công nghệ Thông tin</div>
@@ -244,35 +244,91 @@ body{font-family:'Barlow',system-ui,sans-serif;}
           wire:model.live="password_confirmation" type="password" placeholder="••••••••">
       </div>
     </div>
+<div class="reg-verify-box" x-data="{ open: false }">
 
-    <div class="reg-verify-box">
-      <div class="reg-verify-title">
+    <div
+        class="reg-verify-title"
+        @click="open = !open"
+        style="cursor:pointer;"
+    >
         <i class="fa-solid fa-shield-halved" style="color:#0961AA"></i>
-        Xác minh cựu sinh viên
-        <span class="reg-verify-hint">— cần ít nhất 2 thông tin</span>
-      </div>
-      <p class="reg-verify-desc">Điền ít nhất 2 trong 5 thông tin để xác minh bạn là cựu sinh viên HVNNA.</p>
 
-      <div class="reg-row">
-        <div class="reg-field">
-          <label class="reg-label">Họ tên đầy đủ</label>
-        </div>
-        <div class="reg-field">
-          <label class="reg-label">Mã sinh viên</label>
-        </div>
-      </div>
-      <div class="reg-row">
-        <div class="reg-field">
-          <label class="reg-label">Lớp</label>
-        </div>
-        <div class="reg-field">
-          <label class="reg-label">Năm tốt nghiệp</label>
-        </div>
-      </div>
-      <div class="reg-field">
-        <label class="reg-label">Ngành học</label>
-      </div>
+        <span>Xác minh cựu sinh viên</span>
+
+        <span class="reg-verify-hint">
+            — cần ít nhất 2 thông tin
+        </span>
+
+        <i
+            class="fa-solid"
+            :class="open ? 'fa-chevron-up' : 'fa-chevron-down'"
+            style="margin-left:auto"
+        ></i>
     </div>
+
+    <div x-show="open" x-transition>
+
+        <p class="reg-verify-desc">
+            Điền ít nhất 2 trong 5 thông tin để xác minh bạn là cựu sinh viên HVNNA.
+        </p>
+
+        <div class="reg-row">
+            <div class="reg-field">
+                <label class="reg-label">Họ tên đầy đủ</label>
+                <input
+                    type="text"
+                    class="reg-input"
+                    wire:model.live="full_name"
+                    placeholder="Nguyễn Văn A"
+                >
+            </div>
+
+            <div class="reg-field">
+                <label class="reg-label">Mã sinh viên</label>
+                <input
+                    type="text"
+                    class="reg-input"
+                    wire:model.live="student_code"
+                    placeholder="641234"
+                >
+            </div>
+        </div>
+
+        <div class="reg-row">
+            <div class="reg-field">
+                <label class="reg-label">Lớp</label>
+                <input
+                    type="text"
+                    class="reg-input"
+                    wire:model.live="class_name"
+                    placeholder="K64CNTTA"
+                >
+            </div>
+
+            <div class="reg-field">
+                <label class="reg-label">Năm tốt nghiệp</label>
+                <input
+                    type="number"
+                    class="reg-input"
+                    wire:model.live="graduation_year"
+                    placeholder="2024"
+                >
+            </div>
+        </div>
+
+        <div class="reg-field">
+            <label class="reg-label">Ngành học</label>
+            <input
+                type="text"
+                class="reg-input"
+                wire:model.live="major"
+                placeholder="Công nghệ thông tin"
+            >
+        </div>
+
+    </div>
+
+</div>
 
     @error('verify')
       <div class="reg-err-box">{{ $message }}</div>
@@ -289,7 +345,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     <div class="reg-or"><span>hoặc</span></div>
 
     <a href="#" class="reg-sso">
-      <i class="fa-solid fa-lock"></i> Đăng ký bằng SSO
+      <i class="fa-solid fa-lock"></i> Đăng nhập bằng SSO
     </a>
 
     <p class="reg-login-text">

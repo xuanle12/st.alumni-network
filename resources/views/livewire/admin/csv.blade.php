@@ -131,16 +131,11 @@
       <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
     </div>
 
-    <div class="stats">
-      <div class="stat"><div class="stat-ic ic-b"><i class="fa-solid fa-graduation-cap"></i></div><div class="stat-n n-b">{{ $stats['total'] }}</div><div class="stat-l">Tổng cựu SV</div></div>
-      <div class="stat"><div class="stat-ic ic-g"><i class="fa-solid fa-check-circle"></i></div><div class="stat-n n-g">{{ $stats['active'] }}</div><div class="stat-l">Đã xác minh</div></div>
-      <div class="stat"><div class="stat-ic ic-a"><i class="fa-solid fa-clock"></i></div><div class="stat-n n-a">{{ $stats['pending'] }}</div><div class="stat-l">Chờ duyệt</div></div>
-      <div class="stat"><div class="stat-ic ic-p"><i class="fa-solid fa-briefcase"></i></div><div class="stat-n n-p">{{ $stats['hasJob'] }}</div><div class="stat-l">Có việc làm</div></div>
-    </div>
+    
 
     <div class="toolbar">
       <div class="sw">
-        <span class="sw-ic">🔍</span>
+        <span class="sw-ic"><i class="fa-solid fa-magnifying-glass sw-ic"></i></span>
         <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tên, email, MSV, công ty...">
       </div>
       <select wire:model.live="filterStatus" class="sel">
