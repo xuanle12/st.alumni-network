@@ -27,6 +27,7 @@
   --radius:      12px;
   --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
   --shadow-md:   0 6px 24px rgba(0,0,0,0.08);
+   --header-h:    102px;
 }
 
 html, body {
@@ -34,7 +35,7 @@ html, body {
   background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
-  padding-top: 102px; /* 35 topbar + 67 header */
+  padding-top: 50px; 
 }
 
 .container {
@@ -132,7 +133,6 @@ html, body {
 .menu-icon-btn.open span:nth-child(2) { opacity: 0; }
 .menu-icon-btn.open span:nth-child(3) { width: 18px; transform: translateY(-7px) rotate(-45deg); }
 
-/* ===== TOPBAR ===== */
 .topbar {
   background: var(--blue);
   color: #fff;
@@ -147,7 +147,7 @@ html, body {
   left: 0;
   right: 0;
   z-index: 300;
-  will-change: transform;
+  
 }
 .topbar-left { font-weight: 500; letter-spacing: 0.2px; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
@@ -155,7 +155,7 @@ html, body {
 .topbar-right a:hover { color: #fff; }
 .topbar-sep { color: rgba(255,255,255,.3); }
 
-/* ===== HEADER ===== */
+
 header {
   position: fixed;
   top: 35px;
@@ -165,7 +165,7 @@ header {
   height: 67px;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  will-change: transform;
+  
 }
 
 .header-inner {
@@ -197,7 +197,6 @@ header {
 }
 .logo-text span { font-size: 13px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
 
-/* ===== NAV — chiều cao khớp với header ===== */
 nav { display: flex; align-items: center; gap: 0; height: 67px; margin-left: auto; }
 nav a {
   position: relative;
@@ -238,7 +237,6 @@ nav a.active::before { width: 100%; background: var(--blue); }
   margin-left: 16px;
 }
 
-/* ===== SIDEBAR ===== */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -355,7 +353,6 @@ nav a.active::before { width: 100%; background: var(--blue); }
 .menu-icon-btn { display: none; }
 .hamburger { display: none; }
 
-/* ===== FOOTER ===== */
 .footer-stripe { display: flex; flex-direction: column; }
 .footer-stripe-gold  { height: 6px; background: #F6A309; }
 .footer-stripe-green { height: 6px; background: #066140; }
@@ -615,6 +612,8 @@ a:focus-visible, button:focus-visible {
         <a href="{{ route('csv') }}"   class="{{ request()->routeIs('csv')   ? 'active' : '' }}" wire:navigate>Trang chủ</a>
         <a href="{{ route('job') }}"   class="{{ request()->routeIs('job*')  ? 'active' : '' }}" wire:navigate>Tuyển dụng</a>
         <a href="{{ route('event') }}" class="{{ request()->routeIs('event*')? 'active' : '' }}" wire:navigate>Sự kiện</a>
+        <a href="{{ route('mentor') }}" class="{{ request()->routeIs('mentor')? 'active' : '' }}" wire:navigate>Mentor</a>
+
       @endauth
     </nav>
     <div class="header-right">
@@ -839,4 +838,4 @@ a:focus-visible, button:focus-visible {
 </script>
 
 </body>
-</html>
+</html> 

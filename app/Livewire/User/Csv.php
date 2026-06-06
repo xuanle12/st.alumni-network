@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Event;
+use App\Models\Job;
 use App\Models\Post;
 use App\Models\User;
 
@@ -20,6 +21,7 @@ class Csv extends Component
     public $posts = [];
     public $events = [];
     public $contacts = [];
+    public $jobs = [];
 
     /* modal post */
     public bool $showModal = false;
@@ -77,12 +79,9 @@ class Csv extends Component
         };
 
 
-        $this->events = Event::latest()
+        $this->events = Event::latest()->limit(4)->get();
 
-            ->limit(5)
-
-            ->get();
-
+        $this->jobs = Job::latest()->limit(4)->get();
 
         $this->contacts = User::with('profile')
 
