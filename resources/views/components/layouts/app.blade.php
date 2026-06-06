@@ -612,8 +612,9 @@ a:focus-visible, button:focus-visible {
         <a href="{{ route('csv') }}"   class="{{ request()->routeIs('csv')   ? 'active' : '' }}" wire:navigate>Trang chủ</a>
         <a href="{{ route('job') }}"   class="{{ request()->routeIs('job*')  ? 'active' : '' }}" wire:navigate>Tuyển dụng</a>
         <a href="{{ route('event') }}" class="{{ request()->routeIs('event*')? 'active' : '' }}" wire:navigate>Sự kiện</a>
+      @if(auth()->user()?->hasRole(['student']))
         <a href="{{ route('mentor') }}" class="{{ request()->routeIs('mentor')? 'active' : '' }}" wire:navigate>Mentor</a>
-
+      @endif
       @endauth
     </nav>
     <div class="header-right">

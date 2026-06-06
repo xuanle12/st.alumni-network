@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Models;
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -54,8 +52,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function mentorProfile()
+{
+    return $this->hasOne(MentorProfile::class);
+}
  
-    // Lấy 2 chữ cái đầu để hiển thị avatar
+   
     public function getInitialsAttribute(): string
     {
         $parts = explode(' ', trim($this->name));
@@ -72,11 +74,38 @@ class User extends Authenticatable
             'contact_id'
         )->wherePivot('status', 'accepted')->withTimestamps();
     }
- 
-    public function isAdmin()
+    // phân quyền 
+    public function getRole(): string
     {
-        return $this->is_admin;
+    return $this->profile?->role ?? 'student';
     }
+    public function hasRole(string|array $roles): bool
+    {
+    $myRole = $this->getRole();
+    return in_array($myRole, (array) $roles);
+    }   
+
+   public function isAdmin(): bool    
+   { 
+    return $this->is_admin; 
+    }
+    public function isAlumni(): bool  
+    { 
+        return $this->getRole() === 'alumni'; 
+    }
+    public function isStudent(): bool  
+    { 
+        return $this->getRole() === 'student'; 
+    }
+    public function isLecturer(): bool 
+    { 
+        return $this->getRole() === 'lecturer'; 
+    }
+    public function isBusiness(): bool 
+    { 
+        return $this->getRole() === 'business'; 
+    }
+
     /**
      * Get the attributes that should be cast.
      *
