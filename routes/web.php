@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/event/{id}', \App\Livewire\User\Eventdetail::class)->name('event.show');
     Route::get('/profile', \App\Livewire\User\Profile::class)->name('profile');
     Route::get('/post', \App\Livewire\User\Post::class)->name('post');
-    Route::get('/mentor', \App\Livewire\User\Mentor::class)->middleware('role:student')->name('mentor');
+    Route::get('/mentor', \App\Livewire\User\Mentor::class)->middleware('role:student,admin')->name('mentor');
  
 });
 
@@ -41,6 +41,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/thongk', \App\Livewire\Admin\Thongk::class)->name('admin.thongk');
     Route::get('/admin/post', \App\Livewire\Admin\Posts::class)->name('admin.post');
     Route::get('/admin/user', \App\Livewire\Admin\User::class)->name('admin.user');
+    Route::get('/admin/mentor', \App\Livewire\Admin\Mentor::class)->name('admin.mentor');
 });
 // Route để bắt đầu quá trình redirect sang SSO
 // Route::get('/auth/redirect', function () {
