@@ -51,7 +51,7 @@ class Comment extends Component
             'newComment' => 'required|string|min:1|max:1000',
         ], ['newComment.required' => 'Vui lòng nhập nội dung.']);
  
-        Comment::create([
+        CommentModel::create([
             'post_id'   => $this->post->id,
             'user_id'   => Auth::id(),
             'parent_id' => $this->replyTo,
@@ -71,9 +71,9 @@ class Comment extends Component
  
     public function deleteComment(int $id): void
     {
-        $comment = Comment::find($id);
+        $comment = CommentModel::find($id);
         if ($comment && $comment->user_id === Auth::id()) {
-            Comment::where('parent_id', $id)->delete();
+            CommentModel::where('parent_id', $id)->delete();
             $comment->delete();
             Post::where('id', $this->post->id)->decrement('comments_count');
         }
@@ -82,7 +82,7 @@ class Comment extends Component
     public function likeComment(int $id): void
     {
         if (!Auth::check()) return;
-        $comment = Comment::find($id);
+        $comment = CommentModel::find($id);
         if ($comment) $comment->toggleLike();
     }
     public function render()
