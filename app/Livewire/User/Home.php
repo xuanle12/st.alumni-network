@@ -28,7 +28,7 @@ class Home extends Component
         return view('livewire.user.home', [
             'latestJobs'     => Job::latest()->take(6)->get(),
             'recentJobs'     => Job::latest()->take(3)->get(),
-            'upcomingEvents' => Event::where('start_date', '>=', now())->orderBy('start_date')->take(4)->get(),
+            'upcomingEvents' => Event::latest()->take(4)->get(),
             'latestPosts'    => Post::with('author')->latest()->take(3)->get(),
         ])->layout('components.layouts.app');
     }
