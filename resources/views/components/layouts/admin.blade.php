@@ -27,7 +27,7 @@
          .adm-layout { display: flex; min-height: 100vh; }
 
           .adm-sb {
-            width: 290px;
+            width: 250px;
             flex-shrink: 0;
             background: var(--adm-bg);
             border-right: 1px solid var(--adm-border);
@@ -50,14 +50,14 @@
             flex-shrink: 0;
         }
         .adm-brand img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
             padding: 4px;
         }   
        .adm-brand-name { font-size: 20px; font-weight: 700; color: #fff; line-height: 1.3; }
-        .adm-brand-sub  { font-size: 20px; color: var(--adm-text); margin-top: 2px; }
+        .adm-brand-sub  { font-size: 15px; color: var(--adm-text); margin-top: 2px; }
 
          .adm-back-btn {
             display: flex;
@@ -66,17 +66,17 @@
             margin: 12px 12px 4px;
             padding: 8px 12px;
             border-radius: 8px;
-            font-size: 20px;
+            font-size: 14px;
             color: var(--adm-text);
             transition: .15s;
             border: 1px solid var(--adm-border);
         }
         .adm-back-btn:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
-        .adm-back-btn i { font-size: 20px; }
+        .adm-back-btn i { font-size: 15px; }
 
          .adm-sec {
             padding: 16px 20px 5px;
-            font-size: 20px; font-weight: 700;
+            font-size: 15px; font-weight: 700;
             letter-spacing: 1.1px; text-transform: uppercase;
             color: rgba(255,255,255,0.25);
         }
@@ -85,7 +85,7 @@
             margin: 1px 10px;
             padding: 9px 12px;
             border-radius: 9px;
-            font-size: 20px;
+            font-size: 13px;
             color: var(--adm-text);
             cursor: pointer;
             display: flex;
@@ -96,11 +96,11 @@
         .adm-item:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
         .adm-item.active { background: var(--adm-active); color: var(--adm-active-c); font-weight: 600; }
         .adm-item.active .adm-item-ic { color: var(--adm-active-c); }
-        .adm-item-ic { font-size: 25px; width: 18px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.35); }
+        .adm-item-ic { font-size: 20px; width: 18px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.35); }
         .adm-item:hover .adm-item-ic { color: rgba(255,255,255,0.7); }
         .adm-item-badge {
             margin-left: auto;
-            font-size: 20px; font-weight: 700;
+            font-size: 10px; font-weight: 700;
             padding: 2px 7px; border-radius: 20px;
             background: rgba(251,191,36,0.15); color: #fbbf24;
         }
@@ -151,7 +151,7 @@
         }
         .adm-logout:hover { color: #f87171; background: rgba(248,113,113,0.1); }
 
-         .adm-main { flex: 1; background: #f1f5f9; overflow-y: auto; min-width: 0; }
+         .adm-main { flex: 1; background: #f1f5f9;min-width: 0; }
         .adm-topbar {
             background: var(--adm-bg);
             padding: 0 24px;
@@ -316,24 +316,7 @@
 
         <a href="{{ route('admin.thongk') }}" class="adm-item {{ request()->routeIs('admin.thongk*') ? 'active' : '' }}" wire:navigate>
             <i class="fa-solid fa-chart-bar adm-item-ic"></i> Thống kê
-        </a>
-
-       
-        <div class="adm-foot">
-            <div class="adm-user">
-                <div class="adm-uava">{{ auth()->user()?->initials ?? 'AD' }}</div>
-                <div>
-                    <div class="adm-uname">{{ auth()->user()?->name ?? 'Admin' }}</div>
-                    <div class="adm-urole">Quản trị viên</div>
-                </div>
-            </div>
-            <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Đăng xuất?')">
-                @csrf
-                <button type="submit" class="adm-logout">
-                    <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
-                </button>
-            </form>
-        </div>
+</a>
 
     </aside>
 

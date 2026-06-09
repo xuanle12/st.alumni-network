@@ -281,7 +281,7 @@ table{
 }
 
 thead th{
-  font-size:20px;
+  font-size:15px;
   font-weight:700;
   letter-spacing:.05em;
   text-transform:uppercase;
@@ -315,7 +315,7 @@ td{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  font-size:15px;
+  font-size:10px;
   font-weight:700;
   padding:5px 9px;
   border-radius:999px;
@@ -343,7 +343,7 @@ td{
 }
 
 .btn-xs{
-  font-size:15px;
+  font-size:13px;
   padding:6px 10px;
   border-radius:8px;
   border:1px solid #dbe3ee;
@@ -399,13 +399,13 @@ td{
 }
 
 .act-txt{
-  font-size:18px;
+  font-size:15px;
   color:#334155;
   line-height:1.45;
 }
 
 .act-time{
-  font-size:15px;
+  font-size:10px;
   color:var(--gray-soft);
   margin-top:3px;
 }
@@ -434,7 +434,7 @@ td{
   }
 
   .page-title{
-    font-size:22px;
+    font-size:15px;
   }
 
   .stats{
@@ -466,7 +466,7 @@ td{
 @media (max-width:480px){
 
   .page-title{
-    font-size:19px;
+    font-size:15px;
   }
 
   .stat{
@@ -474,7 +474,7 @@ td{
   }
 
   .stat-val{
-    font-size:22px;
+    font-size:15px;
   }
 
   .btn-xs{
@@ -493,7 +493,7 @@ td{
   <div class="topbar">
     <div>
       <div class="page-title">Dashboard</div>
-      <div class="page-sub">{{ now()->isoFormat('dddd, DD/MM/YYYY') }}</div>
+      <div class="page-sub">{{ ucfirst(now()->locale('vi')->isoFormat('dddd, DD/MM/YYYY')) }}</div>
     </div>
   </div>
  

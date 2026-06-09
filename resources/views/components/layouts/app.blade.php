@@ -620,9 +620,9 @@ a:focus-visible, button:focus-visible {
     <div class="header-right">
       @auth
         @if(auth()->user()->isAdmin())
-          <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
+          <a href="{{ route('admin') }}" class="btn btn-primary">Dashboard</a>
         @else
-          <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
+          <a href="{{ route('profile') }}" class="btn btn-primary">Hồ sơ</a>
         @endif
       @endauth
       <button class="menu-icon-btn" id="menuBtn">
