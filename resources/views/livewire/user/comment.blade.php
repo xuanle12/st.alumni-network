@@ -76,30 +76,14 @@
       </button>
     @endif
     @if(in_array($comment->id, $openReplies))
-      <div class="nw-replies">
-        @foreach($comment->replies as $reply)
-        <div class="nw-cmi" wire:key="reply-{{ $reply->id }}" style="margin-bottom:8px">
-          <div class="nw-cmi-av nw-cmi-av-sm av-c{{ ($reply->user_id ?? 0) % 6 }}">{{ strtoupper(substr($reply->user?->name ?? 'U', 0, 2)) }}</div>
-          <div class="nw-cmi-wrap">
-            <div class="nw-bbl" style="padding:7px 12px">
-              <div class="nw-bbl-name" style="font-size:11px">{{ $reply->user?->name ?? 'Người dùng' }}</div>
-              <div class="nw-bbl-text" style="font-size:12px"><span class="nw-mention">{{ $reply->parent?->user?->name ?? $comment->user?->name }}</span>{{ $reply->content }}</div>
-            </div>
-            <div class="nw-cmab">
-              <span x-data="{ liked: {{ $reply->isLikedBy(auth()->id()) ? 'true' : 'false' }}, count: {{ $reply->likes_count }}, toggle() { this.liked=!this.liked; this.count=this.liked?this.count+1:this.count-1; } }">
-                <button class="nw-cmab-btn" :class="liked?'nw-liked':''" @click="toggle()" wire:click="likeComment({{ $reply->id }})">Thích</button>
-              </span>
-              <button class="nw-cmab-btn" wire:click="setReply({{ $comment->id }}, '{{ addslashes($reply->user?->name ?? '') }}')">Trả lời</button>
-              <span class="nw-cmab-time">{{ $reply->created_at->diffForHumans() }}</span>
-              @if(($reply->user_id ?? 0) === auth()->id())
-                <button class="nw-cmab-btn nw-red" wire:click="deleteComment({{ $reply->id }})" wire:confirm="Xóa trả lời này?">Xóa</button>
-              @endif
-            </div>
-          </div>
-        </div>
-        @endforeach
-      </div>
-    @endif
+    <div class="nw-replies">
+        @include('livewire.user.partials.replies', [
+            'replies' => $comment->replies,
+            'depth'   => 1
+        ])
+    </div>
+@endif
+    
   </div>
 </div>
 @empty

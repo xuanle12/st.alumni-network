@@ -133,8 +133,10 @@
                     <span>{{ number_format($post->comments_count) }} bình luận · {{ number_format($post->shares_count) }} chia sẻ</span>
                 </div>
                 <div class="nw-pac">
-                    <button class="nw-pab"><i class="fa-solid fa-thumbs-up"></i> Thích</button>
-                    <button class="nw-pab" @click="openComments = !openComments"><i class="fa-solid fa-comment"></i> Bình luận</button>
+<button class="nw-pab" wire:click="like({{ $post->id }})">
+    <i class="fa-solid fa-thumbs-up {{ $post->isLikedBy() ? 'text-blue-500' : '' }}"></i>
+    {{ $post->isLikedBy() ? 'Đã thích' : 'Thích' }}
+</button>                    <button class="nw-pab" @click="openComments = !openComments"><i class="fa-solid fa-comment"></i> Bình luận</button>
                     <button class="nw-pab"><i class="fa-solid fa-share"></i> Chia sẻ</button>
                 </div>
                 <div x-show="openComments" x-transition>
@@ -223,7 +225,7 @@
   font-family: 'Barlow', system-ui, sans-serif;
   padding: 20px;
   gap: 20px;
-  max-width: 1790px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
 }

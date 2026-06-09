@@ -175,6 +175,17 @@ class Csv extends Component
             : 'Đăng bài thành công!'
         );
     }
+    public function like(int $postId): void
+    {
+    if (!Auth::check()) return;
+
+    $post = Post::find($postId);
+    if (!$post) return;
+
+    $post->toggleLike();
+
+    $this->loadData();
+    }
 
 
     public function render()
