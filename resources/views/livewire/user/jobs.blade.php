@@ -424,17 +424,17 @@
                 @endif
             </div>
 
-            {{-- SIDEBAR --}}
+           
             <aside class="jobs-sidebar">
 
-                <div class="side-card">
+                <!-- <div class="side-card">
                     <div class="side-card-header">
                         <h3>🔍 Tìm kiếm</h3>
                     </div>
                     <div class="side-search">
                         <input type="text" wire:model.live.debounce.400ms="search" placeholder="Tìm vị trí, kỹ năng...">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="side-card">
                     <div class="side-card-header">
