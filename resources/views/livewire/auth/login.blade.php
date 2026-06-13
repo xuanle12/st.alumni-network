@@ -233,6 +233,11 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     </div>
 
     {{-- Errors --}}
+    @if(session('register_success'))
+      <div class="lerr" style="background:#f0fdf4;border-color:#86efac;color:#166534;padding:12px 14px;border-radius:10px;border:1px solid;margin-bottom:12px;font-size:13px;">
+        <i class="fa-solid fa-circle-check"></i> {{ session('register_success') }}
+      </div>
+    @endif
     @if(session('status'))
       <div class="lerr" style="background:#f0fdf4;border-color:#86efac;color:#166534;">
         <i class="fa-solid fa-check"></i> {{ session('status') }}

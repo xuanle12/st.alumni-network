@@ -329,7 +329,7 @@
     </div>
   </div>
   @endif
-  @if($showDelete)
+    @if($showDelete)
   <div class="mo-bg" wire:click.self="closeDelete">
     <div class="mo" style="max-width:360px">
       <div class="cf-body">
