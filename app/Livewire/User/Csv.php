@@ -43,7 +43,6 @@ class Csv extends Component
     }
 
 
-    /* filter feed */
     public function setFilter(string $filter)
     {
         $this->filter = $filter;
@@ -51,7 +50,6 @@ class Csv extends Component
     }
 
 
-    /* load data — chỉ lấy bài published */
     private function loadData()
     {
         $query = Post::with([
@@ -83,7 +81,6 @@ class Csv extends Component
     }
 
 
-    /* mở modal */
     public function openModal()
     {
         $this->showModal = true;
@@ -104,7 +101,6 @@ class Csv extends Component
     }
 
 
-    /* thêm tag */
     public function addTag()
     {
         $tag = trim($this->tagInput);
@@ -124,7 +120,6 @@ class Csv extends Component
     }
 
 
-    /* đăng bài — tự động kiểm tra từ cấm */
     public function publish()
     {
         $this->validate([
@@ -135,7 +130,6 @@ class Csv extends Component
             ? $this->title . "\n\n" . $this->content
             : $this->content;
 
-        // Danh sách từ cấm
         $bannedWords = [
             'đụ', 'địt', 'lồn', 'cặc', 'đéo',
             'đmm', 'vkl', 'cl', 'dm', 'đm',

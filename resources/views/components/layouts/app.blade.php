@@ -192,7 +192,7 @@ header {
   display: block;
   font-size: 20px;
   font-weight: 800;
-  color: var(--green-dark);
+  color: #5383f3;
   letter-spacing: -0.2px;
   line-height: 1.2;
   white-space: nowrap;
