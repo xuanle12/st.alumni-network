@@ -127,28 +127,24 @@
     @endif
 
     <div class="topbar">
-      <div><div class="tt">Cựu sinh viên</div><div class="ts">Quản lý danh sách alumni</div></div>
+      <div><div class="tt">Danh sách cựu sinh viên</div><div class="ts">Quản lý danh sách tốt nghiệp</div></div>
       <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
     </div>
-
-    
-
     <div class="toolbar">
       <div class="sw">
-        <span class="sw-ic"><i class="fa-solid fa-magnifying-glass sw-ic"></i></span>
-        <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tên, email, MSV, công ty...">
+        <span class="sw-ic"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tên, MSV, lớp...">
       </div>
-      <select wire:model.live="filterStatus" class="sel">
-        <option value="">Tất cả trạng thái</option>
-        <option value="active">Đã xác minh</option>
-        <option value="pending">Chờ duyệt</option>
-        <option value="inactive">Từ chối</option>
+      <select wire:model.live="filterNam" class="sel">
+        <option value="">Tất cả năm</option>
+        @foreach($namList as $nam)
+          <option value="{{ $nam }}">{{ $nam }}</option>
+        @endforeach
       </select>
-      <select wire:model.live="filterKhoa" class="sel">
-        <option value="">Tất cả khoa</option>
-        <option value="Công nghệ thông tin">CNTT</option>
-        <option value="Kinh tế">Kinh tế</option>
-        <option value="Nông học">Nông học</option>
+      <select wire:model.live="filterStatus" class="sel">
+        <option value="">Tất cả</option>
+        <option value="co_tk">Đã có tài khoản</option>
+        <option value="chua_tk">Chưa có tài khoản</option>
       </select>
     </div>
 
@@ -156,36 +152,44 @@
       <table class="tbl">
         <thead>
           <tr>
-            <th style="width:30%">Cựu sinh viên</th>
-            <th style="width:16%">MSV / Khoá</th>
-            <th style="width:22%">Công việc</th>
-            <th style="width:14%">Trạng thái</th>
-            <th style="width:8%"></th>
+            <th style="width:28%">Họ và tên</th>
+            <th style="width:14%">MSV</th>
+            <th style="width:14%">Lớp / Năm TN</th>
+            <th style="width:20%">Khoa / Ngành</th>
+            <th style="width:14%">Tài khoản</th>
+            <th style="width:10%"></th>
           </tr>
         </thead>
         <tbody>
-          @forelse($users as $u)
+          @forelse($rows as $row)
           @php
-            $st = $u->profile?->status ?? 'pending';
-            $bc = match($st) { 'active' => 'bd-g', 'pending' => 'bd-a', default => 'bd-r' };
-            $bl = match($st) { 'active' => 'Đã xác minh', 'pending' => 'Chờ duyệt', default => 'Từ chối' };
+            $user = $msvCoTaiKhoan[$row->msv] ?? null;
+            $profileStatus = $user?->profile?->status ?? null;
           @endphp
           <tr>
             <td>
-              <div class="urow">
-                <div class="uava" style="background:#16a34a">{{ $u->initials }}</div>
-                <div><div class="un">{{ $u->name }}</div><div class="ue">{{ $u->email }}</div></div>
-              </div>
+              <div class="un">{{ $row->ho_ten }}</div>
             </td>
             <td>
-              <div class="msv">{{ $u->profile?->msv ?? '—' }}</div>
-              <div class="cls">{{ $u->profile?->khoa ?? '—' }} · {{ $u->profile?->nam_tot_nghiep ?? '—' }}</div>
+              <div class="msv">{{ $row->msv }}</div>
             </td>
             <td>
-              <div class="job">{{ $u->profile?->current_position ?: '—' }}</div>
-              <div class="cmp">{{ $u->profile?->current_company ?: '—' }}</div>
+              <div class="msv">{{ $row->lop ?? '—' }}</div>
+              <div class="cls">{{ $row->nam_tot_nghiep ?? '—' }}</div>
             </td>
-            <td><span class="bd {{ $bc }}">{{ $bl }}</span></td>
+            <td>
+              <div class="job">{{ $row->khoa ?? '—' }}</div>
+              <div class="cmp">{{ $row->nganh ?? '—' }}</div>
+            </td>
+            <td>
+              @if($user)
+                <span class="bd {{ $profileStatus === 'active' ? 'bd-g' : 'bd-a' }}">
+                  {{ $profileStatus === 'active' ? 'Đã duyệt' : 'Chờ duyệt' }}
+                </span>
+              @else
+                <span class="bd bd-r">Chưa có TK</span>
+              @endif
+            </td>
             <td>
               <div class="dot-wrap" x-data="{ open: false }" @click.away="open = false">
                 <button class="dot-btn" @click="
@@ -194,30 +198,29 @@
                     const rect = $el.getBoundingClientRect();
                     const spaceBelow = window.innerHeight - rect.bottom;
                     const dd = $el.nextElementSibling;
-                    if (spaceBelow < 200) {
-                      dd.classList.add('drop-up');
-                    } else {
-                      dd.classList.remove('drop-up');
-                    }
+                    if (spaceBelow < 200) { dd.classList.add('drop-up'); }
+                    else { dd.classList.remove('drop-up'); }
                   }
-                " title="Thao tác">
+                ">
                   <span></span><span></span><span></span>
                 </button>
                 <div class="dropdown" :class="{ open: open }">
-                  <div class="dd-item" @click="open=false" wire:click="openView({{ $u->id }})">
+                  @if($user)
+                  <div class="dd-item" @click="open=false" wire:click="openView({{ $user->id }})">
                     <span class="dd-ic"><i class="fa-solid fa-eye"></i></span> Xem hồ sơ
                   </div>
-                  @if($st === 'pending')
-                  <div class="dd-item green" @click="open=false" wire:click="quickApprove({{ $u->id }})" wire:confirm="Duyệt hồ sơ {{ $u->name }}?">
+                  @if($profileStatus === 'pending')
+                  <div class="dd-item green" @click="open=false" wire:click="quickApprove({{ $user->id }})" wire:confirm="Duyệt hồ sơ {{ $row->ho_ten }}?">
                     <span class="dd-ic"><i class="fa-solid fa-check"></i></span> Duyệt hồ sơ
                   </div>
                   @endif
                   <div class="dd-sep"></div>
-                  <div class="dd-item" @click="open=false" wire:click="openEdit({{ $u->id }})">
+                  @endif
+                  <div class="dd-item" @click="open=false" wire:click="openEdit({{ $row->id }})">
                     <span class="dd-ic"><i class="fa-solid fa-pen-to-square"></i></span> Chỉnh sửa
                   </div>
                   <div class="dd-sep"></div>
-                  <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $u->id }})">
+                  <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $row->id }})">
                     <span class="dd-ic"><i class="fa-solid fa-trash"></i></span> Xoá
                   </div>
                 </div>
@@ -225,83 +228,57 @@
             </td>
           </tr>
           @empty
-          <tr><td colspan="5"><div class="empty">📭 Không tìm thấy cựu sinh viên nào.</div></td></tr>
+          <tr><td colspan="6"><div class="empty">📭 Không tìm thấy cựu sinh viên nào.</div></td></tr>
           @endforelse
         </tbody>
       </table>
       <div class="pgn">
-        <div class="pgn-info">Hiển thị {{ $users->firstItem() }}–{{ $users->lastItem() }} / {{ $users->total() }}</div>
-        {{ $users->links() }}
+        <div class="pgn-info">Hiển thị {{ $rows->firstItem() }}–{{ $rows->lastItem() }} / {{ $rows->total() }}</div>
+        {{ $rows->links() }}
       </div>
     </div>
 
   </div>
 
-  {{-- MODAL THÊM / SỬA --}}
+  {{-- MODAL THÊM / SỬA ds_csv --}}
   @if($showModal)
   <div class="mo-bg" wire:click.self="closeModal">
     <div class="mo">
       <div class="mo-hd">
-        <div class="mo-title">{{ $editId ? 'Chỉnh sửa cựu sinh viên' : 'Thêm cựu sinh viên' }}</div>
+        <div class="mo-title">{{ $editId ? 'Chỉnh sửa' : 'Thêm cựu sinh viên' }}</div>
         <button class="mo-close" wire:click="closeModal">✕</button>
       </div>
       <div class="mo-body">
-        <div class="mo-sec">Thông tin cơ bản</div>
         <div class="fg2">
           <div class="fi">
             <label>Họ và tên *</label>
-            <input wire:model="f_name" type="text" placeholder="Nguyễn Văn A">
-            @error('f_name')<div class="err">{{ $message }}</div>@enderror
+            <input wire:model="f_ho_ten" type="text" placeholder="Nguyễn Văn A">
+            @error('f_ho_ten')<div class="err">{{ $message }}</div>@enderror
           </div>
           <div class="fi">
-            <label>Email *</label>
-            <input wire:model="f_email" type="email" placeholder="email@gmail.com">
-            @error('f_email')<div class="err">{{ $message }}</div>@enderror
+            <label>Mã sinh viên *</label>
+            <input wire:model="f_msv" placeholder="651001">
+            @error('f_msv')<div class="err">{{ $message }}</div>@enderror
           </div>
         </div>
         <div class="fg3">
           <div class="fi">
-            <label>Mã sinh viên *</label>
-            <input wire:model="f_msv" placeholder="640123">
-            @error('f_msv')<div class="err">{{ $message }}</div>@enderror
+            <label>Lớp</label>
+            <input wire:model="f_lop" placeholder="K65CNPMA">
           </div>
           <div class="fi">
-            <label>Lớp</label>
-            <input wire:model="f_lop" placeholder="K64CNPMA">
+            <label>Khoa</label>
+            <input wire:model="f_khoa" placeholder="Công nghệ Thông tin">
           </div>
           <div class="fi">
             <label>Năm tốt nghiệp</label>
-            <input wire:model="f_year" placeholder="2023">
-            @error('f_year')<div class="err">{{ $message }}</div>@enderror
+            <input wire:model="f_nam" placeholder="2024">
+            @error('f_nam')<div class="err">{{ $message }}</div>@enderror
           </div>
         </div>
-        <hr class="mdiv">
-        <div class="mo-sec">Công việc hiện tại</div>
-        <div class="fg2">
-          <div class="fi">
-            <label>Vị trí</label>
-            <input wire:model="f_job" placeholder="Backend Developer">
-          </div>
-          <div class="fi">
-            <label>Công ty</label>
-            <input wire:model="f_cmp" placeholder="FPT Software">
-          </div>
-        </div>
-        <hr class="mdiv">
-        <div class="mo-sec">Phân loại & trạng thái</div>
-        <div class="fg2">
-          <div class="fi">
-            <label>Khoa</label>
-            <input wire:model="f_khoa" placeholder="Công nghệ thông tin">
-          </div>
-          <div class="fi">
-            <label>Trạng thái xác minh</label>
-            <select wire:model="f_status">
-              <option value="active">Đã xác minh</option>
-              <option value="pending">Chờ duyệt</option>
-              <option value="inactive">Từ chối</option>
-            </select>
-          </div>
+        <div class="fi">
+          <label>Ngành</label>
+          <input wire:model="f_nganh" placeholder="Công nghệ Phần mềm">
         </div>
       </div>
       <div class="mo-ft">
@@ -314,7 +291,6 @@
     </div>
   </div>
   @endif
-
 
   @if($showView && $viewUser)
   <div class="mo-bg" wire:click.self="closeView">
@@ -331,11 +307,11 @@
       </div>
       <div class="mo-body">
         <div class="vgrid">
-          <div class="vi"><label>Mã sinh viên</label><p>{{ $viewUser->profile?->msv ?? '—' }}</p></div>
+          <div class="vi"><label>MSV</label><p>{{ $viewUser->profile?->msv ?? '—' }}</p></div>
           <div class="vi"><label>Lớp</label><p>{{ $viewUser->profile?->lop ?? '—' }}</p></div>
           <div class="vi"><label>Năm TN</label><p>{{ $viewUser->profile?->nam_tot_nghiep ?? '—' }}</p></div>
           <div class="vi"><label>Khoa</label><p>{{ $viewUser->profile?->khoa ?? '—' }}</p></div>
-          <div class="vi"><label>Vị trí</label><p class="{{ $viewUser->profile?->current_position ? '' : 'mt' }}">{{ $viewUser->profile?->current_position ?: 'Chưa cập nhật' }}</p></div>
+          <div class="vi"><label>Vị trí</label><p class="{{ $viewUser->profile?->position ? '' : 'mt' }}">{{ $viewUser->profile?->position ?: 'Chưa cập nhật' }}</p></div>
           <div class="vi"><label>Công ty</label><p class="{{ $viewUser->profile?->current_company ? '' : 'mt' }}">{{ $viewUser->profile?->current_company ?: 'Chưa cập nhật' }}</p></div>
           <div class="vi"><label>Điện thoại</label><p class="{{ $viewUser->profile?->phone ? '' : 'mt' }}">{{ $viewUser->profile?->phone ?: 'Chưa cập nhật' }}</p></div>
           <div class="vi"><label>Địa chỉ</label><p class="{{ $viewUser->profile?->tinh_thanh ? '' : 'mt' }}">{{ $viewUser->profile?->tinh_thanh ?: 'Chưa cập nhật' }}</p></div>
@@ -346,46 +322,19 @@
             </span>
           </div>
         </div>
-        @if($viewUser->profile?->github || $viewUser->profile?->linkedin)
-        <hr class="mdiv">
-        <div class="fg2">
-          @if($viewUser->profile?->github)
-          <div class="vi"><label>GitHub</label><a href="{{ $viewUser->profile->github }}" target="_blank">{{ $viewUser->profile->github }}</a></div>
-          @endif
-          @if($viewUser->profile?->linkedin)
-          <div class="vi"><label>LinkedIn</label><a href="{{ $viewUser->profile->linkedin }}" target="_blank">{{ $viewUser->profile->linkedin }}</a></div>
-          @endif
-        </div>
-        @endif
-        @if($viewUser->cvs->count() > 0)
-        <hr class="mdiv">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:8px">CV đính kèm</div>
-        @foreach($viewUser->cvs as $cv)
-        <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;margin-bottom:6px">
-          <span style="font-size:18px"><i class="fa-solid fa-file-lines"></i></span>
-          <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:600;color:#0f172a">{{ $cv->file_name }}@if($cv->is_primary) <span class="bd bd-g" style="font-size:10px;margin-left:4px">Chính</span>@endif</div>
-            <div style="font-size:11px;color:#94a3b8;margin-top:1px">{{ $cv->file_size }} · {{ $cv->created_at->format('d/m/Y') }}</div>
-          </div>
-          <a href="{{ $cv->url }}" download class="btn btn-ghost" style="font-size:12px;padding:4px 10px">↓ Tải</a>
-        </div>
-        @endforeach
-        @endif
       </div>
       <div class="mo-ft">
         <button wire:click="closeView" class="btn btn-ghost">Đóng</button>
-        <button wire:click="openEdit({{ $viewUser->id }})" wire:click="closeView" class="btn btn-prim">✎ Chỉnh sửa</button>
       </div>
     </div>
   </div>
   @endif
-
   @if($showDelete)
   <div class="mo-bg" wire:click.self="closeDelete">
     <div class="mo" style="max-width:360px">
       <div class="cf-body">
         <div class="cf-ic">🗑</div>
-        <div class="cf-title">Xoá cựu sinh viên?</div>
+        <div class="cf-title">Xoá khỏi danh sách?</div>
         <div class="cf-sub">Bạn sắp xoá <strong>{{ $deleteName }}</strong>.<br>Hành động này không thể hoàn tác.</div>
         <div class="cf-btns">
           <button wire:click="closeDelete" class="btn btn-ghost">Huỷ</button>
@@ -398,5 +347,6 @@
     </div>
   </div>
   @endif
+
   </div>
 </div>
