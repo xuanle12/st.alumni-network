@@ -49,6 +49,8 @@
 .bd-active{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}.bd-active::before{background:#16a34a;}
 .bd-pending{background:#fffbeb;color:#b45309;border:1px solid #fde68a;}.bd-pending::before{background:#d97706;}
 .bd-inactive{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;}.bd-inactive::before{background:#dc2626;}
+.bd-company{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}.bd-company::before{background:#3b82f6;}
+.bd-locked{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;}.bd-locked::before{background:#dc2626;}
 
 .dot-wrap{position:relative;display:inline-block;}
 .dot-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;transition:all .15s;}
@@ -165,12 +167,13 @@
       <option value="alumni">Cựu sinh viên</option>
       <option value="student">Sinh viên</option>
       <option value="lecturer">Giảng viên</option>
+      <option value="company">Doanh nghiệp</option>
     </select>
     <select wire:model.live="filterStatus" class="sel">
       <option value="">Tất cả trạng thái</option>
       <option value="active">Đang hoạt động</option>
       <option value="pending">Chờ duyệt</option>
-      <option value="inactive">Từ chối</option>
+      <option value="locked">Bị khóa</option>
     </select>
     <div class="per-sel">
       Số hàng:
@@ -198,12 +201,12 @@
       <tbody>
         @forelse($users as $i => $u)
         @php
-          $role   = $u->profile?->role ?? 'student';
-          $status = $u->profile?->status ?? 'pending';
+          $role   = $u->role   ?? 'student';
+          $status = $u->status ?? 'pending';
           $colors = ['#16a34a','#7c3aed','#065f46','#c2410c','#9d174d','#1a3d28'];
           $color  = $colors[$u->id % count($colors)];
-          $roleLabel  = match($role) { 'admin'=>'Quản trị', 'alumni'=>'Cựu SV', 'student'=>'Sinh viên', 'lecturer'=>'Giảng viên', default=>'Khác' };
-          $statusLabel= match($status) { 'active'=>'Hoạt động', 'pending'=>'Chờ duyệt', default=>'Từ chối' };
+          $roleLabel  = match($role) { 'admin'=>'Quản trị', 'alumni'=>'Cựu SV', 'student'=>'Sinh viên', 'lecturer'=>'Giảng viên', 'company'=>'Doanh nghiệp', default=>'Khác' };
+          $statusLabel= match($status) { 'active'=>'Hoạt động', 'pending'=>'Chờ duyệt', 'locked'=>'Bị khóa', default=>'Khác' };
         @endphp
         <tr>
           <td style="font-size:13px;color:#94a3b8;font-weight:500">{{ $users->firstItem() + $i }}</td>
@@ -306,6 +309,7 @@
             <option value="student">Sinh viên</option>
             <option value="lecturer">Giảng viên</option>
             <option value="admin">Quản trị viên</option>
+            <option value="company">Doanh nghiệp</option>
           </select>
         </div>
         <div class="fi">
@@ -313,7 +317,7 @@
           <select wire:model="f_status">
             <option value="active">Đang hoạt động</option>
             <option value="pending">Chờ duyệt</option>
-            <option value="inactive">Từ chối</option>
+            <option value="locked">Bị khóa</option>
           </select>
         </div>
       </div>
@@ -348,6 +352,7 @@
           ['student',  'fa-user-graduate',  '#faf5ff', 'Sinh viên',     'Đang theo học'],
           ['lecturer', 'fa-chalkboard-user','#fff7ed', 'Giảng viên',    'Cán bộ giảng dạy'],
           ['admin',    'fa-shield-halved',  '#f0fdf4', 'Quản trị viên', 'Toàn quyền hệ thống'],
+          ['company',  'fa-building',       '#eff6ff', 'Doanh nghiệp',  'Tài khoản doanh nghiệp'],
         ] as [$val, $ic, $bg, $name, $desc])
         <div class="role-card {{ $roleValue === $val ? 'selected' : '' }}"
              wire:click="$set('roleValue','{{ $val }}')">
