@@ -1,303 +1,561 @@
 <div>
 <style>
-.cp-wrap{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-.cp-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:10px;flex-wrap:wrap}
-.back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:#6b7280;cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:none}
-.back-btn:hover{color:#111}
-.cp-title{font-size:18px;font-weight:600;color:#111}
-.cp-layout{display:grid;grid-template-columns:1fr 270px;gap:1.25rem}
-.form-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.5rem}
-.fi{display:flex;flex-direction:column;gap:5px;margin-bottom:1.1rem}
-.fi:last-child{margin-bottom:0}
-.fi label{font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.4px}
-.fi input,.fi select,.fi textarea{padding:9px 11px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;color:#111;font-family:inherit;width:100%;background:#fff;transition:border .15s}
-.fi input:focus,.fi select:focus,.fi textarea:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.08)}
-.fi textarea{resize:vertical;min-height:64px;line-height:1.6}
-.err{font-size:11px;color:#dc2626;margin-top:3px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.1rem}
-.row2 .fi{margin-bottom:0}
- 
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;min-height:100vh;background:#f8fafc}
+.flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
 
-.editor-wrap{border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;transition:border .15s}
-.editor-wrap:focus-within{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.08)}
-.editor-toolbar{display:flex;gap:2px;padding:6px 8px;border-bottom:1px solid #f3f4f6;background:#fafafa;flex-wrap:wrap}
-.tb{width:28px;height:28px;border:none;background:none;border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:13px;font-weight:700;font-family:inherit}
-.tb:hover{background:#e5e7eb;color:#111}
-.tb-sep{width:1px;height:20px;background:#e5e7eb;margin:4px 3px}
-.editor-area{padding:12px;min-height:280px;font-size:13px;color:#374151;line-height:1.8;outline:none}
-.char-count{font-size:11px;color:#9ca3af;text-align:right;padding:5px 10px;border-top:1px solid #f3f4f6}
- 
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tt{font-size:17px;font-weight:700;color:#0f172a}.ts{font-size:12px;color:#64748b;margin-top:2px}
+.btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#16a34a;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
+.btn-add:hover{background:#15803d}
 
-.tags-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px;border:1px solid #e2e8f0;border-radius:8px;min-height:42px;cursor:text;transition:border .15s}
-.tags-wrap:focus-within{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.08)}
-.tag-pill{display:flex;align-items:center;gap:4px;background:#eff6ff;color:#1e40af;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px}
-.tag-pill button{background:none;border:none;cursor:pointer;color:#60a5fa;font-size:13px;line-height:1;padding:0}
-.tag-pill button:hover{color:#1d4ed8}
-.tag-input-el{border:none;outline:none;font-size:12px;color:#111;font-family:inherit;min-width:80px;flex:1;padding:2px 0}
- 
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:box-shadow .15s}
+.stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.stat-left{display:flex;flex-direction:column;gap:4px}
+.stat-l{font-size:12px;color:#64748b;font-weight:500}
+.stat-n{font-size:28px;font-weight:700;line-height:1.1}
+.stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:#94a3b8}
+.ic-b{background:#f0fdf4}.ic-g{background:#f0fdf4}.ic-o{background:#fff7ed}.ic-a{background:#fffbeb}
+.n-b{color:#0f172a}.n-g{color:#16a34a}.n-o{color:#ea580c}.n-a{color:#d97706}
 
-.cover-upload{border:2px dashed #e2e8f0;border-radius:8px;padding:1.5rem;text-align:center;cursor:pointer;transition:all .15s}
-.cover-upload:hover{border-color:#3b82f6;background:#f8fbff}
-.cover-preview{width:100%;height:160px;border-radius:8px;object-fit:cover;display:none}
-.cover-preview.show{display:block}
-.cover-upload.has-img{padding:0;border:none}
-.change-cover{display:block;text-align:center;font-size:11px;color:#6b7280;margin-top:5px;cursor:pointer}
-.change-cover:hover{color:#3b82f6}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.sw{flex:1;min-width:180px;position:relative}
+.sw input{width:100%;padding:9px 12px 9px 34px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit}
+.sw input:focus{outline:none;border-color:#3b82f6}
+.sw input::placeholder{color:#94a3b8}
+.sw-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8}
+.sel{padding:9px 10px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#475569;font-family:inherit}
+.sel:focus{outline:none;border-color:#3b82f6}
 
-.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:visible}
-.side-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.1rem;margin-bottom:10px}
-.side-title{font-size:12px;font-weight:600;color:#374151;margin-bottom:.875rem}
-.pub-btn{width:100%;padding:10px;background:#111;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:6px}
-.pub-btn:hover{background:#333}
-.draft-btn{width:100%;padding:9px;background:#fff;color:#374151;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
-.draft-btn:hover{background:#f9fafb}
-.meta-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f3f4f6;font-size:12px}
-.meta-row:last-child{border-bottom:none}
-.meta-key{color:#6b7280}
-.meta-val{color:#111;font-weight:500}
-.meta-sel{padding:3px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;color:#374151;background:#fff}
-.meta-sel:focus{outline:none;border-color:#3b82f6}
-.tip-list{display:flex;flex-direction:column;gap:8px}
-.tip-item{display:flex;gap:8px;font-size:12px;color:#6b7280;line-height:1.4}
-.tip-ico{width:18px;height:18px;border-radius:50%;background:#f0fdf4;color:#166534;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700}
-.flash-ok{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem}
-.flash-err{background:#fef2f2;border:1px solid #fca5a5;color:#991b1b;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem}
- 
+.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl{width:100%;border-collapse:collapse;table-layout:fixed;min-width:620px}
+.tbl th{padding:10px 14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;text-align:left;background:#f8fafc;border-bottom:1px solid #e2e8f0}
+.tbl td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover td{background:#fafbfc}
+
+.post-row{display:flex;align-items:center;gap:10px}
+.post-thumb{width:44px;height:36px;border-radius:7px;background:#f1f5f9;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;overflow:hidden}
+.post-thumb img{width:100%;height:100%;object-fit:cover}
+.post-title{font-size:13px;font-weight:600;color:#0f172a;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-meta{font-size:11px;color:#94a3b8;margin-top:2px}
+
+.bd{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:20px}
+.bd::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.bd-g{background:#f0fdf4;color:#15803d}.bd-g::before{background:#16a34a}
+.bd-a{background:#fffbeb;color:#b45309}.bd-a::before{background:#d97706}
+.bd-r{background:#fef2f2;color:#b91c1c}.bd-r::before{background:#dc2626}
+.bd-o{background:#fff7ed;color:#c2410c}.bd-o::before{background:#ea580c}
+
+.author-row{display:flex;align-items:center;gap:6px}
+.author-ava{width:26px;height:26px;border-radius:50%;background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ── DOT BUTTON ── */
+.dot-wrap{position:relative;display:inline-block}
+.dot-btn{width:30px;height:30px;border-radius:7px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;transition:background .15s,border-color .15s}
+.dot-btn:hover,.dot-btn[aria-expanded="true"]{background:#f1f5f9;border-color:#cbd5e1;color:#475569}
+.dot-btn span{display:block;width:13px;height:1.5px;background:currentColor;border-radius:2px}
+
+/* ── DROPDOWN: position:fixed, tọa độ set bằng JS ── */
+.dropdown{
+    display:none;
+    position:fixed;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    min-width:176px;
+    z-index:9999;
+    overflow:hidden;
+    box-shadow:0 8px 28px rgba(0,0,0,.13);
+}
+.dropdown.open{display:block;animation:ddIn .14s ease}
+@keyframes ddIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155;user-select:none;transition:background .1s}
+.dd-item:hover{background:#f8fafc}
+.dd-item.green{color:#15803d}.dd-item.green:hover{background:#f0fdf4}
+.dd-item.amber{color:#b45309}.dd-item.amber:hover{background:#fffbeb}
+.dd-item.red{color:#b91c1c}.dd-item.red:hover{background:#fef2f2}
+.dd-sep{height:1px;background:#f1f5f9;margin:3px 0}
+
+.pgn{display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;border-top:1px solid #f1f5f9;background:#fafafa;flex-wrap:wrap;gap:8px}
+.pgn-info{font-size:12px;color:#94a3b8}
+
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}
+.btn-ghost:hover{background:#f8fafc}
+.btn-prim{background:#16a34a;color:#fff}.btn-prim:hover{background:#15803d}
+.btn-green{background:#15803d;color:#fff}.btn-green:hover{background:#166534}
+.btn-amber{background:#d97706;color:#fff}.btn-amber:hover{background:#b45309}
+.btn-del{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.btn-del:hover{background:#fee2e2}
+
+.mo-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem}
+.mo{background:#fff;border-radius:14px;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.mo-sm{max-width:380px}
+.mo-hd{padding:1.1rem 1.4rem;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.mo-title{font-size:15px;font-weight:700;color:#0f172a}
+.mo-close{width:28px;height:28px;border-radius:8px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;font-size:16px;display:flex;align-items:center;justify-content:center}
+.mo-body{padding:1.4rem;display:flex;flex-direction:column;gap:12px}
+.mo-ft{padding:.875rem 1.4rem;border-top:1px solid #f1f5f9;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff;flex-wrap:wrap}
+
+.fi{display:flex;flex-direction:column;gap:5px}
+.fi label{font-size:12px;font-weight:600;color:#475569}
+.fi input,.fi select,.fi textarea{width:100%;padding:9px 11px;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit;background:#fff}
+.fi input:focus,.fi select:focus,.fi textarea:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px #3b82f611}
+.fi textarea{resize:vertical}
+.fi .err{font-size:11px;color:#dc2626}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mo-sec{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8}
+.mdiv{border:none;border-top:1px solid #f1f5f9}
+.check-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#374151}
+.check-row input[type=checkbox]{width:16px;height:16px;cursor:pointer}
+
+.pv-thumb{width:100%;height:160px;background:#f1f5f9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:1rem;border:1px solid #e2e8f0;overflow:hidden}
+.pv-thumb img{width:100%;height:100%;object-fit:cover}
+.pv-cat{font-size:11px;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.pv-title{font-size:17px;font-weight:700;color:#0f172a;line-height:1.4;margin-bottom:10px}
+.pv-meta{display:flex;align-items:center;gap:12px;font-size:12px;color:#94a3b8;margin-bottom:14px;flex-wrap:wrap}
+.pv-excerpt{font-size:13px;color:#374151;font-style:italic;margin-bottom:12px;padding:10px 12px;background:#f8fafc;border-radius:8px;border-left:3px solid #e2e8f0;line-height:1.7}
+.pv-body{font-size:13px;color:#64748b;line-height:1.8}
+
+.ap-info{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:1rem;margin-bottom:1rem}
+.ap-title{font-size:14px;font-weight:600;color:#92400e;margin-bottom:4px}
+.ap-meta{font-size:12px;color:#b45309}
+
+.cf-wrap{padding:2rem 1.5rem;text-align:center}
+.cf-ic{font-size:34px;margin-bottom:10px}
+.cf-t{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px}
+.cf-s{font-size:13px;color:#64748b;line-height:1.7;margin-bottom:1.25rem}
+.cf-btns{display:flex;gap:10px;justify-content:center}
+
+.empty{text-align:center;padding:3rem;color:#cbd5e1;font-size:13px}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:1024px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:768px){
-  .cp-layout{grid-template-columns:1fr}
-  .cp-wrap{padding:1rem}
-  .row2{grid-template-columns:1fr}
-  .side-card:not(:last-child){display:none}
-  .side-card:last-child{display:none}
-  .side-card.pub-card{display:block}
+  .aw{padding:1rem}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat-n{font-size:22px}
+  .toolbar{flex-direction:column}
+  .sw,.sel{width:100%}
+  .topbar{flex-direction:column;align-items:flex-start}
+  .btn-add{width:100%;justify-content:center}
+  .fg2{grid-template-columns:1fr}
+  .tbl th:nth-child(3),.tbl td:nth-child(3){display:none}
+  .dropdown{min-width:190px}
 }
 @media(max-width:480px){
-  .editor-area{min-height:200px}
-  .cp-title{font-size:15px}
+  .stats{grid-template-columns:1fr 1fr;gap:8px}
+  .stat{padding:.85rem 1rem}
+  .stat-n{font-size:20px}
+  .stat-ic{width:36px;height:36px;font-size:16px}
+  .tbl th:nth-child(5),.tbl td:nth-child(5){display:none}
+  .mo{border-radius:12px 12px 0 0;max-width:100%;align-self:flex-end}
+  .mo-bg{align-items:flex-end;padding:0}
+  .dropdown{min-width:200px}
 }
 </style>
- 
-<div class="cp-wrap">
- 
- 
-  <div class="cp-topbar">
-    <a href="{{ route('csv') }}" class="back-btn">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Quay lại diễn đàn
-    </a>
-    <div class="cp-title">Tạo bài viết mới</div>
-    <div style="width:120px;text-align:right">
-      {{-- Nút đăng nhanh trên mobile --}}
-      <button wire:click="publish" class="pub-btn" style="display:none;width:auto;padding:7px 14px;" id="mobile-pub">Đăng</button>
-    </div>
+
+<div class="aw">
+
+@if(session('success'))
+  <div class="flash">✓ {{ session('success') }}</div>
+@endif
+
+<div class="topbar">
+  <div><div class="tt">Bài viết</div><div class="ts">Quản lý nội dung & tin tức</div></div>
+  <button wire:click="openAdd" class="btn-add">＋ Viết bài mới</button>
+</div>
+
+
+<div class="toolbar">
+  <div class="sw">
+    <span class="sw-ic"><i class="fa-solid fa-magnifying-glass"></i></span>
+    <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tiêu đề, tác giả...">
   </div>
- 
-  @if(session('success'))
-    <div class="flash-ok">✓ {{ session('success') }}</div>
-  @endif
- 
-  <div class="cp-layout">
- 
-    {{-- Form chính --}}
-    <div>
-      <div class="form-card">
- 
-        <div class="fi">
-          <label>Tiêu đề *</label>
-          <input wire:model="title" type="text" placeholder="Nhập tiêu đề hấp dẫn cho bài viết...">
-          @error('title')<div class="err">{{ $message }}</div>@enderror
-        </div>
- 
-        <div class="row2">
-          <div class="fi">
-            <label>Danh mục *</label>
-            <select wire:model="category">
-              <option value="">Chọn danh mục</option>
-              @foreach(\App\Models\Post::CATEGORIES as $val => $label)
-                <option value="{{ $val }}">{{ $label }}</option>
-              @endforeach
-            </select>
-            @error('category')<div class="err">{{ $message }}</div>@enderror
-          </div>
-          <div class="fi">
-            <label>Khoa liên quan</label>
-            <select wire:model="khoa">
-              <option value="">Tất cả khoa</option>
-              @foreach(\App\Models\Job::KHOA_LIST as $k => $l)
-                <option value="{{ $k }}">{{ $l }}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
- 
-        <div class="fi">
-          <label>Mô tả ngắn</label>
-          <textarea wire:model="excerpt" rows="2" placeholder="Tóm tắt bài viết trong 1-2 câu..."></textarea>
-        </div>
- 
-       
-        <div class="fi">
-          <label>Nội dung *</label>
-          <div class="editor-wrap">
-            <div class="editor-toolbar">
-              <button type="button" class="tb" onclick="fmt('bold')" title="Bold"><b>B</b></button>
-              <button type="button" class="tb" onclick="fmt('italic')" title="Italic"><i style="font-style:italic">I</i></button>
-              <button type="button" class="tb" onclick="fmt('underline')" title="Underline"><u>U</u></button>
-              <div class="tb-sep"></div>
-              <button type="button" class="tb" onclick="fmt('formatBlock','h2')" title="Tiêu đề">H2</button>
-              <button type="button" class="tb" onclick="fmt('formatBlock','h3')" title="Tiêu đề nhỏ">H3</button>
-              <div class="tb-sep"></div>
-              <button type="button" class="tb" onclick="fmt('insertUnorderedList')" title="Danh sách">
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="2" cy="4" r="1.5" fill="currentColor"/><path d="M6 4h8M6 8h8M6 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="2" cy="8" r="1.5" fill="currentColor"/><circle cx="2" cy="12" r="1.5" fill="currentColor"/></svg>
-              </button>
-              <button type="button" class="tb" onclick="fmt('insertOrderedList')" title="Danh sách số">
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M1 3h2M1 8h2M1 13h2M6 4h8M6 8h8M6 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </button>
-              <div class="tb-sep"></div>
-              <button type="button" class="tb" onclick="insertLink()" title="Link">
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 10l4-4M5 7l-1 1a3 3 0 004 4l1-1M11 9l1-1a3 3 0 00-4-4L7 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </button>
-              <button type="button" class="tb" onclick="fmt('formatBlock','blockquote')" title="Trích dẫn">
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 5h3v4H3V5zm7 0h3v4h-3V5zM6 9c0 2-1 3-3 4M13 9c0 2-1 3-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-              </button>
+  <select wire:model.live="filterStatus" class="sel">
+    <option value="">Tất cả trạng thái</option>
+    <option value="published">Đã đăng</option>
+    <option value="pending">Chờ duyệt</option>
+    <option value="draft">Bản nháp</option>
+    <option value="hidden">Ẩn</option>
+  </select>
+  <select wire:model.live="filterCat" class="sel">
+    <option value="">Tất cả danh mục</option>
+    <option value="Tin tức">Tin tức</option>
+    <option value="Sự kiện">Sự kiện</option>
+    <option value="Tuyển dụng">Tuyển dụng</option>
+    <option value="Chia sẻ">Chia sẻ</option>
+  </select>
+</div>
+
+<div class="tcard">
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:36%">Bài viết</th>
+          <th style="width:12%">Danh mục</th>
+          <th style="width:14%">Tác giả</th>
+          <th style="width:12%">Trạng thái</th>
+          <th style="width:13%">Ngày</th>
+          <th style="width:13%;text-align:right">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        @forelse($posts as $post)
+        @php
+          $bc = match($post->status) {
+            'published' => 'bd-g',
+            'pending'   => 'bd-o',
+            'draft'     => 'bd-a',
+            default     => 'bd-r'
+          };
+          $bl = match($post->status) {
+            'published' => 'Đã đăng',
+            'pending'   => 'Chờ duyệt',
+            'draft'     => 'Bản nháp',
+            default     => 'Ẩn'
+          };
+          $catIcons = [
+            'Sự kiện'    => '<i class="fa-solid fa-calendar-days"></i>',
+            'Tuyển dụng' => '<i class="fa-solid fa-briefcase"></i>',
+            'Chia sẻ'    => '<i class="fa-solid fa-comments"></i>',
+            'Tin tức'    => '<i class="fa-solid fa-newspaper"></i>',
+          ];
+          $ico = $catIcons[$post->category] ?? '<i class="fa-solid fa-file-lines"></i>';
+        @endphp
+        <tr>
+          <td>
+            <div class="post-row">
+              <div class="post-thumb">
+                @if($post->thumbnail)
+                  <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="">
+                @else
+                  {!! $ico !!}
+                @endif
+              </div>
+              <div style="min-width:0">
+                <div class="post-title">{{ $post->title }}</div>
+                <div class="post-meta"><i class="fa-solid fa-eye"></i> {{ $post->formatted_views }} lượt xem</div>
+              </div>
             </div>
-            <div class="editor-area"
-                 id="editor"
-                 contenteditable="true"
-                 data-placeholder="Bắt đầu viết nội dung bài viết..."
-                 wire:ignore
-                 x-data
-                 @input="$wire.content = $event.target.innerHTML; updateCount()">
+          </td>
+          <td><span style="font-size:12px;color:#64748b">{{ $post->category ?: '—' }}</span></td>
+          <td>
+            <div class="author-row">
+              <div class="author-ava">{{ $post->author?->initials ?? '?' }}</div>
+              <span style="font-size:12px;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px">{{ $post->author?->name ?? '—' }}</span>
             </div>
-            <div class="char-count"><span id="charCount">0</span> ký tự</div>
-          </div>
-          @error('content')<div class="err">{{ $message }}</div>@enderror
-        </div>
- 
-        
+          </td>
+          <td><span class="bd {{ $bc }}">{{ $bl }}</span></td>
+          <td><span style="font-size:12px;color:#94a3b8">{{ $post->published_date }}</span></td>
+          <td style="text-align:right">
+            {{-- Dùng data-* + JS position:fixed, bỏ Alpine hoàn toàn --}}
+            <div class="dot-wrap" data-dropdown>
+              <button type="button" class="dot-btn" data-trigger
+                      aria-haspopup="true" aria-expanded="false"
+                      aria-label="Thao tác">
+                <span></span><span></span><span></span>
+              </button>
+              <div class="dropdown" data-menu role="menu">
+
+                <div class="dd-item" data-close wire:click="openView({{ $post->id }})">
+                  <i class="fa-solid fa-eye"></i> Xem trước
+                </div>
+
+                @if($post->status === 'pending')
+                <div class="dd-item green" data-close wire:click="openApprove({{ $post->id }})">
+                  <i class="fa-solid fa-check"></i> Duyệt bài
+                </div>
+                @endif
+
+                @if(in_array($post->status, ['draft', 'hidden']))
+                <div class="dd-item green" data-close wire:click="openApprove({{ $post->id }})">
+                  <i class="fa-solid fa-check"></i> Duyệt & Đăng
+                </div>
+                @endif
+
+                @if($post->status === 'published')
+                <div class="dd-item amber" data-close wire:click="toDraft({{ $post->id }})">
+                  <i class="fa-solid fa-clock"></i> Về bản nháp
+                </div>
+                <div class="dd-item amber" data-close wire:click="hidePost({{ $post->id }})">
+                  <i class="fa-solid fa-eye-slash"></i> Ẩn bài
+                </div>
+                @endif
+
+                <div class="dd-sep"></div>
+
+                <div class="dd-item" data-close wire:click="openEdit({{ $post->id }})">
+                  <i class="fa-solid fa-edit"></i> Chỉnh sửa
+                </div>
+
+                <div class="dd-sep"></div>
+
+                <div class="dd-item red" data-close wire:click="confirmDelete({{ $post->id }})">
+                  <i class="fa-solid fa-trash"></i> Xoá
+                </div>
+
+              </div>
+            </div>
+          </td>
+        </tr>
+        @empty
+        <tr><td colspan="6"><div class="empty">📭 Không tìm thấy bài viết nào.</div></td></tr>
+        @endforelse
+      </tbody>
+    </table>
+  </div>
+  <div class="pgn">
+    <div class="pgn-info">
+      Hiển thị {{ $posts->firstItem() }}–{{ $posts->lastItem() }} / {{ $posts->total() }} bài viết
+    </div>
+    {{ $posts->links() }}
+  </div>
+</div>
+
+</div>
+
+@if($showModal)
+<div class="mo-bg" wire:click.self="closeModal">
+  <div class="mo">
+    <div class="mo-hd">
+      <div class="mo-title">{{ $editId ? 'Chỉnh sửa bài viết' : 'Viết bài mới' }}</div>
+      <button class="mo-close" wire:click="closeModal">✕</button>
+    </div>
+    <div class="mo-body">
+      <div class="mo-sec">Thông tin cơ bản</div>
+      <div class="fi">
+        <label>Tiêu đề *</label>
+        <input wire:model="f_title" type="text" placeholder="Nhập tiêu đề bài viết...">
+        @error('f_title')<div class="err">{{ $message }}</div>@enderror
+      </div>
+      <div class="fg2">
         <div class="fi">
-          <label>Tags (tối đa 5)</label>
-          <div class="tags-wrap" onclick="this.querySelector('.tag-input-el').focus()">
-            @foreach($tags as $i => $tag)
-              <span class="tag-pill">
-                {{ $tag }}
-                <button type="button" wire:click="removeTag({{ $i }})">×</button>
-              </span>
-            @endforeach
-            @if(count($tags) < 5)
-              <input class="tag-input-el"
-                     wire:model="tagInput"
-                     type="text"
-                     placeholder="{{ count($tags) === 0 ? 'Thêm tag, nhấn Enter...' : 'Thêm tag...' }}"
-                     wire:keydown.enter.prevent="addTag">
-            @endif
-          </div>
+          <label>Danh mục *</label>
+          <select wire:model="f_category">
+            <option value="">-- Chọn danh mục --</option>
+            <option value="Tin tức">Tin tức</option>
+            <option value="Sự kiện">Sự kiện</option>
+            <option value="Tuyển dụng">Tuyển dụng</option>
+            <option value="Chia sẻ">Chia sẻ</option>
+          </select>
+          @error('f_category')<div class="err">{{ $message }}</div>@enderror
         </div>
- 
-     
         <div class="fi">
-          <label>Ảnh bìa</label>
-          <div>
-            @if($coverImage)
-              <img src="{{ $coverImage->temporaryUrl() }}" class="cover-preview show" alt="Cover">
-              <span class="change-cover" wire:click="$set('coverImage', null)">✕ Xóa ảnh</span>
-            @else
-              <label class="cover-upload" for="cover-input">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin:0 auto 8px;display:block;color:#9ca3af"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <div style="font-size:13px;color:#6b7280;margin-bottom:3px">Nhấn để tải ảnh bìa lên</div>
-                <div style="font-size:11px;color:#9ca3af">JPG, PNG · Tối đa 2MB</div>
-                <input type="file" id="cover-input" wire:model="coverImage" accept="image/*" style="display:none">
-              </label>
-            @endif
-            @error('coverImage')<div class="err">{{ $message }}</div>@enderror
-          </div>
+          <label>Trạng thái</label>
+          <select wire:model="f_status">
+            <option value="draft">Bản nháp</option>
+            <option value="pending">Gửi duyệt</option>
+            <option value="published">Đăng luôn</option>
+            <option value="hidden">Ẩn</option>
+          </select>
         </div>
- 
+      </div>
+      <div class="fi">
+        <label>Mô tả ngắn</label>
+        <textarea wire:model="f_excerpt" rows="2" placeholder="Tóm tắt nội dung bài viết..."></textarea>
+      </div>
+      <hr class="mdiv">
+      <div class="mo-sec">Nội dung *</div>
+      <div class="fi">
+        <textarea wire:model="f_content" rows="8" placeholder="Viết nội dung bài viết tại đây..."></textarea>
+        @error('f_content')<div class="err">{{ $message }}</div>@enderror
+      </div>
+      <hr class="mdiv">
+      <div class="check-row">
+        <input type="checkbox" wire:model="f_featured" id="featured">
+        <label for="featured"><i class="fa-solid fa-star"></i> Đánh dấu là bài viết nổi bật</label>
       </div>
     </div>
- 
-    
-    <div>
- 
-     
-      <div class="side-card pub-card">
-        <div class="side-title">Xuất bản</div>
-        <button wire:click="publish" class="pub-btn">
-          <span wire:loading wire:target="publish">Đang đăng...</span>
-          <span wire:loading.remove wire:target="publish">🚀 Đăng bài viết</span>
-        </button>
-        <button wire:click="saveDraft" class="draft-btn">
-          <span wire:loading wire:target="saveDraft">Đang lưu...</span>
-          <span wire:loading.remove wire:target="saveDraft">💾 Lưu nháp</span>
-        </button>
-      </div>
- 
-      
-      <div class="side-card">
-        <div class="side-title">Cài đặt bài viết</div>
-        <div class="meta-row">
-          <span class="meta-key">Trạng thái</span>
-          <select class="meta-sel" wire:model="status">
-            <option value="published">Công khai</option>
-            <option value="private">Chỉ mình tôi</option>
-            <option value="draft">Nháp</option>
-          </select>
-        </div>
-        <div class="meta-row">
-          <span class="meta-key">Bình luận</span>
-          <select class="meta-sel" wire:model="allow_comments">
-            <option value="1">Cho phép</option>
-            <option value="0">Tắt</option>
-          </select>
-        </div>
-        <div class="meta-row">
-          <span class="meta-key">Tác giả</span>
-          <span class="meta-val">{{ auth()->user()->name }}</span>
-        </div>
-        <div class="meta-row">
-          <span class="meta-key">Ngày đăng</span>
-          <span class="meta-val">{{ now()->format('d/m/Y') }}</span>
-        </div>
-      </div>
- 
-      
-      <div class="side-card">
-        <div class="side-title">Gợi ý viết bài</div>
-        <div class="tip-list">
-          <div class="tip-item"><div class="tip-ico">✓</div><span>Tiêu đề rõ ràng, dưới 100 ký tự</span></div>
-          <div class="tip-item"><div class="tip-ico">✓</div><span>Thêm ảnh bìa để bài viết nổi bật hơn</span></div>
-          <div class="tip-item"><div class="tip-ico">✓</div><span>Dùng tags để người đọc dễ tìm thấy</span></div>
-          <div class="tip-item"><div class="tip-ico">✓</div><span>Viết mô tả ngắn hấp dẫn để thu hút đọc</span></div>
-        </div>
-      </div>
- 
+    <div class="mo-ft">
+      <button wire:click="closeModal" class="btn btn-ghost">Huỷ</button>
+      <button wire:click="save" class="btn btn-prim">
+        <span wire:loading.remove wire:target="save">{{ $editId ? 'Cập nhật' : 'Lưu bài viết' }}</span>
+        <span wire:loading wire:target="save"><span class="spin"></span> Đang lưu...</span>
+      </button>
     </div>
   </div>
 </div>
- 
-<script>
-function fmt(cmd, val = null) {
-  document.getElementById('editor').focus();
-  document.execCommand(cmd, false, val);
-  syncContent();
-}
-function insertLink() {
-  const url = prompt('Nhập URL:');
-  if (url) fmt('createLink', url);
-}
-function syncContent() {
-  const editor = document.getElementById('editor');
-  window.livewire?.find(editor.closest('[wire\\:id]')?.getAttribute('wire:id'))?.set('content', editor.innerHTML);
-}
-function updateCount() {
-  const text = document.getElementById('editor').innerText;
-  document.getElementById('charCount').textContent = text.length;
-}
-document.getElementById('editor').addEventListener('input', updateCount);
-// Placeholder
-const editor = document.getElementById('editor');
-editor.addEventListener('focus', () => {
-  if (!editor.innerHTML.trim()) editor.innerHTML = '';
-});
+@endif
+
+@if($showView && $viewPost)
+<div class="mo-bg" wire:click.self="closeView">
+  <div class="mo">
+    <div class="mo-hd">
+      <div class="mo-title">Xem trước bài viết</div>
+      <button class="mo-close" wire:click="closeView">✕</button>
+    </div>
+    <div class="mo-body" style="gap:0">
+      @php
+        $catIcons2 = [
+          'Sự kiện'    => '<i class="fa-solid fa-calendar-days"></i>',
+          'Tuyển dụng' => '<i class="fa-solid fa-briefcase"></i>',
+          'Chia sẻ'    => '<i class="fa-solid fa-comments"></i>',
+          'Tin tức'    => '<i class="fa-solid fa-newspaper"></i>',
+        ];
+      @endphp
+      <div class="pv-thumb">
+        @if($viewPost->thumbnail)
+          <img src="{{ asset('storage/'.$viewPost->thumbnail) }}" alt="">
+        @else
+          {!! $catIcons2[$viewPost->category] ?? '<i class="fa-solid fa-file-lines"></i>' !!}
+        @endif
+      </div>
+      <div class="pv-cat">{{ $viewPost->category ?: 'Chưa phân loại' }}</div>
+      <div class="pv-title">{{ $viewPost->title }}</div>
+      <div class="pv-meta">
+        <span><i class="fa-solid fa-pen"></i> {{ $viewPost->author?->name ?? '—' }}</span>
+        <span><i class="fa-solid fa-calendar-days"></i> {{ $viewPost->published_date }}</span>
+        <span><i class="fa-solid fa-eye"></i> {{ $viewPost->formatted_views }} lượt xem</span>
+        @php
+          $vbc = match($viewPost->status){ 'published'=>'bd-g','pending'=>'bd-o','draft'=>'bd-a',default=>'bd-r' };
+          $vbl = match($viewPost->status){ 'published'=>'Đã đăng','pending'=>'Chờ duyệt','draft'=>'Bản nháp',default=>'Ẩn' };
+        @endphp
+        <span class="bd {{ $vbc }}">{{ $vbl }}</span>
+      </div>
+      @if($viewPost->excerpt)
+        <div class="pv-excerpt">{{ $viewPost->excerpt }}</div>
+      @endif
+      <div class="pv-body">{{ $viewPost->content }}</div>
+    </div>
+    <div class="mo-ft">
+      <button wire:click="closeView" class="btn btn-ghost">Đóng</button>
+      <button wire:click="openEdit({{ $viewPost->id }})" class="btn btn-ghost"><i class="fa-solid fa-pen-to-square"></i> Sửa</button>
+      @if(in_array($viewPost->status, ['draft','pending','hidden']))
+        <button wire:click="openApprove({{ $viewPost->id }})" class="btn btn-green"><i class="fa-solid fa-check"></i> Duyệt & Đăng</button>
+      @elseif($viewPost->status === 'published')
+        <button wire:click="toDraft({{ $viewPost->id }})" class="btn btn-amber"><i class="fa-solid fa-clock"></i> Về nháp</button>
+      @endif
+    </div>
+  </div>
+</div>
+@endif
+
+@if($showApprove && $approvePost)
+<div class="mo-bg" wire:click.self="closeApprove">
+  <div class="mo mo-sm">
+    <div class="mo-hd">
+      <div class="mo-title">✓ Duyệt bài viết</div>
+      <button class="mo-close" wire:click="closeApprove">✕</button>
+    </div>
+    <div class="mo-body">
+      <div class="ap-info">
+        <div class="ap-title">{{ $approvePost->title }}</div>
+        <div class="ap-meta">
+          <i class="fa-solid fa-pen"></i> {{ $approvePost->author?->name ?? '—' }} ·
+          <i class="fa-solid fa-calendar-days"></i> {{ $approvePost->published_date }} ·
+          <i class="fa-solid fa-tag"></i> {{ $approvePost->category }}
+        </div>
+      </div>
+      <p style="font-size:13px;color:#64748b;line-height:1.7">
+        Bạn có chắc muốn <strong style="color:#15803d">duyệt và đăng</strong> bài viết này không?<br>
+        Bài viết sẽ hiển thị công khai ngay sau khi duyệt.
+      </p>
+    </div>
+    <div class="mo-ft">
+      <button wire:click="closeApprove" class="btn btn-ghost">Huỷ</button>
+      <button wire:click="approve" class="btn btn-green">
+        <span wire:loading.remove wire:target="approve"><i class="fa-solid fa-check"></i> Duyệt & Đăng ngay</span>
+        <span wire:loading wire:target="approve"><span class="spin"></span> Đang duyệt...</span>
+      </button>
+    </div>
+  </div>
+</div>
+@endif
+
+ @if($showDelete)
+<div class="mo-bg" wire:click.self="closeDelete">
+  <div class="mo mo-sm">
+    <div class="cf-wrap">
+      <div class="cf-ic"><i class="fa-solid fa-trash"></i></div>
+      <div class="cf-t">Xoá bài viết?</div>
+      <div class="cf-s">
+        Bạn sắp xoá bài viết<br>
+        <strong>{{ $deleteName }}</strong><br>
+        Hành động này không thể hoàn tác.
+      </div>
+      <div class="cf-btns">
+        <button wire:click="closeDelete" class="btn btn-ghost">Huỷ</button>
+        <button wire:click="destroy" class="btn btn-del">
+          <span wire:loading.remove wire:target="destroy">Xoá</span>
+          <span wire:loading wire:target="destroy"><span class="spin"></span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
+</div>
+
+ <script>
+(function () {
+    'use strict';
+    var active = null;
+
+    function openMenu(wrap) {
+        var btn  = wrap.querySelector('[data-trigger]');
+        var menu = wrap.querySelector('[data-menu]');
+        if (!btn || !menu) return;
+
+        closeAll();
+
+        /* Đo kích thước menu trước khi show */
+        menu.style.visibility = 'hidden';
+        menu.style.display    = 'block';
+        var mH = menu.offsetHeight;
+        var mW = menu.offsetWidth || 176;
+        menu.style.display    = '';
+        menu.style.visibility = '';
+
+        var r          = btn.getBoundingClientRect();
+        var spaceBelow = window.innerHeight - r.bottom;
+        var spaceAbove = r.top;
+        var goUp       = spaceBelow < mH + 8 && spaceAbove >= mH + 8;
+
+        var top  = goUp ? r.top - mH - 4 : r.bottom + 4;
+        var left = r.right - mW;
+        if (left < 8)                          left = 8;
+        if (left + mW > window.innerWidth - 8) left = window.innerWidth - mW - 8;
+
+        menu.style.top   = top  + 'px';
+        menu.style.left  = left + 'px';
+        menu.style.width = mW   + 'px';
+        menu.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        active = { wrap: wrap, btn: btn, menu: menu };
+    }
+
+    function closeAll() {
+        if (!active) return;
+        active.menu.classList.remove('open');
+        active.btn.setAttribute('aria-expanded', 'false');
+        active = null;
+    }
+
+    document.addEventListener('click', function (e) {
+        var trigger = e.target.closest('[data-trigger]');
+        var closer  = e.target.closest('[data-close]');
+        if (trigger) {
+            var wrap = trigger.closest('[data-dropdown]');
+            if (active && active.wrap === wrap) { closeAll(); } else { openMenu(wrap); }
+            return;
+        }
+        if (closer)  { closeAll(); return; }
+        if (active && !e.target.closest('[data-menu]')) { closeAll(); }
+    }, true);
+
+    window.addEventListener('scroll',  closeAll, true);
+    window.addEventListener('resize',  closeAll);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+    document.addEventListener('livewire:navigated', closeAll);
+    document.addEventListener('livewire:update',    closeAll);
+})();
 </script>
 </div>

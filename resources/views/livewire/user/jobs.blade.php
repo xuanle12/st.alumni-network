@@ -4,8 +4,8 @@
    FITA-STYLE JOBS PAGE
    ══════════════════════════════════════════ */
 :root {
-    --fita:        #0961AA;
-    --fita2:       #0c83d8;
+    --fita:        #16a34a;
+    --fita2:       #22c55e;
     --fita-pale:   #e8f1fb;
     --fita-border: rgba(9,97,170,0.18);
     --warning:     #F6A309;
@@ -104,9 +104,9 @@
 .jm-overlay.open .jm-modal { transform: translateY(0); }
 .jm-header { background: linear-gradient(135deg, #074e89 0%, var(--fita) 55%, var(--fita2) 100%); padding: 22px 28px 20px; display: flex; align-items: flex-start; justify-content: space-between; flex-shrink: 0; }
 .jm-header-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.15); border: 0.5px solid rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
-.jm-header-title { font-size: 20px; font-weight: 800; color: #fff; margin: 0 0 3px; }
+.jm-header-title { font-size: 16px; font-weight: 800; color: #fff; margin: 0 0 3px; }
 .jm-header-sub { font-size: 13px; color: rgba(255,255,255,0.72); margin: 0; }
-.jm-close { background: rgba(255,255,255,0.15); border: none; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 20px; flex-shrink: 0; transition: background .15s; margin-top: 2px; }
+.jm-close { background: rgba(255,255,255,0.15); border: none; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 15px; flex-shrink: 0; transition: background .15s; margin-top: 2px; }
 .jm-close:hover { background: rgba(255,255,255,0.28); }
 .jm-steps { display: flex; align-items: center; padding: 0 28px; background: var(--fita-pale); border-bottom: 1px solid rgba(9,97,170,0.15); flex-shrink: 0; }
 .jm-step { display: flex; align-items: center; gap: 8px; padding: 12px 0; flex: 1; position: relative; }
@@ -317,13 +317,6 @@
 
 <div class="jobs-page">
     <div class="container" style="max-width:1200px;margin:0 auto;padding:0 24px">
-
-        <nav class="jobs-heading">
-            <a href="/csv">Trang chủ</a>
-            <span class="sep">/</span>
-            <span class="current">Việc làm</span>
-        </nav>
-
         <div class="jobs-title-bar">
             <h1>Cơ hội việc làm</h1>
         </div>

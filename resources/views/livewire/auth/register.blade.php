@@ -5,13 +5,13 @@
 @keyframes reg-spin{to{transform:rotate(360deg)}}
 
 :root{
-  --primary:#0961AA;
-  --primary-hover:#0c83d8;
+  --primary:#16a34a;
+  --primary-hover:#22c55e;
   --primary-soft:#e8f0fe;
   --bg:#f1f5f9;
   --card:#ffffff;
   --border:#e2e8f0;
-  --border-focus:#0961AA;
+  --border-focus:#16a34a;
   --text:#0f172a;
   --muted:#64748b;
   --danger:#dc2626;
@@ -106,7 +106,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 
 
 .reg-verify-box{
-  background:#f8faff;
+  background:#f0faf5;
   border:1.5px dashed #abc5ea;
   border-radius:12px;padding:16px;margin-bottom:14px;
 }
@@ -251,7 +251,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
         @click="open = !open"
         style="cursor:pointer;"
     >
-        <i class="fa-solid fa-shield-halved" style="color:#0961AA"></i>
+        <i class="fa-solid fa-shield-halved" style="color:#16a34a"></i>
 
         <span>Xác minh cựu sinh viên</span>
 
@@ -353,6 +353,6 @@ body{font-family:'Barlow',system-ui,sans-serif;}
       <a href="{{ route('login') }}" wire:navigate>Đăng nhập</a>
     </p>
 
-  </div>
+  </div>    
 </div>
 </div>

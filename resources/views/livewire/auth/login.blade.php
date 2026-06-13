@@ -92,7 +92,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 }
 .lfield-row label{margin-bottom:0;}
 .lfield-row a{
-    font-size:12.5px;color:#0961AA;
+    font-size:12.5px;color:#16a34a;
     text-decoration:none;transition:.15s;
 }
 .lfield-row a:hover{text-decoration:underline;}
@@ -109,7 +109,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     transition:border-color .15s,box-shadow .15s;
 }
 .linput:focus{
-    border-color:#0961AA;
+    border-color:#16a34a;
     box-shadow:0 0 0 3px rgba(9,97,170,.1);
 }
 .linput::placeholder{color:#94a3b8;}
@@ -123,7 +123,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     padding:0;color:#94a3b8;font-size:15px;
     transition:.15s;
 }
-.ltoggle:hover{color:#0961AA;}
+.ltoggle:hover{color:#16a34a;}
 
 .lfield-err{font-size:12px;color:#dc2626;margin-top:4px;display:block;}
 
@@ -133,13 +133,13 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 }
 .lremember input{
     width:16px;height:16px;
-    accent-color:#0961AA;cursor:pointer;
+    accent-color:#16a34a;cursor:pointer;
 }
 
 .lbtn-submit{
     width:100%;
     padding:13px;
-    background:#0961AA;
+    background:#16a34a;
     color:#fff;border:none;
     border-radius:10px;
     font-family:'Barlow',sans-serif;
@@ -151,7 +151,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .lbtn-submit:hover:not(:disabled){
-    background:#0c83d8;
+    background:#22c55e;
     transform:translateY(-1px);
     box-shadow:0 4px 18px rgba(9,97,170,.35);
 }
@@ -170,7 +170,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     font-size:13.5px;color:#64748b;
 }
 .lregister a{
-    color:#0961AA;font-weight:600;
+    color:#16a34a;font-weight:600;
     text-decoration:none;transition:.15s;
 }
 .lregister a:hover{text-decoration:underline;}
@@ -191,13 +191,13 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     width:100%;
     padding:13px 16px;
     border-radius:10px;
-    border:1.5px solid #0961AA;
+    border:1.5px solid #16a34a;
     background:#e8f0fe;
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;gap:10px;
     font-family:'Barlow',sans-serif;
     font-size:14px;font-weight:700;
-    color:#0961AA;
+    color:#16a34a;
     transition:.18s;
     text-decoration:none;
 }

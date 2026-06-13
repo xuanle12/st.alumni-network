@@ -2,13 +2,13 @@
 <style>
 .mentor-wrap        { padding: 32px 0 48px; }
 .mentor-header      { margin-bottom: 28px; }
-.mentor-header h1   { font-size: 24px; font-weight: 800; color: var(--blue); margin-bottom: 4px; }
+.mentor-header h1   { font-size: 24px; font-weight: 800; color: var(--green); margin-bottom: 4px; }
 .mentor-header p    { color: var(--text-muted); font-size: 14px; }
 
 .mentor-filter      { background: #f8faf9; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 .mentor-filter-main { flex: 1; min-width: 200px; }
 .mentor-input       { width: 100%; padding: 9px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
-.mentor-input:focus { outline: none; border-color: var(--blue); }
+.mentor-input:focus { outline: none; border-color: var(--green); }
 
 .mentor-grid        { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
@@ -17,10 +17,10 @@
 
 .mentor-card-top    { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
 .mentor-avatar      { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--blue-pale); flex-shrink: 0; }
-.mentor-avatar-placeholder { width: 56px; height: 56px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; font-weight: 700; flex-shrink: 0; }
+.mentor-avatar-placeholder { width: 56px; height: 56px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; font-weight: 700; flex-shrink: 0; }
 .mentor-name        { font-weight: 700; font-size: 15px; color: var(--text); }
 .mentor-pos         { font-size: 12px; color: var(--text-muted); }
-.mentor-badge       { display: inline-block; margin-top: 4px; background: var(--blue-pale); color: var(--blue); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+.mentor-badge       { display: inline-block; margin-top: 4px; background: var(--blue-pale); color: var(--green); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
 
 .mentor-label       { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); margin-bottom: 4px; }
 .mentor-section     { margin-bottom: 10px; }
@@ -33,7 +33,7 @@
 .mentor-bio         { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .mentor-contact     { background: #f8faf9; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--text); }
-.mentor-contact i   { color: var(--blue); }
+.mentor-contact i   { color: var(--green); }
 
 .mentor-empty       { text-align: center; padding: 60px 20px; color: var(--text-muted); }
 .mentor-empty i     { font-size: 40px; margin-bottom: 12px; display: block; opacity: .3; }

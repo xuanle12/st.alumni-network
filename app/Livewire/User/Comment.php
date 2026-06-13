@@ -98,18 +98,16 @@ class Comment extends Component
 
    public function render()
     {
-    $comments = CommentModel::with(['user', 'replies' => function($q) {
-        $q->with(['user', 'parent.user', 'replies' => function($q2) {
-            $q2->with(['user', 'parent.user', 'replies.user'=> function($q3) {
-                $q3->with(['user', 'parent.user'])->latest();
-            }])->latest();
-        }])->latest();
-    }])
-    ->where('post_id', $this->post->id)
-    ->whereNull('parent_id')
-    ->latest()
-    ->get();
+        $comments = CommentModel::with([
+            'user',
+            'replies.user',
+            'replies.parent.user',
+        ])
+        ->where('post_id', $this->post->id)
+        ->whereNull('parent_id')
+        ->latest()
+        ->get();
 
     return view('livewire.user.comment', compact('comments'));
-    }
+}
 }

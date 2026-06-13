@@ -20,7 +20,7 @@ body {
   margin-bottom: 1.75rem;
 }
 
-.ptitle { font-size: 20px; font-weight: 700; color: #111; letter-spacing: -.4px; }
+.ptitle { font-size: 16px; font-weight: 700; color: #111; letter-spacing: -.4px; }
 .psub   { font-size: 12px; color: #9ca3af; margin-top: 3px; }
 
 .flash-ok {
@@ -31,7 +31,7 @@ body {
 
 .btn-prim {
   padding: 8px 18px;
-  background: #2563eb;
+  background: #16a34a;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -46,7 +46,7 @@ body {
 }
 
 .btn-prim:hover {
-  background: #1d4ed8;
+  background: #16a34a;
 }
 
 .btn-prim:active {
@@ -86,7 +86,7 @@ body {
 
 .stat-sm-label { font-size: 11px; color: #9ca3af; margin-bottom: 4px; }
 .stat-sm-val   { font-size: 20px; font-weight: 700; color: #111; }
-.stat-sm-icon  { font-size: 18px; color: #d1d5db; }
+.stat-sm-icon  { font-size: 14px; color: #d1d5db; }
 
 .toolbar {
   display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;
@@ -157,7 +157,7 @@ td {
 .bg { background: #f0fdf4; color: #15803d; }
 .by { background: #fef9c3; color: #92400e; }
 .bp { background: #f5f3ff; color: #6d28d9; }
-.bc { background: #eff6ff; color: #1d4ed8; }
+.bc { background: #f0fdf4; color: #16a34a; }
 .bn { background: #f3f4f6; color: #6b7280; }
 
 .tog {
@@ -259,7 +259,7 @@ td {
 
 .close-btn {
   background: none; border: none;
-  font-size: 20px; color: #9ca3af;
+  font-size: 13px; color: #9ca3af;
   cursor: pointer; line-height: 1; padding: 2px 4px;
   border-radius: 4px; transition: color .1s, background .1s;
 }

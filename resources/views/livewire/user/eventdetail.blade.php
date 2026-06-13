@@ -23,7 +23,7 @@
 .ev-title{font-size:20px;font-weight:700;color:#111;margin-bottom:.75rem;line-height:1.3;}
 .tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;}
 .tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;}
-.tg{background:#f0fdf4;color:#166534;}.tb{background:#eff6ff;color:#1e40af;}.tgr{background:#f3f4f6;color:#6b7280;}
+.tg{background:#f0fdf4;color:#166534;}.tb{background:#f0fdf4;color:#15803d;}.tgr{background:#f3f4f6;color:#6b7280;}
  
 /* Info grid */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem;}
@@ -272,4 +272,3 @@
   </div>
 </div>
 </div>
- 

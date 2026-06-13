@@ -13,15 +13,16 @@
         a { text-decoration: none; }
 
         :root {
-            --adm-bg:      #0d223a;
-            --adm-bg2:     #252d36;
-            --adm-border:  rgba(255,255,255,0.07);
-            --adm-text:    rgb(255, 255, 255);
+            --adm-bg:      #001529;
+            --adm-bg2:     #002140;
+            --adm-border:  rgba(255,255,255,0.08);
+            --adm-text:    rgba(255,255,255,0.75);
             --adm-text-h:  #fff;
-            --adm-active:  rgba(9,97,170,0.35); 
-            --adm-active-c:#60a5fa;
-            --blue:        #0961AA;
-            --blue-light:  #0c83d8;
+            --adm-active:  rgba(22,163,74,0.20);
+            --adm-active-c:#4ade80;
+            --green:       #16a34a;
+            --green-light: #22c55e;
+            --gold:        #c8912a;
         }
 
          .adm-layout { display: flex; min-height: 100vh; }
@@ -37,6 +38,7 @@
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            border-radius: 0 0 12px 0;
         }
         .adm-sb::-webkit-scrollbar { width: 3px; }
         .adm-sb::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
@@ -56,7 +58,7 @@
             object-fit: cover;
             padding: 4px;
         }   
-       .adm-brand-name { font-size: 20px; font-weight: 700; color: #fff; line-height: 1.3; }
+       .adm-brand-name { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.3; }
         .adm-brand-sub  { font-size: 15px; color: var(--adm-text); margin-top: 2px; }
 
          .adm-back-btn {
@@ -96,7 +98,7 @@
         .adm-item:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
         .adm-item.active { background: var(--adm-active); color: var(--adm-active-c); font-weight: 600; }
         .adm-item.active .adm-item-ic { color: var(--adm-active-c); }
-        .adm-item-ic { font-size: 20px; width: 18px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.35); }
+        .adm-item-ic { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.35); }
         .adm-item:hover .adm-item-ic { color: rgba(255,255,255,0.7); }
         .adm-item-badge {
             margin-left: auto;
@@ -104,7 +106,7 @@
             padding: 2px 7px; border-radius: 20px;
             background: rgba(251,191,36,0.15); color: #fbbf24;
         }
-        .adm-item-badge.blue { background: rgba(9,97,170,0.2); color: #60a5fa; }
+        .adm-item-badge.blue { background: rgba(26,107,58,0.25); color: #6ee7a0; }
 
          .adm-div { height: 1px; background: var(--adm-border); margin: 6px 10px; }
 
@@ -127,20 +129,20 @@
             width: 50px; 
             height: 50px;
             border-radius: 50%;
-            background: var(--blue);
+            background: var(--green);
             color: #fff;
             font-size: 20px; font-weight: 700;
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
-        .adm-uname { font-size: 20px; color: #e2e8f0; font-weight: 600; }
-        .adm-urole { font-size: 20px; color: var(--adm-text); margin-top: 1px; }
+        .adm-uname { font-size: 14px; color: #e2e8f0; font-weight: 600; }
+        .adm-urole { font-size: 12px; color: var(--adm-text); margin-top: 1px; }
         .adm-logout {
             display: flex; align-items: center; gap: 8px;
             width: 100%;
             padding: 8px 12px;
             border-radius: 8px;
-            font-size: 20px;
+            font-size: 13px;
             color: var(--adm-text);
             background: transparent;
             border: none;
@@ -163,10 +165,12 @@
             top: 0;
             z-index: 40;
             border-bottom: 1px solid var(--adm-border);
+            border-radius: 0 0 8px 0;
+            margin-top: 0;
         }
         .adm-topbar-left { display: flex; align-items: center; gap: 12px; }
-        .adm-topbar-title { font-size: 20px; font-weight: 700; color: #fff; }
-        .adm-topbar-sub   { font-size: 20px; color: var(--adm-text); margin-top: 1px; }
+        .adm-topbar-title { font-size: 16px; font-weight: 700; color: #fff; }
+        .adm-topbar-sub   { font-size: 12px; color: var(--adm-text); margin-top: 1px; }
         .adm-topbar-right { display: flex; align-items: center; gap: 10px; }
 
         .adm-notif {
@@ -175,7 +179,7 @@
             border: 1px solid var(--adm-border);
             background: transparent;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 14px;
             display: flex; align-items: center; justify-content: center;
             color: var(--adm-text);
             position: relative;
@@ -198,11 +202,11 @@
             transition: .15s;
         }
         .adm-topbar-user:hover { background: var(--adm-bg2); }
-        .adm-topbar-uname { font-size: 20px; color: #e2e8f0; font-weight: 600; }
+        .adm-topbar-uname { font-size: 14px; color: #e2e8f0; font-weight: 600; }
 
         .adm-menu-btn {
             display: none;
-            font-size: 18px;
+            font-size: 16px;
             background: none;
             border: none;
             cursor: pointer;
@@ -222,13 +226,13 @@
             border-left: 4px solid #16a34a;
             border-radius: 10px;
             padding: 12px 16px;
-            font-size: 20px;
+            font-size: 13px;
             color: #0f172a;
             box-shadow: 0 6px 24px rgba(15,23,42,0.12);
             display: flex; align-items: center; gap: 10px;
             max-width: calc(100vw - 32px);
         }
-        .adm-flash.is-info  { border-left-color: var(--blue); }
+        .adm-flash.is-info  { border-left-color: var(--green); }
         .adm-flash.is-error { border-left-color: #dc2626; }
         .adm-flash button { background: transparent; border: none; cursor: pointer; font-size: 16px; color: #64748b; line-height: 1; }
 
@@ -249,7 +253,7 @@
         }
 
         a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--blue);
+            outline: 2px solid var(--green);
             outline-offset: 2px;
             border-radius: 6px;
         }
@@ -290,7 +294,7 @@
         <div class="adm-sec">Quản lý</div>
 
         <a href="{{ route('admin') }}" class="adm-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
-            <i class="fa-solid fa-gauge adm-item-ic"></i> Dashboard
+            <i class="fa-solid fa-gauge adm-item-ic"></i> Bảng điều khiển
         </a>
         <a href="{{ route('admin.user') }}" class="adm-item {{ request()->routeIs('admin.user') ? 'active' : '' }}" wire:navigate>
             <i class="fa-solid fa-users adm-item-ic"></i> Người dùng

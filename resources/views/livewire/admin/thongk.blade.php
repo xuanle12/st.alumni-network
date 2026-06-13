@@ -2,7 +2,7 @@
 <style>
 .dash{padding:1.75rem}
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px}
-.ptitle{font-size:20px;font-weight:600;color:#111;letter-spacing:-.3px}
+.ptitle{font-size:16px;font-weight:600;color:#111;letter-spacing:-.3px}
 .psub{font-size:12px;color:#9ca3af;margin-top:3px}
 .filter-row{display:flex;gap:8px}
 .f-sel{padding:6px 10px;border:1px solid #d1d5db;border-radius:7px;font-size:12px;color:#374151;background:#fff}
@@ -50,10 +50,10 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
 .badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:4px}
 .bg{background:#f0fdf4;color:#166534}
 .by{background:#fef9c3;color:#92400e}
-.bc2{background:#eff6ff;color:#1e40af}
+.bc2{background:#f0fdf4;color:#15803d}
  
 .spark{display:flex;align-items:flex-end;gap:2px;height:28px}
-.sp{width:6px;border-radius:2px 2px 0 0;background:#bfdbfe}
+.sp{width:6px;border-radius:2px 2px 0 0;background:#dcfce7}
 .sp.hi{background:#3b82f6}
  
 @media(max-width:1024px){.stats4{grid-template-columns:1fr 1fr}.row3{grid-template-columns:1fr 1fr}}
@@ -72,12 +72,7 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
           <option value="{{ $y }}">Năm {{ $y }}</option>
         @endforeach
       </select>
-      <select class="f-sel" wire:model.live="khoa">
-        <option value="">Tất cả khoa</option>
-        @foreach($khoaList as $k => $l)
-          <option value="{{ $k }}">{{ $l }}</option>
-        @endforeach
-      </select>
+     
     </div>
   </div>
  
@@ -85,7 +80,7 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
     <div class="sc">
       <div class="sc-top">
         <div class="sc-label">Tổng cựu sinh viên</div>
-        <div class="sc-ico" style="background:#eff6ff">
+        <div class="sc-ico" style="background:#f0fdf4">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="#3b82f6" stroke-width="1.5"/><path d="M2 13c0-3 2.7-5 6-5s6 2 6 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
       </div>
@@ -268,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const col = document.createElement('div');
       col.className = 'bc';
       const h = vals[i] ? Math.round((vals[i] / max) * 110) : 3;
-      const clr = i === cur ? '#3b82f6' : vals[i] === 0 ? '#eaecf0' : '#bfdbfe';
+      const clr = i === cur ? '#3b82f6' : vals[i] === 0 ? '#eaecf0' : '#dcfce7';
       col.innerHTML = `<div class="bar" style="height:${h}px;background:${clr}" title="${vals[i]} đăng ký"></div><div class="bl">${m}</div>`;
       wrap.appendChild(col);
     });

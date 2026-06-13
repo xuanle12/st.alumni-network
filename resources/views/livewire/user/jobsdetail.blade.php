@@ -15,7 +15,7 @@
   text-decoration:none;margin-bottom:1.25rem;
   transition:color .15s;
 }
-.jd-back:hover{color:#0961AA}
+.jd-back:hover{color:#16a34a}
 
 .jd-flash{
   background:#f0fdf4;border:1px solid #86efac;color:#166534;
@@ -65,7 +65,7 @@
 }
 .tag-green {background:#dcfce7;color:#15803d}
 .tag-yellow{background:#fef9c3;color:#854d0e}
-.tag-blue  {background:#dbeafe;color:#1e40af}
+.tag-blue  {background:#dbeafe;color:#15803d}
 .tag-gray  {background:#f1f5f9;color:#475569}
 .tag-purple{background:#ede9fe;color:#6d28d9}
 
@@ -105,8 +105,8 @@
 .jd-contact-link{
   display:inline-flex;align-items:center;gap:8px;
   padding:9px 16px;border-radius:9px;
-  background:#eff6ff;border:1px solid #bfdbfe;
-  color:#1e40af;font-size:13px;font-weight:600;
+  background:#f0fdf4;border:1px solid #dcfce7;
+  color:#15803d;font-size:13px;font-weight:600;
   text-decoration:none;transition:background .15s;
 }
 .jd-contact-link:hover{background:#dbeafe}
@@ -115,7 +115,7 @@
 
 .btn-apply{
   width:100%;padding:12px;
-  background:#0961AA;color:#fff;
+  background:#16a34a;color:#fff;
   border:none;border-radius:10px;
   font-family:inherit;font-size:14px;font-weight:700;
   cursor:pointer;transition:all .18s;
@@ -123,7 +123,7 @@
   box-shadow:0 2px 10px rgba(9,97,170,.22);
   margin-bottom:10px;
 }
-.btn-apply:hover{background:#0c83d8;transform:translateY(-1px)}
+.btn-apply:hover{background:#22c55e;transform:translateY(-1px)}
 .applied-box{
   text-align:center;padding:.75rem;margin-bottom:10px;
   background:#f0fdf4;border:1px solid #86efac;border-radius:10px;
@@ -175,11 +175,11 @@
   width:40px;height:40px;border-radius:9px;
   background:#f1f5f9;border:1px solid #e2e8f0;
   display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
+  font-size:14px;flex-shrink:0;
 }
 .rel-info{flex:1;min-width:0}
 .rel-title{
-  font-size:13px;font-weight:600;color:#0961AA;line-height:1.4;
+  font-size:13px;font-weight:600;color:#16a34a;line-height:1.4;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .rel-meta{font-size:11px;color:#94a3b8;margin-top:3px}
@@ -242,7 +242,7 @@
 
         <div class="jd-info-grid">
           <div class="ig">
-            <div class="ig-icon" style="background:#dbeafe;color:#1e40af"><i class="fa-solid fa-file-lines"></i></div>
+            <div class="ig-icon" style="background:#dbeafe;color:#15803d"><i class="fa-solid fa-file-lines"></i></div>
             <div>
               <div class="ig-lbl">Loại hình</div>
               <div class="ig-val">{{ $job->type_label }}</div>
@@ -335,7 +335,7 @@
           @if($job->contact_email)
           <div class="meta-row">
             <span class="meta-key">Email liên hệ</span>
-            <span class="meta-val" style="color:#0961AA;font-size:11.5px">{{ $job->contact_email }}</span>
+            <span class="meta-val" style="color:#16a34a;font-size:11.5px">{{ $job->contact_email }}</span>
           </div>
           @endif
         </div>

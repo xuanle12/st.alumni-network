@@ -5,8 +5,8 @@
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 :root{
-  --blue:   #0961AA;
-  --blue2:  #0c83d8;
+  --blue:   #16a34a;
+  --blue2:  #22c55e;
   --navy:   #043a6e;
   --pale:   #e8f0fe;
   --pale2:  #f4f8fd;
@@ -22,7 +22,7 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
 
 .lp{max-width:1200px;margin:0 auto;padding:0 24px;}
 .hero{
-  background:linear-gradient(135deg,#043a6e 0%,#0961AA 55%,#0c83d8 100%);
+  background:linear-gradient(135deg,#043a6e 0%,#16a34a 55%,#22c55e 100%);
   padding:80px 24px 0;
   position:relative;overflow:hidden;
 }
@@ -75,7 +75,7 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
 .btn-hero-w{
   padding:13px 26px;border-radius:10px;
   font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;
-  background:#fff;color:var(--blue);border:none;
+  background:#fff;color:var(--green);border:none;
   cursor:pointer;text-decoration:none;
   transition:.18s;display:inline-flex;align-items:center;gap:8px;
 }
@@ -148,7 +148,7 @@ section{padding:72px 24px;}
 .sec-tag{
   font-size:11.5px;font-weight:700;
   letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--blue);margin-bottom:10px;display:block;
+  color:var(--green);margin-bottom:10px;display:block;
 }
 .sec-title{
   font-family:'Barlow Condensed','Barlow',sans-serif;
@@ -163,11 +163,11 @@ section{padding:72px 24px;}
   margin-bottom:36px;gap:16px;
 }
 .sec-link{
-  font-size:13.5px;font-weight:600;color:var(--blue);
+  font-size:13.5px;font-weight:600;color:var(--green);
   text-decoration:none;display:flex;align-items:center;gap:5px;
   white-space:nowrap;flex-shrink:0;transition:.15s;
 }
-.sec-link:hover{color:var(--blue2);}
+.sec-link:hover{color:var(--green-light);}
 .feat-bg{background:var(--white);}
 .feat-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
@@ -184,12 +184,12 @@ section{padding:72px 24px;}
 }
 .feat-ic{
   width:46px;height:46px;border-radius:12px;
-  background:var(--pale);border:1px solid #abc5ea;
+  background:var(--green-pale);border:1px solid #abc5ea;
   display:flex;align-items:center;justify-content:center;
-  font-size:20px;color:var(--blue);margin-bottom:16px;
+  font-size:15px;color:var(--green);margin-bottom:16px;
   transition:.2s;
 }
-.feat-card:hover .feat-ic{background:var(--blue);color:#fff;border-color:var(--blue);}
+.feat-card:hover .feat-ic{background:var(--green);color:#fff;border-color:var(--green);}
 .feat-title{font-size:14.5px;font-weight:700;color:var(--text);margin-bottom:8px;}
 .feat-desc{font-size:13.5px;color:var(--muted);line-height:1.7;}
 .jobs-bg{background:var(--bg);}
@@ -207,9 +207,9 @@ section{padding:72px 24px;}
 }
 .job-logo{
   width:46px;height:46px;border-radius:10px;
-  background:var(--pale);border:1px solid var(--border);
+  background:var(--green-pale);border:1px solid var(--border);
   display:flex;align-items:center;justify-content:center;
-  color:var(--blue);flex-shrink:0;
+  color:var(--green);flex-shrink:0;
   font-weight:700;font-size:14px;
 }
 .job-info{flex:1;min-width:0;}
@@ -220,11 +220,11 @@ section{padding:72px 24px;}
   padding:3px 9px;border-radius:100px;
   font-size:11.5px;font-weight:500;
 }
-.jtag-blue{background:var(--pale);color:var(--blue);}
+.jtag-blue{background:var(--green-pale);color:var(--green);}
 .jtag-gold{background:#fdf3e0;color:#b87400;}
 .jtag-gray{background:#f1f5f9;color:#64748b;}
 .job-salary{
-  font-size:13px;font-weight:700;color:var(--blue);
+  font-size:13px;font-weight:700;color:var(--green);
   white-space:nowrap;flex-shrink:0;margin-top:2px;
 }
 .events-bg{background:var(--white);}
@@ -243,7 +243,7 @@ section{padding:72px 24px;}
 .ev-date{text-align:center;flex-shrink:0;width:52px;}
 .ev-day{
   font-family:'Barlow Condensed',sans-serif;
-  font-size:30px;font-weight:800;color:var(--blue);line-height:1;
+  font-size:30px;font-weight:800;color:var(--green);line-height:1;
 }
 .ev-month{
   font-size:11px;font-weight:700;
@@ -261,7 +261,7 @@ section{padding:72px 24px;}
   padding:4px 12px;border-radius:100px;
   font-size:11.5px;font-weight:600;flex-shrink:0;
 }
-.ev-badge-blue{background:var(--pale);color:var(--blue);}
+.ev-badge-blue{background:var(--green-pale);color:var(--green);}
 .ev-badge-gold{background:#fdf3e0;color:#b87400;}
 .posts-bg{background:var(--bg);}
 .posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -276,7 +276,7 @@ section{padding:72px 24px;}
   transform:translateY(-3px);
 }
 .post-img{
-  height:160px;background:linear-gradient(135deg,#0961AA,#0c83d8);
+  height:160px;background:linear-gradient(135deg,#16a34a,#22c55e);
   display:flex;align-items:center;justify-content:center;
   font-size:40px;flex-shrink:0;position:relative;overflow:hidden;
 }
@@ -285,14 +285,14 @@ section{padding:72px 24px;}
 .post-cat{
   display:inline-block;padding:3px 10px;border-radius:100px;
   font-size:11.5px;font-weight:600;
-  background:var(--pale);color:var(--blue);
+  background:var(--green-pale);color:var(--green);
   margin-bottom:10px;
 }
 .post-title{
   font-size:14.5px;font-weight:700;color:var(--text);
   line-height:1.45;margin-bottom:10px;
 }
-.post-title:hover{color:var(--blue);}
+.post-title:hover{color:var(--green);}
 .post-excerpt{font-size:13px;color:var(--muted);line-height:1.65;flex:1;margin-bottom:14px;}
 .post-foot{
   display:flex;align-items:center;gap:8px;
@@ -301,7 +301,7 @@ section{padding:72px 24px;}
 }
 .post-ava{
   width:26px;height:26px;border-radius:50%;
-  background:var(--blue);color:#fff;
+  background:var(--green);color:#fff;
   font-size:10px;font-weight:700;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
@@ -322,19 +322,19 @@ section{padding:72px 24px;}
   background:var(--white);border:2px solid #abc5ea;
   display:flex;align-items:center;justify-content:center;
   font-family:'Barlow Condensed',sans-serif;
-  font-size:16px;font-weight:800;color:var(--blue);
+  font-size:16px;font-weight:800;color:var(--green);
   margin:0 auto 18px;
   transition:.2s;
 }
 .step-item:hover .step-num{
-  background:var(--blue);color:#fff;border-color:var(--blue);
+  background:var(--green);color:#fff;border-color:var(--green);
   transform:scale(1.1);box-shadow:0 4px 14px rgba(9,97,170,.25);
 }
 .step-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;}
 .step-desc{font-size:13.5px;color:var(--muted);line-height:1.7;}
 .cta-bg{background:var(--bg);}
 .cta-box{
-  background:linear-gradient(135deg,#043a6e,#0961AA);
+  background:linear-gradient(135deg,#043a6e,#16a34a);
   border-radius:20px;padding:64px 48px;
   text-align:center;position:relative;overflow:hidden;
 }

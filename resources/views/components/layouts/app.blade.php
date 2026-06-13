@@ -14,20 +14,22 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-   --blue:        #0961AA;  
-  --blue-light:  #0c83d8;   
-  --blue-pale:   #e8f0fe; 
+  --green:       #16a34a;
+  --green-light: #22c55e;
+  --green-pale:  #f0fdf4;
+  --green-dark:  #15803d;
+  --navy:        #003a70;
   --gold:        #c8912a;
   --gold-light:  #f0c050;
-  --text:        #1a1f2e;
-  --text-muted:  #5c6470;
-  --border:      #e2e8f0;
+  --text:        #111827;
+  --text-muted:  #6b7280;
+  --border:      #e5e7eb;
   --bg:          #ffffff;
-  --bg2:         #f8faf9;
+  --bg2:         #f9fafb;
   --radius:      12px;
   --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
   --shadow-md:   0 6px 24px rgba(0,0,0,0.08);
-   --header-h:    102px;
+  --header-h:    102px;
 }
 
 html, body {
@@ -65,11 +67,11 @@ html, body {
   border-color: var(--border);
 }
 .btn-ghost:hover { background: #f1f5f9; color: var(--text); }
-.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary { background: var(--green-dark); color: #fff; }
 .btn-primary:hover {
-  background: var(--blue-light);
+  background: var(--green);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(9,97,170,0.28);
+  box-shadow: 0 4px 14px rgba(39,174,96,0.35);
 }
 
 .btn-hero {
@@ -118,7 +120,7 @@ html, body {
   flex-shrink: 0;
   transition: .15s;
 }
-.menu-icon-btn:hover { background: var(--blue-pale); border-color: #abc5ea; }
+.menu-icon-btn:hover { background: var(--green-pale); border-color: #abc5ea; }
 .menu-icon-btn span {
   display: block;
   height: 2px;
@@ -134,7 +136,7 @@ html, body {
 .menu-icon-btn.open span:nth-child(3) { width: 18px; transform: translateY(-7px) rotate(-45deg); }
 
 .topbar {
-  background: var(--blue);
+  background: var(--navy);
   color: #fff;
   font-size: 13px;
   height: 35px;
@@ -170,7 +172,7 @@ header {
 
 .header-inner {
   width: 100%;
-  padding: 0 24px 0 8px;
+  padding: 0 24px 0 24px;
   height: 67px;
   display: flex;
   align-items: center;
@@ -190,7 +192,7 @@ header {
   display: block;
   font-size: 20px;
   font-weight: 800;
-  color: var(--blue);
+  color: var(--green-dark);
   letter-spacing: -0.2px;
   line-height: 1.2;
   white-space: nowrap;
@@ -218,16 +220,16 @@ nav a::before {
   position: absolute;
   bottom: 0; left: 0;
   width: 0; height: 3px;
-  background: var(--blue-light);
+  background: var(--green-light);
   transition: width .25s;
 }
-nav a:hover { color: var(--blue-light); }
+nav a:hover { color: var(--green-light); }
 nav a:hover::before { width: 100%; }
 nav a.active {
-  color: var(--blue);
+  color: var(--green);
   font-weight: 700;
 }
-nav a.active::before { width: 100%; background: var(--blue); }
+nav a.active::before { width: 100%; background: var(--green-dark); }
 
 .header-right {
   display: flex;
@@ -279,7 +281,7 @@ nav a.active::before { width: 100%; background: var(--blue); }
   text-decoration: none;
 }
 .sidebar-drawer-logo img { height: 30px; width: auto; }
-.sidebar-drawer-logo span { font-size: 13px; font-weight: 700; color: var(--blue); }
+.sidebar-drawer-logo span { font-size: 13px; font-weight: 700; color: var(--green); }
 
 .sidebar-close {
   width: 32px; height: 32px;
@@ -318,25 +320,25 @@ nav a.active::before { width: 100%; background: var(--blue); }
   gap: 12px;
   padding: 10px 12px;
   border-radius: 9px;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
   text-decoration: none;
   transition: .15s;
 }
-.sidebar-nav-item:hover { background: var(--blue-pale); color: var(--blue); }
-.sidebar-nav-item.active { background: var(--blue-pale); color: var(--blue); font-weight: 600; }
+.sidebar-nav-item:hover { background: var(--green-pale); color: var(--green); }
+.sidebar-nav-item.active { background: var(--green-pale); color: var(--green); font-weight: 600; }
 .sidebar-nav-item .nav-icon {
   width: 34px; height: 34px;
   border-radius: 9px;
   background: #f3f4f6;
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
+  font-size: 14px;
   flex-shrink: 0;
   transition: .15s;
 }
 .sidebar-nav-item:hover .nav-icon,
-.sidebar-nav-item.active .nav-icon { background: rgba(9,97,170,0.1); }
+.sidebar-nav-item.active .nav-icon { background: rgba(39,174,96,0.12); }
 
 .sidebar-divider { height: 1px; background: var(--border); margin: 10px 0; }
 
@@ -359,7 +361,7 @@ nav a.active::before { width: 100%; background: var(--blue); }
 .footer-stripe-brown { height: 6px; background: #4E3636; box-shadow: 0 0 6px #4E3636; }
 
 footer {
-  background: var(--blue);
+  background: var(--navy);
   padding: 48px 16px;
 }
 
@@ -412,7 +414,7 @@ footer {
 .footer-col-map { border-radius: 8px; overflow: hidden; min-height: 200px; }
 
 .footer-copyright {
-  background: var(--blue);
+  background: var(--navy);
   border-top: 1px solid rgba(255,255,255,.1);
   padding: 12px 0;
   text-align: center;
@@ -511,7 +513,7 @@ footer {
   position: absolute;
   left: -999px;
   top: 8px;
-  background: var(--blue);
+  background: var(--green);
   color: #fff;
   padding: 8px 14px;
   border-radius: 8px;
@@ -522,7 +524,7 @@ footer {
 .skip-link:focus { left: 16px; outline: 3px solid var(--gold-light); outline-offset: 2px; }
 
 a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--blue);
+  outline: 2px solid var(--green);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -537,7 +539,7 @@ a:focus-visible, button:focus-visible {
   gap: 10px;
   background: #fff;
   border: 1px solid var(--border);
-  border-left: 4px solid var(--blue);
+  border-left: 4px solid var(--green);
   box-shadow: var(--shadow-md);
   border-radius: 10px;
   padding: 12px 16px;
@@ -620,7 +622,7 @@ a:focus-visible, button:focus-visible {
     <div class="header-right">
       @auth
         @if(auth()->user()->isAdmin())
-          <a href="{{ route('admin') }}" class="btn btn-primary">Dashboard</a>
+          <a href="{{ route('admin') }}" class="btn btn-primary">Bảng điều khiển </a>
         @else
           <a href="{{ route('profile') }}" class="btn btn-primary">Hồ sơ</a>
         @endif
@@ -668,7 +670,7 @@ a:focus-visible, button:focus-visible {
         <div class="sidebar-divider"></div>
         <div class="sidebar-nav-label">Quản trị</div>
         <a href="{{ route('admin') }}" class="sidebar-nav-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
-          <div class="nav-icon"><i class="fa-solid fa-gauge"></i></div> Dashboard
+          <div class="nav-icon"><i class="fa-solid fa-gauge"></i></div> Bảng điều khiển
         </a>
         <a href="{{ route('admin.thongk') }}" class="sidebar-nav-item {{ request()->routeIs('admin.thongk') ? 'active' : '' }}" wire:navigate>
           <div class="nav-icon"><i class="fa-solid fa-chart-bar"></i></div> Thống kê & Báo cáo
@@ -679,7 +681,7 @@ a:focus-visible, button:focus-visible {
   <div class="sidebar-drawer-footer">
     @auth
       @if(auth()->user()->isAdmin())
-        <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Dashboard</a>
+        <a href="{{ route('admin') }}" class="btn btn-primary" wire:navigate>Bảng điều khiển </a>
       @else
         <a href="{{ route('profile') }}" class="btn btn-primary" wire:navigate>Hồ sơ</a>
       @endif
@@ -839,4 +841,4 @@ a:focus-visible, button:focus-visible {
 </script>
 
 </body>
-</html> 
+</html>

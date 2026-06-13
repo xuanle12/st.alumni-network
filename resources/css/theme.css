@@ -1,0 +1,261 @@
+/*
+ * ============================================================
+ *  THEME.CSS — Design tokens tập trung cho toàn bộ project
+ *  Alumni Network — Khoa CNTT, VNUA
+ *
+ *  Để thay đổi giao diện: chỉ cần sửa file này.
+ *  Không cần đụng vào từng blade hay component.
+ * ============================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap');
+
+/* ── RESET ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a { text-decoration: none; }
+
+/* ── ROOT TOKENS ──────────────────────────────────────────── */
+:root {
+
+  /* --- Màu chủ đạo VNUA / FITA --- */
+  --primary:        #0961AA;   /* xanh FITA chính */
+  --primary-hover:  #0c83d8;
+  --primary-light:  #0c83d8;
+  --primary-soft:   #e8f0fe;   /* nền nhạt xanh */
+
+  /* alias để tương thích các blade cũ */
+  --blue:           #0961AA;
+  --blue-light:     #0c83d8;
+  --blue-pale:      #e8f0fe;
+  --blue2:          #1e40af;
+  --fita:           #0961AA;
+  --fita2:          #0c83d8;
+  --fita-pale:      #e8f0fe;
+  --fita-border:    #abc5ea;
+
+  /* --- Màu phụ --- */
+  --gold:           #c8912a;
+  --gold-light:     #f0c050;
+  --green:          #1a6b3a;
+  --green-light:    #2d8a50;
+  --green-pale:     #e8f5ee;
+
+  /* --- Trạng thái --- */
+  --success:        #16a34a;
+  --success-bg:     #f0fdf4;
+  --danger:         #dc2626;
+  --danger-bg:      #fef2f2;
+  --warning:        #d97706;
+  --warning-bg:     #fffbeb;
+
+  /* --- Màu nền & surface --- */
+  --bg:             #ffffff;
+  --bg2:            #f8faf9;
+  --card:           #ffffff;
+  --white:          #ffffff;
+  --pale:           #f1f5f9;
+  --gray-soft:      #f8fafc;
+
+  /* --- Màu chữ --- */
+  --text:           #1a1f2e;
+  --text-muted:     #5c6470;
+  --muted:          #5c6470;  /* alias */
+  --gray:           #64748b;
+  --navy:           #0f172a;
+
+  /* --- Border --- */
+  --border:         #e2e8f0;
+  --bd:             #e2e8f0;  /* alias */
+  --border-focus:   #0961AA;
+
+  /* --- Shadows --- */
+  --shadow-sm:      0 2px 8px rgba(0,0,0,0.06);
+  --shadow:         0 4px 16px rgba(0,0,0,0.08);
+  --shadow-md:      0 6px 24px rgba(0,0,0,0.08);
+  --shadow-hover:   0 8px 30px rgba(9,97,170,0.12);
+
+  /* --- Misc --- */
+  --radius:         12px;
+  --header-h:       102px;   /* topbar 35px + header 67px */
+
+  /* --- Typography --- */
+  --font:           'Barlow', system-ui, sans-serif;
+  --font-size-base: 15px;
+
+  /* --- Admin palette (sidebar tối) --- */
+  --adm-bg:         #0d223a;
+  --adm-bg2:        #252d36;
+  --adm-border:     rgba(255,255,255,0.07);
+  --adm-text:       rgba(255,255,255,0.75);
+  --adm-text-h:     #ffffff;
+  --adm-active:     rgba(9,97,170,0.35);
+  --adm-active-c:   #60a5fa;
+
+  /* --- Occupation category colors (dùng trong job/csv pages) --- */
+  --oc:             #0961AA;
+  --oc-l:           #e8f0fe;
+  --oc-m:           #0c83d8;
+  --oc-p:           #1e40af;
+  --oc-s:           #dbeafe;
+}
+
+/* ── BASE STYLES ──────────────────────────────────────────── */
+html, body {
+  font-family: var(--font);
+  font-size: var(--font-size-base);
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TYPOGRAPHY SCALE ─────────────────────────────────────── */
+/*
+  Dùng các class này thay vì hardcode font-size trong component:
+
+  .text-xs   → 11px  (label, badge nhỏ)
+  .text-sm   → 13px  (caption, meta)
+  .text-base → 15px  (body — default)
+  .text-md   → 16px  (subheading nhỏ)
+  .text-lg   → 18px  (subheading)
+  .text-xl   → 20px  (heading nhỏ)
+  .text-2xl  → 24px  (heading)
+  .text-3xl  → 30px  (section title)
+*/
+.text-xs   { font-size: 11px; }
+.text-sm   { font-size: 13px; }
+.text-base { font-size: 15px; }
+.text-md   { font-size: 16px; }
+.text-lg   { font-size: 18px; }
+.text-xl   { font-size: 20px; }
+.text-2xl  { font-size: 24px; }
+.text-3xl  { font-size: 30px; }
+
+/* ── UTILITY MÀU CHỮ ─────────────────────────────────────── */
+.text-primary  { color: var(--primary); }
+.text-muted    { color: var(--text-muted); }
+.text-danger   { color: var(--danger); }
+.text-success  { color: var(--success); }
+.text-warning  { color: var(--warning); }
+.text-white    { color: #fff; }
+
+/* ── UTILITY NỀN ──────────────────────────────────────────── */
+.bg-primary     { background: var(--primary); }
+.bg-primary-soft{ background: var(--primary-soft); }
+.bg-success     { background: var(--success-bg); }
+.bg-danger      { background: var(--danger-bg); }
+.bg-warning     { background: var(--warning-bg); }
+.bg-pale        { background: var(--pale); }
+
+/* ── BADGE / TAG ──────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-blue    { background: var(--primary-soft); color: var(--primary); }
+.badge-green   { background: var(--green-pale);   color: var(--green); }
+.badge-gold    { background: #fdf3e0;              color: var(--gold); }
+.badge-gray    { background: var(--pale);          color: var(--gray); }
+.badge-red     { background: var(--danger-bg);     color: var(--danger); }
+.badge-success { background: var(--success-bg);    color: var(--success); }
+
+/* ── BUTTON BASE ──────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: .15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(9,97,170,0.28);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+.btn-ghost:hover { background: var(--pale); color: var(--text); }
+.btn-danger  { background: var(--danger); color: #fff; }
+.btn-success { background: var(--success); color: #fff; }
+.btn-sm { padding: 5px 12px; font-size: 13px; }
+.btn-lg { padding: 11px 24px; font-size: 15px; }
+
+/* ── CARD ─────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.card:hover {
+  border-color: var(--fita-border);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ── FORM INPUTS ──────────────────────────────────────────── */
+.input, input[type="text"], input[type="email"],
+input[type="password"], input[type="search"],
+input[type="number"], textarea, select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  background: #fff;
+  transition: border-color .15s, box-shadow .15s;
+  outline: none;
+}
+.input:focus, input:focus, textarea:focus, select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(9,97,170,0.1);
+}
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* ── CONTAINER ────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── STRIPE VNUA (3 màu) ──────────────────────────────────── */
+.vnua-stripe        { display: flex; flex-direction: column; }
+.vnua-stripe-gold   { height: 6px; background: #F6A309; }
+.vnua-stripe-green  { height: 6px; background: #066140; }
+.vnua-stripe-brown  { height: 6px; background: #4E3636; }
+
+/* ── FOCUS / ACCESSIBILITY ────────────────────────────────── */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}

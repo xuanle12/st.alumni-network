@@ -134,7 +134,7 @@
                 </div>
                 <div class="nw-pac">
 <button class="nw-pab" wire:click="like({{ $post->id }})">
-    <i class="fa-solid fa-thumbs-up {{ $post->isLikedBy() ? 'text-blue-500' : '' }}"></i>
+    <i class="fa-solid fa-thumbs-up {{ $post->isLikedBy() ? 'text-green-600' : '' }}"></i>
     {{ $post->isLikedBy() ? 'Đã thích' : 'Thích' }}
 </button>                    <button class="nw-pab" @click="openComments = !openComments"><i class="fa-solid fa-comment"></i> Bình luận</button>
                     <button class="nw-pab"><i class="fa-solid fa-share"></i> Chia sẻ</button>
@@ -206,12 +206,12 @@
 
 <style>
 :root{
-  --oc:   #000000;
-  --oc-m: #1a4fa8;
-  --oc-l: #1b1c1d;
-  --oc-s: #e8f0fc;
-  --oc-p: #f0f5ff;
-  --bd:   #c5d5f5;
+  --oc:   #111827;
+  --oc-m: #16a34a;
+  --oc-l: #374151;
+  --oc-s: #f0fdf4;
+  --oc-p: #ffffff;
+  --bd:   #d1e7d1;
   --muted:#8aaad8;
 }
 
@@ -235,7 +235,7 @@
   overflow-y: auto;
   padding: 16px 20px;
   height: 100%;
-  background: #fff;
+  background: #ffffff;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
@@ -243,7 +243,7 @@
 .nw-feed::-webkit-scrollbar-thumb{background:var(--bd);border-radius:99px;}
 
 .nw-filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
-.nw-title{font-size:18px;font-weight:700;color:var(--oc);margin-right:6px;}
+.nw-title{font-size:15px;font-weight:700;color:var(--oc);margin-right:6px;}
 .nw-fb{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:#fff;font-size:12px;font-weight:500;color:var(--oc-m);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;transition:.15s;}
 .nw-fb:hover{background:var(--oc-s);}
 .nw-fb.on{background:var(--oc-m);color:#fff;border-color:var(--oc-m);}
@@ -275,7 +275,7 @@
     object-fit: contain;
     border: 1px solid var(--bd);
     margin-bottom: 10px;
-    background: #f0f5ff;
+    background: #f0fdf4;
 }
 .nw-jb{background:var(--oc-s);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:10px;}
 .nw-jbt{font-size:13px;font-weight:600;color:var(--oc);margin-bottom:3px;}
@@ -345,7 +345,7 @@
 .modal-box{background:#fff;border-radius:12px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;}
 .modal-hd{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--oc-p);position:sticky;top:0;background:#fff;z-index:1;}
 .modal-hd-title{font-size:15px;font-weight:600;color:var(--oc);}
-.modal-close{width:32px;height:32px;border:none;background:var(--oc-s);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:18px;line-height:1;}
+.modal-close{width:32px;height:32px;border:none;background:var(--oc-s);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:15px;line-height:1;}
 .modal-close:hover{background:var(--bd);color:var(--oc);}
 .modal-body{padding:1rem 1.25rem;flex:1;}
 .author-row{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}

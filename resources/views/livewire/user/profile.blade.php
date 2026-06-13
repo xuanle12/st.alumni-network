@@ -30,7 +30,7 @@
 .pf-ava-wrap{position:relative;flex-shrink:0}
 .pf-ava{
   width:90px;height:90px;border-radius:50%;
-  background:linear-gradient(135deg,var(--blue,#0961AA),#0c83d8);
+  background:linear-gradient(135deg,var(--blue,#16a34a),#22c55e);
   color:#fff;font-size:32px;font-weight:700;
   display:flex;align-items:center;justify-content:center;
   border:3px solid #e2e8f0;
@@ -40,13 +40,13 @@
 .pf-ava-upload{
   position:absolute;bottom:0;right:0;
   width:28px;height:28px;border-radius:50%;
-  background:var(--blue,#0961AA);color:#fff;
+  background:var(--blue,#16a34a);color:#fff;
   border:2px solid #fff;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;font-size:12px;
   transition:background .15s;
 }
-.pf-ava-upload:hover{background:#0c83d8}
+.pf-ava-upload:hover{background:#22c55e}
 .pf-ava-upload input{display:none}
 .pf-info{flex:1;min-width:0}
 .pf-name{font-size:20px;font-weight:700;color:#111827;margin-bottom:4px}
@@ -60,13 +60,13 @@
 }
 .badge-green{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
 .badge-amber{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
-.badge-blue {background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+.badge-blue {background:#dbeafe;color:#15803d;border:1px solid #dcfce7}
 .badge-gray {background:#f3f4f6;color:#4b5563;border:1px solid #e5e7eb}
 .pf-prog-wrap{margin-top:14px}
 .pf-prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.pf-prog-pct{color:var(--blue,#0961AA);font-weight:700}
+.pf-prog-pct{color:var(--blue,#16a34a);font-weight:700}
 .pf-prog-bg{height:5px;background:#e5e7eb;border-radius:99px;overflow:hidden}
-.pf-prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue,#0961AA),#0c83d8);transition:width .4s ease}
+.pf-prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue,#16a34a),#22c55e);transition:width .4s ease}
 
 .pf-card{
   background:#fff;
@@ -86,7 +86,7 @@
   display:flex;align-items:center;justify-content:center;
   font-size:15px;flex-shrink:0;
 }
-.icon-blue{background:#dbeafe;color:var(--blue,#0961AA)}
+.icon-blue{background:#dbeafe;color:var(--blue,#16a34a)}
 .icon-purple{background:#ede9fe;color:#7c3aed}
 .icon-green{background:#dcfce7;color:#15803d}
 .pf-card-title{font-size:14px;font-weight:700;color:#111827;letter-spacing:.01em}
@@ -104,11 +104,11 @@
   display:inline-flex;align-items:center;gap:5px;
   padding:8px 20px;border-radius:9px;
   font-size:13px;font-weight:600;cursor:pointer;
-  border:1px solid var(--blue,#0961AA);
-  background:var(--blue,#0961AA);color:#fff;
+  border:1px solid var(--blue,#16a34a);
+  background:var(--blue,#16a34a);color:#fff;
   transition:all .15s;font-family:inherit;
 }
-.btn-prim:hover{background:#0c83d8}
+.btn-prim:hover{background:#22c55e}
 .btn-ghost{
   display:inline-flex;align-items:center;gap:5px;
   padding:8px 16px;border-radius:9px;
@@ -137,7 +137,7 @@
   display:inline-flex;align-items:center;gap:4px;
   padding:5px 12px;border-radius:7px;
   font-size:11px;font-weight:600;cursor:pointer;
-  border:1px solid #bfdbfe;background:#eff6ff;color:#1e40af;
+  border:1px solid #dcfce7;background:#f0fdf4;color:#15803d;
   transition:all .15s;font-family:inherit;
 }
 .btn-sm-blue:hover{background:#dbeafe}
@@ -163,7 +163,7 @@
   transition:border-color .15s;background:#fff;
 }
 .fi input:focus,.fi textarea:focus,.fi select:focus{
-  outline:none;border-color:var(--blue,#0961AA);
+  outline:none;border-color:var(--blue,#16a34a);
   box-shadow:0 0 0 3px rgba(9,97,170,.1);
 }
 .fi input:disabled{background:#f9fafb;color:#9ca3af;cursor:not-allowed}
@@ -174,7 +174,7 @@
 .soc-list{display:flex;flex-direction:column;gap:8px}
 .soc-item{
   display:flex;align-items:center;gap:12px;
-  padding:10px 14px;background:#f8faff;
+  padding:10px 14px;background:#f0faf5;
   border:1px solid #e8ecf5;border-radius:10px;
 }
 .soc-ico{width:32px;height:32px;border-radius:8px;
@@ -184,7 +184,7 @@
 .soc-ico.wb{background:#6d28d9;color:#fff}
 .soc-text{flex:1;min-width:0}
 .soc-lbl{font-size:10px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
-.soc-url{font-size:13px;color:var(--blue,#0961AA);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;text-decoration:none}
+.soc-url{font-size:13px;color:var(--blue,#16a34a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;text-decoration:none}
 .soc-url:hover{text-decoration:underline}
 .soc-url.muted{color:#d1d5db;font-style:italic;font-size:12px}
 
@@ -196,21 +196,21 @@
   flex:1;padding:9px 12px;border:1px solid #d1d5db;
   border-radius:9px;font-size:13px;color:#111827;font-family:inherit;
 }
-.sf-row input:focus{outline:none;border-color:var(--blue,#0961AA);box-shadow:0 0 0 3px rgba(9,97,170,.1)}
+.sf-row input:focus{outline:none;border-color:var(--blue,#16a34a);box-shadow:0 0 0 3px rgba(9,97,170,.1)}
 
 .cv-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
 .cv-item{
   display:flex;align-items:center;gap:12px;
-  padding:12px 14px;background:#f8faff;
+  padding:12px 14px;background:#f0faf5;
   border:1px solid #e8ecf5;border-radius:10px;
 }
 .cv-ico{
   width:38px;height:38px;border-radius:9px;
   background:#fee2e2;color:#dc2626;
   display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
+  font-size:14px;flex-shrink:0;
 }
-.cv-ico.doc{background:#dbeafe;color:#1e40af}
+.cv-ico.doc{background:#dbeafe;color:#15803d}
 .cv-inf{flex:1;min-width:0}
 .cv-name{
   font-size:13px;font-weight:600;color:#111827;
@@ -228,17 +228,17 @@
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   width:100%;
 }
-.dropzone:hover{border-color:var(--blue,#0961AA);background:#eff6ff}
+.dropzone:hover{border-color:var(--blue,#16a34a);background:#f0fdf4}
 .dropzone input[type=file]{display:none}
 .dz-icon{font-size:28px;color:#94a3b8;margin-bottom:8px}
 .dz-title{font-size:13px;font-weight:600;color:#374151;margin-bottom:4px}
 .dz-sub{font-size:11px;color:#9ca3af;margin-bottom:12px}
 .cv-preview{
   display:flex;align-items:center;gap:8px;
-  padding:10px 13px;background:#eff6ff;
-  border:1px solid #bfdbfe;border-radius:9px;margin-top:10px;
+  padding:10px 13px;background:#f0fdf4;
+  border:1px solid #dcfce7;border-radius:9px;margin-top:10px;
 }
-.cv-preview p{font-size:13px;color:#1e40af;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv-preview p{font-size:13px;color:#15803d;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .empty-cv{text-align:center;padding:1.5rem;color:#94a3b8;font-size:13px}
 
 .flash{
@@ -567,7 +567,7 @@
 
       @if($cvFile)
         <div class="cv-preview">
-          <i class="fa-solid fa-paperclip" style="color:#60a5fa"></i>
+          <i class="fa-solid fa-paperclip" style="color:#6ee7a0"></i>
           <p>{{ is_object($cvFile) ? $cvFile->getClientOriginalName() : 'File đã chọn' }}</p>
         </div>
         @error('cvFile')

@@ -69,7 +69,7 @@ body{
 }
 
 .page-sub{
-  font-size:20px;
+  font-size:14px;
   color:var(--gray-soft);
   margin-top:4px;
 }
@@ -79,7 +79,7 @@ body{
   color:#166534;
   padding:12px 14px;
   border-radius:12px;
-  font-size:20px;
+  font-size:14px;
   margin-bottom:1rem;
   display:flex;
   align-items:center;
@@ -148,7 +148,7 @@ body{
 }
 
 .stat-sub{
-  font-size:20px;
+  font-size:14px;
   margin-top:8px;
   font-weight:500;
 }
@@ -201,7 +201,7 @@ body{
 }
 
 .card-title{
-  font-size:20px;
+  font-size:14px;
   font-weight:700;
   color:var(--gray);
   text-transform:uppercase;
@@ -236,7 +236,7 @@ body{
 }
 
 .bar-lbl{
-  font-size:18px;
+  font-size:13px;
   color:var(--gray-soft);
   font-weight:500;
 }
@@ -272,7 +272,7 @@ body{
   margin-left:auto;
   font-weight:700;
   color:#111827;
-  font-size:18px;
+  font-size:13px;
 }
 
 table{
@@ -492,7 +492,7 @@ td{
     <div class="dash">
   <div class="topbar">
     <div>
-      <div class="page-title">Dashboard</div>
+      <div class="page-title">Bảng điều khiển</div>
       <div class="page-sub">{{ ucfirst(now()->locale('vi')->isoFormat('dddd, DD/MM/YYYY')) }}</div>
     </div>
   </div>

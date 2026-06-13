@@ -4,8 +4,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --fita:      #0961AA;
-  --fita2:     #0c83d8;
+  --fita:      #16a34a;
+  --fita2:     #22c55e;
   --fita-pale: #e8f0fe;
   --gold:      #F6A309;
   --green:     #066140;
@@ -164,7 +164,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
 .featured-date-box .mon { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-top: 2px; }
 .featured-body { padding: 18px 20px; }
 .featured-title {
-  font-size: 18px; font-weight: 700; color: var(--text);
+  font-size: 15px; font-weight: 700; color: var(--text);
   margin-bottom: 8px; line-height: 1.45;
 }
 .featured-title:hover { color: var(--fita); }
@@ -184,7 +184,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
 }
 .tag-free   { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
 .tag-paid   { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
-.tag-online { background: var(--fita-pale); color: var(--fita); border: 1px solid #bfdbfe; }
+.tag-online { background: var(--fita-pale); color: var(--fita); border: 1px solid #dcfce7; }
 .tag-gray   { background: #f3f4f6; color: #6b7280; border: 1px solid #e2e8f0; }
 
 /* ── EVENT LIST (post-style giống fita) ── */
@@ -270,7 +270,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
 .btn-reg-prim  { background: var(--fita); color: #fff; }
 .btn-reg-prim:hover { background: #064d86; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(9,97,170,.3); }
 .btn-reg-done  { background: #f3f4f6; color: #9ca3af; cursor: default; }
-.btn-reg-ok    { background: var(--fita-pale); color: var(--fita); border: 1px solid #bfdbfe; }
+.btn-reg-ok    { background: var(--fita-pale); color: var(--fita); border: 1px solid #dcfce7; }
 .btn-reg-ok:hover { background: #dbeafe; }
 .btn-reg-free  { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
 .btn-reg-free:hover { background: #dcfce7; }
@@ -335,7 +335,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
 .mini-ev:hover .mini-ev-title { color: var(--fita); }
 .mini-date {
   width: 38px; height: 38px; border-radius: 9px;
-  background: var(--fita-pale); border: 1px solid #bfdbfe;
+  background: var(--fita-pale); border: 1px solid #dcfce7;
   display: flex; flex-direction: column; align-items: center;
   justify-content: center; flex-shrink: 0;
 }
@@ -376,15 +376,6 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   .featured-img { height: 160px; }
 }
 </style>
-<div class="breadcrumb">
-  <div class="breadcrumb-inner">
-    <a href="{{ route('home') }}" wire:navigate>Trang chủ</a>
-    <span>›</span>
-    <span>Sự kiện & Hoạt động</span>
-  </div>
-</div>
-
-
 <div class="page-banner">
   <div class="page-banner-inner">
     <div class="page-banner-title">Sự kiện &amp; Hoạt động</div>
