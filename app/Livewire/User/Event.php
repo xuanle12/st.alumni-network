@@ -9,7 +9,7 @@ use App\Models\EventRegistration;
 
 class Event extends Component
 {
-    public string $search = '';
+    public string $search    = '';
     public string $activeTab = 'all';
 
     public function updatedSearch(): void {}
@@ -17,43 +17,39 @@ class Event extends Component
     public function setTab(string $tab): void
     {
         $this->activeTab = $tab;
-        $this->search = '';
+        $this->search    = '';
     }
 
-    /* đăng ký sự kiện */
     public function register(int $eventId)
-{
-    if (!Auth::check()) {
-        return redirect()->route('login');
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $exists = EventRegistration::where('event_id', $eventId)
+            ->where('user_id', Auth::id())
+            ->where('status', 'registered')
+            ->exists();
+
+        if ($exists) {
+            session()->flash('info', 'Bạn đã đăng ký rồi');
+            return;
+        }
+
+        EventRegistration::create([
+            'event_id' => $eventId,
+            'user_id'  => Auth::id(),
+            'status'   => 'registered',
+        ]);
+
+        session()->flash('success', 'Đăng ký thành công');
     }
 
-    $exists = EventRegistration::where('event_id', $eventId)
-        ->where('user_id', Auth::id())
-        ->where('status', 'registered')
-        ->exists();
-
-    if ($exists) {
-        session()->flash('info', 'Bạn đã đăng ký rồi');
-        return;
-    }
-
-    EventRegistration::create([
-        'event_id' => $eventId,
-        'user_id' => Auth::id(),
-        'status' => 'registered'
-    ]);
-
-    session()->flash('success', 'Đăng ký thành công');
-}
-
-    /* huỷ đăng ký */
     public function unregister(int $eventId): void
     {
         EventRegistration::where('event_id', $eventId)
             ->where('user_id', Auth::id())
-            ->update([
-                'status' => 'cancelled'
-            ]);
+            ->update(['status' => 'cancelled']);
 
         session()->flash('success', 'Đã huỷ đăng ký');
     }
@@ -62,70 +58,58 @@ class Event extends Component
     {
         $userId = Auth::id();
 
-        /* thống kê */
         $stats = [
             'year_total' => EventModel::whereYear('event_date', now()->year)->count(),
-
-            'upcoming' => EventModel::where('event_date', '>=', now())
-                ->where('is_active', true)
-                ->count(),
-
-            'total_regs' => EventRegistration::where('status','registered')->count()
+            'upcoming'   => EventModel::where('status', 'active')
+                                ->where('event_date', '>=', now()->toDateString())
+                                ->count(),
+            'total_regs' => EventRegistration::where('status', 'registered')->count(),
         ];
 
-        /* event nổi bật */
-        $featured = EventModel::where('is_active', true)
-            ->whereDate('event_date','>=', now())
+        $featured = EventModel::where('status', 'active')
+            ->where('event_date', '>=', now()->toDateString())
             ->orderBy('event_date')
             ->first();
 
-        /* grid */
-        $gridEvents = EventModel::where('is_active', true)
-
+        $gridEvents = EventModel::where('status', 'active')
             ->when($this->search, fn($q) =>
                 $q->where(function ($w) {
-                    $w->where('title','like','%'.$this->search.'%')
-                      ->orWhere('location','like','%'.$this->search.'%');
+                    $w->where('title',    'like', '%'.$this->search.'%')
+                      ->orWhere('location','like', '%'.$this->search.'%');
                 })
             )
-
-            ->when($this->activeTab == 'upcoming', fn($q) =>
-                $q->whereDate('event_date','>=', now())
+            ->when($this->activeTab === 'upcoming', fn($q) =>
+                $q->where('event_date', '>=', now()->toDateString())
             )
-
-            ->when($this->activeTab == 'past', fn($q) =>
-                $q->whereDate('event_date','<', now())
+            ->when($this->activeTab === 'past', fn($q) =>
+                $q->where('event_date', '<', now()->toDateString())
             )
-
+            ->when($this->activeTab === 'free', fn($q) =>
+                $q->where('badge', 'free')
+            )
             ->orderBy('event_date')
             ->take(4)
             ->get();
 
-        /* upcoming sidebar */
-        $upcomingEvents = EventModel::whereDate(
-                'event_date','>', now()->addDays(14)
-            )
-            ->where('is_active', true)
+        $upcomingEvents = EventModel::where('status', 'active')
+            ->where('event_date', '>', now()->addDays(14)->toDateString())
             ->orderBy('event_date')
             ->take(5)
             ->get();
 
-        /* event đã đăng ký */
         $registeredIds = $userId
             ? EventRegistration::where('user_id', $userId)
-                ->where('status','registered')
+                ->where('status', 'registered')
                 ->pluck('event_id')
                 ->toArray()
             : [];
 
         return view('livewire.user.event', [
-
-            'stats' => $stats,
-            'featured' => $featured,
-            'gridEvents' => $gridEvents,
-            'upcomingEvents' => $upcomingEvents,
-            'registeredIds' => $registeredIds
-
+            'stats'         => $stats,
+            'featured'      => $featured,
+            'gridEvents'    => $gridEvents,
+            'upcomingEvents'=> $upcomingEvents,
+            'registeredIds' => $registeredIds,
         ]);
     }
 }

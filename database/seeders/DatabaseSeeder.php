@@ -16,12 +16,17 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
         UserSeeder::class,    
-        EventsSeeder::class,
-        JobsSeeder::class,  
+        EventsSeeder::class,  
         ProfileSeeder::class,
         PostSeeder::class,
         CompanySeeder::class,
         CommentSeeder::class,
+        DsCsvSeeder::class,
+        SkillsSeeder::class,
+        JobsSeeder::class, 
+        JobSkillSeeder::class,
+        MentorProfileSeeder::class,
+        
         
     ]);
 

@@ -1,4 +1,3 @@
-<div>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 .jd-page{
@@ -39,6 +38,7 @@
 }
 .jd-card:last-child{margin-bottom:0}
 
+/* HERO */
 .jd-hero-body{ padding:1.5rem 1.5rem 0; }
 .jd-hero-top{
   display:flex;align-items:flex-start;gap:16px;
@@ -65,13 +65,13 @@
 }
 .tag-green {background:#dcfce7;color:#15803d}
 .tag-yellow{background:#fef9c3;color:#854d0e}
-.tag-blue  {background:#dbeafe;color:#15803d}
+.tag-blue  {background:#dbeafe;color:#1d4ed8}
 .tag-gray  {background:#f1f5f9;color:#475569}
 .tag-purple{background:#ede9fe;color:#6d28d9}
 
+/* INFO GRID */
 .jd-info-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;
   border-top:1px solid #f1f5f9;
   border-bottom:1px solid #f1f5f9;
 }
@@ -90,8 +90,9 @@
 .ig-val{font-size:13px;font-weight:700;color:#0f172a}
 .ig-val.green{color:#15803d}
 
+/* SECTIONS */
 .jd-section{ padding:1.25rem 1.5rem; }
-.jd-section + .jd-section{ border-top:1px solid #f1f5f9; padding-top:1.25rem; }
+.jd-section + .jd-section{ border-top:1px solid #f1f5f9; }
 .jd-sec-title{
   font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
   color:#94a3b8;margin-bottom:.875rem;
@@ -109,8 +110,31 @@
   color:#15803d;font-size:13px;font-weight:600;
   text-decoration:none;transition:background .15s;
 }
-.jd-contact-link:hover{background:#dbeafe}
+.jd-contact-link:hover{background:#dcfce7}
 
+/* SKILLS */
+.skill-matched{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;padding:5px 12px;
+  border-radius:7px;background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;
+}
+.skill-missing{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;padding:5px 12px;
+  border-radius:7px;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;
+}
+.skill-neutral{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;padding:5px 12px;
+  border-radius:7px;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;
+}
+.skill-summary{
+  margin-top:12px;padding:10px 14px;
+  background:#f8fafc;border-radius:9px;border:1px solid #e2e8f0;
+  display:flex;gap:20px;font-size:12px;
+}
+
+/* SIDEBAR */
 .side-body{ padding:1.25rem; }
 
 .btn-apply{
@@ -120,10 +144,11 @@
   font-family:inherit;font-size:14px;font-weight:700;
   cursor:pointer;transition:all .18s;
   display:flex;align-items:center;justify-content:center;gap:8px;
-  box-shadow:0 2px 10px rgba(9,97,170,.22);
+  box-shadow:0 2px 10px rgba(22,163,74,.22);
   margin-bottom:10px;
 }
 .btn-apply:hover{background:#22c55e;transform:translateY(-1px)}
+
 .applied-box{
   text-align:center;padding:.75rem;margin-bottom:10px;
   background:#f0fdf4;border:1px solid #86efac;border-radius:10px;
@@ -131,6 +156,7 @@
 .applied-ico{font-size:26px;margin-bottom:4px}
 .applied-title{font-size:13px;font-weight:700;color:#166534}
 .applied-sub{font-size:11px;color:#94a3b8;margin-top:3px}
+
 .btn-save{
   width:100%;padding:10px;
   background:#fff;color:#374151;
@@ -164,6 +190,7 @@
 .side-co-name{font-size:14px;font-weight:800;color:#0f172a;margin-bottom:3px}
 .side-co-field{font-size:12px;color:#64748b}
 
+/* RELATED */
 .rel-item{
   display:flex;align-items:flex-start;gap:12px;
   padding:.75rem 0;border-bottom:1px solid #f1f5f9;
@@ -205,14 +232,20 @@
   </a>
 
   @if(session('success'))
-    <div class="jd-flash"><i class="fa-solid fa-circle-check"></i> {{ session('success') }}</div>
+    <div class="jd-flash">
+      <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+    </div>
   @endif
 
   <div class="jd-layout">
 
+    {{-- ===== CỘT TRÁI ===== --}}
     <div>
+
+      {{-- Card chính --}}
       <div class="jd-card">
 
+        {{-- Hero --}}
         <div class="jd-hero-body">
           <div class="jd-hero-top">
             <div class="jd-logo">{{ $job->logo_emoji }}</div>
@@ -222,15 +255,22 @@
                 <strong>{{ $job->company }}</strong>
                 @if($job->location)
                   <span style="color:#cbd5e1">·</span>
-                  <span><i class="fa-solid fa-location-dot" style="color:#94a3b8;font-size:11px"></i> {{ $job->location }}</span>
+                  <span>
+                    <i class="fa-solid fa-location-dot" style="color:#94a3b8;font-size:11px"></i>
+                    {{ $job->location }}
+                  </span>
                 @endif
               </div>
               <div class="tag-row">
-                <span class="tag {{ $job->type==='internship' ? 'tag-yellow' : ($job->type==='part-time' ? 'tag-blue' : 'tag-green') }}">
-                  <i class="fa-solid fa-briefcase" style="font-size:9px"></i> {{ $job->type_label }}
+                <span class="tag {{ $job->type === 'internship' ? 'tag-yellow' : ($job->type === 'part-time' ? 'tag-blue' : 'tag-green') }}">
+                  <i class="fa-solid fa-briefcase" style="font-size:9px"></i>
+                  {{ $job->type_label }}
                 </span>
                 @if($job->khoa)
-                  <span class="tag tag-purple"><i class="fa-solid fa-building-columns" style="font-size:9px"></i> {{ $job->khoa_label }}</span>
+                  <span class="tag tag-purple">
+                    <i class="fa-solid fa-building-columns" style="font-size:9px"></i>
+                    {{ $job->khoa_label }}
+                  </span>
                 @endif
                 @if($job->field)
                   <span class="tag tag-gray">{{ $job->field }}</span>
@@ -240,30 +280,39 @@
           </div>
         </div>
 
+        {{-- Info grid --}}
         <div class="jd-info-grid">
           <div class="ig">
-            <div class="ig-icon" style="background:#dbeafe;color:#15803d"><i class="fa-solid fa-file-lines"></i></div>
+            <div class="ig-icon" style="background:#dbeafe;color:#1d4ed8">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
             <div>
               <div class="ig-lbl">Loại hình</div>
               <div class="ig-val">{{ $job->type_label }}</div>
             </div>
           </div>
           <div class="ig">
-            <div class="ig-icon" style="background:#dcfce7;color:#15803d"><i class="fa-solid fa-money-bill-wave"></i></div>
+            <div class="ig-icon" style="background:#dcfce7;color:#15803d">
+              <i class="fa-solid fa-money-bill-wave"></i>
+            </div>
             <div>
               <div class="ig-lbl">Mức lương</div>
               <div class="ig-val green">{{ $job->salary ?? 'Thỏa thuận' }}</div>
             </div>
           </div>
           <div class="ig">
-            <div class="ig-icon" style="background:#fef9c3;color:#d97706"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="ig-icon" style="background:#fef9c3;color:#d97706">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
             <div>
               <div class="ig-lbl">Địa điểm</div>
               <div class="ig-val">{{ $job->location ?? '—' }}</div>
             </div>
           </div>
           <div class="ig">
-            <div class="ig-icon" style="background:#ede9fe;color:#7c3aed"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="ig-icon" style="background:#ede9fe;color:#7c3aed">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
             <div>
               <div class="ig-lbl">Khoa</div>
               <div class="ig-val">{{ $job->khoa ? $job->khoa_label : 'Tất cả' }}</div>
@@ -271,6 +320,7 @@
           </div>
         </div>
 
+        {{-- Mô tả công việc --}}
         <div class="jd-section">
           <div class="jd-sec-title">Mô tả công việc</div>
           @if($job->description)
@@ -282,20 +332,67 @@
           @endif
         </div>
 
+        {{-- Kỹ năng yêu cầu --}}
+        @if($job->skills->count())
+          <div class="jd-section">
+            <div class="jd-sec-title">Kỹ năng yêu cầu</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              @foreach($job->skills as $skill)
+                @php
+                  $isMatched = in_array(strtolower($skill->name), $matchedSkills ?? []);
+                  $isMissing = in_array(strtolower($skill->name), $missingSkills ?? []);
+                @endphp
+                @auth
+                  @if($isMatched)
+                    <span class="skill-matched">
+                      <i class="fa-solid fa-check" style="font-size:10px"></i> {{ $skill->name }}
+                    </span>
+                  @else
+                    <span class="skill-missing">
+                      <i class="fa-solid fa-xmark" style="font-size:10px"></i> {{ $skill->name }}
+                    </span>
+                  @endif
+                @else
+                  <span class="skill-neutral">{{ $skill->name }}</span>
+                @endauth
+              @endforeach
+            </div>
+
+            @auth
+              <div class="skill-summary">
+                <span style="color:#15803d;font-weight:600">
+                  <i class="fa-solid fa-check"></i>
+                  Bạn có: {{ count($matchedSkills ?? []) }}/{{ $job->skills->count() }} kỹ năng
+                </span>
+                <span style="color:#b91c1c;font-weight:600">
+                  <i class="fa-solid fa-xmark"></i>
+                  Còn thiếu: {{ count($missingSkills ?? []) }} kỹ năng
+                </span>
+              </div>
+            @endauth
+          </div>
+        @endif
+
+        {{-- Liên hệ --}}
         @if($job->contact_email)
-        <div class="jd-section">
-          <div class="jd-sec-title">Liên hệ ứng tuyển</div>
-          <a href="mailto:{{ $job->contact_email }}" class="jd-contact-link">
-            <i class="fa-solid fa-envelope"></i> {{ $job->contact_email }}
-          </a>
-        </div>
+          <div class="jd-section">
+            <div class="jd-sec-title">Liên hệ ứng tuyển</div>
+            <a href="mailto:{{ $job->contact_email }}" class="jd-contact-link">
+              <i class="fa-solid fa-envelope"></i> {{ $job->contact_email }}
+            </a>
+          </div>
         @endif
 
       </div>
-    </div>
+      {{-- /jd-card chính --}}
 
+    </div>
+    {{-- /cột trái --}}
+
+    {{-- ===== CỘT PHẢI ===== --}}
     <div>
 
+      {{-- Ứng tuyển --}}
       <div class="jd-card">
         <div class="side-body">
           @if($applied)
@@ -306,8 +403,12 @@
             </div>
           @else
             <button wire:click="apply" class="btn-apply">
-              <span wire:loading wire:target="apply"><i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...</span>
-              <span wire:loading.remove wire:target="apply"><i class="fa-solid fa-paper-plane"></i> Ứng tuyển ngay</span>
+              <span wire:loading wire:target="apply">
+                <i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...
+              </span>
+              <span wire:loading.remove wire:target="apply">
+                <i class="fa-solid fa-paper-plane"></i> Ứng tuyển ngay
+              </span>
             </button>
           @endif
           <button wire:click="toggleSave" class="btn-save {{ $saved ? 'saved' : '' }}">
@@ -317,6 +418,7 @@
         </div>
       </div>
 
+      {{-- Thông tin chi tiết --}}
       <div class="jd-card">
         <div class="side-body">
           <div class="side-sec-title">Thông tin chi tiết</div>
@@ -328,19 +430,32 @@
             <span class="meta-key">Ngành nghề</span>
             <span class="meta-val">{{ $job->field ?? '—' }}</span>
           </div>
+          @if($job->experience_required)
+            <div class="meta-row">
+              <span class="meta-key">Kinh nghiệm</span>
+              <span class="meta-val">{{ $job->experience_required }}+ năm</span>
+            </div>
+          @endif
+          @if($job->deadline)
+            <div class="meta-row">
+              <span class="meta-key">Hạn nộp</span>
+              <span class="meta-val">{{ \Carbon\Carbon::parse($job->deadline)->format('d/m/Y') }}</span>
+            </div>
+          @endif
           <div class="meta-row">
             <span class="meta-key">Ngày đăng</span>
             <span class="meta-val">{{ $job->created_at->format('d/m/Y') }}</span>
           </div>
           @if($job->contact_email)
-          <div class="meta-row">
-            <span class="meta-key">Email liên hệ</span>
-            <span class="meta-val" style="color:#16a34a;font-size:11.5px">{{ $job->contact_email }}</span>
-          </div>
+            <div class="meta-row">
+              <span class="meta-key">Email liên hệ</span>
+              <span class="meta-val" style="color:#16a34a;font-size:11.5px">{{ $job->contact_email }}</span>
+            </div>
           @endif
         </div>
       </div>
 
+      {{-- Về công ty --}}
       <div class="jd-card">
         <div class="side-body">
           <div class="side-sec-title">Về công ty</div>
@@ -352,28 +467,30 @@
         </div>
       </div>
 
-      {{-- Related --}}
+      {{-- Việc làm tương tự --}}
       @if($related->count() > 0)
-      <div class="jd-card">
-        <div class="side-body">
-          <div class="side-sec-title">Việc làm tương tự</div>
-          @foreach($related as $r)
-            <a href="{{ route('job.show', $r->id) }}" class="rel-item">
-              <div class="rel-logo">{{ $r->logo_emoji }}</div>
-              <div class="rel-info">
-                <div class="rel-title">{{ Str::limit($r->title, 42) }}</div>
-                <div class="rel-meta">{{ $r->company }} · {{ $r->location ?? '—' }}</div>
-              </div>
-              <div class="rel-salary">{{ $r->salary ?? '' }}</div>
-            </a>
-          @endforeach
+        <div class="jd-card">
+          <div class="side-body">
+            <div class="side-sec-title">Việc làm tương tự</div>
+            @foreach($related as $r)
+              <a href="{{ route('job.show', $r->id) }}" class="rel-item">
+                <div class="rel-logo">{{ $r->logo_emoji }}</div>
+                <div class="rel-info">
+                  <div class="rel-title">{{ Str::limit($r->title, 42) }}</div>
+                  <div class="rel-meta">{{ $r->company }} · {{ $r->location ?? '—' }}</div>
+                </div>
+                <div class="rel-salary">{{ $r->salary ?? '' }}</div>
+              </a>
+            @endforeach
+          </div>
         </div>
-      </div>
       @endif
 
     </div>
-  </div>
+    {{-- /cột phải --}}
 
-</div>
+  </div>
+  {{-- /jd-layout --}}
+
 </div>
 </div>

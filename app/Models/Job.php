@@ -19,6 +19,7 @@ class Job extends Model
             'full-time'  => 'Full-time',
             'part-time'  => 'Part-time',
             'internship' => 'Thực tập',
+            'remote'     => 'Remote',
             default      => $this->type,
         };
     }
@@ -29,6 +30,7 @@ class Job extends Model
     {
         return match($this->type) {
             'internship' => 'tag-gold',
+            'remote'     => 'tag-blue',
             default      => 'tag-green',
         };
     }
