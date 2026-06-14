@@ -16,7 +16,9 @@ class Jobsdetail extends Component
 
     public function mount($id)
     {
-        $this->job = Job::findOrFail($id);
+        $this->job = Job::with('skills')->findOrFail($id);
+        $this->job->salary = $this->formatSalary($this->job->min_salary, $this->job->max_salary);
+        $this->job->skill_names = $this->job->skills->pluck('name');
 
         $this->related = Job::where('id', '!=', $id)
             ->where(function ($q) {
@@ -24,7 +26,24 @@ class Jobsdetail extends Component
                   ->orWhere('field', $this->job->field);
             })
             ->take(3)
-            ->get();
+            ->get()
+            ->map(function ($r) {
+                $r->salary = $this->formatSalary($r->min_salary, $r->max_salary);
+                return $r;
+            });
+    }
+
+    protected function formatSalary($min, $max): string
+    {
+        if (!$min && !$max) {
+            return 'Thỏa thuận';
+        }
+
+        if ($min && $max) {
+            return number_format($min) . ' - ' . number_format($max) . ' triệu';
+        }
+
+        return number_format($min ?: $max) . ' triệu';
     }
 
     public function apply()

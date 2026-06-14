@@ -19,6 +19,7 @@ class Profile extends Component
     // trạng thái UI 
     public bool $edit = false;
     public bool $editingSocial = false;
+    public bool $editingSkills = false;
     public int $pct = 0;
 
     // thông tin user
@@ -33,6 +34,10 @@ class Profile extends Component
     public string $linkedin = '';
     public string $website = '';
 
+    // skills
+    public array $selectedSkills = []; // array of skill names (đang chọn, chưa lưu)
+    public string $skillInput = '';
+
     // upload 
     public $cvFile;
     public $avatarFile;
@@ -44,7 +49,7 @@ class Profile extends Component
 
     private function loadData()
     {
-        $u = Auth::user()->load('profile');
+        $u = Auth::user()->load('profile', 'profile.skills');
 
         $this->name = $u->name;
         $this->phone = $u->profile->phone ?? '';
@@ -55,6 +60,10 @@ class Profile extends Component
         $this->github = $u->profile->github ?? '';
         $this->linkedin = $u->profile->linkedin ?? '';
         $this->website = $u->profile->website ?? '';
+
+        $this->selectedSkills = $u->profile?->skills
+            ? $u->profile->skills->pluck('name')->toArray()
+            : [];
     }
 
     // lưu thông tin
@@ -111,6 +120,77 @@ class Profile extends Component
     {
         $this->loadData();
         $this->editingSocial = false;
+    }
+
+    // ─── kỹ năng ───
+    public function addSkill(?string $name = null)
+    {
+        $name = trim($name ?? $this->skillInput);
+
+        if ($name === '') {
+            return;
+        }
+
+        // tránh trùng (không phân biệt hoa thường)
+        $exists = collect($this->selectedSkills)
+            ->contains(fn ($s) => mb_strtolower($s) === mb_strtolower($name));
+
+        if (!$exists) {
+            $this->selectedSkills[] = $name;
+        }
+
+        $this->skillInput = '';
+    }
+
+    public function removeSkill(string $name)
+    {
+        $this->selectedSkills = array_values(array_filter(
+            $this->selectedSkills,
+            fn ($s) => $s !== $name
+        ));
+    }
+
+    // gợi ý kỹ năng theo input (dùng cho autocomplete)
+    public function getSkillSuggestionsProperty()
+    {
+        $term = trim($this->skillInput);
+
+        if ($term === '') {
+            return collect();
+        }
+
+        return \App\Models\Skill::where('name', 'like', "%{$term}%")
+            ->whereNotIn('name', $this->selectedSkills ?: [''])
+            ->orderBy('name')
+            ->limit(8)
+            ->get();
+    }
+
+    public function saveSkills()
+    {
+        $profile = ProfileModel::firstOrCreate(['user_id' => Auth::id()]);
+
+        $skillIds = collect($this->selectedSkills)
+            ->filter()
+            ->map(function ($name) {
+                $skill = \App\Models\Skill::firstOrCreate(['name' => trim($name)]);
+                return $skill->id;
+            })
+            ->unique()
+            ->values()
+            ->toArray();
+
+        $profile->skills()->sync($skillIds);
+
+        $this->editingSkills = false;
+        session()->flash('success', 'Đã cập nhật kỹ năng');
+    }
+
+    public function cancelSkills()
+    {
+        $this->loadData();
+        $this->editingSkills = false;
+        $this->skillInput = '';
     }
 
     // auto upload avatar when file selected
@@ -170,7 +250,7 @@ class Profile extends Component
 
     public function render()
     {
-        $user = Auth::user()->load('profile','cv');
+        $user = Auth::user()->load('profile', 'profile.skills', 'cv');
 
         // % hoàn thành profile 
         $check = [
@@ -181,6 +261,7 @@ class Profile extends Component
             $user->profile->tinh_thanh ?? null,
             $user->profile->github ?? null,
             $user->profile->linkedin ?? null,
+            $user->profile?->skills->count() ?? 0,
             $user->cv->count()
         ];
 

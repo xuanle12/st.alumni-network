@@ -276,6 +276,71 @@
 }
 .mentor-cta-btn.is-rejected:hover{background:#fef2f2;box-shadow:none}
 
+/* ── SKILLS ── */
+.skill-tags{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom: 1rem;
+}
+.skill-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:20px;
+  font-size:13px;font-weight:600;
+  color: var(--chip-c);
+  background: var(--chip-bg);
+  border:1px solid var(--chip-b);
+  transition:all .15s;
+}
+.skill-chip i{
+  font-size:11px;color:var(--chip-c);opacity:.5;cursor:pointer;
+  transition:opacity .15s;
+}
+.skill-chip i:hover{opacity:1;color:#dc2626}
+.skill-empty{
+  font-size:13px;color:#9ca3af;font-style:italic;
+}
+
+.skill-input-wrap{position:relative;margin-bottom:6px}
+.skill-input-wrap input{
+  width:100%;padding:9px 12px;border:1px solid #d1d5db;
+  border-radius:9px;font-size:13px;color:#111827;
+  font-family:inherit;transition:border-color .15s;background:#fff;
+}
+.skill-input-wrap input:focus{
+  outline:none;border-color:var(--blue,#16a34a);
+  box-shadow:0 0 0 3px rgba(22,163,74,.1);
+}
+.skill-suggest{
+  position:absolute;top:calc(100% + 4px);left:0;right:0;
+  background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+  box-shadow:0 4px 16px rgba(0,0,0,.08);
+  max-height:180px;
+  overflow-y:auto;
+  z-index:10;
+}
+.skill-suggest::-webkit-scrollbar{
+  width:6px;
+}
+.skill-suggest::-webkit-scrollbar-track{
+  background:transparent;
+}
+.skill-suggest::-webkit-scrollbar-thumb{
+  background:#cbd5e1;
+  border-radius:99px;
+}
+.skill-suggest::-webkit-scrollbar-thumb:hover{
+  background:#9ca3af;
+}
+.skill-suggest-item{
+  padding:9px 14px;font-size:13px;color:#374151;
+  cursor:pointer;transition:background .15s;
+}
+.skill-suggest-item:hover{background:#f0fdf4;color:#15803d}
+.skill-hint{
+  font-size:11px;color:#9ca3af;margin-bottom:4px;
+}
+
+[x-cloak]{display:none!important}
+
 @media(max-width:640px){
   .pf-page{padding:1rem}
   .pf-hero{flex-direction:column;align-items:flex-start;gap:1rem;padding:1.5rem}
@@ -325,12 +390,14 @@
 
       <div class="pf-badges">
         @php
-        
+          $st = $user->status ?? 'pending';
+          $bc = match($st) { 'active' => 'badge-green', 'pending' => 'badge-amber', default => 'badge-gray' };
+          $bl = match($st) { 'active' => 'Đang hoạt động', 'pending' => 'Chờ duyệt', default => 'Không hoạt động' };
           $role = $user->role ?? '';
           $rc = match($role) { 'alumni' => 'badge-blue', 'student' => 'badge-green', 'lecturer' => 'badge-purple', 'admin' => 'badge-gray', default => 'badge-gray' };
           $rl = match($role) { 'alumni' => 'Cựu SV', 'student' => 'Sinh viên', 'lecturer' => 'Giảng viên', 'admin' => 'Quản trị viên', default => '' };
         @endphp
-        <!-- <span class="badge {{ $bc }}">{{ $bl }}</span> -->
+        <span class="badge {{ $bc }}">{{ $bl }}</span>
         @if($rl)
           <span class="badge {{ $rc }}">{{ $rl }}</span>
         @endif
@@ -501,6 +568,91 @@
       </div>
     </div>
   @endif
+
+  {{-- ═══ KỸ NĂNG ═══ --}}
+<div class="pf-card">
+  <div class="pf-card-hd">
+    <div class="pf-card-hd-left">
+      <div class="pf-card-icon icon-amber"><i class="fa-solid fa-star"></i></div>
+      <span class="pf-card-title">Kỹ năng</span>
+    </div>
+    @if(!$editingSkills)
+      <button wire:click="$set('editingSkills',true)" class="btn-edit">
+        <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+      </button>
+    @endif
+  </div>
+  <div class="pf-card-body">
+
+    @php
+      if (!function_exists('skillColor')) {
+          function skillColor($name) {
+              $hash = 0;
+              foreach (str_split($name) as $ch) {
+                  $hash = ord($ch) + (($hash << 5) - $hash);
+              }
+              $hue = abs($hash) % 360;
+              return [
+                  'bg'     => "hsl($hue, 75%, 95%)",
+                  'border' => "hsl($hue, 70%, 85%)",
+                  'color'  => "hsl($hue, 60%, 35%)",
+              ];
+          }
+      }
+    @endphp
+
+    @if($editingSkills)
+      <div class="skill-tags">
+        @forelse($selectedSkills as $skill)
+          @php $c = skillColor($skill); @endphp
+          <span class="skill-chip" style="--chip-bg:{{ $c['bg'] }};--chip-b:{{ $c['border'] }};--chip-c:{{ $c['color'] }}">
+            {{ $skill }}
+            <i class="fa-solid fa-xmark" wire:click="removeSkill('{{ $skill }}')"></i>
+          </span>
+        @empty
+          <span class="skill-empty">Chưa có kỹ năng nào, thêm bên dưới.</span>
+        @endforelse
+      </div>
+
+      <div class="skill-input-wrap" x-data="{ open: false }">
+        <input
+          type="text"
+          wire:model.live.debounce.250ms="skillInput"
+          wire:keydown.enter.prevent="addSkill"
+          x-on:focus="open = true"
+          x-on:blur="setTimeout(() => open = false, 150)"
+          placeholder="Nhập tên kỹ năng rồi Enter để thêm..."
+        >
+        <div class="skill-suggest" x-show="open" x-cloak
+             @if($this->skillSuggestions->isEmpty()) style="display:none" @endif>
+          @foreach($this->skillSuggestions as $s)
+            <div class="skill-suggest-item" wire:click="addSkill('{{ $s->name }}')">{{ $s->name }}</div>
+          @endforeach
+        </div>
+      </div>
+      <div class="skill-hint">Gõ tên kỹ năng và nhấn Enter để thêm (có thể thêm kỹ năng chưa có trong danh sách).</div>
+
+      <div class="form-actions">
+        <button wire:click="cancelSkills" class="btn-ghost">Huỷ</button>
+        <button wire:click="saveSkills" class="btn-prim">
+          <span wire:loading.remove wire:target="saveSkills"><i class="fa-solid fa-floppy-disk"></i> Lưu</span>
+          <span wire:loading wire:target="saveSkills">Đang lưu...</span>
+        </button>
+      </div>
+
+    @else
+      <div class="skill-tags">
+        @forelse($user->profile?->skills ?? [] as $skill)
+          @php $c = skillColor($skill->name); @endphp
+          <span class="skill-chip" style="cursor:default;--chip-bg:{{ $c['bg'] }};--chip-b:{{ $c['border'] }};--chip-c:{{ $c['color'] }}">{{ $skill->name }}</span>
+        @empty
+          <span class="skill-empty">Chưa cập nhật kỹ năng</span>
+        @endforelse
+      </div>
+    @endif
+
+  </div>
+</div>
 
   <div class="pf-card">
     <div class="pf-card-hd">

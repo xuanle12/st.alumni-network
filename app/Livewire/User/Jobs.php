@@ -62,7 +62,7 @@ class Jobs extends Component
     ]);
 
 
-    $query = Job::query();
+    $query = Job::query()->active()->with('skills');
 
     // tìm kiếm
     if ($this->search) {
@@ -89,13 +89,23 @@ class Jobs extends Component
 
     // sắp xếp
     if ($this->sort == 'salary') {
-        $query->orderByDesc('salary');
+        $query->orderByDesc('max_salary');
     } else {
         $query->latest();
     }
-    
+
 
     $jobs = $query->paginate(10);
+
+    // Format các trường để view dùng đúng (salary, experience, skills)
+    $jobs->getCollection()->transform(function ($job) {
+        $job->salary = $this->formatSalary($job->min_salary, $job->max_salary);
+        $job->experience = $job->experience_required > 0
+            ? $job->experience_required . '+ năm KN'
+            : null;
+        $job->skill_names = $job->skills->pluck('name');
+        return $job;
+    });
 
     return view('livewire.user.jobs', [
         'jobs' => $jobs,
@@ -107,5 +117,21 @@ class Jobs extends Component
         'departments' => $departments,
         'locationOptions' => $locationOptions,
     ]);
+}
+
+/**
+ * Format min/max salary thành chuỗi hiển thị, ví dụ "12 - 18 triệu" hoặc "Thỏa thuận"
+ */
+protected function formatSalary($min, $max): ?string
+{
+    if (!$min && !$max) {
+        return 'Thỏa thuận';
+    }
+
+    if ($min && $max) {
+        return number_format($min) . ' - ' . number_format($max) . ' triệu';
+    }
+
+    return number_format($min ?: $max) . ' triệu';
 }
 }

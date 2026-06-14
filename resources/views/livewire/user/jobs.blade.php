@@ -381,10 +381,10 @@
                                         <p class="job-excerpt">{{ $job->description }}</p>
                                     @endif
 
-                                    @if(!empty($job->skills))
+                                    @if($job->skill_names->isNotEmpty())
                                         <div class="job-skills">
-                                            @foreach($job->skills as $skill)
-                                                <span class="job-skill">{{ $skill }}</span>
+                                            @foreach($job->skill_names as $skillName)
+                                                <span class="job-skill">{{ $skillName }}</span>
                                             @endforeach
                                         </div>
                                     @endif

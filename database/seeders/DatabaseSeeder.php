@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         PostSeeder::class,
         CompanySeeder::class,
         CommentSeeder::class,
+        
     ]);
 
         User::factory()->create([

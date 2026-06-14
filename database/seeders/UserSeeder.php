@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Nguyễn Văn A',
                 'password' => Hash::make('123456'),
-                'is_admin' => true,
+                'role' => 'admin',
             ]
         );
 
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Trần Thị B',
                 'password' => Hash::make('123456'),
-                'is_admin' => false,
+                'role' => 'alumni',
             ]
         );
 
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Lê Văn C',
                 'password' => Hash::make('123456'),
-                'is_admin' => false,
+                'role' => 'student',
             ]
         );
     }
