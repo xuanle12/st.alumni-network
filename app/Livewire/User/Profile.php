@@ -12,6 +12,10 @@ class Profile extends Component
 {
     use WithFileUploads;
 
+    protected $listeners = [
+        'mentor-registered' => '$refresh',
+    ];
+
     // trạng thái UI 
     public bool $edit = false;
     public bool $editingSocial = false;
@@ -186,8 +190,11 @@ class Profile extends Component
                 / count($check) * 100
             );
 
+        $mentorProfile = \App\Models\MentorProfile::where('user_id', Auth::id())->first();
+
         return view('livewire.user.profile',[
-            'user' => $user
+            'user' => $user,
+            'mentorProfile' => $mentorProfile,
         ]);
     }
 }

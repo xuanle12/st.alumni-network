@@ -79,8 +79,9 @@
   display:flex;align-items:center;justify-content:space-between;
   padding:1rem 1.5rem;
   border-bottom:1px solid #f0f4f8;
+  gap:12px;
 }
-.pf-card-hd-left{display:flex;align-items:center;gap:10px}
+.pf-card-hd-left{display:flex;align-items:center;gap:10px;min-width:0}
 .pf-card-icon{
   width:34px;height:34px;border-radius:9px;
   display:flex;align-items:center;justify-content:center;
@@ -89,7 +90,9 @@
 .icon-blue{background:#dbeafe;color:var(--blue,#16a34a)}
 .icon-purple{background:#ede9fe;color:#7c3aed}
 .icon-green{background:#dcfce7;color:#15803d}
+.icon-amber{background:#fef9c3;color:#b45309}
 .pf-card-title{font-size:14px;font-weight:700;color:#111827;letter-spacing:.01em}
+.pf-card-sub{font-size:12px;color:#9ca3af;margin-top:1px}
 .pf-card-body{padding:1.5rem}
 
 .btn-edit{
@@ -107,8 +110,9 @@
   border:1px solid var(--blue,#16a34a);
   background:var(--blue,#16a34a);color:#fff;
   transition:all .15s;font-family:inherit;
+  white-space:nowrap;flex-shrink:0;
 }
-.btn-prim:hover{background:#22c55e}
+.btn-prim:hover{background:#22c55e;box-shadow:0 2px 10px rgba(22,163,74,.25)}
 .btn-ghost{
   display:inline-flex;align-items:center;gap:5px;
   padding:8px 16px;border-radius:9px;
@@ -248,24 +252,47 @@
   display:flex;align-items:center;gap:8px;
 }
 
+/* ── MENTOR CTA CARD ── */
+.mentor-cta-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:9px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  border:1px solid var(--blue,#16a34a);
+  background:var(--blue,#16a34a);color:#fff;
+  transition:all .15s;font-family:inherit;
+  white-space:nowrap;flex-shrink:0;
+}
+.mentor-cta-btn:hover{background:#22c55e;box-shadow:0 2px 10px rgba(22,163,74,.25)}
+.mentor-cta-btn.is-pending{
+  border-color:#fde68a;background:#fffbeb;color:#92400e;
+}
+.mentor-cta-btn.is-pending:hover{background:#fef3c7;box-shadow:none}
+.mentor-cta-btn.is-approved{
+  border-color:#bbf7d0;background:#f0fdf4;color:#15803d;
+}
+.mentor-cta-btn.is-approved:hover{background:#dcfce7;box-shadow:none}
+.mentor-cta-btn.is-rejected{
+  border-color:#fecaca;background:#fff;color:#dc2626;
+}
+.mentor-cta-btn.is-rejected:hover{background:#fef2f2;box-shadow:none}
+
 @media(max-width:640px){
   .pf-page{padding:1rem}
   .pf-hero{flex-direction:column;align-items:flex-start;gap:1rem;padding:1.5rem}
   .info-grid,.form-grid{grid-template-columns:1fr}
   .pf-card-body{padding:1rem}
+  .pf-card-hd{flex-direction:column;align-items:flex-start;gap:10px}
+  .pf-card-hd .mentor-cta-btn,.pf-card-hd .btn-edit{align-self:flex-start}
 }
 </style>
-
 <div class="pf-page">
 <div class="pf-inner">
-
   @if(session('success'))
     <div class="flash">
       <i class="fa-solid fa-circle-check"></i>
       {{ session('success') }}
     </div>
   @endif
-
   <div class="pf-hero">
     {{-- Avatar --}}
     <div class="pf-ava-wrap">
@@ -298,14 +325,12 @@
 
       <div class="pf-badges">
         @php
-          $st = $user->profile?->status ?? 'pending';
-          $bc = match($st) { 'active' => 'badge-green', 'pending' => 'badge-amber', default => 'badge-gray' };
-          $bl = match($st) { 'active' => 'Đang hoạt động', 'pending' => 'Chờ duyệt', default => 'Không hoạt động' };
-          $role = $user->profile?->role ?? '';
+        
+          $role = $user->role ?? '';
           $rc = match($role) { 'alumni' => 'badge-blue', 'student' => 'badge-green', 'lecturer' => 'badge-purple', 'admin' => 'badge-gray', default => 'badge-gray' };
           $rl = match($role) { 'alumni' => 'Cựu SV', 'student' => 'Sinh viên', 'lecturer' => 'Giảng viên', 'admin' => 'Quản trị viên', default => '' };
         @endphp
-        <span class="badge {{ $bc }}">{{ $bl }}</span>
+        <!-- <span class="badge {{ $bc }}">{{ $bl }}</span> -->
         @if($rl)
           <span class="badge {{ $rc }}">{{ $rl }}</span>
         @endif
@@ -427,7 +452,56 @@
     </div>
   </div>
 
-  {{-- ═══ MẠNG XÃ HỘI ═══ --}}
+  {{-- ═══ ĐĂNG KÝ MENTOR ═══ --}}
+  @if(in_array($user->role ?? '', ['alumni','admin']))
+    @php
+      $mStatus = $mentorProfile->status ?? null;
+      $mBtnClass = match($mStatus) {
+        'approved' => 'is-approved',
+        'rejected' => 'is-rejected',
+        'pending'  => 'is-pending',
+        default    => '',
+      };
+      $mBtnIcon = match($mStatus) {
+        'approved' => 'fa-circle-check',
+        'rejected' => 'fa-rotate-right',
+        'pending'  => 'fa-hourglass-half',
+        default    => 'fa-user-tie',
+      };
+      $mBtnLabel = match($mStatus) {
+        'approved' => 'Đã là Mentor',
+        'rejected' => 'Đăng ký lại',
+        'pending'  => 'Đang chờ duyệt',
+        default    => 'Đăng ký làm Mentor',
+      };
+      $mCardIcon = match($mStatus) {
+        'approved' => 'icon-green',
+        'pending'  => 'icon-amber',
+        default    => 'icon-blue',
+      };
+      $mSub = match($mStatus) {
+        'approved' => 'Bạn đang là Mentor được duyệt. Bấm để xem hoặc cập nhật thông tin.',
+        'pending'  => 'Hồ sơ của bạn đang chờ quản trị viên duyệt.',
+        'rejected' => 'Đăng ký trước đó đã bị từ chối'.($mentorProfile->admin_note ? ': '.$mentorProfile->admin_note : '.').' Bấm để gửi lại.',
+        default    => 'Chia sẻ kinh nghiệm, hỗ trợ sinh viên và cựu sinh viên khác.',
+      };
+    @endphp
+    <div class="pf-card">
+      <div class="pf-card-hd">
+        <div class="pf-card-hd-left">
+          <div class="pf-card-icon {{ $mCardIcon }}"><i class="fa-solid fa-user-tie"></i></div>
+          <div>
+            <div class="pf-card-title">Chương trình Mentor</div>
+            <div class="pf-card-sub">{{ $mSub }}</div>
+          </div>
+        </div>
+        <button wire:click="$dispatch('open-mentor-register')" class="mentor-cta-btn {{ $mBtnClass }}">
+          <i class="fa-solid {{ $mBtnIcon }}"></i> {{ $mBtnLabel }}
+        </button>
+      </div>
+    </div>
+  @endif
+
   <div class="pf-card">
     <div class="pf-card-hd">
       <div class="pf-card-hd-left">
@@ -583,8 +657,9 @@
       @endif
 
     </div>
-  </div>
+</div>
+</div>
+</div>
 
-</div>
-</div>
+@livewire('user.mentor-form')
 </div>

@@ -77,7 +77,7 @@ class User extends Authenticatable
     // phân quyền 
     public function getRole(): string
     {
-    return $this->profile?->role ?? 'student';
+    return $this->role ?? 'student';
     }
     public function hasRole(string|array $roles): bool
     {
