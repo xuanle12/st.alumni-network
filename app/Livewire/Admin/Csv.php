@@ -17,7 +17,6 @@ class Csv extends Component
     public string $filterNam    = '';
     public string $filterStatus = '';
 
-    // Modal thêm/sửa ds_csv
     public bool  $showModal = false;
     public ?int  $editId    = null;
     public string $f_msv    = '';
@@ -27,11 +26,9 @@ class Csv extends Component
     public string $f_nganh  = '';
     public string $f_nam    = '';
 
-    // Modal xem tài khoản
     public bool $showView = false;
     public ?int $viewId   = null;
 
-    // Modal xoá
     public bool   $showDelete = false;
     public ?int   $deleteId   = null;
     public string $deleteName = '';

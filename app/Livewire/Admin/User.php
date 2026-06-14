@@ -71,7 +71,6 @@ class User extends Component
         $this->f_name     = $u->name;
         $this->f_email    = $u->email;
         $this->f_password = '';
-        // role & status nằm trên bảng users (sau fix_users_table migration)
         $this->f_role     = $u->role   ?? 'student';
         $this->f_status   = $u->status ?? 'pending';
         $this->showModal  = true;

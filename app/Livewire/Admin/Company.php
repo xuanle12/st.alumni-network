@@ -25,7 +25,6 @@ class Company extends Component
     public ?int $viewId = null;
     public ?int $deleteId = null;
 
-    /* form */
     public string $f_name = '';
     public string $f_field = '';
     public string $f_web = '';
@@ -54,7 +53,6 @@ class Company extends Component
         $this->resetPage();
     }
 
-    /* mở form */
     public function openAdd()
     {
         $this->resetForm();
@@ -83,7 +81,6 @@ class Company extends Component
         $this->showModal = true;
     }
 
-    /* lưu */
     public function save()
     {
         $this->validate([
@@ -135,7 +132,6 @@ class Company extends Component
         $this->editId = null;
     }
 
-    /* xem chi tiết */
     public function openView($id)
     {
         $this->viewId = $id;
@@ -148,7 +144,6 @@ class Company extends Component
         $this->viewId = null;
     }
 
-    /* duyệt nhanh */
     public function quickApprove($id)
     {
         CompanyModel::where('id',$id)
@@ -157,7 +152,6 @@ class Company extends Component
             ]);
     }
 
-    /* xoá */
     public function confirmDelete($id)
     {
         $this->deleteId = $id;

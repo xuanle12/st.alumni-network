@@ -8,7 +8,8 @@ class Job extends Model
 {
      protected $fillable =[
          'title', 'company', 'location', 'type',
-        'field', 'salary', 'is_active','khoa',
+        'field', 'min_salary', 'max_salary', 'is_active', 'khoa',
+        'description', 'experience_required', 'deadline', 'created_by'
     ];
 
      // Label hiển thị cho loại công việc
@@ -21,13 +22,7 @@ class Job extends Model
             default      => $this->type,
         };
     }
-    const KHOA_LIST = [
-        'CNTT' => 'Công nghệ thông tin',
-        'QTKD' => 'Quản trị kinh doanh',
-        'KT'   => 'Kế toán',
-        'TCNH' => 'Tài chính ngân hàng',
-        'NN'   => 'Ngoại ngữ',
-    ];
+    
  
     // CSS class cho badge
     public function getTypeClassAttribute(): string
@@ -41,5 +36,10 @@ class Job extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+    
+    public function skills()
+    {
+    return $this->belongsToMany(Skill::class, 'job_skills');
     }
 }

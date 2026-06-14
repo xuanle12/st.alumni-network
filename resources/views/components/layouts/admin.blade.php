@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin – Cựu sinh viên VNUA</title>
+    <title>Admin – Cựu sinh viên FITA-VNUA</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -13,13 +13,13 @@
         a { text-decoration: none; }
 
         :root {
-            --adm-bg:      #001529;
-            --adm-bg2:     #002140;
+            --adm-bg:      #0c1f3d;
+            --adm-bg2:     #16294a;
             --adm-border:  rgba(255,255,255,0.08);
-            --adm-text:    rgba(255,255,255,0.75);
+            --adm-text:    rgba(255,255,255,0.65);
             --adm-text-h:  #fff;
-            --adm-active:  rgba(22,163,74,0.20);
-            --adm-active-c:#4ade80;
+            --adm-active:   #16a34a;
+            --adm-active-c:#fff;
             --green:       #16a34a;
             --green-light: #22c55e;
             --gold:        #c8912a;
@@ -28,7 +28,7 @@
          .adm-layout { display: flex; min-height: 100vh; }
 
           .adm-sb {
-            width: 250px;
+            width: 230px;
             flex-shrink: 0;
             background: var(--adm-bg);
             border-right: 1px solid var(--adm-border);
@@ -58,7 +58,7 @@
             object-fit: cover;
             padding: 4px;
         }   
-       .adm-brand-name { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.3; }
+       .adm-brand-name { font-size: 17px; font-weight: 700; color: #fff; line-height: 1.3; }
         .adm-brand-sub  { font-size: 15px; color: var(--adm-text); margin-top: 2px; }
 
          .adm-back-btn {
@@ -76,30 +76,33 @@
         .adm-back-btn:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
         .adm-back-btn i { font-size: 15px; }
 
-         .adm-sec {
-            padding: 16px 20px 5px;
-            font-size: 15px; font-weight: 700;
-            letter-spacing: 1.1px; text-transform: uppercase;
-            color: rgba(255,255,255,0.25);
+        .adm-sec 
+        {
+            padding: 18px 24px 6px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
         }
-
-          .adm-item {
-            margin: 1px 10px;
-            padding: 9px 12px;
-            border-radius: 9px;
-            font-size: 13px;
+        .adm-item {
+            margin: 4px 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
             color: var(--adm-text);
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
             transition: all .15s;
         }
-        .adm-item:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
+        .adm-item.active .adm-item-ic { color: var(--adm-active-c); }
         .adm-item.active { background: var(--adm-active); color: var(--adm-active-c); font-weight: 600; }
         .adm-item.active .adm-item-ic { color: var(--adm-active-c); }
-        .adm-item-ic { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.35); }
-        .adm-item:hover .adm-item-ic { color: rgba(255,255,255,0.7); }
+        .adm-item-ic { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.45); }
+        .adm-item:hover .adm-item-ic { color: rgba(255,255,255,0.85); }
         .adm-item-badge {
             margin-left: auto;
             font-size: 10px; font-weight: 700;
@@ -285,11 +288,6 @@
                 <div class="adm-brand-name">Trang quản trị</div>
             </div>
         </div>
-
-        <a href="{{ route('csv') }}" class="adm-back-btn" wire:navigate>
-            <i class="fa-solid fa-arrow-left"></i>
-            Trang người dùng
-        </a>
 
         <div class="adm-sec">Quản lý</div>
 

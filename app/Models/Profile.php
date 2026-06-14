@@ -10,12 +10,26 @@ class Profile extends Model
      protected $table = 'profile';
  
     protected $fillable = [
-        'user_id', 'msv', 'lop', 'khoa', 'nganh',
-        'nam_tot_nghiep', 'phone', 'bio', 'avatar',
-        'tinh_thanh', 'que_quan',
-        'linkedin', 'github', 'website',
-        'status', 'admin_note',
-        'role', 'position', 'is_online', 'current_company',
+        'user_id',
+        'msv', 
+        'lop',
+        'khoa', 
+        'nganh',
+        'nam_tot_nghiep', 
+        'phone', 
+        'bio', 
+        'avatar',
+        'tinh_thanh', 
+        'que_quan',
+        'linkedin', 
+        'github', 
+        'website',
+        'status', 
+        'admin_note',
+        'position', 
+        'is_online',
+        'current_company',
+        'experience_years',
     ];
 
     protected $casts = [
@@ -45,5 +59,9 @@ class Profile extends Model
             'admin'    => 'Quản trị',
             default    => '—',
         };
+    }
+    public function skills()
+    {
+    return $this->belongsToMany(Skill::class, 'profile_skills');
     }
 }

@@ -12,24 +12,24 @@ class Profile extends Component
 {
     use WithFileUploads;
 
-    /* trạng thái UI */
+    // trạng thái UI 
     public bool $edit = false;
     public bool $editingSocial = false;
     public int $pct = 0;
 
-    /* thông tin user */
+    // thông tin user
     public string $name = '';
     public string $phone = '';
     public string $que_quan = '';
     public string $tinh_thanh = '';
     public string $bio = '';
 
-    /* social */
+    // social 
     public string $github = '';
     public string $linkedin = '';
     public string $website = '';
 
-    /* upload */
+    // upload 
     public $cvFile;
     public $avatarFile;
 
@@ -53,7 +53,7 @@ class Profile extends Component
         $this->website = $u->profile->website ?? '';
     }
 
-    /* lưu thông tin */
+    // lưu thông tin
     public function saveInfo()
     {
         $this->validate([
@@ -86,7 +86,7 @@ class Profile extends Component
         $this->edit = false;
     }
 
-    /* lưu social */
+    // lưu social
     public function saveSocial()
     {
         ProfileModel::updateOrCreate(
@@ -109,13 +109,13 @@ class Profile extends Component
         $this->editingSocial = false;
     }
 
-    /* auto upload avatar when file selected */
+    // auto upload avatar when file selected
     public function updatedAvatarFile()
     {
         $this->uploadAvatar();
     }
 
-    /* upload avatar */
+    // upload avatar
     public function uploadAvatar()
     {
         $this->validate([
@@ -133,7 +133,7 @@ class Profile extends Component
         session()->flash('success', 'Đã cập nhật ảnh đại diện');
     }
 
-    /* upload cv */
+    // upload cv
     public function uploadCv()
     {
         $this->validate([
@@ -168,7 +168,7 @@ class Profile extends Component
     {
         $user = Auth::user()->load('profile','cv');
 
-        /* % hoàn thành profile */
+        // % hoàn thành profile 
         $check = [
             $user->name,
             $user->email,
