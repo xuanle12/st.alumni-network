@@ -130,10 +130,6 @@
 .jm-input::placeholder, .jm-textarea::placeholder { color: #aab2be; }
 .jm-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 .jm-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
-.jm-input-prefix { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 9px; overflow: hidden; transition: border-color .2s, box-shadow .2s; }
-.jm-input-prefix:focus-within { border-color: var(--fita); box-shadow: 0 0 0 3px rgba(9,97,170,0.10); }
-.jm-input-prefix span { padding: 9px 10px 9px 13px; font-size: 13px; color: var(--text-muted); background: #f8fafc; border-right: 1px solid var(--border); white-space: nowrap; flex-shrink: 0; font-family: var(--font); }
-.jm-input-prefix input { border: none; border-radius: 0; box-shadow: none; padding: 9px 13px; font-size: 13px; color: var(--text); outline: none; font-family: var(--font); flex: 1; min-width: 0; background: transparent; }
 .jm-skill-wrap { display: flex; flex-wrap: wrap; gap: 7px; padding: 10px; border: 1px solid var(--border); border-radius: 9px; min-height: 44px; align-items: flex-start; cursor: text; transition: border-color .2s; box-sizing: border-box; width: 100%; }
 .jm-skill-wrap:focus-within { border-color: var(--fita); box-shadow: 0 0 0 3px rgba(9,97,170,0.10); }
 .jm-skill-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--fita-pale); border: 1px solid var(--fita-border); color: var(--fita); font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 6px; }
@@ -141,15 +137,6 @@
 .jm-skill-tag button:hover { color: #ef4444; }
 .jm-skill-input { border: none; outline: none; font-size: 13px; color: var(--text); font-family: var(--font); background: transparent; flex: 1; min-width: 80px; }
 .jm-hint { font-size: 11px; color: #aab2be; margin-top: 3px; }
-.jm-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: #f8fafc; border: 1px solid var(--border); border-radius: 9px; margin-bottom: 12px; }
-.jm-toggle-label { font-size: 13px; font-weight: 600; color: var(--text); }
-.jm-toggle-desc { font-size: 11.5px; color: var(--text-muted); }
-.jm-toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
-.jm-toggle input { opacity: 0; width: 0; height: 0; }
-.jm-toggle-slider { position: absolute; inset: 0; background: #cbd5e1; border-radius: 22px; cursor: pointer; transition: background .2s; }
-.jm-toggle-slider::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-.jm-toggle input:checked ~ .jm-toggle-slider { background: var(--fita); }
-.jm-toggle input:checked ~ .jm-toggle-slider::before { transform: translateX(18px); }
 .jm-divider { border: none; border-top: 1px solid #f1f5f9; margin: 18px 0; }
 .jm-char-count { font-size: 11px; color: #aab2be; text-align: right; margin-top: 3px; }
 .jm-required-note { font-size: 11.5px; color: #aab2be; margin-bottom: 18px; }
@@ -203,19 +190,6 @@
                     <label class="jm-label">Tên công ty <span class="req">*</span></label>
                     <input class="jm-input" type="text" name="company" placeholder="VD: Công ty CP ABC Technology" required>
                 </div>
-                <div class="jm-field" style="max-width:180px">
-                    <label class="jm-label">Quy mô</label>
-                    <select class="jm-select" name="company_size">
-                        <option value="">Chọn quy mô</option>
-                        <option>1 – 50 nhân viên</option><option>51 – 200</option><option>201 – 1.000</option><option>Trên 1.000</option>
-                    </select>
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field">
-                    <label class="jm-label">Website công ty</label>
-                    <div class="jm-input-prefix"><span>https://</span><input type="text" name="website" placeholder="company.com"></div>
-                </div>
                 <div class="jm-field">
                     <label class="jm-label">Email liên hệ <span class="req">*</span></label>
                     <input class="jm-input" type="email" name="contact_email" placeholder="hr@company.com" required>
@@ -248,14 +222,25 @@
             </div>
             <div class="jm-row">
                 <div class="jm-field">
-                    <label class="jm-label">Kinh nghiệm yêu cầu</label>
-                    <select class="jm-select" name="experience">
-                        <option value="">Không yêu cầu</option><option>Dưới 1 năm</option><option>1 – 2 năm</option><option>2 – 5 năm</option><option>Trên 5 năm</option>
-                    </select>
+                    <label class="jm-label">Ngành nghề</label>
+                    <input class="jm-input" type="text" name="field" placeholder="VD: Công nghệ, Marketing...">
+                </div>
+                
+            </div>
+            <div class="jm-row">
+                <div class="jm-field">
+                    <label class="jm-label">Kinh nghiệm yêu cầu (năm)</label>
+                    <input class="jm-input" type="number" name="experience_required" min="0" placeholder="VD: 1 (0 = không yêu cầu)">
+                </div>
+            </div>
+            <div class="jm-row">
+                <div class="jm-field">
+                    <label class="jm-label">Lương tối thiểu (triệu)</label>
+                    <input class="jm-input" type="number" name="min_salary" min="0" placeholder="VD: 10">
                 </div>
                 <div class="jm-field">
-                    <label class="jm-label">Mức lương</label>
-                    <input class="jm-input" type="text" name="salary" placeholder="VD: 12 – 18 triệu hoặc Thỏa thuận">
+                    <label class="jm-label">Lương tối đa (triệu)</label>
+                    <input class="jm-input" type="number" name="max_salary" min="0" placeholder="VD: 20">
                 </div>
             </div>
             <div class="jm-row">
@@ -267,8 +252,20 @@
             <div class="jm-row">
                 <div class="jm-field" style="flex:1 1 100%">
                     <label class="jm-label">Mô tả công việc <span class="req">*</span></label>
-                    <textarea class="jm-textarea" name="description" placeholder="Mô tả chi tiết về vị trí, trách nhiệm, quyền lợi..." oninput="jmCount(this,'jm-dc',2000)" required></textarea>
+                    <textarea class="jm-textarea" name="description" placeholder="Mô tả chung về vị trí, nhiệm vụ chính..." oninput="jmCount(this,'jm-dc',2000)" required></textarea>
                     <div class="jm-char-count"><span id="jm-dc">0</span>/2000</div>
+                </div>
+            </div>
+            <div class="jm-row">
+                <div class="jm-field" style="flex:1 1 100%">
+                    <label class="jm-label">Yêu cầu công việc</label>
+                    <textarea class="jm-textarea" name="requirements" placeholder="Mỗi yêu cầu một dòng, VD:&#10;- Tốt nghiệp đại học chuyên ngành CNTT&#10;- Có kinh nghiệm với Laravel"></textarea>
+                </div>
+            </div>
+            <div class="jm-row">
+                <div class="jm-field" style="flex:1 1 100%">
+                    <label class="jm-label">Quyền lợi</label>
+                    <textarea class="jm-textarea" name="benefits" placeholder="Mỗi quyền lợi một dòng, VD:&#10;- Lương thưởng cạnh tranh&#10;- Bảo hiểm đầy đủ"></textarea>
                 </div>
             </div>
             <div class="jm-row">
@@ -279,19 +276,6 @@
                     </div>
                     <p class="jm-hint">Nhấn <kbd style="font-size:10px;background:#f1f5f9;border:1px solid #cbd5e1;padding:1px 5px;border-radius:4px;">Enter</kbd> hoặc dấu phẩy để thêm kỹ năng</p>
                 </div>
-            </div>
-            <hr class="jm-divider">
-            <p class="jm-section-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                Tuỳ chọn
-            </p>
-            <div class="jm-toggle-row">
-                <div><div class="jm-toggle-label">Tin nổi bật</div><div class="jm-toggle-desc">Hiển thị ưu tiên, tăng lượt xem</div></div>
-                <label class="jm-toggle"><input type="checkbox" name="is_featured"><span class="jm-toggle-slider"></span></label>
-            </div>
-            <div class="jm-toggle-row">
-                <div><div class="jm-toggle-label">Cho phép nộp hồ sơ trực tuyến</div><div class="jm-toggle-desc">Ứng viên nộp CV trực tiếp qua hệ thống</div></div>
-                <label class="jm-toggle"><input type="checkbox" name="allow_online_apply" checked><span class="jm-toggle-slider"></span></label>
             </div>
             <div style="height:24px"></div>
         </div>

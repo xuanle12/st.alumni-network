@@ -29,6 +29,11 @@
   align-items:start;
 }
 
+.jd-side{
+  position:sticky;
+  top:1.25rem;
+}
+
 .jd-card{
   background:#fff;
   border:1px solid #cbd5e1;
@@ -102,6 +107,18 @@
 .jd-content ul{padding-left:1.25rem;margin-bottom:.875rem}
 .jd-content li{margin-bottom:5px}
 .jd-content strong{color:#0f172a;font-weight:700}
+
+/* ACTIONS ROW (Ứng tuyển + Lưu) */
+.jd-actions-row{
+  display:flex;align-items:stretch;gap:10px;
+}
+.jd-actions-row .btn-apply,
+.jd-actions-row .btn-save{
+  margin-bottom:0;
+}
+.jd-actions-row .applied-box{
+  margin-bottom:0;
+}
 
 .jd-contact-link{
   display:inline-flex;align-items:center;gap:8px;
@@ -180,16 +197,6 @@
 .meta-key{color:#64748b;font-weight:500}
 .meta-val{color:#0f172a;font-weight:700;text-align:right}
 
-.side-co{text-align:center;padding-top:.5rem}
-.side-co-logo{
-  width:52px;height:52px;border-radius:12px;
-  background:#f1f5f9;border:1px solid #e2e8f0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:24px;margin:0 auto .875rem;
-}
-.side-co-name{font-size:14px;font-weight:800;color:#0f172a;margin-bottom:3px}
-.side-co-field{font-size:12px;color:#64748b}
-
 /* RELATED */
 .rel-item{
   display:flex;align-items:flex-start;gap:12px;
@@ -214,6 +221,7 @@
 
 @media(max-width:768px){
   .jd-layout{grid-template-columns:1fr}
+  .jd-side{position:static}
   .jd-info-grid{grid-template-columns:1fr 1fr}
   .ig{border-bottom:1px solid #f1f5f9}
   .jd-page{padding:1rem}
@@ -221,6 +229,8 @@
 @media(max-width:480px){
   .jd-info-grid{grid-template-columns:1fr}
   .jd-hero-body,.jd-section{padding-left:1rem;padding-right:1rem}
+  .jd-actions-row{flex-direction:column}
+  .jd-actions-row .btn-save{flex:1}
 }
 </style>
 
@@ -248,7 +258,7 @@
         {{-- Hero --}}
         <div class="jd-hero-body">
           <div class="jd-hero-top">
-            <div class="jd-logo">{{ $job->logo_emoji }}</div>
+            <div class="jd-logo"><i class="fa-solid fa-building"></i></div>
             <div style="flex:1;min-width:0">
               <div class="jd-title">{{ $job->title }}</div>
               <div class="jd-company-row">
@@ -318,6 +328,30 @@
               <div class="ig-val">{{ $job->khoa ? $job->khoa_label : 'Tất cả' }}</div>
             </div>
           </div>
+        </div>
+
+        {{-- Hành động: Ứng tuyển & Lưu --}}
+        <div class="jd-section jd-actions-row">
+          @if($applied)
+            <div class="applied-box" style="flex:1">
+              <div class="applied-ico">✅</div>
+              <div class="applied-title">Đã ứng tuyển thành công!</div>
+              <div class="applied-sub">Nhà tuyển dụng sẽ liên hệ sớm</div>
+            </div>
+          @else
+            <button wire:click="apply" class="btn-apply" style="flex:1;margin-bottom:0">
+              <span wire:loading wire:target="apply">
+                <i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...
+              </span>
+              <span wire:loading.remove wire:target="apply">
+                <i class="fa-solid fa-paper-plane"></i> Ứng tuyển ngay
+              </span>
+            </button>
+          @endif
+          <button wire:click="toggleSave" class="btn-save {{ $saved ? 'saved' : '' }}" style="flex:0 0 160px">
+            <i class="fa-{{ $saved ? 'solid' : 'regular' }} fa-heart"></i>
+            {{ $saved ? 'Đã lưu' : 'Lưu việc làm' }}
+          </button>
         </div>
 
         {{-- Mô tả công việc --}}
@@ -390,38 +424,16 @@
     {{-- /cột trái --}}
 
     {{-- ===== CỘT PHẢI ===== --}}
-    <div>
-
-      {{-- Ứng tuyển --}}
-      <div class="jd-card">
-        <div class="side-body">
-          @if($applied)
-            <div class="applied-box">
-              <div class="applied-ico">✅</div>
-              <div class="applied-title">Đã ứng tuyển thành công!</div>
-              <div class="applied-sub">Nhà tuyển dụng sẽ liên hệ sớm</div>
-            </div>
-          @else
-            <button wire:click="apply" class="btn-apply">
-              <span wire:loading wire:target="apply">
-                <i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...
-              </span>
-              <span wire:loading.remove wire:target="apply">
-                <i class="fa-solid fa-paper-plane"></i> Ứng tuyển ngay
-              </span>
-            </button>
-          @endif
-          <button wire:click="toggleSave" class="btn-save {{ $saved ? 'saved' : '' }}">
-            <i class="fa-{{ $saved ? 'solid' : 'regular' }} fa-heart"></i>
-            {{ $saved ? 'Đã lưu' : 'Lưu việc làm' }}
-          </button>
-        </div>
-      </div>
+    <div class="jd-side">
 
       {{-- Thông tin chi tiết --}}
       <div class="jd-card">
         <div class="side-body">
           <div class="side-sec-title">Thông tin chi tiết</div>
+          <div class="meta-row">
+            <span class="meta-key">Công ty</span>
+            <span class="meta-val">{{ $job->company }}</span>
+          </div>
           <div class="meta-row">
             <span class="meta-key">Loại hình</span>
             <span class="meta-val">{{ $job->type_label }}</span>
@@ -452,18 +464,12 @@
               <span class="meta-val" style="color:#16a34a;font-size:11.5px">{{ $job->contact_email }}</span>
             </div>
           @endif
-        </div>
-      </div>
-
-      {{-- Về công ty --}}
-      <div class="jd-card">
-        <div class="side-body">
-          <div class="side-sec-title">Về công ty</div>
-          <div class="side-co">
-            <div class="side-co-logo">{{ $job->logo_emoji }}</div>
-            <div class="side-co-name">{{ $job->company }}</div>
-            <div class="side-co-field">{{ $job->field ?? 'Doanh nghiệp' }}</div>
-          </div>
+          @if($companyOpenJobs > 0)
+            <div class="meta-row">
+              <span class="meta-key">Vị trí khác đang tuyển</span>
+              <span class="meta-val green">{{ $companyOpenJobs }}</span>
+            </div>
+          @endif
         </div>
       </div>
 
@@ -474,7 +480,7 @@
             <div class="side-sec-title">Việc làm tương tự</div>
             @foreach($related as $r)
               <a href="{{ route('job.show', $r->id) }}" class="rel-item">
-                <div class="rel-logo">{{ $r->logo_emoji }}</div>
+                <div class="rel-logo"><i class="fa-solid fa-building"></i></div>
                 <div class="rel-info">
                   <div class="rel-title">{{ Str::limit($r->title, 42) }}</div>
                   <div class="rel-meta">{{ $r->company }} · {{ $r->location ?? '—' }}</div>

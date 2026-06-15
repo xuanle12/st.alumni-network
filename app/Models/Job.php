@@ -9,8 +9,14 @@ class Job extends Model
      protected $fillable =[
          'title', 'company', 'location', 'type',
         'field', 'min_salary', 'max_salary', 'is_active', 'khoa',
-        'description', 'experience_required', 'deadline', 'created_by'
+        'description', 'experience_required', 'deadline', 'created_by', 'contact_email'
     ];
+
+    // Label hiển thị cho khoa (cột khoa đã lưu sẵn dạng tên hiển thị)
+    public function getKhoaLabelAttribute(): ?string
+    {
+        return $this->khoa;
+    }
 
      // Label hiển thị cho loại công việc
     public function getTypeLabelAttribute(): string

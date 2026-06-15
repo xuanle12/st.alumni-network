@@ -11,6 +11,11 @@ class Jobsdetail extends Component
     public Job $job;
     public $related = [];
 
+    public array $matchedSkills = [];
+    public array $missingSkills = [];
+
+    public int $companyOpenJobs = 0;
+
     public bool $saved = false;
     public bool $applied = false;
 
@@ -19,6 +24,27 @@ class Jobsdetail extends Component
         $this->job = Job::with('skills')->findOrFail($id);
         $this->job->salary = $this->formatSalary($this->job->min_salary, $this->job->max_salary);
         $this->job->skill_names = $this->job->skills->pluck('name');
+
+        $jobSkillNames = $this->job->skills->pluck('name')
+            ->map(fn($name) => strtolower($name))
+            ->toArray();
+
+        if (Auth::check() && Auth::user()->profile) {
+            $userSkillNames = Auth::user()->profile->skills->pluck('name')
+                ->map(fn($name) => strtolower($name))
+                ->toArray();
+
+            $this->matchedSkills = array_values(array_intersect($jobSkillNames, $userSkillNames));
+            $this->missingSkills = array_values(array_diff($jobSkillNames, $userSkillNames));
+        } else {
+            $this->matchedSkills = [];
+            $this->missingSkills = $jobSkillNames;
+        }
+
+        $this->companyOpenJobs = Job::where('company', $this->job->company)
+            ->where('id', '!=', $id)
+            ->where('is_active', true)
+            ->count();
 
         $this->related = Job::where('id', '!=', $id)
             ->where(function ($q) {
@@ -67,6 +93,9 @@ class Jobsdetail extends Component
         return view('livewire.user.jobsdetail', [
             'job' => $this->job,
             'related' => $this->related,
+            'matchedSkills' => $this->matchedSkills,
+            'missingSkills' => $this->missingSkills,
+            'companyOpenJobs' => $this->companyOpenJobs,
         ]);
     }
 }

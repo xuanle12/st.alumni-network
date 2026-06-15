@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Skill;
+use App\Models\Job;
 use Illuminate\Support\Facades\DB;
 
 class JobSkillSeeder extends Seeder
@@ -14,39 +15,93 @@ class JobSkillSeeder extends Seeder
      */
     public function run(): void
     {
-        $s = Skill::all()->keyBy('name');
- 
         $map = [
-            1  => ['Python', 'Data Analysis', 'SQL Server'],
-            2  => ['PHP', 'Laravel', 'MySQL', 'RESTful API', 'Git'],
-            3  => ['Python', 'Pandas', 'Power BI', 'SQL Server', 'Data Analysis'],
-            4  => ['Excel', 'Word', 'Data Analysis'],
-            5  => ['JavaScript', 'ReactJS', 'VueJS', 'HTML', 'CSS', 'Tailwind CSS'],
-            6  => ['Giao tiếp', 'Quản lý dự án', 'Excel', 'Làm việc nhóm'],
-            7  => ['JavaScript', 'React Native', 'TypeScript', 'Git'],
-            8  => ['Docker', 'Kubernetes', 'CI/CD', 'AWS', 'Linux', 'Git'],
-            9  => ['PHP', 'Laravel', 'MySQL', 'Git', 'HTML', 'CSS'],
-            10 => ['Excel', 'Data Analysis', 'Giao tiếp', 'Quản lý dự án'],
-            11 => ['Python', 'SQL Server', 'PostgreSQL', 'Docker', 'Data Analysis'],
-            12 => ['ReactJS', 'NextJS', 'TypeScript', 'Tailwind CSS', 'Git'],
+            [
+                'title'   => 'Kỹ sư Nông nghiệp Công nghệ cao',
+                'company' => 'Công ty Vineco',
+                'skills'  => ['Python', 'Data Analysis', 'IoT', 'SQL Server'],
+            ],
+            [
+                'title'   => 'Lập trình viên Backend PHP',
+                'company' => 'FPT Software',
+                'skills'  => ['PHP', 'Laravel', 'MySQL', 'RESTful API', 'Git'],
+            ],
+            [
+                'title'   => 'Chuyên viên Phân tích Dữ liệu',
+                'company' => 'TH True Milk',
+                'skills'  => ['Python', 'Pandas', 'Power BI', 'SQL Server', 'Data Analysis'],
+            ],
+            [
+                'title'   => 'Thực tập sinh Kỹ thuật Môi trường',
+                'company' => 'Viện Khoa học Nông nghiệp VN',
+                'skills'  => ['Excel', 'Word', 'Data Analysis'],
+            ],
+            [
+                'title'   => 'Kỹ sư Phần mềm Frontend',
+                'company' => 'VNG Corporation',
+                'skills'  => ['JavaScript', 'ReactJS', 'VueJS', 'HTML', 'CSS', 'Tailwind CSS'],
+            ],
+            [
+                'title'   => 'Chuyên viên Marketing Nông sản',
+                'company' => 'Dabaco Group',
+                'skills'  => ['Giao tiếp', 'Quản lý dự án', 'Excel', 'Làm việc nhóm'],
+            ],
+            [
+                'title'   => 'Lập trình viên Mobile (React Native)',
+                'company' => 'VCCorp',
+                'skills'  => ['JavaScript', 'React Native', 'TypeScript', 'Git'],
+            ],
+            [
+                'title'   => 'DevOps Engineer',
+                'company' => 'Viettel Digital',
+                'skills'  => ['Docker', 'Kubernetes', 'CI/CD', 'AWS', 'Linux', 'Git'],
+            ],
+            [
+                'title'   => 'Thực tập sinh Lập trình Laravel',
+                'company' => 'Toàn Cầu Tech',
+                'skills'  => ['PHP', 'Laravel', 'MySQL', 'Git', 'HTML', 'CSS'],
+            ],
+            [
+                'title'   => 'Nhân viên Phân tích Tín dụng',
+                'company' => 'AgriBank',
+                'skills'  => ['Excel', 'Data Analysis', 'Giao tiếp', 'Quản lý dự án'],
+            ],
+            [
+                'title'   => 'Kỹ sư Dữ liệu (Data Engineer)',
+                'company' => 'FPT Software',
+                'skills'  => ['Python', 'SQL Server', 'PostgreSQL', 'Docker', 'Data Analysis'],
+            ],
+            [
+                'title'   => 'Remote Frontend Developer (NextJS)',
+                'company' => 'Toàn Cầu Tech',
+                'skills'  => ['ReactJS', 'NextJS', 'TypeScript', 'Tailwind CSS', 'Git'],
+            ],
         ];
  
-        foreach ($map as $jobId => $skillNames) {
-            $rows = collect($skillNames)
-                ->map(fn($name) => $s->get($name)?->id)
-                ->filter()
-                ->map(fn($skillId) => [
-                    'job_id'     => $jobId,
-                    'skill_id'   => $skillId,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ])
-                ->values()
-                ->toArray();
+        foreach ($map as $item) {
+            $job = Job::where('title', $item['title'])
+                ->where('company', $item['company'])
+                ->first();
  
-            DB::table('job_skills')->insertOrIgnore($rows);
+            if (! $job) {
+                $this->command->warn("✗ Không tìm thấy job: {$item['title']} - {$item['company']}");
+                continue;
+            }
  
-            $this->command->info("✓ job_id {$jobId}: " . count($rows) . " skills");
+            $skillIds = Skill::whereIn('name', $item['skills'])->pluck('id', 'name');
+ 
+            $ids = [];
+            foreach ($item['skills'] as $name) {
+                if (isset($skillIds[$name])) {
+                    $ids[] = $skillIds[$name];
+                } else {
+                    $this->command->warn("  ⚠ Skill không tồn tại: {$name}");
+                }
+            }
+ 
+            $job->skills()->syncWithoutDetaching($ids);
+ 
+            $this->command->info("✓ {$item['title']} (#{$job->id}): " . count($ids) . ' skills');
         }
     }
 }
