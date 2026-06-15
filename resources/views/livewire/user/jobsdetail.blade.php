@@ -248,14 +248,8 @@
   @endif
 
   <div class="jd-layout">
-
-    {{-- ===== CỘT TRÁI ===== --}}
     <div>
-
-      {{-- Card chính --}}
       <div class="jd-card">
-
-        {{-- Hero --}}
         <div class="jd-hero-body">
           <div class="jd-hero-top">
             <div class="jd-logo"><i class="fa-solid fa-building"></i></div>
@@ -418,12 +412,7 @@
         @endif
 
       </div>
-      {{-- /jd-card chính --}}
-
     </div>
-    {{-- /cột trái --}}
-
-    {{-- ===== CỘT PHẢI ===== --}}
     <div class="jd-side">
 
       {{-- Thông tin chi tiết --}}

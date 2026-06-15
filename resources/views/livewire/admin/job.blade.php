@@ -376,12 +376,6 @@ td {
           <option value="part-time">Part-time</option>
           <option value="internship">Thực tập</option>
         </select>
-        <select class="tb-sel" wire:model.live="khoa">
-          <option value="">Tất cả khoa</option>
-          @foreach($khoaList as $key => $label)
-            <option value="{{ $key }}">{{ $label }}</option>
-          @endforeach
-        </select>
       </div>
 
       <div class="card">
@@ -390,11 +384,12 @@ td {
             <tr>
               <th style="width:30%">Tin tuyển dụng</th>
               <th>Công ty</th>
-              <th>Khoa</th>
               <th>Loại</th>
               <th>Lương</th>
+              <th>Kinh nghiệm</th>
               <th>Hiển thị</th>
               <th>Ngày đăng</th>
+              <th>Hạn nộp</th>
               <th style="width:44px"></th>
             </tr>
           </thead>
@@ -403,7 +398,6 @@ td {
               <tr wire:key="job-{{ $job->id }}">
                 <td>
                   <div style="display:flex;align-items:center;gap:9px">
-                    <!-- <span style="font-size:20px;flex-shrink:0">{{ $job->logo_emoji }}</span> -->
                     <div style="min-width:0">
                       <div
                         style="font-weight:500;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">
@@ -414,17 +408,23 @@ td {
                   </div>
                 </td>
                 <td style="font-weight:500">{{ $job->company }}</td>
-                <td>
-                  @if($job->khoa)<span class="badge bc">{{ $job->khoa }}</span>
-                  @else<span class="badge" style="background:#f3f4f6;color:#6b7280">Tất cả</span>@endif
-                </td>
                 <td><span
                     class="badge {{ $job->type === 'internship' ? 'by' : ($job->type === 'part-time' ? 'bp' : 'bg') }}">{{ $job->type_label }}</span>
                 </td>
-                <td style="color:#6b7280">{{ $job->salary ?? '—' }}</td>
+                <td style="color:#6b7280">
+                    @if($job->min_salary || $job->max_salary)
+                        {{ number_format($job->min_salary ?? 0) }}
+                        -
+                        {{ number_format($job->max_salary ?? 0) }}
+                    @else
+                        —
+                    @endif
+                </td>
+                <td style="color:#6b7280">{{ $job->experience_required ? $job->experience_required . ' năm' : '—' }}</td>
                 <td><button wire:click="toggleActive({{ $job->id }})"
                     class="tog {{ $job->is_active ? 'on' : 'off' }}"></button></td>
                 <td style="color:#9ca3af;white-space:nowrap">{{ $job->created_at->format('d/m/Y') }}</td>
+                <td style="color:#9ca3af;white-space:nowrap">{{ $job->deadline ? \Carbon\Carbon::parse($job->deadline)->format('d/m/Y') : '—' }}</td>
                 <td>
                   <div x-data="{
                     open: false,
@@ -457,7 +457,7 @@ td {
               </tr>
             @empty
               <tr>
-                <td colspan="8" style="text-align:center;color:#9ca3af;padding:2rem">Không tìm thấy tin nào</td>
+                <td colspan="9" style="text-align:center;color:#9ca3af;padding:2rem">Không tìm thấy tin nào</td>
               </tr>
             @endforelse
           </tbody>
@@ -475,26 +475,38 @@ td {
           <div class="modal-title">Chi tiết tin tuyển dụng<button class="close-btn"
               wire:click="$set('showDetail', false)">×</button></div>
           <div class="d-hero">
-            <!-- <div class="d-ico">{{ $detail->logo_emoji }}</div> -->
             <div>
               <div style="font-size:15px;font-weight:600;color:#111">{{ $detail->title }}</div>
               <div style="font-size:12px;color:#6b7280;margin-top:2px">{{ $detail->company }}@if($detail->location) ·
               {{ $detail->location }}@endif</div>
               <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
                 <span class="badge {{ $detail->type === 'internship' ? 'by' : 'bg' }}">{{ $detail->type_label }}</span>
-                @if($detail->khoa)<span class="badge bc">{{ $detail->khoa_label }}</span>
-                @else<span class="badge" style="background:#f3f4f6;color:#6b7280">Tất cả khoa</span>@endif
                 <span class="badge {{ $detail->is_active ? 'bg' : '' }}"
                   style="{{ $detail->is_active ? '' : 'background:#f3f4f6;color:#9ca3af' }}">{{ $detail->is_active ? 'Đang hiển thị' : 'Đã ẩn' }}</span>
               </div>
             </div>
           </div>
           <div class="d-grid">
-            <div class="dg"><label>Mức lương</label>
-              <p class="{{ $detail->salary ? '' : 'mt' }}">{{ $detail->salary ?? 'Chưa cập nhật' }}</p>
+            <div class="dg">
+              <label>Mức lương</label>
+              <p class="{{ ($detail->min_salary || $detail->max_salary) ? '' : 'mt' }}">
+                @if($detail->min_salary || $detail->max_salary)
+                  {{ number_format($detail->min_salary ?? 0) }}
+                  -
+                  {{ number_format($detail->max_salary ?? 0) }}
+                @else
+                  Chưa cập nhật
+                @endif
+              </p>
             </div>
             <div class="dg"><label>Ngành nghề</label>
               <p class="{{ $detail->field ? '' : 'mt' }}">{{ $detail->field ?? 'Chưa cập nhật' }}</p>
+            </div>
+            <div class="dg"><label>Kinh nghiệm yêu cầu</label>
+              <p class="{{ $detail->experience_required ? '' : 'mt' }}">{{ $detail->experience_required ? $detail->experience_required . ' năm' : 'Chưa cập nhật' }}</p>
+            </div>
+            <div class="dg"><label>Hạn nộp</label>
+              <p class="{{ $detail->deadline ? '' : 'mt' }}">{{ $detail->deadline ? \Carbon\Carbon::parse($detail->deadline)->format('d/m/Y') : 'Chưa cập nhật' }}</p>
             </div>
             <div class="dg"><label>Email liên hệ</label>
               <p class="{{ $detail->contact_email ? '' : 'mt' }}">{{ $detail->contact_email ?? 'Chưa cập nhật' }}</p>
@@ -541,18 +553,49 @@ td {
                 <option value="part-time">Part-time</option>
                 <option value="internship">Thực tập</option>
               </select></div>
-            <div class="fi"><label>Khoa (bỏ trống = tất cả)</label>
-              <select wire:model="f_khoa">
-                <option value="">Tất cả khoa</option>@foreach($khoaList as $k => $l)<option value="{{ $k }}">{{ $l }}
-                </option>@endforeach
-              </select>
+            <div class="fi">
+              <label>Ngành nghề</label>
+              <input wire:model="field" type="text" placeholder="Công nghệ...">
             </div>
-            <div class="fi"><label>Ngành nghề</label><input wire:model="field" type="text" placeholder="Công nghệ...">
+            <div class="fi">
+                <label>Lương tối thiểu</label>
+                <input
+                    wire:model="min_salary"
+                    type="number"
+                    placeholder="10000000">
+                @error('min_salary')<div class="err">{{ $message }}</div>@enderror
             </div>
-            <div class="fi"><label>Mức lương</label><input wire:model="salary" type="text" placeholder="18–30 tr"></div>
-            <!-- <div class="fi"><label>Icon</label><input wire:model="logo_emoji" type="text" placeholder="<i class='fa-solid fa-laptop'></i>"></div>             -->
-            <div class="fi"><label>Email liên hệ</label><input wire:model="contact_email" type="email"
-                placeholder="hr@congty.com">@error('contact_email')<div class="err">{{ $message }}</div>@enderror</div>
+            <div class="fi">
+                <label>Lương tối đa</label>
+                <input
+                    wire:model="max_salary"
+                    type="number"
+                    placeholder="30000000">
+                @error('max_salary')<div class="err">{{ $message }}</div>@enderror
+            </div>
+            <div class="fi">
+                <label>Kinh nghiệm (năm)</label>
+                <input
+                    wire:model="experience_required"
+                    type="number"
+                    placeholder="2">
+                @error('experience_required')<div class="err">{{ $message }}</div>@enderror
+            </div>
+            <div class="fi">
+                <label>Hạn nộp</label>
+                <input
+                    wire:model="deadline"
+                    type="date">
+                @error('deadline')<div class="err">{{ $message }}</div>@enderror
+            </div>
+            <div class="fi">
+              <label>Email liên hệ</label>
+              <input wire:model="contact_email" type="email"
+                placeholder="hr@congty.com">@error('contact_email')
+                <div class="err">{{ $message }}       
+                </div>
+                @enderror
+              </div>
             <div class="fi full"><label>Mô tả công việc</label><textarea wire:model="description"
                 placeholder="Mô tả yêu cầu, quyền lợi..."></textarea></div>
           </div>
@@ -567,5 +610,4 @@ td {
       </div>
     @endif
   </div>
-</div>
 </div>

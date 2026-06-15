@@ -10,7 +10,6 @@ class Thongk extends Component
 {
     
     public string $year  = '';
-    public string $khoa  = '';
  
     public function mount(): void
     {
@@ -48,7 +47,6 @@ class Thongk extends Component
         return collect(range(1, 12))->map(fn($m) =>
             Profile::whereYear('created_at', $this->year)
                 ->whereMonth('created_at', $m)
-                ->when($this->khoa, fn($q) => $q->where('khoa', $this->khoa))
                 ->count()
         )->toArray();
     }
@@ -61,19 +59,6 @@ class Thongk extends Component
             'pending'  => Profile::where('status', 'pending')->count(),
             'inactive' => Profile::where('status', 'inactive')->count(),
         ];
-    }
- 
-    // ── CSV theo khoa ──────────────────────────────
-    public function getByKhoaProperty(): array
-    {
-        return Profile::selectRaw('khoa, count(*) as total')
-            ->whereNotNull('khoa')
-            ->where('status', 'active')
-            ->groupBy('khoa')
-            ->orderByDesc('total')
-            ->get()
-            ->map(fn($r) => ['khoa' => $r->khoa, 'total' => $r->total])
-            ->toArray();
     }
  
     // ── Khu vực làm việc ───────────────────────────
@@ -110,8 +95,6 @@ class Thongk extends Component
  
     public function render()
     {
-        return view('livewire.admin.thongk', [
-            'khoaList' => Job::KHOA_LIST,
-        ])->layout('components.layouts.admin');
+        return view('livewire.admin.thongk')->layout('components.layouts.admin');
     }
 }

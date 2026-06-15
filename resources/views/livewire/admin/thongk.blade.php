@@ -18,7 +18,7 @@
 .up{color:#16a34a}.muted{color:#9ca3af}
  
 .row2{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
-.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .card{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
 .card-title{font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
 .card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
@@ -56,7 +56,7 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
 .sp{width:6px;border-radius:2px 2px 0 0;background:#dcfce7}
 .sp.hi{background:#3b82f6}
  
-@media(max-width:1024px){.stats4{grid-template-columns:1fr 1fr}.row3{grid-template-columns:1fr 1fr}}
+@media(max-width:1024px){.stats4{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){.row2,.row3{grid-template-columns:1fr}}
 </style>
 <div>
@@ -161,21 +161,6 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
  
  
   <div class="row3">
-    <div class="card">
-      <div class="card-title">CSV theo khoa</div>
-      @php $maxKhoa = collect($this->byKhoa)->max('total') ?: 1; @endphp
-      <div class="hbar-list">
-        @forelse($this->byKhoa as $item)
-        <div>
-          <div class="hbar-top"><span>{{ \App\Models\Job::KHOA_LIST[$item['khoa']] ?? $item['khoa'] }}</span><span class="hbar-val">{{ $item['total'] }}</span></div>
-          <div class="hbar-bg"><div class="hbar-fill" style="width:{{ round($item['total']/$maxKhoa*100) }}%;background:#3b82f6"></div></div>
-        </div>
-        @empty
-          <p style="font-size:12px;color:#9ca3af;text-align:center;padding:1rem">Chưa có dữ liệu</p>
-        @endforelse
-      </div>
-    </div>
- 
     <div class="card">
       <div class="card-title">Khu vực làm việc</div>
       @php $maxLoc = collect($this->byLocation)->max('total') ?: 1; @endphp

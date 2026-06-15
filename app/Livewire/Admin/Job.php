@@ -14,7 +14,6 @@ class Job extends Component
 
     public string $search = '';
     public string $type = '';
-    public string $khoa = '';
 
     public bool $showForm = false;
     public bool $showDetail = false;
@@ -28,16 +27,17 @@ class Job extends Component
     public string $location = '';
     public string $f_type = 'full-time';
     public string $field = '';
-    public string $salary = '';
-    
+    public string $min_salary = '';
+    public string $max_salary = '';
+    public string $experience_required = '';
+    public string $deadline = '';
+
     public string $description = '';
     public string $contact_email = '';
-    public string $f_khoa = '';
 
     /* reset page khi search */
     public function updatedSearch() { $this->resetPage(); }
     public function updatedType() { $this->resetPage(); }
-    public function updatedKhoa() { $this->resetPage(); }
 
     public function openCreate()
     {
@@ -55,10 +55,12 @@ class Job extends Component
         $this->location = $job->location ?? '';
         $this->f_type = $job->type;
         $this->field = $job->field ?? '';
-        $this->salary = $job->salary ?? '';
+        $this->min_salary = $job->min_salary !== null ? (string) $job->min_salary : '';
+        $this->max_salary = $job->max_salary !== null ? (string) $job->max_salary : '';
+        $this->experience_required = $job->experience_required !== null ? (string) $job->experience_required : '';
+        $this->deadline = $job->deadline ? \Carbon\Carbon::parse($job->deadline)->format('Y-m-d') : '';
         $this->description = $job->description ?? '';
         $this->contact_email = $job->contact_email ?? '';
-        $this->f_khoa = $job->khoa ?? '';
 
         $this->showForm = true;
         $this->showDetail = false;
@@ -75,7 +77,11 @@ class Job extends Component
         $this->validate([
             'title' => 'required|max:200',
             'company' => 'required|max:100',
-            'contact_email' => 'nullable|email'
+            'contact_email' => 'nullable|email',
+            'min_salary' => 'nullable|numeric|min:0',
+            'max_salary' => 'nullable|numeric|min:0',
+            'experience_required' => 'nullable|integer|min:0',
+            'deadline' => 'nullable|date',
         ]);
 
         $data = [
@@ -85,10 +91,12 @@ class Job extends Component
             'location' => $this->location ?: null,
             'type' => $this->f_type,
             'field' => $this->field ?: null,
-            'salary' => $this->salary ?: null,
+            'min_salary' => $this->min_salary !== '' ? $this->min_salary : null,
+            'max_salary' => $this->max_salary !== '' ? $this->max_salary : null,
+            'experience_required' => $this->experience_required !== '' ? $this->experience_required : null,
+            'deadline' => $this->deadline ?: null,
             'description' => $this->description ?: null,
             'contact_email' => $this->contact_email ?: null,
-            'khoa' => $this->f_khoa ?: null,
 
         ];
 
@@ -137,10 +145,12 @@ class Job extends Component
             'company',
             'location',
             'field',
-            'salary',
+            'min_salary',
+            'max_salary',
+            'experience_required',
+            'deadline',
             'description',
             'contact_email',
-            'f_khoa',
             'editId'
         ]);
 
@@ -169,12 +179,6 @@ class Job extends Component
 
         }
 
-        if ($this->khoa) {
-
-            $query->where('khoa',$this->khoa);
-
-        }
-
         return view('livewire.admin.job',[
 
             'jobs' => $query
@@ -184,8 +188,6 @@ class Job extends Component
             'detail' => $this->detailId
                 ? JobModel::find($this->detailId)
                 : null,
-
-            'khoaList' => JobModel::KHOA_LIST ?? []
 
         ])->layout('components.layouts.admin');
 
