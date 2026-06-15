@@ -509,7 +509,7 @@ td {
               <p class="{{ $detail->deadline ? '' : 'mt' }}">{{ $detail->deadline ? \Carbon\Carbon::parse($detail->deadline)->format('d/m/Y') : 'Chưa cập nhật' }}</p>
             </div>
             <div class="dg"><label>Email liên hệ</label>
-              <p class="{{ $detail->contact_email ? '' : 'mt' }}">{{ $detail->contact_email ?? 'Chưa cập nhật' }}</p>
+              <!-- <p class="{{ $detail->contact_email ? '' : 'mt' }}">{{ $detail->contact_email ?? 'Chưa cập nhật' }}</p> -->
             </div>
             <div class="dg"><label>Ngày đăng</label>
               <p>{{ $detail->created_at->format('d/m/Y') }}</p>
@@ -591,10 +591,7 @@ td {
             <div class="fi">
               <label>Email liên hệ</label>
               <input wire:model="contact_email" type="email"
-                placeholder="hr@congty.com">@error('contact_email')
-                <div class="err">{{ $message }}       
-                </div>
-                @enderror
+                placeholder="hr@congty.com">
               </div>
             <div class="fi full"><label>Mô tả công việc</label><textarea wire:model="description"
                 placeholder="Mô tả yêu cầu, quyền lợi..."></textarea></div>

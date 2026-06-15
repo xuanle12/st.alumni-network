@@ -144,6 +144,12 @@ class Company extends Component
         $this->viewId = null;
     }
 
+    public function closeDelete(): void
+    {
+        $this->showDelete = false;
+        $this->deleteId = null;
+    }
+
     public function quickApprove($id)
     {
         CompanyModel::where('id',$id)

@@ -8,6 +8,7 @@ use Livewire\Attributes\Url;
 use App\Models\Job;
 use Illuminate\Support\Str;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Services\JobMatchingService;
 
 class Jobs extends Component
 {
@@ -30,16 +31,51 @@ class Jobs extends Component
 
     #[Url]
     public array $locations = [];
+    public $suggestedJobs = [];
+    public bool $hasSkills = false;
 
-    public function updatingSearch() { $this->resetPage(); }
-    public function updatingTypes() { $this->resetPage(); }
-    public function updatingFields() { $this->resetPage(); }
-    public function updatingLocations() { $this->resetPage(); }
+    public function updatingSearch() 
+    { 
+        $this->resetPage(); 
+    }
+    public function updatingTypes() 
+    { 
+        $this->resetPage(); 
+    }
+    public function updatingFields() 
+    { 
+        $this->resetPage(); 
+    }
+    public function updatingLocations() 
+    { 
+        $this->resetPage(); 
+    }
 
     public function resetFilters()
     {
         $this->reset(['search','field','sort','types','fields','locations']);
         $this->resetPage();
+    }
+    public function mount()
+    {
+    $profile = auth()->user()?->profile;
+    if (!$profile) return;
+
+    $this->hasSkills = $profile->skills()->count() > 0;
+
+    if ($this->hasSkills) 
+        {
+            $service = new JobMatchingService();
+            $this->suggestedJobs = $service->recommend($profile, 5)
+                ->map(fn($j) => [
+                    'id'          => $j->id,
+                    'title'       => $j->title,
+                    'company'     => $j->company,
+                    'location'    => $j->location,
+                    'match_score' => round($j->match_score),
+                    'skills'      => $j->skills->pluck('name')->toArray(),
+                ])->values()->toArray();
+        }
     }
 
     public function render()

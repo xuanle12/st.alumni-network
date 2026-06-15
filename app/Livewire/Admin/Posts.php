@@ -64,11 +64,11 @@ class Posts extends Component
         $p = Post::findOrFail($id);
 
         $this->editId = $id;
-        $this->f_title = $p->title;
+        $this->f_title  = $p->title  ?? '';
         $this->f_excerpt = $p->excerpt ?? '';
         $this->f_content = $p->content ?? '';
         $this->f_category = $p->category ?? '';
-        $this->f_status = $p->status;
+        $this->f_status = $p->status ?? 'draft';
         $this->f_featured = (bool) $p->is_featured;
 
         $this->showModal = true;
@@ -117,6 +117,18 @@ class Posts extends Component
 
         $this->closeModal();
     }
+
+    public function toDraft(int $id): void
+{
+    Post::findOrFail($id)->update(['status' => 'draft']);
+    session()->flash('success', 'Đã chuyển về bản nháp.');
+}
+
+public function hidePost(int $id): void
+{
+    Post::findOrFail($id)->update(['status' => 'hidden']);
+    session()->flash('success', 'Đã ẩn bài viết.');
+}
 
     public function closeModal()
     {

@@ -161,7 +161,7 @@
               @error('contact_info')<div class="err">{{ $message }}</div>@enderror
             </div>
             <div class="mr-fi">
-              <label>Số mentee tối đa <span class="req">*</span></label>
+              <label>Số sinh viên tối đa <span class="req">*</span></label>
               <input type="number" wire:model="max_mentee" min="1" max="20">
               @error('max_mentee')<div class="err">{{ $message }}</div>@enderror
             </div>

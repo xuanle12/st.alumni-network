@@ -33,7 +33,6 @@ class Job extends Component
     public string $deadline = '';
 
     public string $description = '';
-    public string $contact_email = '';
 
     /* reset page khi search */
     public function updatedSearch() { $this->resetPage(); }
@@ -60,7 +59,6 @@ class Job extends Component
         $this->experience_required = $job->experience_required !== null ? (string) $job->experience_required : '';
         $this->deadline = $job->deadline ? \Carbon\Carbon::parse($job->deadline)->format('Y-m-d') : '';
         $this->description = $job->description ?? '';
-        $this->contact_email = $job->contact_email ?? '';
 
         $this->showForm = true;
         $this->showDetail = false;
@@ -77,7 +75,7 @@ class Job extends Component
         $this->validate([
             'title' => 'required|max:200',
             'company' => 'required|max:100',
-            'contact_email' => 'nullable|email',
+            
             'min_salary' => 'nullable|numeric|min:0',
             'max_salary' => 'nullable|numeric|min:0',
             'experience_required' => 'nullable|integer|min:0',
@@ -96,8 +94,7 @@ class Job extends Component
             'experience_required' => $this->experience_required !== '' ? $this->experience_required : null,
             'deadline' => $this->deadline ?: null,
             'description' => $this->description ?: null,
-            'contact_email' => $this->contact_email ?: null,
-
+ 
         ];
 
         if ($this->editId) {
@@ -150,8 +147,7 @@ class Job extends Component
             'experience_required',
             'deadline',
             'description',
-            'contact_email',
-            'editId'
+             'editId'
         ]);
 
         $this->f_type = 'full-time';

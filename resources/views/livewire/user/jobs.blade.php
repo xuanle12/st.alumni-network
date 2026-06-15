@@ -307,6 +307,58 @@
 
         <div class="jobs-grid">
             <div>
+                {{-- Gợi ý việc làm --}}
+                @if($hasSkills && count($suggestedJobs))
+                <div style="background:#fff;border-radius:12px;border:1px solid #d1e7d1;padding:16px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+                        <div style="width:28px;height:28px;background:#f0fdf4;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <span style="font-size:14px;font-weight:700;color:#1a1f2e;">Việc làm phù hợp với bạn</span>
+                        <span style="font-size:11px;color:#16a34a;background:#f0fdf4;border:1px solid #d1e7d1;padding:2px 8px;border-radius:20px;margin-left:auto;">Dựa trên kỹ năng của bạn</span>
+                    </div>
+
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+                        @foreach($suggestedJobs as $sj)
+                        <a href="{{ route('job.show', $sj['id']) }}" wire:navigate
+                        style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;text-decoration:none;color:inherit;border:1px solid #e2e8f0;transition:all .15s;"
+                        onmouseover="this.style.background='#f0fdf4';this.style.borderColor='#d1e7d1'"
+                        onmouseout="this.style.background='';this.style.borderColor='#e2e8f0'">
+
+                            <div style="width:40px;height:40px;background:#e8f1fb;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                            </div>
+
+                            <div style="flex:1;min-width:0;">
+                                <div style="font-size:13px;font-weight:700;color:#1a1f2e;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $sj['title'] }}</div>
+                                <div style="font-size:12px;color:#16a34a;margin-bottom:4px;">{{ $sj['company'] }}</div>
+                                <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                                    @foreach(array_slice($sj['skills'], 0, 3) as $skill)
+                                        <span style="font-size:10px;background:#f0fdf4;border:1px solid #d1e7d1;color:#16a34a;padding:1px 7px;border-radius:4px;">{{ $skill }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div style="text-align:right;flex-shrink:0;">
+                                <div style="font-size:15px;font-weight:800;color:#16a34a;">{{ $sj['match_score'] }}%</div>
+                                <div style="font-size:10px;color:#aab2be;">phù hợp</div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                @elseif(!$hasSkills)
+                <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <div style="flex:1;">
+                        <span style="font-size:13px;font-weight:600;color:#92400e;">Bạn chưa cập nhật kỹ năng</span>
+                        <span style="font-size:12px;color:#a16207;"> — Hãy bổ sung để nhận gợi ý việc làm phù hợp!</span>
+                    </div>
+                    <a href="{{ route('profile') }}" wire:navigate style="font-size:12px;font-weight:700;color:#fff;background:#f59e0b;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;">
+                        Cập nhật →
+                    </a>
+                </div>
+                @endif
                 <div class="jobs-search-wrap">
                     <input type="text" wire:model.live.debounce.300ms="search" placeholder="Tìm vị trí, kỹ năng, công ty...">
                 </div>

@@ -162,10 +162,9 @@ class Csv extends Component
             )
             ->when($this->filterKhoa, fn($q) => $q->where('khoa', $this->filterKhoa))
             ->when($this->filterNam,  fn($q) => $q->where('nam_tot_nghiep', $this->filterNam))
-            ->when($this->filterStatus === 'co_tk',  fn($q) => $q->whereIn('msv',  $msvCoTaiKhoan->keys()))
+            ->when($this->filterStatus === 'co_tk',   fn($q) => $q->whereIn('msv',    $msvCoTaiKhoan->keys()))
             ->when($this->filterStatus === 'chua_tk', fn($q) => $q->whereNotIn('msv', $msvCoTaiKhoan->keys()))
-            ->orderBy('nam_tot_nghiep', 'desc')
-            ->orderBy('ho_ten')
+            ->orderByDesc('id')
             ->paginate(15);
 
         $namList = DB::table('ds_csv')

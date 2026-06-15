@@ -501,13 +501,15 @@ td{
     <div class="flash-ok"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
   @endif
  
- 
   <div class="stats">
     <div class="stat">
       <div class="stat-top">
         <div class="stat-label">Cựu sinh viên</div>
         <div class="stat-ico" style="background:#eff6ff">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="#3b82f6" stroke-width="1.5"/><path d="M2 13c0-3 2.7-5 6-5s6 2 6 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="5" r="3" stroke="#3b82f6" stroke-width="1.5"/>
+            <path d="M2 13c0-3 2.7-5 6-5s6 2 6 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </div>
       </div>
       <div class="stat-val">{{ number_format($totalAlumni) }}</div>
@@ -517,7 +519,10 @@ td{
       <div class="stat-top">
         <div class="stat-label">Chờ duyệt</div>
         <div class="stat-ico" style="background:#fffbeb">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#d97706" stroke-width="1.5"/><path d="M8 5v3.5l2 2" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="6" stroke="#d97706" stroke-width="1.5"/>
+            <path d="M8 5v3.5l2 2" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </div>
       </div>
       <div class="stat-val">{{ $pendingCount }}</div>
@@ -527,7 +532,10 @@ td{
       <div class="stat-top">
         <div class="stat-label">Tuyển dụng</div>
         <div class="stat-ico" style="background:#f0fdf4">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#16a34a" stroke-width="1.5"/><path d="M5 7h6M5 10h4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#16a34a" stroke-width="1.5"/>
+            <path d="M5 7h6M5 10h4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </div>
       </div>
       <div class="stat-val">{{ $jobCount }}</div>
@@ -537,7 +545,10 @@ td{
       <div class="stat-top">
         <div class="stat-label">Sự kiện sắp tới</div>
         <div class="stat-ico" style="background:#faf5ff">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="#9333ea" stroke-width="1.5"/><path d="M5 1v4M11 1v4M2 7h12" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="#9333ea" stroke-width="1.5"/>
+            <path d="M5 1v4M11 1v4M2 7h12" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </div>
       </div>
       <div class="stat-val">{{ $eventCount }}</div>

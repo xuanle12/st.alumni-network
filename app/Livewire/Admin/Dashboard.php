@@ -23,7 +23,7 @@ class Dashboard extends Component
         $this->totalAlumni  = Profile::where('status', 'active')->count();
         $this->pendingCount = Profile::where('status', 'pending')->count();
         $this->jobCount     = Job::where('is_active', true)->count();
-        $this->eventCount   = Event::where('is_active', true)
+        $this->eventCount   = Event::where('status', 'active')
                                 ->where('event_date', '>=', now()->toDateString())
                                 ->count();
  
@@ -47,7 +47,7 @@ class Dashboard extends Component
             ->take(5)
             ->get();
  
-        // Hoạt động gần đây (dùng bảng activity_log nếu có, tạm dùng profiles)
+        // Hoạt động gần đây 
         $this->recentActivities = Profile::with('user')
             ->latest()
             ->take(5)

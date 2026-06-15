@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
  
             // Thông tin cơ bản
-            $table->string('msv', 20)->unique();
+            $table->string('msv', 20)->nullable()->unique();
             $table->string('lop', 30)->nullable();
             $table->string('khoa');
             $table->string('nganh')->nullable();

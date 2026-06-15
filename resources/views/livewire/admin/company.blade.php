@@ -81,7 +81,7 @@
 .btn-ghost:hover{background:#f8fafc}
 .btn-prim{background:#16a34a;color:#fff}.btn-prim:hover{background:#15803d}
 .btn-del{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.btn-del:hover{background:#fee2e2}
-.mo-bg{position:fixed;inset:0;background:rgba(81, 128, 237, 0.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem}
+.mo-bg{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem}
 .mo{background:#fff;border-radius:14px;width:100%;max-width:580px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .mo-hd{padding:1.1rem 1.4rem;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
 .mo-title{font-size:15px;font-weight:700;color:#0f172a}
@@ -475,7 +475,7 @@
 <div class="mo-bg" wire:click.self="closeDelete">
   <div class="mo" style="max-width:360px">
     <div class="cf-body">
-      <div class="cf-ic">🗑</div>
+      <div class="cf-ic"><i class="fas fa-trash"></i>
       <div class="cf-t">Xoá doanh nghiệp?</div>
       <div class="cf-s">Bạn sắp xoá <strong>{{ $deleteName }}</strong>.<br>Hành động này không thể hoàn tác.</div>
       <div class="cf-btns">

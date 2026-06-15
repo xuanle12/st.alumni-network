@@ -1,43 +1,215 @@
 <div>
 <style>
-.adm-mentor-wrap        { padding: 32px 0 48px; }
-.adm-mentor-top         { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
-.adm-mentor-top h1      { font-size: 22px; font-weight: 800; color: var(--blue); }
-.adm-mentor-filters     { display: flex; gap: 10px; flex-wrap: wrap; }
-.adm-mentor-input       { padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
-.adm-mentor-input:focus { outline: none; border-color: var(--blue); }
+:root{
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --border:#e2e8f0;
+    --text:#0f172a;
+    --muted:#64748b;
+    --primary:#2563eb;
+    --success:#16a34a;
+}
 
-.adm-flash              { background: #dcfce7; border: 1px solid #86efac; color: #166534; padding: 10px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; }
+.adm-mentor-wrap{
+    padding:24px;
+}
 
-.adm-table-wrap         { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.adm-table              { width: 100%; border-collapse: collapse; font-size: 14px; }
-.adm-table thead tr     { background: #f8faf9; border-bottom: 1px solid var(--border); }
-.adm-table th           { padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-muted); }
-.adm-table td           { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-.adm-table tbody tr:last-child td { border-bottom: none; }
+.adm-mentor-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:20px;
+}
 
-.adm-name               { font-weight: 600; color: var(--text); }
-.adm-email              { font-size: 12px; color: var(--text-muted); }
+.adm-title h1{
+    font-size:20px;
+    font-weight:800;
+    color:var(--text);
+    margin:0;
+}
 
-.adm-badge              { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.adm-title p{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:15px;
+}
 
-.adm-action-form        { display: flex; flex-direction: column; gap: 6px; min-width: 200px; }
-.adm-note               { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; font-family: inherit; resize: vertical; min-height: 50px; }
-.adm-action-btns        { display: flex; gap: 6px; }
-.adm-btn-approve        { background: #16a34a; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; }
-.adm-btn-reject         { background: #dc2626; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; }
-.adm-btn-cancel         { background: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; }
-.adm-btn-review         { background: var(--blue); color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; }
-.adm-btn-change         { background: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; }
+.adm-mentor-filters{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
 
-.adm-empty              { padding: 40px; text-align: center; color: var(--text-muted); }
-.adm-pagination         { margin-top: 20px; }
+.adm-mentor-input{
+    height:46px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:0 16px;
+    background:#fff;
+    font-size:14px;
+    min-width:220px;
+}
+
+.adm-mentor-input:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+
+.adm-table-wrap{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.adm-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.adm-table thead{
+    background:#f8fafc;
+}
+
+.adm-table th{
+    padding:18px 20px;
+    text-align:left;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:#64748b;
+    border-bottom:1px solid var(--border);
+}
+
+.adm-table td{
+    padding:18px 20px;
+    border-bottom:1px solid #f1f5f9;
+    vertical-align:middle;
+}
+
+.adm-table tbody tr:hover{
+    background:#fafcff;
+}
+
+.adm-table tbody tr:last-child td{
+    border-bottom:none;
+}
+
+.adm-user{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.adm-name{
+    font-size:16px;
+    font-weight:700;
+    color:var(--text);
+    line-height:1.2;
+}
+
+.adm-email{
+    font-size:13px;
+    color:#94a3b8;
+}
+
+.adm-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px 14px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.adm-action-form{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:260px;
+}
+
+.adm-note{
+    width:100%;
+    min-height:80px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px;
+    resize:none;
+}
+
+.adm-action-btns{
+    display:flex;
+    gap:8px;
+}
+
+.adm-btn-approve,
+.adm-btn-reject,
+.adm-btn-review,
+.adm-btn-change,
+.adm-btn-cancel{
+    border:none;
+    border-radius:10px;
+    padding:8px 14px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.adm-btn-review{
+    background:#2563eb;
+    color:#fff;
+}
+
+.adm-btn-approve{
+    background:#16a34a;
+    color:#fff;
+}
+
+.adm-btn-reject{
+    background:#dc2626;
+    color:#fff;
+}
+
+.adm-btn-change{
+    background:#f1f5f9;
+    color:#334155;
+    border:1px solid #e2e8f0;
+}
+
+.adm-btn-cancel{
+    background:#e5e7eb;
+    color:#475569;
+}
+
+.adm-btn-review:hover,
+.adm-btn-approve:hover,
+.adm-btn-reject:hover{
+    transform:translateY(-1px);
+}
+
+.adm-empty{
+    padding:60px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+.adm-pagination{
+    margin-top:20px;
+}
 </style>
 
 <div class="container adm-mentor-wrap">
 
   <div class="adm-mentor-top">
-    <h1><i class="fa-solid fa-user-graduate"></i> Quản lý Mentor</h1>
+    <div class="adm-title">
+        <h1>Quản lý Mentor</h1>
+        <p>Quản lý đăng ký mentor và xét duyệt hồ sơ</p>
+    </div>
     <div class="adm-mentor-filters">
       <input wire:model.live.debounce.300ms="search" type="text"
              class="adm-mentor-input" placeholder="Tìm theo tên...">
@@ -58,7 +230,7 @@
     <table class="adm-table">
       <thead>
         <tr>
-          <th>#</th>
+          <th>STT</th>
           <th>Họ tên</th>
           <th>Lĩnh vực</th>
           <th>Liên hệ</th>
