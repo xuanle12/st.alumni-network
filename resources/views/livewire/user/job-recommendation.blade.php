@@ -4,16 +4,17 @@
         <p class="text-gray-500">Chưa có gợi ý việc làm.</p>
     @else
         <div class="space-y-3">
+             <span style="font-size:14px;font-weight:700;color:#1a1f2e;">Việc làm phù hợp với bạn</span>
             @foreach($jobs as $job)
-            <div class="border rounded p-3 hover:shadow transition">
+            <a href="{{ route('job.show', $job->id) }}" wire:navigate
+            class="block border rounded p-3 hover:shadow transition">
                 <div class="flex justify-between items-start">
                     <div>
                         <h4 class="font-semibold">{{ $job->title }}</h4>
                         <p class="text-sm text-gray-500">{{ $job->company }}</p>
-                        <p class="text-xs text-gray-400">📍 {{ $job->location }}</p>
+                        <p class="text-xs text-gray-400">{{ $job->location }}</p>
                     </div>
                     <div class="text-right">
-                        {{-- Hiển thị % phù hợp --}}
                         <span class="text-green-600 font-bold text-sm">
                             {{ round($job->match_score) }}%
                         </span>
@@ -28,7 +29,7 @@
                         </span>
                     @endforeach
                 </div>
-            </div>
+            </a>
             @endforeach
         </div>
     @endif

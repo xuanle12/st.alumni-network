@@ -4,9 +4,15 @@ namespace App\Livewire\User;
 
 use Livewire\Component;
 use App\Services\JobMatchingService;
+use Livewire\Attributes\On;
 
 class JobRecommendation extends Component
 {
+        #[On('skills-updated')]
+    public function refreshJobs()
+    {
+            $this->render();
+    }
     public function render()
     {
         $profile = auth()->user()?->profile;

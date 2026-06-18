@@ -15,7 +15,7 @@ class JobMatchingService
 
     public function recommend(Profile $profile, int $limit = 10): \Illuminate\Support\Collection
     {
-        // Lấy skill IDs của ứng viên
+        // Lấy skill ID của ứng viên
         $candidateSkillIds = $profile->skills()->pluck('skills.id')->toArray();
 
         // Lấy tất cả job active kèm skills

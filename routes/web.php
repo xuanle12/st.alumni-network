@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', \App\Livewire\User\Profile::class)->name('profile');
     Route::get('/post', \App\Livewire\User\Post::class)->name('post');
     Route::get('/mentor', \App\Livewire\User\Mentor::class)->middleware('role:student,admin')->name('mentor');
+    Route::get('/job-recommendation', \App\Livewire\User\JobRecommendation::class)->name('job.recommendation');
  
 });
 

@@ -1,7 +1,7 @@
 <div>
 <style>
 /* ══════════════════════════════════════════
-   FITA-STYLE JOBS PAGE
+   FITA-STYLE JOBS PAGE — POLISHED REDESIGN
    ══════════════════════════════════════════ */
 :root {
     --fita:        #16a34a;
@@ -19,24 +19,65 @@
     --font:        'Barlow', system-ui, sans-serif;
 }
 .jobs-page { font-family: var(--font); background: var(--bg); min-height: 60vh; padding: 28px 0 48px; }
-.jobs-heading { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 18px; font-weight: 500; }
-.jobs-heading a { color: var(--fita); text-decoration: none; }
-.jobs-heading a:hover { text-decoration: underline; }
-.jobs-heading .sep { color: var(--border); }
-.jobs-heading .current { color: var(--text); font-weight: 600; }
-.jobs-title-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; flex-wrap: wrap; gap: 10px; }
+.jobs-title-bar { margin-bottom: 18px; }
 .jobs-title-bar h1 { font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; }
+
 .jobs-grid { display: grid; grid-template-columns: 1fr 260px; gap: 24px; align-items: flex-start; }
 @media (max-width: 900px) { .jobs-grid { grid-template-columns: 1fr; } .jobs-sidebar { order: -1; } }
-.jobs-search-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 14px 16px; display: flex; gap: 10px; margin-bottom: 16px; border: 1px solid var(--border); }
-.jobs-search-wrap input { flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; font-size: 14px; font-family: var(--font); outline: none; color: var(--text); transition: border-color .2s, box-shadow .2s; background: var(--white); }
-.jobs-search-wrap input:focus { border-color: var(--fita); box-shadow: 0 0 0 3px rgba(9,97,170,0.10); }
+
+.jobs-search-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 14px 16px; display: flex; gap: 10px; margin-bottom: 14px; border: 1px solid var(--border); }
+.jobs-search-wrap svg { width: 18px; height: 18px; color: #aab2be; flex-shrink: 0; }
+.jobs-search-wrap input { flex: 1; border: none; padding: 0; font-size: 14px; font-family: var(--font); outline: none; color: var(--text); background: transparent; }
 .jobs-search-wrap input::placeholder { color: #aab2be; }
-.jobs-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding: 0 2px; flex-wrap: wrap; gap: 8px; }
+
+.jobs-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding: 0 2px; flex-wrap: wrap; gap: 8px; }
 .jobs-meta-count { font-size: 13px; color: var(--text-muted); }
 .jobs-meta-count strong { color: var(--text); font-weight: 700; }
 .jobs-meta select { border: 1px solid var(--border); border-radius: 8px; padding: 6px 11px; font-size: 13px; font-family: var(--font); background: var(--white); outline: none; color: var(--text); cursor: pointer; }
 .jobs-meta select:focus { border-color: var(--fita); }
+
+/* Suggested jobs toggle button — pill style with icon + subtitle */
+.btn-suggest-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 16px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color .15s, background .15s; font-family: var(--font); margin-bottom: 10px; box-shadow: var(--shadow-sm); }
+.btn-suggest-toggle:hover { background: #f8fafb; border-color: #bbf7d0; }
+.btn-suggest-toggle.open { border-color: #bbf7d0; background: #f0fdf4; border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
+.bst-left { display: flex; align-items: center; gap: 10px; text-align: left; }
+.bst-icon { width: 32px; height: 32px; border-radius: 50%; background: #f0fdf4; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.bst-icon svg { width: 16px; height: 16px; color: var(--fita); }
+.bst-text { display: flex; flex-direction: column; }
+.bst-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.bst-sub { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+.bst-chev { width: 17px; height: 17px; color: #aab2be; transition: transform .2s; flex-shrink: 0; }
+.btn-suggest-toggle.open .bst-chev { transform: rotate(180deg); }
+
+/* Suggested panel body */
+.suggest-panel { background: var(--white); border: 1px solid #bbf7d0; border-top: none; border-radius: 0 0 var(--radius) var(--radius); margin-bottom: 16px; overflow: hidden; display: none; box-shadow: var(--shadow-sm); }
+.suggest-panel.open { display: block; }
+.suggest-panel-body { padding: 8px; display: flex; flex-direction: column; gap: 4px; }
+.sj-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 9px; text-decoration: none; color: inherit; transition: background .15s; }
+.sj-row:hover { background: #f8fafb; }
+.sj-row.top { background: #f0fdf4; }
+.sj-row.top:hover { background: #e7fbef; }
+.sj-icon { width: 38px; height: 38px; border-radius: 9px; background: #f4f7fb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sj-row.top .sj-icon { background: #dcfce7; }
+.sj-icon svg { width: 17px; height: 17px; color: var(--text-muted); }
+.sj-row.top .sj-icon svg { color: var(--fita); }
+.sj-info { flex: 1; min-width: 0; }
+.sj-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sj-co { font-size: 12px; color: var(--text-muted); }
+.sj-row.top .sj-co { color: var(--fita); }
+.sj-pct { text-align: right; flex-shrink: 0; }
+.sj-num { font-size: 16px; font-weight: 800; color: var(--text); line-height: 1.1; }
+.sj-row.top .sj-num { color: var(--fita); }
+.sj-lbl { font-size: 10px; color: #aab2be; }
+
+/* Skill warning banner */
+.skill-warning { background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius); padding: 14px 18px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.skill-warning svg { width: 20px; height: 20px; color: #f59e0b; flex-shrink: 0; }
+.skill-warning .txt { flex: 1; }
+.skill-warning .txt strong { font-size: 13px; font-weight: 700; color: #92400e; }
+.skill-warning .txt span { font-size: 12px; color: #a16207; }
+.skill-warning a { font-size: 12px; font-weight: 700; color: #fff; background: #f59e0b; padding: 7px 14px; border-radius: 8px; text-decoration: none; white-space: nowrap; }
+
 .jobs-list { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border); overflow: hidden; margin-bottom: 12px; }
 .job-card { display: block; padding: 18px 22px; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: background .15s; cursor: pointer; }
 .job-card:last-child { border-bottom: none; }
@@ -73,10 +114,12 @@
 .jobs-empty button { font-size: 13px; color: var(--fita); background: none; border: none; cursor: pointer; font-family: var(--font); text-decoration: underline; margin-top: 6px; }
 .jobs-pagination { margin-top: 24px; }
 .jobs-pagination span[aria-current="page"] > span { background: var(--fita) !important; color: #fff !important; font-weight: 700; }
+
 .jobs-sidebar { display: flex; flex-direction: column; gap: 16px; }
 .side-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border); overflow: hidden; }
 .side-card-header { padding: 13px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.side-card-header h3 { font-size: 14px; font-weight: 700; color: var(--text); }
+.side-card-header h3 { font-size: 14px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+.side-card-header h3 svg { width: 15px; height: 15px; color: var(--text-muted); }
 .reset-btn { font-size: 12px; color: var(--fita); background: none; border: none; cursor: pointer; font-family: var(--font); padding: 0; }
 .reset-btn:hover { text-decoration: underline; }
 .filter-group { border-bottom: 1px solid var(--border); }
@@ -89,14 +132,11 @@
 .filter-check-row { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--text-muted); cursor: pointer; transition: color .15s; }
 .filter-check-row:hover { color: var(--text); }
 .filter-check-row input[type=checkbox] { accent-color: var(--fita); width: 15px; height: 15px; flex-shrink: 0; cursor: pointer; }
-.side-search { padding: 14px 18px; }
-.side-search input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 9px 13px; font-size: 13px; font-family: var(--font); outline: none; color: var(--text); transition: border-color .2s, box-shadow .2s; background: var(--white); box-sizing: border-box; }
-.side-search input:focus { border-color: var(--fita); box-shadow: 0 0 0 3px rgba(9,97,170,0.10); }
-.side-search input::placeholder { color: #aab2be; }
 .employer-cta { padding: 18px; }
 .employer-cta p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
 .employer-cta-btn { display: block; width: 100%; padding: 10px 0; text-align: center; font-size: 13px; font-weight: 700; color: #fff; background: var(--fita); border: none; border-radius: 8px; cursor: pointer; font-family: var(--font); transition: background .15s, transform .12s; text-decoration: none; }
 .employer-cta-btn:hover { background: var(--fita2); transform: translateY(-1px); }
+
 /* Modal */
 .jm-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(15,23,42,0.55); display: flex; align-items: center; justify-content: center; padding: 24px 16px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
 .jm-overlay.open { opacity: 1; pointer-events: all; }
@@ -149,6 +189,7 @@
 .jm-btn-preview:hover { background: rgba(9,97,170,0.12); }
 .jm-btn-submit { padding: 9px 22px; font-size: 13px; font-weight: 800; color: #fff; background: var(--fita); border: none; border-radius: 9px; cursor: pointer; transition: background .15s; font-family: var(--font); display: flex; align-items: center; gap: 7px; }
 .jm-btn-submit:hover { background: var(--fita2); }
+
 @media (max-width: 640px) {
     .job-card-inner { flex-direction: column; gap: 12px; }
     .job-right { width: 100%; flex-direction: row; align-items: center; flex-wrap: wrap; }
@@ -161,6 +202,7 @@
     .jm-step-label { display: none; }
 }
 </style>
+
 <div class="jm-overlay" id="jm-overlay" role="dialog" aria-modal="true" aria-labelledby="jm-title">
     <div class="jm-modal">
         <div class="jm-header">
@@ -225,7 +267,6 @@
                     <label class="jm-label">Ngành nghề</label>
                     <input class="jm-input" type="text" name="field" placeholder="VD: Công nghệ, Marketing...">
                 </div>
-                
             </div>
             <div class="jm-row">
                 <div class="jm-field">
@@ -301,68 +342,21 @@
 
 <div class="jobs-page">
     <div class="container" style="max-width:1200px;margin:0 auto;padding:0 24px">
+
         <div class="jobs-title-bar">
             <h1>Cơ hội việc làm</h1>
         </div>
 
         <div class="jobs-grid">
             <div>
-                {{-- Gợi ý việc làm --}}
-                @if($hasSkills && count($suggestedJobs))
-                <div style="background:#fff;border-radius:12px;border:1px solid #d1e7d1;padding:16px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-                        <div style="width:28px;height:28px;background:#f0fdf4;border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        </div>
-                        <span style="font-size:14px;font-weight:700;color:#1a1f2e;">Việc làm phù hợp với bạn</span>
-                        <span style="font-size:11px;color:#16a34a;background:#f0fdf4;border:1px solid #d1e7d1;padding:2px 8px;border-radius:20px;margin-left:auto;">Dựa trên kỹ năng của bạn</span>
-                    </div>
 
-                    <div style="display:flex;flex-direction:column;gap:8px;">
-                        @foreach($suggestedJobs as $sj)
-                        <a href="{{ route('job.show', $sj['id']) }}" wire:navigate
-                        style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;text-decoration:none;color:inherit;border:1px solid #e2e8f0;transition:all .15s;"
-                        onmouseover="this.style.background='#f0fdf4';this.style.borderColor='#d1e7d1'"
-                        onmouseout="this.style.background='';this.style.borderColor='#e2e8f0'">
-
-                            <div style="width:40px;height:40px;background:#e8f1fb;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                            </div>
-
-                            <div style="flex:1;min-width:0;">
-                                <div style="font-size:13px;font-weight:700;color:#1a1f2e;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $sj['title'] }}</div>
-                                <div style="font-size:12px;color:#16a34a;margin-bottom:4px;">{{ $sj['company'] }}</div>
-                                <div style="display:flex;flex-wrap:wrap;gap:4px;">
-                                    @foreach(array_slice($sj['skills'], 0, 3) as $skill)
-                                        <span style="font-size:10px;background:#f0fdf4;border:1px solid #d1e7d1;color:#16a34a;padding:1px 7px;border-radius:4px;">{{ $skill }}</span>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div style="text-align:right;flex-shrink:0;">
-                                <div style="font-size:15px;font-weight:800;color:#16a34a;">{{ $sj['match_score'] }}%</div>
-                                <div style="font-size:10px;color:#aab2be;">phù hợp</div>
-                            </div>
-                        </a>
-                        @endforeach
-                    </div>
-                </div>
-                @elseif(!$hasSkills)
-                <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
-                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    <div style="flex:1;">
-                        <span style="font-size:13px;font-weight:600;color:#92400e;">Bạn chưa cập nhật kỹ năng</span>
-                        <span style="font-size:12px;color:#a16207;"> — Hãy bổ sung để nhận gợi ý việc làm phù hợp!</span>
-                    </div>
-                    <a href="{{ route('profile') }}" wire:navigate style="font-size:12px;font-weight:700;color:#fff;background:#f59e0b;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;">
-                        Cập nhật →
-                    </a>
-                </div>
-                @endif
+                {{-- 1. Search bar --}}
                 <div class="jobs-search-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     <input type="text" wire:model.live.debounce.300ms="search" placeholder="Tìm vị trí, kỹ năng, công ty...">
                 </div>
 
+                {{-- 2. Meta: tổng số tin + sort --}}
                 <div class="jobs-meta">
                     <p class="jobs-meta-count">Tìm thấy <strong>{{ $jobs->total() }} tin</strong> phù hợp</p>
                     <select wire:model.live="sort">
@@ -371,6 +365,55 @@
                     </select>
                 </div>
 
+                {{-- 3. Cảnh báo chưa có kỹ năng --}}
+                @if(!$hasSkills)
+                <div class="skill-warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <div class="txt">
+                        <strong>Bạn chưa cập nhật kỹ năng</strong>
+                        <span> — Hãy bổ sung để nhận gợi ý việc làm phù hợp!</span>
+                    </div>
+                    <a href="{{ route('profile') }}" wire:navigate>Cập nhật →</a>
+                </div>
+                @endif
+
+                {{-- 4. Nút gợi ý việc làm (collapsed mặc định) --}}
+                @if($hasSkills && count($suggestedJobs))
+                <button type="button" class="btn-suggest-toggle" id="suggest-toggle-btn" onclick="toggleSuggestPanel()">
+                    <div class="bst-left">
+                        <div class="bst-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <div class="bst-text">
+                            <span class="bst-title">Việc làm phù hợp với bạn</span>
+                            <span class="bst-sub">{{ count($suggestedJobs) }} vị trí dựa trên kỹ năng của bạn</span>
+                        </div>
+                    </div>
+                    <svg class="bst-chev" id="suggest-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+
+                <div class="suggest-panel" id="suggest-panel">
+                    <div class="suggest-panel-body">
+                        @foreach($suggestedJobs as $i => $sj)
+                        <a href="{{ route('job.show', $sj['id']) }}" wire:navigate class="sj-row {{ $i === 0 ? 'top' : '' }}">
+                            <div class="sj-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                            </div>
+                            <div class="sj-info">
+                                <div class="sj-title">{{ $sj['title'] }}</div>
+                                <div class="sj-co">{{ $sj['company'] }}</div>
+                            </div>
+                            <div class="sj-pct">
+                                <div class="sj-num">{{ $sj['match_score'] }}%</div>
+                                <div class="sj-lbl">phù hợp</div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
+                {{-- 5. Danh sách job --}}
                 @forelse($jobs as $job)
                     @php $isNew = $job->created_at && $job->created_at->diffInDays(now()) <= 3; @endphp
                     <div class="jobs-list">
@@ -398,7 +441,6 @@
                                             <span class="badge-cat">{{ $job->type_label ?? $job->type }}</span>
                                         @endif
                                     </div>
-
                                     <a href="{{ route('job.show', $job->id) }}" wire:navigate>
                                         <h3 class="job-title">{{ $job->title }}</h3>
                                     </a>
@@ -406,7 +448,7 @@
 
                                     <div class="job-tags">
                                         @if($job->location)
-                                            <span class="job-tag">📍 {{ $job->location }}</span>
+                                            <span class="job-tag"> {{ $job->location }}</span>
                                         @endif
                                         @if($job->experience)
                                             <span class="job-tag">⏱ {{ $job->experience }}</span>
@@ -453,21 +495,15 @@
                 @endif
             </div>
 
-           
-            <aside class="jobs-sidebar">
 
-                <!-- <div class="side-card">
-                    <div class="side-card-header">
-                        <h3>🔍 Tìm kiếm</h3>
-                    </div>
-                    <div class="side-search">
-                        <input type="text" wire:model.live.debounce.400ms="search" placeholder="Tìm vị trí, kỹ năng...">
-                    </div>
-                </div> -->
+            <aside class="jobs-sidebar">
 
                 <div class="side-card">
                     <div class="side-card-header">
-                        <h3>☰ Bộ lọc</h3>
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+                            Bộ lọc
+                        </h3>
                         <button wire:click="resetFilters" class="reset-btn">Đặt lại</button>
                     </div>
 
@@ -504,7 +540,10 @@
 
                 <div class="side-card">
                     <div class="side-card-header">
-                        <h3>Dành cho doanh nghiệp</h3>
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M13 21V11l6 4v6M9 9v.01M9 12v.01M9 15v.01"/></svg>
+                            Dành cho doanh nghiệp
+                        </h3>
                     </div>
                     <div class="employer-cta">
                         <p>Đăng tin miễn phí, tiếp cận trực tiếp sinh viên & cựu sinh viên VNUA.</p>
@@ -550,6 +589,15 @@ function addSkill(t) {
     var tag = document.createElement('div'); tag.className = 'jm-skill-tag';
     tag.innerHTML = t + '<button type="button" onclick="this.parentNode.remove()" aria-label="Xoá">×</button>';
     sw.insertBefore(tag, si);
+}
+
+/* Toggle suggested-jobs panel */
+function toggleSuggestPanel() {
+    var panel = document.getElementById('suggest-panel');
+    var btn = document.getElementById('suggest-toggle-btn');
+    if (!panel || !btn) return;
+    panel.classList.toggle('open');
+    btn.classList.toggle('open');
 }
 </script>
 </div>

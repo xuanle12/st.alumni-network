@@ -650,7 +650,7 @@
         @endforelse
       </div>
     @endif
-
+    <livewire:user.job-recommendation />
   </div>
 </div>
 

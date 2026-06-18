@@ -122,7 +122,7 @@ class Profile extends Component
         $this->editingSocial = false;
     }
 
-    // ─── kỹ năng ───
+    // kỹ năng 
     public function addSkill(?string $name = null)
     {
         $name = trim($name ?? $this->skillInput);
@@ -131,7 +131,7 @@ class Profile extends Component
             return;
         }
 
-        // tránh trùng (không phân biệt hoa thường)
+        // tránh trùng 
         $exists = collect($this->selectedSkills)
             ->contains(fn ($s) => mb_strtolower($s) === mb_strtolower($name));
 
@@ -150,7 +150,7 @@ class Profile extends Component
         ));
     }
 
-    // gợi ý kỹ năng theo input (dùng cho autocomplete)
+    // gợi ý kỹ năng theo input 
     public function getSkillSuggestionsProperty()
     {
         $term = trim($this->skillInput);
@@ -184,6 +184,8 @@ class Profile extends Component
 
         $this->editingSkills = false;
         session()->flash('success', 'Đã cập nhật kỹ năng');
+
+        $this->dispatch('skills-updated');
     }
 
     public function cancelSkills()
