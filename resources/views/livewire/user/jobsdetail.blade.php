@@ -16,12 +16,6 @@
 }
 .jd-back:hover{color:#16a34a}
 
-.jd-flash{
-  background:#f0fdf4;border:1px solid #86efac;color:#166534;
-  padding:10px 16px;border-radius:12px;font-size:13px;font-weight:500;
-  display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;
-}
-
 .jd-layout{
   display:grid;
   grid-template-columns:1fr 288px;
@@ -241,12 +235,6 @@
     <i class="fa-solid fa-arrow-left"></i> Quay lại tuyển dụng
   </a>
 
-  @if(session('success'))
-    <div class="jd-flash">
-      <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
-    </div>
-  @endif
-
   <div class="jd-layout">
     <div>
       <div class="jd-card">
@@ -328,7 +316,7 @@
         <div class="jd-section jd-actions-row">
           @if($applied)
             <div class="applied-box" style="flex:1">
-              <div class="applied-ico">✅</div>
+              <div class="applied-ico"><i class="fa-solid fa-circle-check" style="color:#16a34a;font-size:24px"></i></div>
               <div class="applied-title">Đã ứng tuyển thành công!</div>
               <div class="applied-sub">Nhà tuyển dụng sẽ liên hệ sớm</div>
             </div>

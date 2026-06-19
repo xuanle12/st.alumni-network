@@ -3,7 +3,6 @@
 .ep-wrap{max-width:920px;margin:0 auto;padding:2rem 1.5rem}
 .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#6b7280;cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:none;margin-bottom:1.25rem}
 .back-btn:hover{color:#111}
-.flash-ok{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem}
 .ep-layout{display:grid;grid-template-columns:1fr 280px;gap:1.25rem}
  
 /* Cover */
@@ -99,10 +98,6 @@
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     Quay lại sự kiện
   </a>
- 
-  @if(session('success'))
-    <div class="flash-ok"><i class="fa-solid fa-check"></i>{{ session('success') }}</div>
-  @endif
  
   <div class="ep-layout">
  

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
-     protected $fillable =[
-         'title', 'company', 'location', 'type',
+    protected $fillable = [
+        'title', 'company', 'location', 'type',
         'field', 'min_salary', 'max_salary', 'is_active',
-        'description', 'experience_required', 'deadline', 'created_by'
+        'description', 'experience_required', 'deadline', 'created_by',
+        'status', 'contact_email',
     ];
 
      // Label hiển thị cho loại công việc
@@ -35,7 +36,37 @@ class Job extends Model
  
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
+        return $query->where('status', 'approved')->where('is_active', true);
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
+
+    public function getStatusLabelAttribute(): string
+    {
+        return match($this->status) {
+            'approved' => 'Đã duyệt',
+            'pending'  => 'Chờ duyệt',
+            'rejected' => 'Từ chối',
+            default    => '—',
+        };
+    }
+
+    public function getStatusColorAttribute(): string
+    {
+        return match($this->status) {
+            'approved' => 'green',
+            'pending'  => 'amber',
+            'rejected' => 'red',
+            default    => 'gray',
+        };
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
     
     public function skills()

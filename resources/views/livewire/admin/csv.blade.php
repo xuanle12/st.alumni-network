@@ -4,7 +4,7 @@
   .aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;background:#f8fafc;min-height:100vh}
   .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
   .topbar{display:flex;align-items:center;justify-content:space-between}
-  .tt{font-size:17px;font-weight:700;color:#0f172a}.ts{font-size:12px;color:#64748b;margin-top:2px}
+  .tt{font-size:20px;font-weight:700;color:#0f172a}.ts{font-size:13px;color:#64748b;margin-top:2px}
   .btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#16a34a;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
   .btn-add:hover{background:#15803d}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
@@ -12,48 +12,16 @@
   .stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-bottom:0;}.ic-b{background:#f0fdf4}.ic-g{background:#f0fdf4}.ic-a{background:#fffbeb}.ic-p{background:#faf5ff}
   .stat-n{font-size:24px;font-weight:700}.stat-l{font-size:11px;color:#64748b;margin-top:3px}
   .n-b{color:#0f172a}.n-g{color:#16a34a}.n-a{color:#d97706}.n-p{color:#7c3aed}
-  .toolbar{display:flex;gap:10px}
-  .sw{flex:1;position:relative}
-  .sw input{width:100%;padding:9px 12px 9px 34px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit}
-  .sw input:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px #3b82f611}
-  .sw input::placeholder{color:#94a3b8}
-  .sw-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8}
-  .sel{padding:9px 11px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#475569;font-family:inherit}
-  .sel:focus{outline:none;border-color:#3b82f6}
-  .tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:visible}.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
-  .tbl th{padding:10px 14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;text-align:left;background:#f8fafc;border-bottom:1px solid #e2e8f0}
-  .tbl td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
-  .tbl tr:last-child td{border-bottom:none}
-  .tbl tbody tr:hover td{background:#fafbfc}
-  .urow{display:flex;align-items:center;gap:10px}
-  .uava{width:34px;height:34px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .un{font-size:13px;font-weight:600;color:#0f172a}.ue{font-size:11px;color:#94a3b8;margin-top:1px}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap}
+  .sw{flex:1;min-width:200px;position:relative}
+  .sw input{width:100%;height:40px;padding:0 14px 0 40px;background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13.5px;color:#0f172a;font-family:inherit;box-shadow:0 1px 3px rgba(15,23,42,.06);transition:border-color .15s,box-shadow .15s}
+  .sw input:focus{outline:none;border-color:#0961AA;box-shadow:0 0 0 3px rgba(9,97,170,.1)}
+  .sw input::placeholder{color:#b0bec5;font-weight:400}
+  .sw-ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8;pointer-events:none}
+  .sel{height:40px;padding:0 34px 0 13px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;background-size:15px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;font-weight:500;color:#374151;font-family:inherit;cursor:pointer;box-shadow:0 1px 3px rgba(15,23,42,.06);appearance:none;-webkit-appearance:none;transition:border-color .15s,box-shadow .15s}
+  .sel:focus{outline:none;border-color:#0961AA;box-shadow:0 0 0 3px rgba(9,97,170,.1)}
   .msv{font-size:13px;font-weight:600;color:#0f172a}.cls{font-size:11px;color:#94a3b8;margin-top:1px}
   .job{font-size:12px;font-weight:600;color:#0f172a}.cmp{font-size:11px;color:#94a3b8;margin-top:1px}
-  .bd{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
-  .bd::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
-  .bd-g{background:#f0fdf4;color:#15803d}.bd-g::before{background:#16a34a}
-  .bd-a{background:#fffbeb;color:#b45309}.bd-a::before{background:#d97706}
-  .bd-r{background:#fef2f2;color:#b91c1c}.bd-r::before{background:#dc2626}
-
-
-  .dot-wrap{position:relative;display:inline-block}
-  .dot-btn{width:32px;height:32px;border-radius:8px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#64748b;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3.5px}
-  .dot-btn:hover{background:#f1f5f9}
-  .dot-btn span{display:block;width:13px;height:1.5px;background:currentColor;border-radius:2px}
-  .dropdown{display:none;position:absolute;top:36px;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:168px;z-index:999;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1)}
-  .dropdown.open{display:block}
-
-  .dropdown.drop-up{top:auto;bottom:36px;}
-
-  .dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155}
-  .dd-item:hover{background:#f8fafc}
-  .dd-item.green{color:#15803d}.dd-item.green:hover{background:#f0fdf4}
-  .dd-item.red{color:#b91c1c}.dd-item.red:hover{background:#fef2f2}
-  .dd-sep{height:1px;background:#f1f5f9;margin:3px 0}
-  .dd-ic{font-size:14px;width:16px;text-align:center}
-  .pgn{display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;border-top:1px solid #f1f5f9;background:#fafafa}
-  .pgn-info{font-size:12px;color:#94a3b8}
   .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s}
   .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}
   .btn-ghost:hover{background:#f8fafc}
@@ -105,8 +73,6 @@
   .stat-n{font-size:20px}
   .topbar{flex-direction:column;align-items:flex-start;gap:8px}
   .btn-add{width:100%;justify-content:center}
-  .tcard{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .tbl{min-width:560px}
   .mo{border-radius:12px 12px 0 0;max-width:100%;align-self:flex-end}
   .mo-bg{align-items:flex-end;padding:0}
   .fg2{grid-template-columns:1fr}
@@ -121,10 +87,6 @@
 
   <div>
     <div class="aw">
-
-    @if(session('success'))
-      <div class="flash">✓ {{ session('success') }}</div>
-    @endif
 
     <div class="topbar">
       <div><div class="tt">Danh sách cựu sinh viên</div><div class="ts">Quản lý danh sách tốt nghiệp</div></div>
@@ -146,97 +108,74 @@
         <option value="co_tk">Đã có tài khoản</option>
         <option value="chua_tk">Chưa có tài khoản</option>
       </select>
+      <select wire:model.live="perPage" class="sel">
+        <option value="10">10 / trang</option>
+        <option value="20">20 / trang</option>
+        <option value="50">50 / trang</option>
+      </select>
     </div>
 
-    <div class="tcard">
-      <table class="tbl">
-        <thead>
-          <tr>
-            <th style="width:28%">Họ và tên</th>
-            <th style="width:14%">MSV</th>
-            <th style="width:14%">Lớp / Năm TN</th>
-            <th style="width:20%">Khoa / Ngành</th>
-            <th style="width:14%">Tài khoản</th>
-            <th style="width:10%"></th>
-          </tr>
-        </thead>
-        <tbody>
-          @forelse($rows as $row)
-          @php
-            $user = $msvCoTaiKhoan[$row->msv] ?? null;
-            $profileStatus = $user?->profile?->status ?? null;
-          @endphp
-          <tr>
-            <td>
-              <div class="un">{{ $row->ho_ten }}</div>
-            </td>
-            <td>
-              <div class="msv">{{ $row->msv }}</div>
-            </td>
-            <td>
-              <div class="msv">{{ $row->lop ?? '—' }}</div>
-              <div class="cls">{{ $row->nam_tot_nghiep ?? '—' }}</div>
-            </td>
-            <td>
-              <div class="job">{{ $row->khoa ?? '—' }}</div>
-              <div class="cmp">{{ $row->nganh ?? '—' }}</div>
-            </td>
-            <td>
-              @if($user)
-                <span class="bd {{ $profileStatus === 'active' ? 'bd-g' : 'bd-a' }}">
-                  {{ $profileStatus === 'active' ? 'Đã duyệt' : 'Chờ duyệt' }}
-                </span>
-              @else
-                <span class="bd bd-r">Chưa có TK</span>
-              @endif
-            </td>
-            <td>
-              <div class="dot-wrap" x-data="{ open: false }" @click.away="open = false">
-                <button class="dot-btn" @click="
-                  open = !open;
-                  if (open) {
-                    const rect = $el.getBoundingClientRect();
-                    const spaceBelow = window.innerHeight - rect.bottom;
-                    const dd = $el.nextElementSibling;
-                    if (spaceBelow < 200) { dd.classList.add('drop-up'); }
-                    else { dd.classList.remove('drop-up'); }
-                  }
-                ">
-                  <span></span><span></span><span></span>
-                </button>
-                <div class="dropdown" :class="{ open: open }">
-                  @if($user)
-                  <div class="dd-item" @click="open=false" wire:click="openView({{ $user->id }})">
-                    <span class="dd-ic"><i class="fa-solid fa-eye"></i></span> Xem hồ sơ
-                  </div>
-                  @if($profileStatus === 'pending')
-                  <div class="dd-item green" @click="open=false" wire:click="quickApprove({{ $user->id }})" wire:confirm="Duyệt hồ sơ {{ $row->ho_ten }}?">
-                    <span class="dd-ic"><i class="fa-solid fa-check"></i></span> Duyệt hồ sơ
-                  </div>
-                  @endif
-                  <div class="dd-sep"></div>
-                  @endif
-                  <div class="dd-item" @click="open=false" wire:click="openEdit({{ $row->id }})">
-                    <span class="dd-ic"><i class="fa-solid fa-pen-to-square"></i></span> Chỉnh sửa
-                  </div>
-                  <div class="dd-sep"></div>
-                  <div class="dd-item red" @click="open=false" wire:click="confirmDelete({{ $row->id }})">
-                    <span class="dd-ic"><i class="fa-solid fa-trash"></i></span> Xoá
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-          @empty
-          <tr><td colspan="6"><div class="empty">📭 Không tìm thấy cựu sinh viên nào.</div></td></tr>
-          @endforelse
-        </tbody>
-      </table>
-      <div class="pgn">
-        <div class="pgn-info">Hiển thị {{ $rows->firstItem() }}–{{ $rows->lastItem() }} / {{ $rows->total() }}</div>
-        {{ $rows->links() }}
-      </div>
-    </div>
+    <x-table>
+      <x-slot:heading>
+        <th style="width:5%">STT</th>
+        <th style="width:23%">Họ và tên</th>
+        <th style="width:14%">MSV</th>
+        <th style="width:14%">Lớp / Năm TN</th>
+        <th style="width:20%">Khoa / Ngành</th>
+        <th style="width:14%">Tài khoản</th>
+        <th style="width:10%"></th>
+      </x-slot:heading>
+
+      @forelse($rows as $row)
+      @php
+        $user = $msvCoTaiKhoan[$row->msv] ?? null;
+        $profileStatus = $user?->profile?->status ?? null;
+        $tkColor = $user ? ($profileStatus === 'active' ? 'green' : 'yellow') : 'red';
+        $tkLabel = $user ? ($profileStatus === 'active' ? 'Đã duyệt' : 'Chờ duyệt') : 'Chưa có TK';
+      @endphp
+      <tr>
+        <td style="color:#94a3b8;font-size:12px;font-weight:600">{{ $loop->iteration }}</td>
+        <td style="font-size:13px;font-weight:600;color:#0f172a">{{ $row->ho_ten }}</td>
+        <td class="msv">{{ $row->msv }}</td>
+        <td>
+          <div class="msv">{{ $row->lop ?? '—' }}</div>
+          <div class="cls">{{ $row->nam_tot_nghiep ?? '—' }}</div>
+        </td>
+        <td>
+          <div class="job">{{ $row->khoa ?? '—' }}</div>
+          <div class="cmp">{{ $row->nganh ?? '—' }}</div>
+        </td>
+        <td><x-badge :color="$tkColor">{{ $tkLabel }}</x-badge></td>
+        <td>
+          <x-table.action-btn>
+            @if($user)
+            <div class="adm-dd-item" wire:click="openView({{ $user->id }})">
+              <span class="adm-dd-ic"><i class="fa-solid fa-eye"></i></span> Xem hồ sơ
+            </div>
+            @if($profileStatus === 'pending')
+            <div class="adm-dd-item green" wire:click="quickApprove({{ $user->id }})" wire:confirm="Duyệt hồ sơ {{ $row->ho_ten }}?">
+              <span class="adm-dd-ic"><i class="fa-solid fa-check"></i></span> Duyệt hồ sơ
+            </div>
+            @endif
+            <div class="adm-dd-sep"></div>
+            @endif
+            <div class="adm-dd-item" wire:click="openEdit({{ $row->id }})">
+              <span class="adm-dd-ic"><i class="fa-solid fa-pen-to-square"></i></span> Chỉnh sửa
+            </div>
+            <div class="adm-dd-sep"></div>
+            <div class="adm-dd-item red" wire:click="confirmDelete({{ $row->id }})">
+              <span class="adm-dd-ic"><i class="fa-solid fa-trash"></i></span> Xoá
+            </div>
+          </x-table.action-btn>
+        </td>
+      </tr>
+      @empty
+      <tr><td colspan="7" class="adm-tbl-empty">Không tìm thấy cựu sinh viên nào.</td></tr>
+      @endforelse
+
+      <x-slot:paginationInfo>Hiển thị {{ $rows->firstItem() ?? 0 }}–{{ $rows->lastItem() ?? 0 }} / {{ $rows->total() }} cựu sinh viên</x-slot:paginationInfo>
+      <x-slot:pagination>{{ $rows->links() }}</x-slot:pagination>
+    </x-table>
 
   </div>
 

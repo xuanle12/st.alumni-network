@@ -76,7 +76,7 @@ class MentorForm extends Component
  
         $this->dispatch('mentor-registered');
  
-        session()->flash('success', 'Đã gửi đăng ký làm Mentor, vui lòng chờ quản trị viên duyệt.');
+        $this->dispatch('toast', type: 'success', message: 'Đã gửi đăng ký làm Mentor, vui lòng chờ quản trị viên duyệt.');
     }
  
     public function render()
@@ -88,3 +88,4 @@ class MentorForm extends Component
         ]);
     }
 }
+

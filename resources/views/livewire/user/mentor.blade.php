@@ -5,10 +5,6 @@
 .mentor-header h1   { font-size: 24px; font-weight: 800; color: var(--green); margin-bottom: 4px; }
 .mentor-header p    { color: var(--text-muted); font-size: 14px; }
 
-.mentor-filter      { background: #f8faf9; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-.mentor-filter-main { flex: 1; min-width: 200px; }
-.mentor-input       { width: 100%; padding: 9px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
-.mentor-input:focus { outline: none; border-color: var(--green); }
 
 .mentor-grid        { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
@@ -39,7 +35,7 @@
 .mentor-empty i     { font-size: 40px; margin-bottom: 12px; display: block; opacity: .3; }
 .mentor-empty p     { font-size: 15px; }
 
-.mentor-pagination  { margin-top: 28px; }
+.pgn-row { margin-top: 8px; }
 </style>
 
 <div class="container mentor-wrap">
@@ -49,16 +45,12 @@
     <p>Kết nối với cựu sinh viên có kinh nghiệm để được hỗ trợ định hướng nghề nghiệp</p>
   </div>
 
-  <div class="mentor-filter">
-    <div class="mentor-filter-main">
-      <input wire:model.live.debounce.300ms="search" type="text"
-             class="mentor-input" placeholder="Tìm theo tên, kỹ năng, lĩnh vực...">
-    </div>
-    <div>
-      <input wire:model.live.debounce.300ms="filterExpertise" type="text"
-             class="mentor-input" placeholder="Lĩnh vực..." style="width:auto">
-    </div>
-  </div>
+  <x-toolbar>
+    <x-slot:search>
+      <x-toolbar.search placeholder="Tìm theo tên, kỹ năng, lĩnh vực..." />
+    </x-slot:search>
+    <x-toolbar.input model="filterExpertise" placeholder="Lĩnh vực..." />
+  </x-toolbar>
 
   @if($mentors->count())
     <div class="mentor-grid">
@@ -115,7 +107,7 @@
       @endforeach
     </div>
 
-    <div class="mentor-pagination">
+    <div class="pgn-row">
       {{ $mentors->links() }}
     </div>
 

@@ -112,8 +112,7 @@
 .jobs-empty svg { width: 52px; height: 52px; color: #c9d3df; margin: 0 auto 12px; display: block; }
 .jobs-empty p { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
 .jobs-empty button { font-size: 13px; color: var(--fita); background: none; border: none; cursor: pointer; font-family: var(--font); text-decoration: underline; margin-top: 6px; }
-.jobs-pagination { margin-top: 24px; }
-.jobs-pagination span[aria-current="page"] > span { background: var(--fita) !important; color: #fff !important; font-weight: 700; }
+.pgn-row { margin-top: 12px; }
 
 .jobs-sidebar { display: flex; flex-direction: column; gap: 16px; }
 .side-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border); overflow: hidden; }
@@ -343,8 +342,13 @@
 <div class="jobs-page">
     <div class="container" style="max-width:1200px;margin:0 auto;padding:0 24px">
 
-        <div class="jobs-title-bar">
+        <div class="jobs-title-bar" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
             <h1>Cơ hội việc làm</h1>
+            <a href="{{ route('job.create') }}"
+              style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#16a34a;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s"
+              onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
+              <i class="fa-solid fa-plus"></i> Đăng tin tuyển dụng
+            </a>
         </div>
 
         <div class="jobs-grid">
@@ -451,7 +455,7 @@
                                             <span class="job-tag"> {{ $job->location }}</span>
                                         @endif
                                         @if($job->experience)
-                                            <span class="job-tag">⏱ {{ $job->experience }}</span>
+                                            <span class="job-tag"><i class="fa-regular fa-clock"></i> {{ $job->experience }}</span>
                                         @endif
                                     </div>
 
@@ -491,7 +495,7 @@
                 @endforelse
 
                 @if($jobs->hasPages())
-                    <div class="jobs-pagination">{{ $jobs->links() }}</div>
+                    <div class="pgn-row">{{ $jobs->links() }}</div>
                 @endif
             </div>
 

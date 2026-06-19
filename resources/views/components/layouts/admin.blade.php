@@ -7,294 +7,44 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Barlow', system-ui, sans-serif; background: #f1f5f9; min-height: 100vh; }
-        a { text-decoration: none; }
-
-        :root {
-            --adm-bg:      #0c1f3d;
-            --adm-bg2:     #16294a;
-            --adm-border:  rgba(255,255,255,0.08);
-            --adm-text:    rgba(255,255,255,0.65);
-            --adm-text-h:  #fff;
-            --adm-active:   #16a34a;
-            --adm-active-c:#fff;
-            --green:       #16a34a;
-            --green-light: #22c55e;
-            --gold:        #c8912a;
-        }
-
-         .adm-layout { display: flex; min-height: 100vh; }
-
-          .adm-sb {
-            width: 230px;
-            flex-shrink: 0;
-            background: var(--adm-bg);
-            border-right: 1px solid var(--adm-border);
-            display: flex;
-            flex-direction: column;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            border-radius: 0 0 12px 0;
-        }
-        .adm-sb::-webkit-scrollbar { width: 3px; }
-        .adm-sb::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
-
-         .adm-brand {
-            padding: 18px 20px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--adm-border);
-            flex-shrink: 0;
-        }
-        .adm-brand img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            padding: 4px;
-        }   
-       .adm-brand-name { font-size: 17px; font-weight: 700; color: #fff; line-height: 1.3; }
-        .adm-brand-sub  { font-size: 15px; color: var(--adm-text); margin-top: 2px; }
-
-         .adm-back-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 12px 12px 4px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: var(--adm-text);
-            transition: .15s;
-            border: 1px solid var(--adm-border);
-        }
-        .adm-back-btn:hover { color: var(--adm-text-h); background: var(--adm-bg2); }
-        .adm-back-btn i { font-size: 15px; }
-
-        .adm-sec 
-        {
-            padding: 18px 24px 6px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
-        }
-        .adm-item {
-            margin: 4px 12px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--adm-text);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: all .15s;
-        }
-        .adm-item.active .adm-item-ic { color: var(--adm-active-c); }
-        .adm-item.active { background: var(--adm-active); color: var(--adm-active-c); font-weight: 600; }
-        .adm-item.active .adm-item-ic { color: var(--adm-active-c); }
-        .adm-item-ic { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; color: rgba(255,255,255,0.45); }
-        .adm-item:hover .adm-item-ic { color: rgba(255,255,255,0.85); }
-        .adm-item-badge {
-            margin-left: auto;
-            font-size: 10px; font-weight: 700;
-            padding: 2px 7px; border-radius: 20px;
-            background: rgba(251,191,36,0.15); color: #fbbf24;
-        }
-        .adm-item-badge.blue { background: rgba(26,107,58,0.25); color: #6ee7a0; }
-
-         .adm-div { height: 1px; background: var(--adm-border); margin: 6px 10px; }
-
-         .adm-foot {
-            margin-top: auto;
-            padding: 14px 12px 16px;
-            border-top: 1px solid var(--adm-border);
-            flex-shrink: 0;
-        }
-        .adm-user {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 12px;
-            border-radius: 9px;
-            cursor: default;
-            margin-bottom: 6px;
-        }
-        .adm-uava {
-            width: 50px; 
-            height: 50px;
-            border-radius: 50%;
-            background: var(--green);
-            color: #fff;
-            font-size: 20px; font-weight: 700;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
-        .adm-uname { font-size: 14px; color: #e2e8f0; font-weight: 600; }
-        .adm-urole { font-size: 12px; color: var(--adm-text); margin-top: 1px; }
-        .adm-logout {
-            display: flex; align-items: center; gap: 8px;
-            width: 100%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--adm-text);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all .15s;
-            text-align: left;
-        }
-        .adm-logout:hover { color: #f87171; background: rgba(248,113,113,0.1); }
-
-         .adm-main { flex: 1; background: #f1f5f9;min-width: 0; }
-        .adm-topbar {
-            background: var(--adm-bg);
-            padding: 0 24px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            border-bottom: 1px solid var(--adm-border);
-            border-radius: 0 0 8px 0;
-            margin-top: 0;
-        }
-        .adm-topbar-left { display: flex; align-items: center; gap: 12px; }
-        .adm-topbar-title { font-size: 16px; font-weight: 700; color: #fff; }
-        .adm-topbar-sub   { font-size: 12px; color: var(--adm-text); margin-top: 1px; }
-        .adm-topbar-right { display: flex; align-items: center; gap: 10px; }
-
-        .adm-notif {
-            width: 34px; height: 34px;
-            border-radius: 8px;
-            border: 1px solid var(--adm-border);
-            background: transparent;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--adm-text);
-            position: relative;
-            transition: .15s;
-        }
-        .adm-notif:hover { background: var(--adm-bg2); color: #fff; }
-        .adm-notif-dot {
-            position: absolute; top: 6px; right: 7px;
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: #dc2626;
-            border: 1.5px solid var(--adm-bg);
-        }
-        .adm-topbar-user {
-            display: flex; align-items: center; gap: 8px;
-            padding: 5px 10px;
-            border-radius: 8px;
-            border: 1px solid var(--adm-border);
-            cursor: pointer;
-            transition: .15s;
-        }
-        .adm-topbar-user:hover { background: var(--adm-bg2); }
-        .adm-topbar-uname { font-size: 14px; color: #e2e8f0; font-weight: 600; }
-
-        .adm-menu-btn {
-            display: none;
-            font-size: 16px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--adm-text);
-            padding: 6px;
-            border-radius: 6px;
-            transition: .15s;
-        }
-        .adm-menu-btn:hover { color: #fff; background: var(--adm-bg2); }
-
-         .adm-flash {
-            position: fixed;
-            top: 68px; right: 16px;
-            z-index: 200;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #16a34a;
-            border-radius: 10px;
-            padding: 12px 16px;
-            font-size: 13px;
-            color: #0f172a;
-            box-shadow: 0 6px 24px rgba(15,23,42,0.12);
-            display: flex; align-items: center; gap: 10px;
-            max-width: calc(100vw - 32px);
-        }
-        .adm-flash.is-info  { border-left-color: var(--green); }
-        .adm-flash.is-error { border-left-color: #dc2626; }
-        .adm-flash button { background: transparent; border: none; cursor: pointer; font-size: 16px; color: #64748b; line-height: 1; }
-
-         .adm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; display: none; }
-        .adm-overlay.show { display: block; }
-
-         @media (max-width: 1024px) {
-            .adm-sb {
-                position: fixed;
-                left: -260px;
-                top: 0; height: 100%;
-                z-index: 100;
-                transition: left .25s ease;
-            }
-            .adm-sb.open { left: 0; }
-            .adm-main { width: 100%; }
-            .adm-menu-btn { display: flex; align-items: center; justify-content: center; }
-        }
-
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--green);
-            outline-offset: 2px;
-            border-radius: 6px;
-        }
-    </style>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 </head>
-<body>
+<body class="adm">
 
- @if(session('success') || session('info') || session('error'))
-    @php
-        $flashType = session('error') ? 'is-error' : (session('info') ? 'is-info' : '');
-        $flashMsg  = session('error') ?? session('info') ?? session('success');
-    @endphp
-    <div class="adm-flash {{ $flashType }}" role="status" aria-live="polite" id="admFlash">
-        <span>{{ $flashMsg }}</span>
-        <button type="button" aria-label="Đóng" onclick="this.parentNode.remove()">✕</button>
-    </div>
-    <script>setTimeout(() => { const t=document.getElementById('admFlash'); if(t) t.remove(); }, 4000);</script>
-@endif
+<div id="toaster" role="status" aria-live="polite"></div>
+
+{{-- Page Loader --}}
+<div id="page-loader"><div id="page-loader-bar"></div></div>
+<div id="req-spinner" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round">
+    <path d="M12 2a10 10 0 1 0 10 10" />
+  </svg>
+</div>
 
 <div id="overlay" class="adm-overlay" onclick="toggleSidebar()"></div>
 
 <div class="adm-layout">
 
+    {{-- ════ SIDEBAR ════ --}}
     <aside id="sidebar" class="adm-sb">
 
-        <div class="adm-brand">
-      <img src="{{ asset('img/fita-logo.png') }}" alt="{{ config('admin.name') }}" loading="lazy">
+        <a href="{{ route('admin') }}" class="adm-brand" wire:navigate>
+            <img src="{{ asset('img/fita-logo.png') }}" alt="Logo" loading="lazy">
             <div>
-                <div class="adm-brand-name">Trang quản trị</div>
+                <div class="adm-brand-name">Bảng điều khiển</div>
+                <div class="adm-brand-sub">FITA · VNUA</div>
             </div>
-        </div>
+        </a>
 
         <div class="adm-sec">Quản lý</div>
 
         <a href="{{ route('admin') }}" class="adm-item {{ request()->routeIs('admin') ? 'active' : '' }}" wire:navigate>
             <i class="fa-solid fa-gauge adm-item-ic"></i> Bảng điều khiển
         </a>
-        <a href="{{ route('admin.user') }}" class="adm-item {{ request()->routeIs('admin.user') ? 'active' : '' }}" wire:navigate>
+        <a href="{{ route('admin.user') }}" class="adm-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}" wire:navigate>
             <i class="fa-solid fa-users adm-item-ic"></i> Người dùng
         </a>
         <a href="{{ route('admin.csv') }}" class="adm-item {{ request()->routeIs('admin.csv*') ? 'active' : '' }}" wire:navigate>
@@ -318,13 +68,35 @@
 
         <a href="{{ route('admin.thongk') }}" class="adm-item {{ request()->routeIs('admin.thongk*') ? 'active' : '' }}" wire:navigate>
             <i class="fa-solid fa-chart-bar adm-item-ic"></i> Thống kê
-</a>
+        </a>
 
     </aside>
 
-     <div class="adm-main">
+    {{-- ════ MAIN ════ --}}
+    <div class="adm-main">
 
-        <div class="adm-topbar">
+        @php
+            $adminPages = [
+                'admin.user'    => 'Người dùng',
+                'admin.csv'     => 'Cựu sinh viên',
+                'admin.job'     => 'Tuyển dụng',
+                'admin.company' => 'Doanh nghiệp',
+                'admin.post'    => 'Bài viết',
+                'admin.mentor'  => 'Mentor',
+                'admin.thongk'  => 'Thống kê',
+                'admin'         => 'Bảng điều khiển',
+            ];
+            $pageLabel = 'Bảng điều khiển';
+            foreach ($adminPages as $routeKey => $label) {
+                if (request()->routeIs($routeKey . '*')) {
+                    $pageLabel = $label; break;
+                }
+            }
+            $isDashboard = $pageLabel === 'Bảng điều khiển';
+        @endphp
+
+        {{-- Topbar trắng --}}
+        <header class="adm-topbar">
             <div class="adm-topbar-left">
                 <button class="adm-menu-btn" onclick="toggleSidebar()" aria-label="Mở menu" type="button">
                     <i class="fa-solid fa-bars"></i>
@@ -335,11 +107,47 @@
                     <i class="fa-solid fa-bell"></i>
                     <span class="adm-notif-dot"></span>
                 </button>
-                <a href="{{ route('csv') }}" class="adm-topbar-user" wire:navigate>
-                    <div class="adm-uava" style="width:28px;height:28px;font-size:10px">{{ auth()->user()?->initials ?? 'AD' }}</div>
-                    <span class="adm-topbar-uname">{{ auth()->user()?->name ?? 'Admin' }}</span>
-                </a>
+                <div class="adm-topbar-user" id="admUserBtn" onclick="toggleUserMenu()" role="button" tabindex="0">
+                    <div class="adm-topbar-uava">{{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}</div>
+                    <div class="adm-topbar-uinfo">
+                        <div class="adm-topbar-uname">{{ auth()->user()?->name ?? 'Admin' }}</div>
+                        <div class="adm-topbar-urole">Quản trị viên</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down adm-topbar-chev" id="admUserChev"></i>
+
+                    {{-- Dropdown --}}
+                    <div class="adm-user-dropdown" id="admUserDropdown">
+                        <div class="adm-udrop-head">
+                            <div class="adm-udrop-ava">{{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}</div>
+                            <div>
+                                <div class="adm-udrop-name">{{ auth()->user()?->name ?? 'Admin' }}</div>
+                                <div class="adm-udrop-role">Quản trị viên</div>
+                            </div>
+                        </div>
+                        <div class="adm-udrop-div"></div>
+                        <a href="{{ route('profile') }}" class="adm-udrop-item" wire:navigate>
+                            <i class="fa-regular fa-user"></i> Hồ sơ cá nhân
+                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="adm-udrop-item adm-udrop-logout">
+                                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
+        </header>
+
+        {{-- Breadcrumb bar --}}
+        <div class="adm-breadbar">
+            <a href="{{ route('admin') }}" wire:navigate>
+                <i class="fa-solid fa-house"></i> Trang quản trị
+            </a>
+            @if(!$isDashboard)
+                <span class="adm-breadbar-sep">/</span>
+                <span class="adm-breadbar-cur">{{ $pageLabel }}</span>
+            @endif
         </div>
 
         {{ $slot }}
@@ -349,6 +157,43 @@
 
 @livewireScripts
 <script>
+window.__toaster = {
+  _icons: { success: '✓', error: '✕', info: 'i', warning: '!' },
+  show(message, type) {
+    type = type || 'success';
+    const c = document.getElementById('toaster');
+    if (!c) return;
+    const el = document.createElement('div');
+    el.className = 'toast-item is-' + type;
+    el.innerHTML =
+      '<div class="toast-icon">' + (this._icons[type] || '✓') + '</div>' +
+      '<div class="toast-body">' + message + '</div>' +
+      '<button class="toast-close" aria-label="Đóng">✕</button>' +
+      '<div class="toast-progress"></div>';
+    el.querySelector('.toast-close').addEventListener('click', () => this.dismiss(el));
+    c.appendChild(el);
+    setTimeout(() => this.dismiss(el), 4500);
+  },
+  dismiss(el) {
+    if (!el || el.classList.contains('removing')) return;
+    el.classList.add('removing');
+    el.addEventListener('animationend', () => el.remove(), { once: true });
+  }
+};
+document.addEventListener('livewire:init', () => {
+  Livewire.on('toast', ({ type, message }) => window.__toaster.show(message, type ?? 'success'));
+});
+@if(session('success'))
+  document.addEventListener('DOMContentLoaded', () => window.__toaster.show(@json(session('success')), 'success'));
+@endif
+@if(session('info'))
+  document.addEventListener('DOMContentLoaded', () => window.__toaster.show(@json(session('info')), 'info'));
+@endif
+@if(session('error'))
+  document.addEventListener('DOMContentLoaded', () => window.__toaster.show(@json(session('error')), 'error'));
+@endif
+</script>
+<script>
 function toggleSidebar(){
     const sb = document.getElementById('sidebar');
     const ov = document.getElementById('overlay');
@@ -356,6 +201,15 @@ function toggleSidebar(){
     sb.classList.toggle('open');
     ov.classList.toggle('show');
 }
+function toggleUserMenu(e){
+    const btn = document.getElementById('admUserBtn');
+    if (!btn) return;
+    btn.classList.toggle('open');
+}
+document.addEventListener('click', (e) => {
+    const btn = document.getElementById('admUserBtn');
+    if (btn && !btn.contains(e.target)) btn.classList.remove('open');
+});
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         const sb = document.getElementById('sidebar');
@@ -368,6 +222,61 @@ document.addEventListener('livewire:navigated', () => {
     if (sb) sb.classList.remove('open');
     if (ov) ov.classList.remove('show');
 });
+</script>
+<script>
+(function () {
+  var loader  = document.getElementById('page-loader');
+  var bar     = document.getElementById('page-loader-bar');
+  var spinner = document.getElementById('req-spinner');
+  var _prog = 0, _raf;
+
+  function startProgress() {
+    if (!loader || !bar) return;
+    _prog = 0;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    loader.classList.remove('done');
+    loader.classList.add('active');
+    function step() {
+      if (_prog < 80) {
+        _prog += (80 - _prog) * 0.08 + 0.5;
+        bar.style.transition = 'width .3s ease';
+        bar.style.width = _prog + '%';
+        _raf = requestAnimationFrame(step);
+      }
+    }
+    _raf = requestAnimationFrame(step);
+  }
+
+  function finishProgress() {
+    if (!loader || !bar) return;
+    cancelAnimationFrame(_raf);
+    bar.style.transition = 'width .25s ease';
+    bar.style.width = '100%';
+    loader.classList.add('done');
+    setTimeout(function () {
+      loader.classList.remove('active', 'done');
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+    }, 350);
+  }
+
+  var _reqCount = 0;
+  function showSpinner() {
+    _reqCount++;
+    if (spinner) spinner.classList.add('active');
+  }
+  function hideSpinner() {
+    _reqCount = Math.max(0, _reqCount - 1);
+    if (_reqCount === 0 && spinner) spinner.classList.remove('active');
+  }
+
+  document.addEventListener('livewire:navigating', startProgress);
+  document.addEventListener('livewire:navigated',  finishProgress);
+
+  document.addEventListener('livewire:request',  showSpinner);
+  document.addEventListener('livewire:response', hideSpinner);
+})();
 </script>
 </body>
 </html>

@@ -91,7 +91,7 @@ class User extends Component
             if ($this->f_password) {
                 $u->update(['password' => Hash::make($this->f_password)]);
             }
-            session()->flash('success', 'Cập nhật người dùng thành công!');
+            $this->dispatch('toast', type: 'success', message: 'Cập nhật người dùng thành công!');
         } else {
             UserModel::create([
                 'name'     => $this->f_name,
@@ -100,7 +100,7 @@ class User extends Component
                 'role'     => $this->f_role,
                 'status'   => $this->f_status,
             ]);
-            session()->flash('success', 'Thêm người dùng thành công!');
+            $this->dispatch('toast', type: 'success', message: 'Thêm người dùng thành công!');
         }
 
         $this->showModal = false;
@@ -123,7 +123,7 @@ class User extends Component
         $u = UserModel::findOrFail($this->roleUserId);
         $u->update(['role' => $this->roleValue]);
         $this->showRole = false;
-        session()->flash('success', 'Đã cập nhật quyền cho '.$u->name.'!');
+        $this->dispatch('toast', type: 'success', message: 'Đã cập nhật quyền cho '.$u->name.'!');
     }
 
     public function closeRole(): void { $this->showRole = false; }
@@ -140,7 +140,7 @@ class User extends Component
     {
         UserModel::findOrFail($this->deleteId)->delete();
         $this->showDelete = false;
-        session()->flash('success', 'Đã xóa người dùng '.$this->deleteName.'!');
+        $this->dispatch('toast', type: 'success', message: 'Đã xóa người dùng '.$this->deleteName.'!');
         $this->resetPage();
     }
 

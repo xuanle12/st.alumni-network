@@ -23,6 +23,7 @@ Route::post('/logout', function (Request $request) {
 Route::middleware('auth')->group(function () {
     Route::get('/csv', \App\Livewire\User\Csv::class)->middleware('auth')->name('csv');
     Route::get('/job', \App\Livewire\User\Jobs::class)->name('job');
+    Route::get('/job/create', \App\Livewire\User\JobForm::class)->name('job.create');
     Route::get('/job/{id}', \App\Livewire\User\Jobsdetail::class)->name('job.show');
     Route::get('/event', \App\Livewire\User\Event::class)->name('event');
     Route::get('/event/{id}', \App\Livewire\User\Eventdetail::class)->name('event.show');

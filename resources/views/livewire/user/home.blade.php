@@ -705,8 +705,8 @@ section{padding:72px 24px;}
 <section class="cta-bg">
   <div class="lp">
     <div class="cta-box">
-      <h2>Sẵn sàng tham gia<br><em>cộng đồng alumni?</em></h2>
-      <p>Đăng ký miễn phí — kết nối ngay với hàng nghìn cựu sinh viên VNUA.</p>
+      <h2>Sẵn sàng tham gia<br><em>mạng lưới cựu sinh viên?</em></h2>
+      <p>Đăng ký miễn phí — kết nối ngay với hàng nghìn cựu sinh viên FITA - VNUA.</p>
       <div class="cta-btns">
         <a href="{{ route('register') }}" class="btn-hero-w" wire:navigate>
           <i class="fa-solid fa-user-plus"></i> Đăng ký ngay

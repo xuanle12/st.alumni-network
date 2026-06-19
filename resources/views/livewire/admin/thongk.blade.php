@@ -2,8 +2,8 @@
 <style>
 .dash{padding:1.75rem}
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px}
-.ptitle{font-size:16px;font-weight:600;color:#111;letter-spacing:-.3px}
-.psub{font-size:12px;color:#9ca3af;margin-top:3px}
+.ptitle{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.3px}
+.psub{font-size:13px;color:#64748b;margin-top:3px}
 .filter-row{display:flex;gap:8px}
 .f-sel{padding:6px 10px;border:1px solid #d1d5db;border-radius:7px;font-size:12px;color:#374151;background:#fff}
 .f-sel:focus{outline:none;border-color:#3b82f6}
@@ -41,16 +41,6 @@
 .hbar-bg{height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden}
 .hbar-fill{height:100%;border-radius:3px}
  
-table{width:100%;border-collapse:collapse}
-thead th{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#9ca3af;padding:8px 10px;text-align:left;border-bottom:1px solid #eaecf0;background:#fafafa}
-tbody tr{border-bottom:1px solid #f3f4f6;transition:background .1s}
-tbody tr:last-child{border-bottom:none}
-tbody tr:hover{background:#fafafa}
-td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
-.badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:4px}
-.bg{background:#f0fdf4;color:#166534}
-.by{background:#fef9c3;color:#92400e}
-.bc2{background:#f0fdf4;color:#15803d}
  
 .spark{display:flex;align-items:flex-end;gap:2px;height:28px}
 .sp{width:6px;border-radius:2px 2px 0 0;background:#dcfce7}
@@ -204,33 +194,32 @@ td{padding:9px 10px;font-size:12px;color:#374151;vertical-align:middle}
     <div class="card-hd">
       <div class="card-title">Top doanh nghiệp tuyển dụng</div>
     </div>
-    <table>
-      <thead>
-        <tr><th>#</th><th>Doanh nghiệp</th><th>Lĩnh vực</th><th>Số tin</th><th>Xu hướng</th></tr>
-      </thead>
-      <tbody>
-        @forelse($this->topCompanies as $i => $c)
-        <tr>
-          <td style="color:#9ca3af;font-weight:600">{{ $i + 1 }}</td>
-          <td>
-            <div style="font-weight:500;color:#111">{{ $c['company'] }}</div>
-            <div style="font-size:11px;color:#9ca3af">{{ $c['location'] }}</div>
-          </td>
-          <td><span class="badge bc2">{{ $c['field'] }}</span></td>
-          <td style="font-weight:600">{{ $c['total'] }}</td>
-          <td>
-            <div class="spark">
-              @for($j = 0; $j < 5; $j++)
-                <div class="sp {{ $j === 4 ? 'hi' : '' }}" style="height:{{ rand(30, 90) }}%"></div>
-              @endfor
-            </div>
-          </td>
-        </tr>
-        @empty
-          <tr><td colspan="5" style="text-align:center;color:#9ca3af;padding:2rem">Chưa có dữ liệu</td></tr>
-        @endforelse
-      </tbody>
-    </table>
+    <x-table :bare="true" minWidth="480px">
+      <x-slot:heading>
+        <th>STT</th><th>Doanh nghiệp</th><th>Lĩnh vực</th><th>Số tin</th><th>Xu hướng</th>
+      </x-slot:heading>
+
+      @forelse($this->topCompanies as $i => $c)
+      <tr>
+        <td style="color:#9ca3af;font-weight:600">{{ $i + 1 }}</td>
+        <td>
+          <div style="font-weight:500;color:#111">{{ $c['company'] }}</div>
+          <div style="font-size:11px;color:#9ca3af">{{ $c['location'] }}</div>
+        </td>
+        <td><x-badge color="green">{{ $c['field'] }}</x-badge></td>
+        <td style="font-weight:600">{{ $c['total'] }}</td>
+        <td>
+          <div class="spark">
+            @for($j = 0; $j < 5; $j++)
+              <div class="sp {{ $j === 4 ? 'hi' : '' }}" style="height:{{ rand(30, 90) }}%"></div>
+            @endfor
+          </div>
+        </td>
+      </tr>
+      @empty
+        <tr><td colspan="5" class="adm-tbl-empty">Chưa có dữ liệu</td></tr>
+      @endforelse
+    </x-table>
   </div>
 </div>
  

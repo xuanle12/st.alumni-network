@@ -90,7 +90,7 @@ class Profile extends Component
 
         $this->edit = false;
 
-        session()->flash('success','Đã lưu thông tin');
+        $this->dispatch('toast', type: 'success', message: 'Đã lưu thông tin');
     }
 
     public function cancelInfo()
@@ -113,7 +113,7 @@ class Profile extends Component
 
         $this->editingSocial = false;
 
-        session()->flash('success','Đã lưu liên kết');
+        $this->dispatch('toast', type: 'success', message: 'Đã lưu liên kết');
     }
 
     public function cancelSocial()
@@ -183,7 +183,7 @@ class Profile extends Component
         $profile->skills()->sync($skillIds);
 
         $this->editingSkills = false;
-        session()->flash('success', 'Đã cập nhật kỹ năng');
+        $this->dispatch('toast', type: 'success', message: 'Đã cập nhật kỹ năng');
 
         $this->dispatch('skills-updated');
     }
@@ -216,7 +216,7 @@ class Profile extends Component
         );
 
         $this->avatarFile = null;
-        session()->flash('success', 'Đã cập nhật ảnh đại diện');
+        $this->dispatch('toast', type: 'success', message: 'Đã cập nhật ảnh đại diện');
     }
 
     // upload cv
@@ -240,7 +240,7 @@ class Profile extends Component
 
         $this->cvFile = null;
 
-        session()->flash('success','Upload CV thành công');
+        $this->dispatch('toast', type: 'success', message: 'Upload CV thành công');
     }
 
     public function deleteCv($id)

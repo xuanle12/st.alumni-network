@@ -14,6 +14,7 @@ class Posts extends Component
     public string $search = '';
     public string $filterStatus = '';
     public string $filterCat = '';
+    public int    $perPage = 15;
 
     // modal thêm / sửa
     public bool $showModal = false;
@@ -46,6 +47,8 @@ class Posts extends Component
     {
         $this->resetPage();
     }
+
+    public function updatingPerPage(): void { $this->resetPage(); }
 
     public function updatedFilterCat()
     {
@@ -101,7 +104,7 @@ class Posts extends Component
 
             $post->update($data);
 
-            session()->flash('success', 'Đã cập nhật bài viết.');
+            $this->dispatch('toast', type: 'success', message: 'Đã cập nhật bài viết.');
         } else {
             $data['slug'] = Post::generateSlug($this->f_title);
             $data['author_id'] = Auth::id();
@@ -112,7 +115,7 @@ class Posts extends Component
 
             Post::create($data);
 
-            session()->flash('success', 'Đã thêm bài viết.');
+            $this->dispatch('toast', type: 'success', message: 'Đã thêm bài viết.');
         }
 
         $this->closeModal();
@@ -121,13 +124,13 @@ class Posts extends Component
     public function toDraft(int $id): void
 {
     Post::findOrFail($id)->update(['status' => 'draft']);
-    session()->flash('success', 'Đã chuyển về bản nháp.');
+    $this->dispatch('toast', type: 'success', message: 'Đã chuyển về bản nháp.');
 }
 
 public function hidePost(int $id): void
 {
     Post::findOrFail($id)->update(['status' => 'hidden']);
-    session()->flash('success', 'Đã ẩn bài viết.');
+    $this->dispatch('toast', type: 'success', message: 'Đã ẩn bài viết.');
 }
 
     public function closeModal()
@@ -169,7 +172,7 @@ public function hidePost(int $id): void
             'published_at' => now(),
         ]);
 
-        session()->flash('success', 'Đã duyệt bài viết.');
+        $this->dispatch('toast', type: 'success', message: 'Đã duyệt bài viết.');
 
         $this->closeApprove();
     }
@@ -190,7 +193,7 @@ public function hidePost(int $id): void
     {
         if ($this->deleteId) {
             Post::findOrFail($this->deleteId)->delete();
-            session()->flash('success', 'Đã xoá bài viết.');
+            $this->dispatch('toast', type: 'success', message: 'Đã xoá bài viết.');
         }
 
         $this->closeDelete();
@@ -219,7 +222,7 @@ public function hidePost(int $id): void
                 $q->where('category', $this->filterCat)
             )
             ->latest()
-            ->paginate(15);
+            ->paginate($this->perPage);
 
         $stats = [
             'total' => Post::count(),
@@ -243,3 +246,4 @@ public function hidePost(int $id): void
         ))->layout('components.layouts.admin');
     }
 }
+

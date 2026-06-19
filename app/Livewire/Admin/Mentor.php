@@ -5,16 +5,23 @@ namespace App\Livewire\Admin;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\MentorProfile;
- 
+
 class Mentor extends Component
 {
-   use WithPagination;
- 
+    use WithPagination;
+
+    protected $paginationTheme = 'tailwind';
+
     public string $search = '';
     public string $filterStatus = '';
-    public ?int $selectedId = null;
+    public int    $perPage = 15;
+    public ?int   $selectedId = null;
     public string $admin_note = '';
- 
+
+    public function updatingSearch(): void       { $this->resetPage(); }
+    public function updatingFilterStatus(): void { $this->resetPage(); }
+    public function updatingPerPage(): void      { $this->resetPage(); }
+
     public function approve($id)
     {
         MentorProfile::findOrFail($id)->update([
@@ -23,9 +30,9 @@ class Mentor extends Component
         ]);
         $this->admin_note = '';
         $this->selectedId = null;
-        session()->flash('success', 'Đã duyệt mentor.');
+        $this->dispatch('toast', type: 'success', message: 'Đã duyệt mentor.');
     }
- 
+
     public function reject($id)
     {
         MentorProfile::findOrFail($id)->update([
@@ -34,9 +41,9 @@ class Mentor extends Component
         ]);
         $this->admin_note = '';
         $this->selectedId = null;
-        session()->flash('success', 'Đã từ chối.');
+        $this->dispatch('toast', type: 'success', message: 'Đã từ chối.');
     }
- 
+
     public function render()
     {
         $mentors = MentorProfile::with('user.profile')
@@ -49,8 +56,8 @@ class Mentor extends Component
                 $q->where('status', $this->filterStatus)
             )
             ->latest()
-            ->paginate(15);
- 
+            ->paginate($this->perPage);
+
         return view('livewire.admin.mentor', compact('mentors'))->layout('components.layouts.admin');
     }
 }

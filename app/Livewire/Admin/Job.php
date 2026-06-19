@@ -14,6 +14,8 @@ class Job extends Component
 
     public string $search = '';
     public string $type = '';
+    public string $statusFilter = '';
+    public int    $perPage = 15;
 
     public bool $showForm = false;
     public bool $showDetail = false;
@@ -31,12 +33,14 @@ class Job extends Component
     public string $max_salary = '';
     public string $experience_required = '';
     public string $deadline = '';
-
     public string $description = '';
+    public string $contact_email = '';
 
-    /* reset page khi search */
+    /* reset page khi search/filter */
     public function updatedSearch() { $this->resetPage(); }
     public function updatedType() { $this->resetPage(); }
+    public function updatedStatusFilter() { $this->resetPage(); }
+    public function updatingPerPage(): void  { $this->resetPage(); }
 
     public function openCreate()
     {
@@ -59,9 +63,32 @@ class Job extends Component
         $this->experience_required = $job->experience_required !== null ? (string) $job->experience_required : '';
         $this->deadline = $job->deadline ? \Carbon\Carbon::parse($job->deadline)->format('Y-m-d') : '';
         $this->description = $job->description ?? '';
+        $this->contact_email = $job->contact_email ?? '';
 
         $this->showForm = true;
         $this->showDetail = false;
+    }
+
+    public function approve($id)
+    {
+        JobModel::where('id', $id)->update([
+            'status'    => 'approved',
+            'is_active' => true,
+        ]);
+
+        $this->showDetail = false;
+        $this->dispatch('toast', type: 'success', message: 'Đã duyệt tin tuyển dụng.');
+    }
+
+    public function reject($id)
+    {
+        JobModel::where('id', $id)->update([
+            'status'    => 'rejected',
+            'is_active' => false,
+        ]);
+
+        $this->showDetail = false;
+        $this->dispatch('toast', type: 'success', message: 'Đã từ chối tin tuyển dụng.');
     }
 
     public function openDetail($id)
@@ -83,31 +110,29 @@ class Job extends Component
         ]);
 
         $data = [
-
-            'title' => $this->title,
-            'company' => $this->company,
-            'location' => $this->location ?: null,
-            'type' => $this->f_type,
-            'field' => $this->field ?: null,
-            'min_salary' => $this->min_salary !== '' ? $this->min_salary : null,
-            'max_salary' => $this->max_salary !== '' ? $this->max_salary : null,
+            'title'               => $this->title,
+            'company'             => $this->company,
+            'location'            => $this->location ?: null,
+            'type'                => $this->f_type,
+            'field'               => $this->field ?: null,
+            'min_salary'          => $this->min_salary !== '' ? $this->min_salary : null,
+            'max_salary'          => $this->max_salary !== '' ? $this->max_salary : null,
             'experience_required' => $this->experience_required !== '' ? $this->experience_required : null,
-            'deadline' => $this->deadline ?: null,
-            'description' => $this->description ?: null,
- 
+            'deadline'            => $this->deadline ?: null,
+            'description'         => $this->description ?: null,
+            'contact_email'       => $this->contact_email ?: null,
         ];
 
         if ($this->editId) {
-
-            JobModel::where('id',$this->editId)->update($data);
-
-            session()->flash('success','Đã cập nhật job');
-
+            JobModel::where('id', $this->editId)->update($data);
+            $this->dispatch('toast', type: 'success', message: 'Đã cập nhật tin tuyển dụng.');
         } else {
-
+            // Admin tạo trực tiếp → approved ngay
+            $data['status']     = 'approved';
+            $data['is_active']  = true;
+            $data['created_by'] = auth()->id();
             JobModel::create($data);
-
-            session()->flash('success','Đã tạo job');
+            $this->dispatch('toast', type: 'success', message: 'Đã thêm tin tuyển dụng.');
         }
 
         $this->resetForm();
@@ -131,23 +156,15 @@ class Job extends Component
 
         $this->showDetail = false;
 
-        session()->flash('success','Đã xoá job');
+        $this->dispatch('toast', type: 'success', message: 'Đã xoá job');
     }
 
-    /* reset form */
     private function resetForm()
     {
         $this->reset([
-            'title',
-            'company',
-            'location',
-            'field',
-            'min_salary',
-            'max_salary',
-            'experience_required',
-            'deadline',
-            'description',
-             'editId'
+            'title', 'company', 'location', 'field',
+            'min_salary', 'max_salary', 'experience_required',
+            'deadline', 'description', 'contact_email', 'editId',
         ]);
 
         $this->f_type = 'full-time';
@@ -155,37 +172,29 @@ class Job extends Component
 
     public function render()
     {
-
         $query = JobModel::query();
 
         if ($this->search) {
-
-            $query->where(function($q){
-
-                $q->where('title','like','%'.$this->search.'%')
-                  ->orWhere('company','like','%'.$this->search.'%');
-
+            $query->where(function ($q) {
+                $q->where('title', 'like', '%' . $this->search . '%')
+                  ->orWhere('company', 'like', '%' . $this->search . '%');
             });
-
         }
 
         if ($this->type) {
-
-            $query->where('type',$this->type);
-
+            $query->where('type', $this->type);
         }
 
-        return view('livewire.admin.job',[
+        if ($this->statusFilter) {
+            $query->where('status', $this->statusFilter);
+        }
 
-            'jobs' => $query
-                ->latest()
-                ->paginate(15),
+        $pendingCount = JobModel::pending()->count();
 
-            'detail' => $this->detailId
-                ? JobModel::find($this->detailId)
-                : null,
-
+        return view('livewire.admin.job', [
+            'jobs'         => $query->latest()->paginate($this->perPage),
+            'detail'       => $this->detailId ? JobModel::find($this->detailId) : null,
+            'pendingCount' => $pendingCount,
         ])->layout('components.layouts.admin');
-
     }
 }

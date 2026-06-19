@@ -9,10 +9,11 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public int   $totalAlumni   = 0;
-    public int   $pendingCount  = 0;
-    public int   $jobCount      = 0;
-    public int   $eventCount    = 0;
+    public int   $totalAlumni    = 0;
+    public int   $pendingCount   = 0;
+    public int   $jobCount       = 0;
+    public int   $pendingJobCount = 0;
+    public int   $eventCount     = 0;
     public array $monthlyStats  = [];
     public array $statusStats   = [];
     public       $recentProfiles;
@@ -20,9 +21,10 @@ class Dashboard extends Component
  
     public function mount(): void
     {
-        $this->totalAlumni  = Profile::where('status', 'active')->count();
-        $this->pendingCount = Profile::where('status', 'pending')->count();
-        $this->jobCount     = Job::where('is_active', true)->count();
+        $this->totalAlumni     = Profile::where('status', 'active')->count();
+        $this->pendingCount    = Profile::where('status', 'pending')->count();
+        $this->jobCount        = Job::where('status', 'approved')->where('is_active', true)->count();
+        $this->pendingJobCount = Job::where('status', 'pending')->count();
         $this->eventCount   = Event::where('status', 'active')
                                 ->where('event_date', '>=', now()->toDateString())
                                 ->count();
@@ -59,14 +61,14 @@ class Dashboard extends Component
     {
         Profile::where('id', $id)->update(['status' => 'active']);
         $this->mount();
-        session()->flash('success', 'Đã duyệt hồ sơ.');
+        $this->dispatch('toast', type: 'success', message: 'Đã duyệt hồ sơ.');
     }
  
     public function reject(int $id): void
     {
         Profile::where('id', $id)->update(['status' => 'inactive']);
         $this->mount();
-        session()->flash('success', 'Đã từ chối hồ sơ.');
+        $this->dispatch('toast', type: 'success', message: 'Đã từ chối hồ sơ.');
     }
 
     public function render()
@@ -74,3 +76,4 @@ class Dashboard extends Component
         return view('livewire.admin.dashboard')->layout('components.layouts.admin');
     }
 }
+

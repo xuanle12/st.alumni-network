@@ -71,7 +71,7 @@ class Eventdetail extends Component
 
             $this->registered = false;
 
-            session()->flash('success','Đã huỷ đăng ký');
+            $this->dispatch('toast', type: 'success', message: 'Đã huỷ đăng ký');
 
             return;
         }
@@ -93,7 +93,7 @@ class Eventdetail extends Component
 
         $this->registered = true;
 
-        session()->flash('success','Đăng ký thành công');
+        $this->dispatch('toast', type: 'success', message: 'Đăng ký thành công');
 
     }
 
@@ -117,3 +117,4 @@ class Eventdetail extends Component
         return view('livewire.user.eventdetail');
     }
 }
+

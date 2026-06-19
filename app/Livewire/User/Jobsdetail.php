@@ -80,7 +80,7 @@ class Jobsdetail extends Component
 
         $this->applied = true;
 
-        session()->flash('success', 'Đã gửi hồ sơ!');
+        $this->dispatch('toast', type: 'success', message: 'Đã gửi hồ sơ!');
     }
 
     public function toggleSave()

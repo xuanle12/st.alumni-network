@@ -16,6 +16,7 @@ class Company extends Component
     public string $search = '';
     public string $filterStatus = '';
     public string $filterField = '';
+    public int    $perPage = 15;
 
     public bool $showModal = false;
     public bool $showView = false;
@@ -47,6 +48,8 @@ class Company extends Component
     {
         $this->resetPage();
     }
+
+    public function updatingPerPage(): void { $this->resetPage(); }
 
     public function updatedFilterField()
     {
@@ -113,13 +116,13 @@ class Company extends Component
 
             CompanyModel::where('id',$this->editId)->update($data);
 
-            session()->flash('success','Đã cập nhật company');
+            $this->dispatch('toast', type: 'success', message: 'Đã cập nhật company');
 
         } else {
 
             CompanyModel::create($data);
 
-            session()->flash('success','Đã thêm company');
+            $this->dispatch('toast', type: 'success', message: 'Đã thêm company');
         }
 
         $this->closeModal();
@@ -170,7 +173,7 @@ class Company extends Component
 
             CompanyModel::destroy($this->deleteId);
 
-            session()->flash('success','Đã xoá company');
+            $this->dispatch('toast', type: 'success', message: 'Đã xoá company');
 
         }
 
@@ -230,7 +233,7 @@ class Company extends Component
         $companies = $query
             ->withCount('job')
             ->latest()
-            ->paginate(15);
+            ->paginate($this->perPage);
 
         $stats = [
 

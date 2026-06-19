@@ -35,67 +35,7 @@
     font-size:15px;
 }
 
-.adm-mentor-filters{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
 
-.adm-mentor-input{
-    height:46px;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:0 16px;
-    background:#fff;
-    font-size:14px;
-    min-width:220px;
-}
-
-.adm-mentor-input:focus{
-    outline:none;
-    border-color:var(--primary);
-}
-
-.adm-table-wrap{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.adm-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-.adm-table thead{
-    background:#f8fafc;
-}
-
-.adm-table th{
-    padding:18px 20px;
-    text-align:left;
-    font-size:13px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    color:#64748b;
-    border-bottom:1px solid var(--border);
-}
-
-.adm-table td{
-    padding:18px 20px;
-    border-bottom:1px solid #f1f5f9;
-    vertical-align:middle;
-}
-
-.adm-table tbody tr:hover{
-    background:#fafcff;
-}
-
-.adm-table tbody tr:last-child td{
-    border-bottom:none;
-}
 
 .adm-user{
     display:flex;
@@ -198,9 +138,7 @@
     color:#94a3b8;
 }
 
-.adm-pagination{
-    margin-top:20px;
-}
+.adm-pagination{ margin-top:4px; }
 </style>
 
 <div class="container adm-mentor-wrap">
@@ -210,89 +148,72 @@
         <h1>Quản lý Mentor</h1>
         <p>Quản lý đăng ký mentor và xét duyệt hồ sơ</p>
     </div>
-    <div class="adm-mentor-filters">
-      <input wire:model.live.debounce.300ms="search" type="text"
-             class="adm-mentor-input" placeholder="Tìm theo tên...">
-      <select wire:model.live="filterStatus" class="adm-mentor-input" style="background:#fff">
-        <option value="">Tất cả trạng thái</option>
-        <option value="pending">Chờ duyệt</option>
-        <option value="approved">Đã duyệt</option>
-        <option value="rejected">Từ chối</option>
-      </select>
-    </div>
   </div>
 
-  @if(session('success'))
-    <div class="adm-flash">{{ session('success') }}</div>
-  @endif
+  <x-toolbar>
+    <x-slot:search>
+      <x-toolbar.search placeholder="Tìm theo tên..." />
+    </x-slot:search>
+    <x-toolbar.select model="filterStatus">
+      <option value="">Tất cả trạng thái</option>
+      <option value="pending">Chờ duyệt</option>
+      <option value="approved">Đã duyệt</option>
+      <option value="rejected">Từ chối</option>
+    </x-toolbar.select>
+    <x-toolbar.per-page />
+  </x-toolbar>
 
-  <div class="adm-table-wrap">
-    <table class="adm-table">
-      <thead>
-        <tr>
-          <th>STT</th>
-          <th>Họ tên</th>
-          <th>Lĩnh vực</th>
-          <th>Liên hệ</th>
-          <th>Trạng thái</th>
-          <th>Ngày đăng ký</th>
-          <th>Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        @forelse($mentors as $mentor)
-          <tr>
-            <td style="color:var(--text-muted)">{{ $mentor->id }}</td>
-            <td>
-              <div class="adm-name">{{ $mentor->user->name }}</div>
-              <div class="adm-email">{{ $mentor->user->email }}</div>
-            </td>
-            <td>{{ Str::limit($mentor->expertise, 40) }}</td>
-            <td style="font-size:13px">{{ $mentor->contact_info ?? '—' }}</td>
-            <td>
-              @php
-                $colors = [
-                  'pending'  => ['bg'=>'#fef9c3','text'=>'#854d0e'],
-                  'approved' => ['bg'=>'#dcfce7','text'=>'#166534'],
-                  'rejected' => ['bg'=>'#fee2e2','text'=>'#991b1b'],
-                ];
-                $c = $colors[$mentor->status] ?? ['bg'=>'#f1f5f9','text'=>'#64748b'];
-              @endphp
-              <span class="adm-badge" style="background:{{ $c['bg'] }};color:{{ $c['text'] }}">
-                {{ $mentor->status_label }}
-              </span>
-            </td>
-            <td style="color:var(--text-muted);font-size:13px">
-              {{ $mentor->created_at->format('d/m/Y') }}
-            </td>
-            <td>
-              @if($selectedId === $mentor->id)
-                <div class="adm-action-form">
-                  <textarea wire:model="admin_note" class="adm-note"
-                            placeholder="Ghi chú (tuỳ chọn)..."></textarea>
-                  <div class="adm-action-btns">
-                    <button wire:click="approve({{ $mentor->id }})" class="adm-btn-approve">✓ Duyệt</button>
-                    <button wire:click="reject({{ $mentor->id }})"  class="adm-btn-reject">✗ Từ chối</button>
-                    <button wire:click="$set('selectedId', null)"   class="adm-btn-cancel">Huỷ</button>
-                  </div>
-                </div>
-              @else
-                @if($mentor->status === 'pending')
-                  <button wire:click="$set('selectedId', {{ $mentor->id }})" class="adm-btn-review">Xét duyệt</button>
-                @else
-                  <button wire:click="$set('selectedId', {{ $mentor->id }})" class="adm-btn-change">Đổi trạng thái</button>
-                @endif
-              @endif
-            </td>
-          </tr>
-        @empty
-          <tr><td colspan="7" class="adm-empty">Chưa có đơn đăng ký mentor nào.</td></tr>
-        @endforelse
-      </tbody>
-    </table>
-  </div>
+  <x-table>
+    <x-slot:heading>
+      <th style="width:5%">STT</th>
+      <th style="width:22%">Họ tên</th>
+      <th style="width:25%">Lĩnh vực</th>
+      <th style="width:18%">Liên hệ</th>
+      <th style="width:12%">Trạng thái</th>
+      <th style="width:10%">Ngày ĐK</th>
+      <th style="width:8%">Hành động</th>
+    </x-slot:heading>
 
-  <div class="adm-pagination">{{ $mentors->links() }}</div>
+    @forelse($mentors as $mentor)
+    @php
+      $mColor = match($mentor->status) { 'approved'=>'green', 'pending'=>'yellow', default=>'red' };
+    @endphp
+    <tr>
+      <td style="color:#94a3b8;font-size:13px">{{ $mentor->id }}</td>
+      <td>
+        <div class="adm-name">{{ $mentor->user->name }}</div>
+        <div class="adm-email">{{ $mentor->user->email }}</div>
+      </td>
+      <td style="font-size:13px;color:#475569">{{ Str::limit($mentor->expertise, 40) }}</td>
+      <td style="font-size:13px;color:#475569">{{ $mentor->contact_info ?? '—' }}</td>
+      <td><x-badge :color="$mColor">{{ $mentor->status_label }}</x-badge></td>
+      <td style="font-size:12px;color:#94a3b8">{{ $mentor->created_at->format('d/m/Y') }}</td>
+      <td>
+        @if($selectedId === $mentor->id)
+          <div class="adm-action-form">
+            <textarea wire:model="admin_note" class="adm-note" placeholder="Ghi chú (tuỳ chọn)..."></textarea>
+            <div class="adm-action-btns">
+              <button wire:click="approve({{ $mentor->id }})" class="adm-btn-approve">✓ Duyệt</button>
+              <button wire:click="reject({{ $mentor->id }})"  class="adm-btn-reject">✗ Từ chối</button>
+              <button wire:click="$set('selectedId', null)"   class="adm-btn-cancel">Huỷ</button>
+            </div>
+          </div>
+        @else
+          @if($mentor->status === 'pending')
+            <button wire:click="$set('selectedId', {{ $mentor->id }})" class="adm-btn-review">Xét duyệt</button>
+          @else
+            <button wire:click="$set('selectedId', {{ $mentor->id }})" class="adm-btn-change">Đổi TT</button>
+          @endif
+        @endif
+      </td>
+    </tr>
+    @empty
+    <tr><td colspan="7" class="adm-tbl-empty">Chưa có đơn đăng ký mentor nào.</td></tr>
+    @endforelse
+
+    <x-slot:paginationInfo>Hiển thị {{ $mentors->firstItem() ?? 0 }}–{{ $mentors->lastItem() ?? 0 }} / {{ $mentors->total() }} mentor</x-slot:paginationInfo>
+    <x-slot:pagination>{{ $mentors->links() }}</x-slot:pagination>
+  </x-table>
 
 </div>
 </div>

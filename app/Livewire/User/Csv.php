@@ -73,7 +73,7 @@ class Csv extends Component
         };
 
         $this->events   = Event::latest()->limit(4)->get();
-        $this->jobs     = Job::latest()->limit(4)->get();
+        $this->jobs     = Job::active()->latest()->limit(4)->get();
         $this->contacts = User::with('profile')
             ->where('id', '!=', $this->currentUser->id)
             ->limit(5)
@@ -164,7 +164,7 @@ class Csv extends Component
         $this->closeModal();
         $this->loadData();
 
-        session()->flash('success', $hasBanned
+        $this->dispatch('toast', type: 'success', message: $hasBanned
             ? 'Bài viết đang chờ admin duyệt do chứa nội dung không phù hợp.'
             : 'Đăng bài thành công!'
         );

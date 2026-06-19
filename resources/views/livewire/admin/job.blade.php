@@ -1,15 +1,6 @@
 <div>
   <style>
-   @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  background: #f4f6f9;
-  color: #111;
-  font-size: 13px;
-}
 
 .dash { padding: 1.75rem; }
 
@@ -20,14 +11,8 @@ body {
   margin-bottom: 1.75rem;
 }
 
-.ptitle { font-size: 16px; font-weight: 700; color: #111; letter-spacing: -.4px; }
-.psub   { font-size: 12px; color: #9ca3af; margin-top: 3px; }
-
-.flash-ok {
-  background: #f0fdf4; border: 1px solid #86efac;
-  color: #166534; padding: 9px 14px; border-radius: 8px;
-  font-size: 13px; margin-bottom: 1rem;
-}
+.ptitle { font-size: 20px; font-weight: 700; color: #0f172a; letter-spacing: -.4px; }
+.psub   { font-size: 13px; color: #64748b; margin-top: 3px; }
 
 .btn-prim {
   padding: 8px 18px;
@@ -88,31 +73,6 @@ body {
 .stat-sm-val   { font-size: 20px; font-weight: 700; color: #111; }
 .stat-sm-icon  { font-size: 14px; color: #d1d5db; }
 
-.toolbar {
-  display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;
-}
-
-.tb-in {
-  flex: 1; min-width: 180px;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db; border-radius: 8px;
-  font-size: 13px; color: #111; background: #fff;
-  font-family: inherit;
-  transition: border-color .15s, box-shadow .15s;
-}
-.tb-in:focus {
-  outline: none; border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59,130,246,.1);
-}
-
-.tb-sel {
-  padding: 8px 12px;
-  border: 1px solid #d1d5db; border-radius: 8px;
-  font-size: 13px; color: #374151; background: #fff;
-  font-family: inherit; cursor: pointer;
-  transition: border-color .15s;
-}
-.tb-sel:focus { outline: none; border-color: #3b82f6; }
 
 .card {
   background: #fff;
@@ -121,118 +81,20 @@ body {
   overflow: visible;
 }
 
-table { width: 100%; border-collapse: collapse; }
-
-thead th {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: .06em; text-transform: uppercase;
-  color: #9ca3af;
-  padding: 11px 14px;
-  text-align: left;
-  border-bottom: 1px solid #eaecf0;
-  background: #fafafa;
-  white-space: nowrap;
-}
-
-tbody tr {
-  border-bottom: 1px solid #f3f4f6;
-  transition: background .12s;
-}
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover      { background: #fafafa; }
-
-td {
-  padding: 11px 14px;
-  font-size: 12.5px;
-  color: #374151;
-  vertical-align: middle;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 10.5px; font-weight: 600;
-  padding: 3px 9px; border-radius: 5px;
-  white-space: nowrap;
-}
-.bg { background: #f0fdf4; color: #15803d; }
-.by { background: #fef9c3; color: #92400e; }
-.bp { background: #f5f3ff; color: #6d28d9; }
-.bc { background: #f0fdf4; color: #16a34a; }
-.bn { background: #f3f4f6; color: #6b7280; }
-
 .tog {
   width: 36px; height: 20px;
   border-radius: 10px; border: none;
   cursor: pointer; position: relative; flex-shrink: 0;
-  transition: background .2s;
-  display: block;
+  transition: background .2s; display: block;
 }
 .tog::after {
-  content: '';
-  position: absolute; top: 2px; left: 2px;
-  width: 16px; height: 16px;
-  border-radius: 50%; background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.2);
-  transition: transform .2s;
+  content: ''; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%; background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .2s;
 }
-.tog.on  { background: #16a34a; }
-.tog.on::after  { transform: translateX(16px); }
+.tog.on { background: #16a34a; }
+.tog.on::after { transform: translateX(16px); }
 .tog.off { background: #d1d5db; }
-
-.pager {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 10px 14px;
-  border-top: 1px solid #eaecf0;
-  font-size: 12px; color: #9ca3af;
-}
-
-/* ── DROPDOWN FIX CHÍNH ── */
-.dd-wrap {
-  position: relative;
-  display: inline-block;
-}
-
-.dd-btn {
-  width: 30px; height: 30px;
-  border: 1px solid #e5e7eb; border-radius: 6px;
-  background: #fff; cursor: pointer;
-  display: flex; align-items: center;
-  justify-content: center; flex-direction: column;
-  gap: 2.5px; padding: 0;
-  transition: background .1s, border-color .1s;
-}
-.dd-btn:hover { background: #f3f4f6; border-color: #d1d5db; }
-
-.dd-dot {
-  width: 3px; height: 3px;
-  border-radius: 50%; background: #9ca3af;
-}
-
-.dd-menu {
-  position: absolute;
-  right: 0;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 9px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.12);
-  min-width: 155px;
-  z-index: 9999;           /* ← nổi lên trên tất cả */
-  overflow: hidden;
-}
-
-.dd-item {
-  display: flex; align-items: center; gap: 9px;
-  padding: 9px 14px;
-  font-size: 12.5px; color: #374151;
-  cursor: pointer;
-  transition: background .1s;
-}
-.dd-item:hover     { background: #f9fafb; }
-.dd-item.red       { color: #dc2626; }
-.dd-item.red:hover { background: #fef2f2; }
-.dd-item i         { width: 14px; text-align: center; flex-shrink: 0; }
-
-.dd-sep { height: 1px; background: #f3f4f6; }
 
 .modal-bg {
   position: fixed; inset: 0;
@@ -332,9 +194,6 @@ td {
 @media(max-width:768px){
   .dash{padding:1rem}
   .stats-sm{grid-template-columns:repeat(2,1fr);gap:8px}
-  .toolbar{flex-wrap:wrap}
-  .tb-in{min-width:100%}
-  .tb-sel{flex:1;min-width:120px}
   .card{overflow-x:auto;-webkit-overflow-scrolling:touch}
   table{min-width:640px}
 }
@@ -363,110 +222,117 @@ td {
         <button class="btn-prim" wire:click="openCreate">+ Thêm tin mới </button>
       </div>
 
-      @if(session('success'))
-        <div class="flash-ok"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
-      @endif
+      {{-- Tabs trạng thái --}}
+      <div style="display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap">
+        <button wire:click="$set('statusFilter','')"
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='' ? '#16a34a' : '#e5e7eb' }};background:{{ $statusFilter==='' ? '#f0fdf4' : '#fff' }};color:{{ $statusFilter==='' ? '#16a34a' : '#6b7280' }}">
+          Tất cả
+        </button>
+        <button wire:click="$set('statusFilter','pending')"
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='pending' ? '#d97706' : '#e5e7eb' }};background:{{ $statusFilter==='pending' ? '#fffbeb' : '#fff' }};color:{{ $statusFilter==='pending' ? '#d97706' : '#6b7280' }};display:inline-flex;align-items:center;gap:6px">
+          Chờ duyệt
+          @if($pendingCount > 0)
+            <span style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;line-height:1.6">{{ $pendingCount }}</span>
+          @endif
+        </button>
+        <button wire:click="$set('statusFilter','approved')"
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='approved' ? '#16a34a' : '#e5e7eb' }};background:{{ $statusFilter==='approved' ? '#f0fdf4' : '#fff' }};color:{{ $statusFilter==='approved' ? '#16a34a' : '#6b7280' }}">
+          Đã duyệt
+        </button>
+        <button wire:click="$set('statusFilter','rejected')"
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='rejected' ? '#dc2626' : '#e5e7eb' }};background:{{ $statusFilter==='rejected' ? '#fef2f2' : '#fff' }};color:{{ $statusFilter==='rejected' ? '#dc2626' : '#6b7280' }}">
+          Từ chối
+        </button>
+      </div>
 
-     
-      <div class="toolbar">
-      <input class="tb-in" wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm theo tiêu đề, công ty...">       
-        <select class="tb-sel" wire:model.live="type">
+      <x-toolbar>
+        <x-slot:search>
+          <x-toolbar.search placeholder="Tìm theo tiêu đề, công ty..." />
+        </x-slot:search>
+        <x-toolbar.select model="type">
           <option value="">Tất cả loại</option>
           <option value="full-time">Full-time</option>
           <option value="part-time">Part-time</option>
           <option value="internship">Thực tập</option>
-        </select>
-      </div>
+        </x-toolbar.select>
+        <x-toolbar.per-page />
+      </x-toolbar>
 
-      <div class="card">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:30%">Tin tuyển dụng</th>
-              <th>Công ty</th>
-              <th>Loại</th>
-              <th>Lương</th>
-              <th>Kinh nghiệm</th>
-              <th>Hiển thị</th>
-              <th>Ngày đăng</th>
-              <th>Hạn nộp</th>
-              <th style="width:44px"></th>
-            </tr>
-          </thead>
-          <tbody>
-            @forelse($jobs as $job)
-              <tr wire:key="job-{{ $job->id }}">
-                <td>
-                  <div style="display:flex;align-items:center;gap:9px">
-                    <div style="min-width:0">
-                      <div
-                        style="font-weight:500;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">
-                        {{ $job->title }}</div>
-                      <div style="font-size:11px;color:#9ca3af">{{ $job->location ?? '—' }}@if($job->field) ·
-                      {{ $job->field }}@endif</div>
-                    </div>
-                  </div>
-                </td>
-                <td style="font-weight:500">{{ $job->company }}</td>
-                <td><span
-                    class="badge {{ $job->type === 'internship' ? 'by' : ($job->type === 'part-time' ? 'bp' : 'bg') }}">{{ $job->type_label }}</span>
-                </td>
-                <td style="color:#6b7280">
-                    @if($job->min_salary || $job->max_salary)
-                        {{ number_format($job->min_salary ?? 0) }}
-                        -
-                        {{ number_format($job->max_salary ?? 0) }}
-                    @else
-                        —
-                    @endif
-                </td>
-                <td style="color:#6b7280">{{ $job->experience_required ? $job->experience_required . ' năm' : '—' }}</td>
-                <td><button wire:click="toggleActive({{ $job->id }})"
-                    class="tog {{ $job->is_active ? 'on' : 'off' }}"></button></td>
-                <td style="color:#9ca3af;white-space:nowrap">{{ $job->created_at->format('d/m/Y') }}</td>
-                <td style="color:#9ca3af;white-space:nowrap">{{ $job->deadline ? \Carbon\Carbon::parse($job->deadline)->format('d/m/Y') : '—' }}</td>
-                <td>
-                  <div x-data="{
-                    open: false,
-                    above: false,
-                    toggle(btn) {
-                      const rect = btn.getBoundingClientRect();
-                      this.above = (window.innerHeight - rect.bottom) < 130;
-                      this.open = !this.open;
-                    }
-                  }" class="dd-wrap">
-                    <button class="dd-btn" @click="toggle($el)">
-                      <span class="dd-dot"></span>
-                      <span class="dd-dot"></span>
-                      <span class="dd-dot"></span>
-                    </button>
-                    <div class="dd-menu"
-                         x-show="open"
-                         @click.outside="open=false"
-                         x-transition
-                         :style="above
-                           ? 'bottom: calc(100% + 6px); top: auto; right: 0;'
-                           : 'top: calc(100% + 6px); bottom: auto; right: 0;'">
-                      <div class="dd-item" @click="open=false" wire:click="openDetail({{ $job->id }})"> <i class="fa-solid fa-eye"></i> Xem chi tiết</div>
-                      <div class="dd-item" @click="open=false" wire:click="openEdit({{ $job->id }})"> <i class="fa-solid fa-edit"></i> Chỉnh sửa </div>
-                      <div class="dd-sep"></div>
-                      <div class="dd-item red" @click="open=false" wire:click="delete({{ $job->id }})"> <i class="fa-solid fa-trash"></i> Xóa</div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            @empty
-              <tr>
-                <td colspan="9" style="text-align:center;color:#9ca3af;padding:2rem">Không tìm thấy tin nào</td>
-              </tr>
-            @endforelse
-          </tbody>
-        </table>
-        <div class="pager">
-          <span>Hiển thị {{ $jobs->firstItem() ?? 0 }}–{{ $jobs->lastItem() ?? 0 }} trong {{ $jobs->total() }} tin</span>
-          {{ $jobs->links() }}
-        </div>
-      </div>
+      <x-table minWidth="900px">
+        <x-slot:heading>
+          <th style="width:4%">STT</th>
+          <th style="width:22%">Tin tuyển dụng</th>
+          <th style="width:12%">Công ty</th>
+          <th style="width:8%">Loại</th>
+          <th style="width:10%">Trạng thái</th>
+          <th style="width:11%">Lương</th>
+          <th style="width:7%">Hiển thị</th>
+          <th style="width:9%">Ngày nộp</th>
+          <th style="width:9%">Hạn nộp</th>
+          <th style="width:8%"></th>
+        </x-slot:heading>
+
+        @forelse($jobs as $job)
+        @php
+          $typeColor   = match($job->type) { 'internship'=>'yellow', 'part-time'=>'purple', default=>'green' };
+          $statusColor = $job->status_color;
+        @endphp
+        <tr wire:key="job-{{ $job->id }}" style="{{ $job->status==='pending' ? 'background:#fffbeb' : '' }}">
+          <td style="color:#94a3b8;font-size:12px;font-weight:600">{{ $loop->iteration }}</td>
+          <td>
+            <div style="font-weight:500;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px">{{ $job->title }}</div>
+            <div style="font-size:11px;color:#9ca3af">{{ $job->location ?? '—' }}@if($job->field) · {{ $job->field }}@endif</div>
+          </td>
+          <td style="font-weight:500;font-size:13px">{{ $job->company }}</td>
+          <td><x-badge :color="$typeColor">{{ $job->type_label }}</x-badge></td>
+          <td><x-badge :color="$statusColor">{{ $job->status_label }}</x-badge></td>
+          <td style="font-size:13px;color:#6b7280">
+            @if($job->min_salary || $job->max_salary)
+              {{ number_format($job->min_salary ?? 0) }}–{{ number_format($job->max_salary ?? 0) }}
+            @else —
+            @endif
+          </td>
+          <td>
+            @if($job->status === 'approved')
+              <button wire:click="toggleActive({{ $job->id }})" class="tog {{ $job->is_active ? 'on' : 'off' }}"></button>
+            @else
+              <span style="font-size:12px;color:#d1d5db">—</span>
+            @endif
+          </td>
+          <td style="font-size:12px;color:#9ca3af;white-space:nowrap">{{ $job->created_at->format('d/m/Y') }}</td>
+          <td style="font-size:12px;color:#9ca3af;white-space:nowrap">{{ $job->deadline ? \Carbon\Carbon::parse($job->deadline)->format('d/m/Y') : '—' }}</td>
+          <td>
+            <x-table.action-btn>
+              <div class="adm-dd-item" wire:click="openDetail({{ $job->id }})">
+                <i class="fa-solid fa-eye"></i> Xem chi tiết
+              </div>
+              @if($job->status === 'pending')
+                <div class="adm-dd-sep"></div>
+                <div class="adm-dd-item" wire:click="approve({{ $job->id }})" style="color:#16a34a;font-weight:600">
+                  <i class="fa-solid fa-check"></i> Duyệt
+                </div>
+                <div class="adm-dd-item red" wire:click="reject({{ $job->id }})">
+                  <i class="fa-solid fa-xmark"></i> Từ chối
+                </div>
+              @else
+                <div class="adm-dd-item" wire:click="openEdit({{ $job->id }})">
+                  <i class="fa-solid fa-edit"></i> Chỉnh sửa
+                </div>
+              @endif
+              <div class="adm-dd-sep"></div>
+              <div class="adm-dd-item red" wire:click="delete({{ $job->id }})" wire:confirm="Xóa tin này?">
+                <i class="fa-solid fa-trash"></i> Xóa
+              </div>
+            </x-table.action-btn>
+          </td>
+        </tr>
+        @empty
+        <tr><td colspan="10" class="adm-tbl-empty">Không tìm thấy tin nào.</td></tr>
+        @endforelse
+
+        <x-slot:paginationInfo>Hiển thị {{ $jobs->firstItem() ?? 0 }}–{{ $jobs->lastItem() ?? 0 }} / {{ $jobs->total() }} tin</x-slot:paginationInfo>
+        <x-slot:pagination>{{ $jobs->links() }}</x-slot:pagination>
+      </x-table>
     </div>
 
     @if($showDetail && $detail)
@@ -481,8 +347,10 @@ td {
               {{ $detail->location }}@endif</div>
               <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
                 <span class="badge {{ $detail->type === 'internship' ? 'by' : 'bg' }}">{{ $detail->type_label }}</span>
-                <span class="badge {{ $detail->is_active ? 'bg' : '' }}"
-                  style="{{ $detail->is_active ? '' : 'background:#f3f4f6;color:#9ca3af' }}">{{ $detail->is_active ? 'Đang hiển thị' : 'Đã ẩn' }}</span>
+                @php
+                  $sc = match($detail->status) { 'approved'=>'background:#dcfce7;color:#16a34a', 'rejected'=>'background:#fee2e2;color:#dc2626', default=>'background:#fef9c3;color:#ca8a04' };
+                @endphp
+                <span class="badge" style="{{ $sc }}">{{ $detail->status_label }}</span>
               </div>
             </div>
           </div>
@@ -509,7 +377,7 @@ td {
               <p class="{{ $detail->deadline ? '' : 'mt' }}">{{ $detail->deadline ? \Carbon\Carbon::parse($detail->deadline)->format('d/m/Y') : 'Chưa cập nhật' }}</p>
             </div>
             <div class="dg"><label>Email liên hệ</label>
-              <!-- <p class="{{ $detail->contact_email ? '' : 'mt' }}">{{ $detail->contact_email ?? 'Chưa cập nhật' }}</p> -->
+              <p class="{{ $detail->contact_email ? '' : 'mt' }}">{{ $detail->contact_email ?? 'Chưa cập nhật' }}</p>
             </div>
             <div class="dg"><label>Ngày đăng</label>
               <p>{{ $detail->created_at->format('d/m/Y') }}</p>
@@ -522,11 +390,24 @@ td {
             <div class="d-desc">{{ $detail->description }}</div>
           @endif
           <div class="d-footer">
-            <button class="btn-xs btn-del-sm" wire:click="delete({{ $detail->id }})" wire:confirm="Xóa tin này?"><i class="fa-solid fa-trash"></i> Xóa
-              tin</button>
+            <button class="btn-xs btn-del-sm" wire:click="delete({{ $detail->id }})" wire:confirm="Xóa tin này?">
+              <i class="fa-solid fa-trash"></i> Xóa
+            </button>
             <div style="display:flex;gap:8px">
               <button class="btn-xs" wire:click="$set('showDetail', false)">Đóng</button>
-              <button class="btn-prim" wire:click="openEdit({{ $detail->id }})"><i class="fa-solid fa-edit"></i> Chỉnh sửa</button>
+              @if($detail->status === 'pending')
+                <button class="btn-xs" wire:click="reject({{ $detail->id }})"
+                  style="border-color:#fca5a5;color:#dc2626;background:#fef2f2">
+                  <i class="fa-solid fa-xmark"></i> Từ chối
+                </button>
+                <button class="btn-prim" wire:click="approve({{ $detail->id }})">
+                  <i class="fa-solid fa-check"></i> Duyệt tin
+                </button>
+              @else
+                <button class="btn-prim" wire:click="openEdit({{ $detail->id }})">
+                  <i class="fa-solid fa-edit"></i> Chỉnh sửa
+                </button>
+              @endif
             </div>
           </div>
         </div>

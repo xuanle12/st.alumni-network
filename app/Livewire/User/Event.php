@@ -32,7 +32,7 @@ class Event extends Component
             ->exists();
 
         if ($exists) {
-            session()->flash('info', 'Bạn đã đăng ký rồi');
+            $this->dispatch('toast', type: 'info', message: 'Bạn đã đăng ký rồi');
             return;
         }
 
@@ -42,7 +42,7 @@ class Event extends Component
             'status'   => 'registered',
         ]);
 
-        session()->flash('success', 'Đăng ký thành công');
+        $this->dispatch('toast', type: 'success', message: 'Đăng ký thành công');
     }
 
     public function unregister(int $eventId): void
@@ -51,7 +51,7 @@ class Event extends Component
             ->where('user_id', Auth::id())
             ->update(['status' => 'cancelled']);
 
-        session()->flash('success', 'Đã huỷ đăng ký');
+        $this->dispatch('toast', type: 'success', message: 'Đã huỷ đăng ký');
     }
 
     public function render()

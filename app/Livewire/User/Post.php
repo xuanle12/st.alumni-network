@@ -89,8 +89,7 @@ class Post extends Component
             'status'   => $this->status,
         ]);
 
-        session()->flash('success',
-            $this->status === 'published' ? 'Bài viết đã được đăng!' : 'Đã lưu nháp.'
+        $this->dispatch('toast', type: 'success', message: $this->status === 'published' ? 'Bài viết đã được đăng!' : 'Đã lưu nháp.'
         );
 
         $this->redirect(route('csv'), navigate: true);
@@ -100,3 +99,4 @@ class Post extends Component
         return view('livewire.user.post');
     }
 }
+

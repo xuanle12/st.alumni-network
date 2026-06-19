@@ -16,6 +16,7 @@ class Csv extends Component
     public string $filterKhoa   = '';
     public string $filterNam    = '';
     public string $filterStatus = '';
+    public int    $perPage      = 15;
 
     public bool  $showModal = false;
     public ?int  $editId    = null;
@@ -37,6 +38,7 @@ class Csv extends Component
     public function updatingFilterKhoa()  { $this->resetPage(); }
     public function updatingFilterNam()   { $this->resetPage(); }
     public function updatingFilterStatus(){ $this->resetPage(); }
+    public function updatingPerPage(): void { $this->resetPage(); }
 
     public function openAdd(): void
     {
@@ -95,10 +97,10 @@ class Csv extends Component
 
         if ($this->editId) {
             DB::table('ds_csv')->where('id', $this->editId)->update($data);
-            session()->flash('success', 'Đã cập nhật thành công!');
+            $this->dispatch('toast', type: 'success', message: 'Đã cập nhật thành công!');
         } else {
             DB::table('ds_csv')->insert(array_merge($data, ['created_at' => now()]));
-            session()->flash('success', 'Đã thêm thành công!');
+            $this->dispatch('toast', type: 'success', message: 'Đã thêm thành công!');
         }
 
         $this->closeModal();
@@ -119,7 +121,7 @@ class Csv extends Component
     public function quickApprove(int $userId): void
     {
         Profile::where('user_id', $userId)->update(['status' => 'active']);
-        session()->flash('success', 'Đã duyệt hồ sơ.');
+        $this->dispatch('toast', type: 'success', message: 'Đã duyệt hồ sơ.');
     }
 
     public function confirmDelete(int $id): void
@@ -142,7 +144,7 @@ class Csv extends Component
     public function destroy(): void
     {
         DB::table('ds_csv')->where('id', $this->deleteId)->delete();
-        session()->flash('success', 'Đã xoá thành công!');
+        $this->dispatch('toast', type: 'success', message: 'Đã xoá thành công!');
         $this->closeDelete();
     }
 
@@ -165,7 +167,7 @@ class Csv extends Component
             ->when($this->filterStatus === 'co_tk',   fn($q) => $q->whereIn('msv',    $msvCoTaiKhoan->keys()))
             ->when($this->filterStatus === 'chua_tk', fn($q) => $q->whereNotIn('msv', $msvCoTaiKhoan->keys()))
             ->orderByDesc('id')
-            ->paginate(15);
+            ->paginate($this->perPage);
 
         $namList = DB::table('ds_csv')
             ->select('nam_tot_nghiep')

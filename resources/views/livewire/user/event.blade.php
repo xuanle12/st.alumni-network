@@ -82,7 +82,6 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
 .main-col { min-width: 0; }
 
 /* Flash */
-.flash-s { background: #f0fdf4; border: 1px solid #86efac; color: #166534; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; }
 .flash-e { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; }
 
 
@@ -353,14 +352,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
 }
 .btn-reset:hover { background: #fee2e2; border-color: #fca5a5; color: #dc2626; }
 
- .pagination { display: flex; gap: 5px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
-.pg-btn {
-  padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;
-  border: 1px solid var(--border); background: #fff; color: var(--muted);
-  cursor: pointer; font-family: 'Barlow', sans-serif; transition: .15s;
-}
-.pg-btn:hover { border-color: var(--fita2); color: var(--fita); }
-.pg-btn.active { background: var(--fita); color: #fff; border-color: var(--fita); }
+.pagination { margin-top: 8px; }
 
 /* ── RESPONSIVE ── */
 @media(max-width: 900px) {
@@ -389,9 +381,6 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   <div class="main-col">
 
   
-    @if(session('success'))
-      <div class="flash-s"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
-    @endif
     @if(session('error'))
       <div class="flash-e"><i class="fa-solid fa-times"></i> {{ session('error') }}</div>
     @endif
@@ -415,7 +404,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
           @else
             <i class="fa-solid fa-calendar-star"></i>
           @endif
-          <div class="featured-badge">⭐ Nổi bật</div>
+          <div class="featured-badge"><i class="fa-solid fa-star"></i> Nổi bật</div>
           <div class="featured-date-box">
             <div class="day">{{ $featured->day }}</div>
             <div class="mon">{{ $featured->month_label }}</div>
@@ -542,8 +531,8 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
       </div>
 
       
-      @if(method_exists($gridEvents, 'links'))
-        <div class="pagination">{{ $gridEvents->links() }}</div>
+      @if($gridEvents->hasPages())
+        <div class="pgn-row">{{ $gridEvents->links() }}</div>
       @endif
 
     @else

@@ -73,19 +73,6 @@ body{
   color:var(--gray-soft);
   margin-top:4px;
 }
-.flash-ok{
-  background:var(--success-bg);
-  border:1px solid #86efac;
-  color:#166534;
-  padding:12px 14px;
-  border-radius:12px;
-  font-size:14px;
-  margin-bottom:1rem;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -209,138 +196,9 @@ body{
 }
 
 .chart-wrap{
-  height:170px;
-  display:flex;
-  align-items:flex-end;
-  gap:8px;
-  padding-top:10px;
+  height:260px;
 }
 
-.bar-col{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:5px;
-}
-
-.bar{
-  width:100%;
-  border-radius:8px 8px 3px 3px;
-  transition:.18s ease;
-}
-
-.bar:hover{
-  opacity:.85;
-  transform:translateY(-2px);
-}
-
-.bar-lbl{
-  font-size:13px;
-  color:var(--gray-soft);
-  font-weight:500;
-}
-
-.leg{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  justify-content:center;
-  height:100%;
-}
-
-.leg-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:15px;
-  color:#334155;
-  background:#f8fbff;
-  border:1px solid #edf3fa;
-  border-radius:12px;
-  padding:10px 12px;
-}
-
-.leg-dot{
-  width:10px;
-  height:10px;
-  border-radius:3px;
-  flex-shrink:0;
-}
-
-.leg-num{
-  margin-left:auto;
-  font-weight:700;
-  color:#111827;
-  font-size:13px;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-thead th{
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  color:var(--gray-soft);
-  padding:10px 8px;
-  text-align:left;
-  border-bottom:1px solid var(--border);
-}
-
-tbody tr{
-  border-bottom:1px solid #f1f5f9;
-  transition:.15s ease;
-}
-
-tbody tr:last-child{
-  border-bottom:none;
-}
-
-tbody tr:hover{
-  background:#f8fbff;
-}
-
-td{
-  padding:11px 8px;
-  font-size:15px;
-  color:#334155;
-  vertical-align:middle;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10px;
-  font-weight:700;
-  padding:5px 9px;
-  border-radius:999px;
-  letter-spacing:.02em;
-}
-
-.b-yellow{
-  background:#fff7ed;
-  color:#b45309;
-}
-
-.b-green{
-  background:#ecfdf5;
-  color:#15803d;
-}
-
-.b-red{
-  background:#fef2f2;
-  color:#b91c1c;
-}
-
-.b-gray{
-  background:#f3f4f6;
-  color:#6b7280;
-}
 
 .btn-xs{
   font-size:13px;
@@ -497,10 +355,6 @@ td{
     </div>
   </div>
  
-  @if(session('success'))
-    <div class="flash-ok"><i class="fa-solid fa-check"></i> {{ session('success') }}</div>
-  @endif
- 
   <div class="stats">
     <div class="stat">
       <div class="stat-top">
@@ -562,17 +416,11 @@ td{
       <div class="card-hd">
         <div class="card-title">Đăng ký theo tháng ({{ now()->year }})</div>
       </div>
-      <div class="chart-wrap" id="bar-chart"
-           data-vals="{{ json_encode($monthlyStats) }}">
-      </div>
+      <div class="chart-wrap" id="bar-chart" wire:ignore></div>
     </div>
     <div class="card">
       <div class="card-hd"><div class="card-title">Trạng thái hồ sơ</div></div>
-      <div class="leg">
-        <div class="leg-row"><div class="leg-dot" style="background:#3b82f6"></div>Hoạt động<span class="leg-num">{{ number_format($statusStats['active']) }}</span></div>
-        <div class="leg-row"><div class="leg-dot" style="background:#d97706"></div>Chờ duyệt<span class="leg-num">{{ number_format($statusStats['pending']) }}</span></div>
-        <div class="leg-row"><div class="leg-dot" style="background:#d1d5db"></div>Không HĐ<span class="leg-num">{{ number_format($statusStats['inactive']) }}</span></div>
-      </div>
+      <div id="donut-chart" wire:ignore style="height:260px"></div>
     </div>
   </div>
  
@@ -583,40 +431,36 @@ td{
         <div class="card-title">Hồ sơ gần đây</div>
         <a href="#" class="btn-xs">Xem tất cả</a>
       </div>
-      <table>
-        <thead>
-          <tr><th>Họ tên</th><th>MSV</th><th>Lớp</th><th>Ngày</th><th>Trạng thái</th><th></th></tr>
-        </thead>
-        <tbody>
-          @forelse($recentProfiles as $profile)
-          <tr>
-            <td>{{ $profile->user?->name ?? '—' }}</td>
-            <td style="color:#9ca3af">{{ $profile->msv ?? '—' }}</td>
-            <td>{{ $profile->lop ?? '—' }}</td>
-            <td style="color:#9ca3af">{{ $profile->created_at->format('d/m') }}</td>
-            <td>
-              @if($profile->status === 'active')
-                <span class="badge b-green">Hoạt động</span>
-              @elseif($profile->status === 'pending')
-                <span class="badge b-yellow">Chờ duyệt</span>
-              @else
-                <span class="badge b-red">Từ chối</span>
-              @endif
-            </td>
-            <td>
-              @if($profile->status === 'pending')
-                <div style="display:flex;gap:4px">
-                  <button wire:click="approve({{ $profile->id }})" class="btn-xs btn-ok"><i class="fa-solid fa-check"></i></button>
-                  <button wire:click="reject({{ $profile->id }})" class="btn-xs btn-no"><i class="fa-solid fa-times"></i></button>
-                </div>
-              @endif
-            </td>
-          </tr>
-          @empty
-            <tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:1rem">Chưa có dữ liệu</td></tr>
-          @endforelse
-        </tbody>
-      </table>
+      <x-table :bare="true">
+        <x-slot:heading>
+          <th>STT</th><th>Họ tên</th><th>MSV</th><th>Lớp</th><th>Ngày</th><th>Trạng thái</th><th></th>
+        </x-slot:heading>
+
+        @forelse($recentProfiles as $profile)
+        @php
+          $pColor = match($profile->status) { 'active'=>'green', 'pending'=>'yellow', default=>'red' };
+          $pLabel = match($profile->status) { 'active'=>'Hoạt động', 'pending'=>'Chờ duyệt', default=>'Từ chối' };
+        @endphp
+        <tr>
+          <td style="color:#94a3b8;font-size:12px;font-weight:600">{{ $loop->iteration }}</td>
+          <td>{{ $profile->user?->name ?? '—' }}</td>
+          <td style="color:#9ca3af">{{ $profile->msv ?? '—' }}</td>
+          <td>{{ $profile->lop ?? '—' }}</td>
+          <td style="color:#9ca3af">{{ $profile->created_at->format('d/m') }}</td>
+          <td><x-badge :color="$pColor">{{ $pLabel }}</x-badge></td>
+          <td>
+            @if($profile->status === 'pending')
+              <div style="display:flex;gap:4px">
+                <button wire:click="approve({{ $profile->id }})" class="btn-xs btn-ok"><i class="fa-solid fa-check"></i></button>
+                <button wire:click="reject({{ $profile->id }})" class="btn-xs btn-no"><i class="fa-solid fa-times"></i></button>
+              </div>
+            @endif
+          </td>
+        </tr>
+        @empty
+          <tr><td colspan="7" class="adm-tbl-empty">Chưa có dữ liệu</td></tr>
+        @endforelse
+      </x-table>
     </div>
  
     <div class="card">
@@ -642,22 +486,139 @@ td{
 </div>
  
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const wrap = document.getElementById('bar-chart');
-  if (!wrap) return;
-  const vals = JSON.parse(wrap.dataset.vals);
-  const months = ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12'];
-  const max = Math.max(...vals, 1);
-  const currentMonth = new Date().getMonth();
-  months.forEach((m, i) => {
-    const col = document.createElement('div');
-    col.className = 'bar-col';
-    const h = vals[i] ? Math.round((vals[i] / max) * 100) : 3;
-    const clr = i === currentMonth ? '#3b82f6' : vals[i] === 0 ? '#eaecf0' : '#bfdbfe';
-    col.innerHTML = `<div class="bar" style="height:${h}px;background:${clr}" title="${vals[i]} đăng ký"></div><div class="bar-lbl">${m}</div>`;
-    wrap.appendChild(col);
-  });
-});
+(function () {
+  var _barRoot   = null;
+  var _donutRoot = null;
+
+  var MONTHLY = @json($monthlyStats);
+  var STATUS  = @json($statusStats);
+
+  function initCharts() {
+    if (!document.getElementById('bar-chart')) return;
+
+    // dispose cũ nếu có
+    if (_barRoot)   { _barRoot.dispose();   _barRoot   = null; }
+    if (_donutRoot) { _donutRoot.dispose(); _donutRoot = null; }
+
+    // ── BAR CHART ──────────────────────────────────────────────
+    _barRoot = am5.Root.new('bar-chart');
+    _barRoot._logo && _barRoot._logo.dispose();
+    _barRoot.setThemes([am5themes_Animated.new(_barRoot)]);
+
+    var chart = _barRoot.container.children.push(
+      am5xy.XYChart.new(_barRoot, {
+        panX: false, panY: false,
+        wheelX: 'none', wheelY: 'none',
+        paddingLeft: 0, paddingRight: 8, paddingBottom: 0,
+      })
+    );
+    chart.zoomOutButton.set('forceHidden', true);
+
+    var xRend = am5xy.AxisRendererX.new(_barRoot, { minGridDistance: 10, cellStartLocation: 0.15, cellEndLocation: 0.85 });
+    xRend.grid.template.setAll({ stroke: am5.color(0xe2e8f0) });
+    xRend.labels.template.setAll({ fontSize: 12, fill: am5.color(0x94a3b8) });
+
+    var xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(_barRoot, { categoryField: 'month', renderer: xRend })
+    );
+
+    var yRend = am5xy.AxisRendererY.new(_barRoot, {});
+    yRend.grid.template.setAll({ stroke: am5.color(0xe2e8f0), strokeDasharray: [3, 3] });
+    yRend.labels.template.setAll({ fontSize: 11, fill: am5.color(0x94a3b8) });
+
+    chart.yAxes.push(
+      am5xy.ValueAxis.new(_barRoot, { renderer: yRend, min: 0, strictMinMax: true })
+    );
+
+    var series = chart.series.push(
+      am5xy.ColumnSeries.new(_barRoot, {
+        xAxis: xAxis,
+        yAxis: chart.yAxes.getIndex(0),
+        valueYField: 'value',
+        categoryXField: 'month',
+        tooltip: am5.Tooltip.new(_barRoot, { labelText: '{categoryX}: [bold]{valueY}[/] đăng ký' }),
+      })
+    );
+    series.columns.template.setAll({
+      cornerRadiusTL: 6, cornerRadiusTR: 6,
+      strokeOpacity: 0, maxWidth: 36,
+    });
+
+    var curMonth = new Date().getMonth();
+    series.columns.template.adapters.add('fill', function (fill, target) {
+      var ctx = target.dataItem && target.dataItem.dataContext;
+      if (!ctx) return fill;
+      if (ctx.current) return am5.color(0x3b82f6);
+      if (!ctx.value)  return am5.color(0xe2e8f0);
+      return am5.color(0xbfdbfe);
+    });
+
+    var months  = ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12'];
+    var barData = MONTHLY.map(function (v, i) {
+      return { month: months[i], value: v, current: i === curMonth };
+    });
+
+    xAxis.data.setAll(barData);
+    series.data.setAll(barData);
+    series.appear(1000);
+    chart.appear(1000, 100);
+
+    // ── DONUT CHART ────────────────────────────────────────────
+    _donutRoot = am5.Root.new('donut-chart');
+    _donutRoot._logo && _donutRoot._logo.dispose();
+    _donutRoot.setThemes([am5themes_Animated.new(_donutRoot)]);
+
+    var pie = _donutRoot.container.children.push(
+      am5percent.PieChart.new(_donutRoot, {
+        innerRadius: am5.percent(62),
+        layout: _donutRoot.verticalLayout,
+      })
+    );
+
+    var pieSeries = pie.series.push(
+      am5percent.PieSeries.new(_donutRoot, {
+        valueField: 'value', categoryField: 'category', alignLabels: false,
+      })
+    );
+    pieSeries.labels.template.setAll({ forceHidden: true });
+    pieSeries.ticks.template.setAll({ forceHidden: true });
+    pieSeries.slices.template.setAll({ strokeWidth: 2, stroke: am5.color(0xffffff), cornerRadius: 4 });
+    pieSeries.get('colors').set('colors', [
+      am5.color(0x3b82f6),
+      am5.color(0xf59e0b),
+      am5.color(0xd1d5db),
+    ]);
+
+    var total = (STATUS.active || 0) + (STATUS.pending || 0) + (STATUS.inactive || 0);
+    pieSeries.data.setAll([
+      { category: 'Hoạt động', value: STATUS.active  || 0 },
+      { category: 'Chờ duyệt', value: STATUS.pending || 0 },
+      { category: 'Không HĐ',  value: STATUS.inactive || 0 },
+    ]);
+
+    // nhãn giữa
+    pie.seriesContainer.children.push(am5.Label.new(_donutRoot, {
+      text: '[fontSize:22px fontWeight:700 fill:#0f172a]' + total + '[/]\n[fontSize:11px fill:#94a3b8]tổng hồ sơ[/]',
+      textAlign: 'center',
+      centerX: am5.percent(50), centerY: am5.percent(50),
+      x: am5.percent(50), y: am5.percent(50),
+      oversizedBehavior: 'fit',
+    }));
+
+    var legend = pie.children.push(am5.Legend.new(_donutRoot, {
+      centerX: am5.percent(50), x: am5.percent(50), marginTop: 12,
+    }));
+    legend.labels.template.setAll({ fontSize: 12, fill: am5.color(0x475569) });
+    legend.valueLabels.template.setAll({ fontSize: 12, fontWeight: '700', fill: am5.color(0x0f172a) });
+    legend.markers.template.setAll({ width: 10, height: 10, borderRadius: 3 });
+    legend.data.setAll(pieSeries.dataItems);
+
+    pieSeries.appear(1000, 100);
+  }
+
+  document.addEventListener('DOMContentLoaded', initCharts);
+  document.addEventListener('livewire:navigated', initCharts);
+})();
 </script>
 </div>
 </div>

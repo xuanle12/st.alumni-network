@@ -4,8 +4,8 @@
 .aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;min-height:100vh;background:#f8fafc}
 .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.tt{font-size:17px;font-weight:700;color:#0f172a}
-.ts{font-size:12px;color:#64748b;margin-top:2px}
+.tt{font-size:20px;font-weight:700;color:#0f172a}
+.ts{font-size:13px;color:#64748b;margin-top:2px}
 .btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#16a34a;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .btn-add:hover{background:#15803d}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
@@ -34,48 +34,12 @@
 }
 .ic-b{background:#f0fdf4}.ic-g{background:#f0fdf4}.ic-p{background:#faf5ff}.ic-a{background:#fffbeb}
 .n-b{color:#0f172a}.n-g{color:#16a34a}.n-p{color:#7c3aed}.n-a{color:#d97706}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap}
-.sw{flex:1;min-width:180px;position:relative}
-.sw input{width:100%;padding:9px 12px 9px 34px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit}
-.sw input:focus{outline:none;border-color:#3b82f6}
-.sw input::placeholder{color:#94a3b8}
-.sw-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8}
-.sel{padding:9px 10px;background:#fff;border:1px solid #e2e8f0;border-radius:9px;font-size:13px;color:#475569;font-family:inherit;min-width:140px}
-.sel:focus{outline:none;border-color:#3b82f6}
-.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.tbl{width:100%;border-collapse:collapse;table-layout:fixed;min-width:680px}
-.tbl th{padding:10px 14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;text-align:left;background:#f8fafc;border-bottom:1px solid #e2e8f0;white-space:nowrap}
-.tbl td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
-.tbl tr:last-child td{border-bottom:none}
-.tbl tbody tr:hover td{background:#fafbfc}
 .clogo{width:36px;height:36px;border-radius:9px;background:#f1f5f9;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#475569;flex-shrink:0}
 .crow{display:flex;align-items:center;gap:10px}
 .cn{font-size:13px;font-weight:600;color:#0f172a}
 .ce{font-size:11px;color:#94a3b8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
 .ct{font-size:12px;font-weight:500;color:#0f172a}
 .cs{font-size:11px;color:#94a3b8;margin-top:1px}
-.bd{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap}
-.bd::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.bd-g{background:#f0fdf4;color:#15803d}.bd-g::before{background:#16a34a}
-.bd-a{background:#fffbeb;color:#b45309}.bd-a::before{background:#d97706}
-.bd-r{background:#fef2f2;color:#b91c1c}.bd-r::before{background:#dc2626}
-.jc{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:#0f172a}
-.jc-dot{width:20px;height:20px;border-radius:6px;background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.dot-wrap{position:relative;display:inline-block}
-.dot-btn{width:30px;height:30px;border-radius:7px;border:1px solid #e2e8f0;background:transparent;cursor:pointer;color:#94a3b8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;transition:background .15s,border-color .15s}
-.dot-btn:hover,.dot-btn[aria-expanded="true"]{background:#f1f5f9;border-color:#cbd5e1;color:#475569}
-.dot-btn span{display:block;width:13px;height:1.5px;background:currentColor;border-radius:2px}
-.dropdown{display:none;position:fixed;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:172px;z-index:9999;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.13)}
-.dropdown.open{display:block;animation:ddIn .14s ease}
-@keyframes ddIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.dd-item{padding:9px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;color:#334155;user-select:none;transition:background .1s}
-.dd-item:hover{background:#f8fafc}
-.dd-item.green{color:#15803d}.dd-item.green:hover{background:#f0fdf4}
-.dd-item.red{color:#b91c1c}.dd-item.red:hover{background:#fef2f2}
-.dd-sep{height:1px;background:#f1f5f9;margin:3px 0}
-.pgn{display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;border-top:1px solid #f1f5f9;background:#fafafa;flex-wrap:wrap;gap:8px}
-.pgn-info{font-size:12px;color:#94a3b8}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s}
 .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}
 .btn-ghost:hover{background:#f8fafc}
@@ -128,9 +92,6 @@
   .aw{padding:1rem}
   .stats{grid-template-columns:repeat(2,1fr);gap:8px}
   .stat-n{font-size:22px}
-  .toolbar{flex-direction:column}
-  .sw{width:100%}
-  .sel{width:100%}
   .tbl th:nth-child(5),.tbl td:nth-child(5){display:none}
   .dropdown{min-width:190px}
 }
@@ -160,10 +121,6 @@
 <div>
 <div class="aw">
 
-@if(session('success'))
-  <div class="flash">✓ {{ session('success') }}</div>
-@endif
-
 <div class="topbar">
   <div>
     <div class="tt">Doanh nghiệp</div>
@@ -174,123 +131,90 @@
 
 
 
-<div class="toolbar">
-  <div class="sw">
-    <span class="sw-ic"><i class="fa-solid fa-magnifying-glass"></i></span>
-    <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tên, email, lĩnh vực...">
-  </div>
-  <select wire:model.live="filterStatus" class="sel">
+<x-toolbar>
+  <x-slot:search>
+    <x-toolbar.search placeholder="Tìm tên, email, lĩnh vực..." />
+  </x-slot:search>
+  <x-toolbar.select model="filterStatus">
     <option value="">Tất cả trạng thái</option>
     <option value="active">Đang hợp tác</option>
     <option value="pending">Chờ duyệt</option>
     <option value="inactive">Ngừng hợp tác</option>
-  </select>
-  <select wire:model.live="filterField" class="sel">
+  </x-toolbar.select>
+  <x-toolbar.select model="filterField">
     <option value="">Tất cả lĩnh vực</option>
     <option value="CNTT">CNTT</option>
     <option value="Tài chính">Tài chính</option>
     <option value="Thương mại">Thương mại</option>
     <option value="Sản xuất">Sản xuất</option>
     <option value="Giáo dục">Giáo dục</option>
-  </select>
-</div>
+  </x-toolbar.select>
+  <x-toolbar.per-page />
+</x-toolbar>
 
-<div class="tcard">
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th style="width:30%">Doanh nghiệp</th>
-          <th style="width:14%">Lĩnh vực</th>
-          <!-- <th style="width:11%">Tin đăng</th> -->
-          <th style="width:13%">Trạng thái</th>
-          <th style="width:22%">Liên hệ</th>
-          <th style="width:10%;text-align:right">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        @forelse($companies as $c)
-        @php
-          $bc = match($c->status) { 'active' => 'bd-g', 'pending' => 'bd-a', default => 'bd-r' };
-          $bl = match($c->status) { 'active' => 'Đang hợp tác', 'pending' => 'Chờ duyệt', default => 'Ngừng HT' };
-        @endphp
-        <tr>
-          <td>
-            <div class="crow">
-              <div class="clogo">{{ $c->initials }}</div>
-              <div style="min-width:0">
-                <div class="cn">{{ $c->name }}</div>
-                <div class="ce">{{ $c->website ?: 'Chưa cập nhật' }}</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="ct">{{ $c->field ?: '—' }}</div>
-            <div class="cs">{{ $c->size ?: '—' }}</div>
-          </td>
-          <!-- <td>
-            <div class="jc">
-              <div class="jc-dot">{{ $c->job_postings_count }}</div>
-              tin
-            </div>
-          </td> -->
-          <td><span class="bd {{ $bc }}">{{ $bl }}</span></td>
-          <td>
-            <div class="ct">{{ $c->contact_name ?: '—' }}</div>
-            <div class="ce">{{ $c->contact_email ?: '—' }}</div>
-          </td>
-          <td style="text-align:right">
-            <div class="dot-wrap" data-dropdown>
-              <button class="dot-btn" data-trigger
-                      aria-haspopup="true" aria-expanded="false"
-                      aria-label="Thao tác với {{ $c->name }}">
-                <span></span><span></span><span></span>
-              </button>
-              <div class="dropdown" data-menu role="menu">
-                <div class="dd-item" role="menuitem" data-close
-                     wire:click="openView({{ $c->id }})">
-                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Xem chi tiết
-                </div>
-                @if($c->status === 'pending')
-                <div class="dd-item green" role="menuitem" data-close
-                     wire:click="quickApprove({{ $c->id }})"
-                     wire:confirm="Duyệt doanh nghiệp {{ $c->name }}?">
-                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Duyệt
-                </div>
-                @endif
-                <div class="dd-sep"></div>
-                <div class="dd-item" role="menuitem" data-close
-                     wire:click="openEdit({{ $c->id }})">
-                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                  Chỉnh sửa
-                </div>
-                <div class="dd-sep"></div>
-                <div class="dd-item red" role="menuitem" data-close
-                     wire:click="confirmDelete({{ $c->id }})">
-                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-                  Xoá
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        @empty
-        <tr>
-          <td colspan="6"><div class="empty">Không tìm thấy doanh nghiệp nào.</div></td>
-        </tr>
-        @endforelse
-      </tbody>
-    </table>
-  </div>
-  <div class="pgn">
-    <div class="pgn-info">
-      Hiển thị {{ $companies->firstItem() }}–{{ $companies->lastItem() }} / {{ $companies->total() }}
-    </div>
-    {{ $companies->links() }}
-  </div>
-</div>
+<x-table minWidth="680px">
+  <x-slot:heading>
+    <th style="width:5%">STT</th>
+    <th style="width:25%">Doanh nghiệp</th>
+    <th style="width:14%">Lĩnh vực</th>
+    <th style="width:13%">Trạng thái</th>
+    <th style="width:22%">Liên hệ</th>
+    <th style="width:10%;text-align:right">Thao tác</th>
+  </x-slot:heading>
+
+  @forelse($companies as $c)
+  @php
+    $statusColor = match($c->status) { 'active'=>'green', 'pending'=>'yellow', default=>'red' };
+    $statusLabel = match($c->status) { 'active'=>'Đang hợp tác', 'pending'=>'Chờ duyệt', default=>'Ngừng HT' };
+  @endphp
+  <tr>
+    <td style="color:#94a3b8;font-size:12px;font-weight:600">{{ $loop->iteration }}</td>
+    <td>
+      <div class="crow">
+        <div class="clogo">{{ $c->initials }}</div>
+        <div style="min-width:0">
+          <div class="cn">{{ $c->name }}</div>
+          <div class="ce">{{ $c->website ?: 'Chưa cập nhật' }}</div>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="ct">{{ $c->field ?: '—' }}</div>
+      <div class="cs">{{ $c->size ?: '—' }}</div>
+    </td>
+    <td><x-badge :color="$statusColor">{{ $statusLabel }}</x-badge></td>
+    <td>
+      <div class="ct">{{ $c->contact_name ?: '—' }}</div>
+      <div class="ce">{{ $c->contact_email ?: '—' }}</div>
+    </td>
+    <td style="text-align:right">
+      <x-table.action-btn>
+        <div class="adm-dd-item" wire:click="openView({{ $c->id }})">
+          <i class="fa-solid fa-eye"></i> Xem chi tiết
+        </div>
+        @if($c->status === 'pending')
+        <div class="adm-dd-item green" wire:click="quickApprove({{ $c->id }})" wire:confirm="Duyệt doanh nghiệp {{ $c->name }}?">
+          <i class="fa-solid fa-check"></i> Duyệt
+        </div>
+        @endif
+        <div class="adm-dd-sep"></div>
+        <div class="adm-dd-item" wire:click="openEdit({{ $c->id }})">
+          <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+        </div>
+        <div class="adm-dd-sep"></div>
+        <div class="adm-dd-item red" wire:click="confirmDelete({{ $c->id }})">
+          <i class="fa-solid fa-trash"></i> Xoá
+        </div>
+      </x-table.action-btn>
+    </td>
+  </tr>
+  @empty
+  <tr><td colspan="6" class="adm-tbl-empty">Không tìm thấy doanh nghiệp nào.</td></tr>
+  @endforelse
+
+  <x-slot:paginationInfo>Hiển thị {{ $companies->firstItem() ?? 0 }}–{{ $companies->lastItem() ?? 0 }} / {{ $companies->total() }} doanh nghiệp</x-slot:paginationInfo>
+  <x-slot:pagination>{{ $companies->links() }}</x-slot:pagination>
+</x-table>
 
 </div>
 
@@ -492,58 +416,3 @@
 
 </div>
 </div>
-
-<script>
-(function () {
-    'use strict';
-    var active = null;
-    function open(wrap) {
-        var btn  = wrap.querySelector('[data-trigger]');
-        var menu = wrap.querySelector('[data-menu]');
-        if (!btn || !menu) return;
-        closeAll();
-        menu.style.visibility = 'hidden';
-        menu.style.display    = 'block';
-        var mH = menu.offsetHeight;
-        var mW = menu.offsetWidth || 172;
-        menu.style.display    = '';
-        menu.style.visibility = '';
-        var r          = btn.getBoundingClientRect();
-        var spaceBelow = window.innerHeight - r.bottom;
-        var spaceAbove = r.top;
-        var goUp       = spaceBelow < mH + 8 && spaceAbove >= mH + 8;
-        var top  = goUp ? r.top - mH - 4 : r.bottom + 4;
-        var left = r.right - mW;
-        if (left < 8)                          left = 8;
-        if (left + mW > window.innerWidth - 8) left = window.innerWidth - mW - 8;
-        menu.style.top   = top  + 'px';
-        menu.style.left  = left + 'px';
-        menu.style.width = mW   + 'px';
-        menu.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        active = { wrap: wrap, btn: btn, menu: menu };
-    }
-    function closeAll() {
-        if (!active) return;
-        active.menu.classList.remove('open');
-        active.btn.setAttribute('aria-expanded', 'false');
-        active = null;
-    }
-    document.addEventListener('click', function (e) {
-        var trigger = e.target.closest('[data-trigger]');
-        var closer  = e.target.closest('[data-close]');
-        if (trigger) {
-            var wrap = trigger.closest('[data-dropdown]');
-            if (active && active.wrap === wrap) { closeAll(); } else { open(wrap); }
-            return;
-        }
-        if (closer) { closeAll(); return; }
-        if (active && !e.target.closest('[data-menu]')) { closeAll(); }
-    }, true);
-    window.addEventListener('scroll',  closeAll, true);
-    window.addEventListener('resize',  closeAll);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
-    document.addEventListener('livewire:navigated', closeAll);
-    document.addEventListener('livewire:update',    closeAll);
-})();
-</script>
