@@ -321,14 +321,13 @@
               <div class="applied-sub">Nhà tuyển dụng sẽ liên hệ sớm</div>
             </div>
           @else
-            <button wire:click="apply" class="btn-apply" style="flex:1;margin-bottom:0">
-              <span wire:loading wire:target="apply">
-                <i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...
-              </span>
-              <span wire:loading.remove wire:target="apply">
+
+            <livewire:user.form-ung-tuyen />
+            <button onclick="Livewire.dispatch('open-apply-modal', { jobId: {{ $job->id }} })" 
+                    class="btn-apply" style="flex:1;margin-bottom:0">
                 <i class="fa-solid fa-paper-plane"></i> Ứng tuyển ngay
-              </span>
             </button>
+
           @endif
           <button wire:click="toggleSave" class="btn-save {{ $saved ? 'saved' : '' }}" style="flex:0 0 160px">
             <i class="fa-{{ $saved ? 'solid' : 'regular' }} fa-heart"></i>
