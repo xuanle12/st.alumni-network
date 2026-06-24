@@ -65,8 +65,9 @@ class JobForm extends Component
 
         Mail::to($this->contact_email)->send(new OtpMail(
             otp: $otp,
-            jobTitle: $this->title,
-            companyName: $this->company,
+            itemTitle: $this->title,
+            itemName: $this->company,
+            type: 'job',
         ));
 
         $this->otp_sent        = true;
