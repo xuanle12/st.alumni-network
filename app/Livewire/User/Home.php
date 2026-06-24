@@ -18,17 +18,23 @@ class Home extends Component
         $this->stats = [
             'alumni'    => User::count(),
             'companies' => Company::count(),
-            'jobs'      => Job::count(),
-            'events'    => Event::count(),
+            'jobs'      => Job::active()->count(),
+            'events'    => Event::active()->count(),
         ];
     }
 
     public function render()
     {
+        $upcomingEvents = Event::active()
+            ->whereDate('event_date', '>=', today())
+            ->orderBy('event_date')
+            ->take(4)
+            ->get();
+
         return view('livewire.user.home', [
-            'latestJobs'     => Job::latest()->take(6)->get(),
-            'recentJobs'     => Job::latest()->take(3)->get(),
-            'upcomingEvents' => Event::latest()->take(4)->get(),
+            'latestJobs'     => Job::active()->latest()->take(6)->get(),
+            'recentJobs'     => Job::active()->latest()->take(3)->get(),
+            'upcomingEvents' => $upcomingEvents,
             'latestPosts'    => Post::with('author')->latest()->take(3)->get(),
         ])->layout('components.layouts.app');
     }

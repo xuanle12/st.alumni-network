@@ -34,6 +34,25 @@ class Job extends Model
         };
     }
  
+    // Hiển thị khoảng lương (triệu VND)
+    public function getSalaryRangeAttribute(): string
+    {
+        $min = $this->min_salary;
+        $max = $this->max_salary;
+
+        if ($min && $max) {
+            return number_format($min) . '–' . number_format($max) . ' triệu';
+        }
+        if ($min) {
+            return 'Từ ' . number_format($min) . ' triệu';
+        }
+        if ($max) {
+            return 'Đến ' . number_format($max) . ' triệu';
+        }
+
+        return 'Thỏa thuận';
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 'approved')->where('is_active', true);

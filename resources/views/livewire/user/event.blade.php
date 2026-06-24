@@ -16,7 +16,7 @@
   --bg:        #f8fafc;
 }
 
-body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); color: var(--text); }
+body { font-family: var(--font); background: var(--bg); color: var(--text); }
 
 /* ── stripe VNUA ── */
 .stripe { display: flex; flex-direction: column; margin-bottom: 0; }
@@ -62,7 +62,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   color: var(--fita);
   text-transform: uppercase;
   letter-spacing: 0.3px;
-  font-family: 'Barlow', sans-serif;
+  font-family: var(--font);
   margin-bottom: 4px;
 }
 .page-banner-sub { font-size: 14px; color: var(--muted); }
@@ -106,7 +106,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   cursor: pointer;
   border: none;
   background: none;
-  font-family: 'Barlow', sans-serif;
+  font-family: var(--font);
   transition: .15s;
   letter-spacing: .01em;
 }
@@ -263,7 +263,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   padding: 6px 16px; border-radius: 8px;
   font-size: 12px; font-weight: 700;
   border: none; cursor: pointer; white-space: nowrap;
-  font-family: 'Barlow', sans-serif; transition: .15s;
+  font-family: var(--font); transition: .15s;
   flex-shrink: 0; align-self: center;
 }
 .btn-reg-prim  { background: var(--fita); color: #fff; }
@@ -296,7 +296,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   border-bottom: 1px solid var(--border);
   font-size: 14px; font-weight: 800;
   color: var(--fita); text-transform: uppercase;
-  letter-spacing: .04em; font-family: 'Barlow', sans-serif;
+  letter-spacing: .04em; font-family: var(--font);
 }
 .sb-card-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; }
 
@@ -305,7 +305,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   padding: 9px 12px 9px 36px;
   border: 1px solid var(--border); border-radius: 9px;
   font-size: 13px; color: var(--text);
-  font-family: 'Barlow', sans-serif; width: 100%; transition: .15s;
+  font-family: var(--font); width: 100%; transition: .15s;
 }
 .sb-search:focus { outline: none; border-color: var(--fita2); box-shadow: 0 0 0 3px rgba(9,97,170,.08); }
 .sb-search-wrap { position: relative; }
@@ -318,7 +318,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   border: none; background: transparent;
   font-size: 13px; font-weight: 500;
   color: var(--muted); cursor: pointer;
-  font-family: 'Barlow', sans-serif; transition: .15s;
+  font-family: var(--font); transition: .15s;
   display: flex; justify-content: space-between; align-items: center;
 }
 .cat-btn:hover { background: #f1f5f9; color: var(--text); }
@@ -347,7 +347,7 @@ body { font-family: 'Barlow', system-ui, sans-serif; background: var(--bg); colo
   width: 100%; padding: 8px; border-radius: 8px;
   border: 1px solid var(--border); background: #f8fafc;
   font-size: 12px; font-weight: 600; color: var(--muted);
-  cursor: pointer; font-family: 'Barlow', sans-serif; transition: .15s;
+  cursor: pointer; font-family: var(--font); transition: .15s;
   margin-top: 6px;
 }
 .btn-reset:hover { background: #fee2e2; border-color: #fca5a5; color: #dc2626; }

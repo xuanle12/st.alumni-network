@@ -81,8 +81,10 @@ class Csv extends Component
     }
 
 
-    public function openModal()
+    public function openModal(string $category = 'normal')
     {
+        $this->category = in_array($category, ['normal', 'job', 'event'], true)
+            ? $category : 'normal';
         $this->showModal = true;
     }
 

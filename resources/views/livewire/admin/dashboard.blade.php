@@ -382,14 +382,19 @@ body{
       <div class="stat-val">{{ $pendingCount }}</div>
       <div class="stat-sub warn">Cần xử lý</div>
     </div>
-    <div class="stat">
+    <div class="stat" style="cursor:pointer" onclick="window.location='{{ route('admin.job') }}'">
       <div class="stat-top">
         <div class="stat-label">Tuyển dụng</div>
-        <div class="stat-ico" style="background:#f0fdf4">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#16a34a" stroke-width="1.5"/>
-            <path d="M5 7h6M5 10h4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div style="display:flex;align-items:center;gap:6px">
+          @if($pendingJobCount > 0)
+            <span style="background:#ef4444;color:#fff;border-radius:20px;padding:1px 8px;font-size:11px;font-weight:700">{{ $pendingJobCount }} chờ</span>
+          @endif
+          <div class="stat-ico" style="background:#f0fdf4">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#16a34a" stroke-width="1.5"/>
+              <path d="M5 7h6M5 10h4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="stat-val">{{ $jobCount }}</div>

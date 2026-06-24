@@ -33,7 +33,7 @@ html, body {
   scroll-behavior: smooth;
 }
 body {
-  padding-top: 50px;
+  padding-top: var(--header-h);
 }
 
 .container {

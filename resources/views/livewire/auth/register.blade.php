@@ -20,7 +20,7 @@
   --shadow:0 10px 40px rgba(15,23,42,.08);
 }
 
-body{font-family:'Barlow',system-ui,sans-serif;}
+body{font-family:var(--font);}
 
 .register-page{
   min-height:100vh;background:var(--bg);
@@ -59,7 +59,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 .reg-input{
   width:100%;padding:11px 14px;
   border:1.5px solid var(--border);border-radius:10px;
-  font-family:'Barlow',system-ui,sans-serif;
+  font-family:var(--font);
   font-size:14px;color:var(--text);
   outline:none;transition:.15s;background:#fff;
 }
@@ -92,7 +92,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
   width:100%;padding:13px;
   background:var(--primary);color:#fff;
   border:none;border-radius:10px;
-  font-family:'Barlow',system-ui,sans-serif;
+  font-family:var(--font);
   font-size:15px;font-weight:700;
   cursor:pointer;transition:.18s;
   display:flex;align-items:center;justify-content:center;
@@ -119,7 +119,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
 .reg-sso{
   width:100%;padding:12px;border:1.5px solid var(--primary);
   border-radius:10px;background:var(--primary-soft);
-  font-family:'Barlow',system-ui,sans-serif;
+  font-family:var(--font);
   font-size:14px;font-weight:700;color:var(--primary);
   cursor:pointer;transition:.18s;
   display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;

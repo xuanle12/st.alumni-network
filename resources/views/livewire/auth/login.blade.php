@@ -4,7 +4,7 @@
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-body{font-family:'Barlow',system-ui,sans-serif;}
+body{font-family:var(--font);}
 
 .lp{
     min-height:100vh;
@@ -103,7 +103,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     border:1.5px solid #e2e8f0;
     border-radius:10px;
     background:#fff;
-    font-family:'Barlow',sans-serif;
+    font-family:var(--font);
     font-size:14px;color:#0f172a;
     outline:none;
     transition:border-color .15s,box-shadow .15s;
@@ -142,7 +142,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     background:#16a34a;
     color:#fff;border:none;
     border-radius:10px;
-    font-family:'Barlow',sans-serif;
+    font-family:var(--font);
     font-size:15px;font-weight:700;
     letter-spacing:.3px;
     cursor:pointer;
@@ -195,7 +195,7 @@ body{font-family:'Barlow',system-ui,sans-serif;}
     background:#e8f0fe;
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;gap:10px;
-    font-family:'Barlow',sans-serif;
+    font-family:var(--font);
     font-size:14px;font-weight:700;
     color:#16a34a;
     transition:.18s;

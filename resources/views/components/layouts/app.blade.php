@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ $title ?? 'Mạng lưới cựu sinh viên khoa Công Nghệ Thông Tin ' }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   @livewireStyles
  </head>
@@ -53,7 +54,7 @@
     <nav>
       @auth
         <a href="{{ route('csv') }}"   class="{{ request()->routeIs('csv')   ? 'active' : '' }}" wire:navigate>Trang chủ</a>
-        <a href="{{ route('job') }}"   class="{{ request()->routeIs('job*')  ? 'active' : '' }}" wire:navigate>Tuyển dụng</a>
+        <a href="{{ route('job') }}"   class="{{ request()->routeIs('job') || request()->routeIs('job.*') ? 'active' : '' }}" wire:navigate>Tuyển dụng</a>
         <a href="{{ route('event') }}" class="{{ request()->routeIs('event*')? 'active' : '' }}" wire:navigate>Sự kiện</a>
       @if(auth()->user()?->hasRole(['student','admin','alumni']))
         <a href="{{ route('mentor') }}" class="{{ request()->routeIs('mentor')? 'active' : '' }}" wire:navigate>Mentor</a>
@@ -98,8 +99,11 @@
       <a href="{{ route('csv') }}" class="sidebar-nav-item {{ request()->routeIs('csv') ? 'active' : '' }}" wire:navigate>
         <div class="nav-icon"><i class="fa-solid fa-house"></i></div> Trang chủ
       </a>
-      <a href="{{ route('job') }}" class="sidebar-nav-item {{ request()->routeIs('job*') ? 'active' : '' }}" wire:navigate>
+      <a href="{{ route('job') }}" class="sidebar-nav-item {{ request()->routeIs('job') ? 'active' : '' }}" wire:navigate>
         <div class="nav-icon"><i class="fa-solid fa-briefcase"></i></div> Tuyển dụng
+      </a>
+      <a href="{{ route('job.create') }}" class="sidebar-nav-item {{ request()->routeIs('job.create') ? 'active' : '' }}" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-plus"></i></div> Đăng tin tuyển dụng
       </a>
       <a href="{{ route('event') }}" class="sidebar-nav-item {{ request()->routeIs('event*') ? 'active' : '' }}" wire:navigate>
         <div class="nav-icon"><i class="fa-solid fa-calendar-days"></i></div> Sự kiện

@@ -3,16 +3,16 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 .pf-page{
-  font-family:'Barlow',system-ui,sans-serif;
+  font-family:var(--font);
   padding:1.5rem 1.25rem;
   background:#f5f6f8;
   min-height:100vh;
 }
 .pf-wrap{
-  max-width:860px;
+  max-width:1240px;
   margin:0 auto;
   display:grid;
-  grid-template-columns:220px 1fr;
+  grid-template-columns:250px 1fr;
   gap:1rem;
   align-items:start;
 }
@@ -48,8 +48,8 @@
 .pf-ava-btn:hover{background:#15803d}
 .pf-ava-btn input{display:none}
 
-.pf-name{font-size:15px;font-weight:700;color:#111827;line-height:1.3}
-.pf-email{font-size:11px;color:#9ca3af}
+.pf-name{font-size:17px;font-weight:700;color:#111827;line-height:1.3}
+.pf-email{font-size:12.5px;color:#9ca3af}
 
 .pf-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
 .bdg{
@@ -72,7 +72,7 @@
 .pf-meta-list{width:100%;text-align:left;display:flex;flex-direction:column;gap:3px}
 .pf-meta-row{
   display:flex;align-items:center;gap:7px;
-  font-size:11.5px;color:#4b5563;padding:3px 0;
+  font-size:13px;color:#4b5563;padding:3px 0;
 }
 .pf-meta-row i{width:13px;text-align:center;color:#94a3b8;flex-shrink:0;font-size:11px}
 
@@ -80,8 +80,8 @@
 .pf-soc-list{width:100%;border-top:1px solid #f0f2f5;padding-top:.65rem;display:flex;flex-direction:column;gap:3px}
 .pf-soc-item{
   display:flex;align-items:center;gap:7px;
-  padding:5px 7px;border-radius:7px;
-  font-size:11.5px;color:#374151;
+  padding:6px 8px;border-radius:7px;
+  font-size:13px;color:#374151;
   background:#f8fafc;text-decoration:none;transition:.12s;
 }
 a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
@@ -90,21 +90,26 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 .pf-soc-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
 .pf-soc-muted{color:#d1d5db!important;font-style:italic;font-size:11px}
 
-/* ── RIGHT PANEL ── */
+/* ── RIGHT PANEL ── masonry cards */
 .pf-right{
-  background:#fff;border-radius:12px;border:1px solid #e5e7eb;
-  overflow:hidden;
+  column-count:2;
+  column-gap:1rem;
 }
 
-/* section */
-.pf-section{padding:1rem 1.25rem;border-bottom:1px solid #f0f2f5}
-.pf-section:last-child{border-bottom:none}
+/* section = card */
+.pf-section{
+  background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:1rem 1.25rem;
+  margin-bottom:1rem;
+  break-inside:avoid;
+}
+.pf-section.full{column-span:all}
 .pf-section-hd{
   display:flex;align-items:center;justify-content:space-between;
   margin-bottom:.75rem;
 }
 .pf-section-title{
-  font-size:12px;font-weight:700;color:#6b7280;
+  font-size:13px;font-weight:700;color:#6b7280;
   text-transform:uppercase;letter-spacing:.07em;
 }
 .btn-edit{
@@ -136,25 +141,25 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 .pf-info-rows{display:flex;flex-direction:column;gap:0}
 .pf-info-row{
   display:flex;align-items:baseline;gap:0;
-  padding:6px 0;border-bottom:1px solid #f8fafc;
-  font-size:13px;
+  padding:7px 0;border-bottom:1px solid #f8fafc;
+  font-size:14px;
 }
 .pf-info-row:last-child{border-bottom:none}
 .pf-info-lbl{
   width:140px;flex-shrink:0;
-  font-size:12px;color:#9ca3af;font-weight:500;
+  font-size:13px;color:#9ca3af;font-weight:500;
 }
 .pf-info-val{color:#111827;font-weight:500;flex:1;min-width:0}
-.pf-info-val.muted{color:#d1d5db;font-style:italic;font-weight:400;font-size:12px}
-.pf-info-val.bio{color:#374151;font-weight:400;line-height:1.6;font-size:12.5px}
+.pf-info-val.muted{color:#d1d5db;font-style:italic;font-weight:400;font-size:13px}
+.pf-info-val.bio{color:#374151;font-weight:400;line-height:1.6;font-size:13.5px}
 
 /* form */
 .pf-form-rows{display:flex;flex-direction:column;gap:8px}
 .fi{display:flex;flex-direction:column;gap:3px}
-.fi label{font-size:11px;font-weight:600;color:#6b7280}
+.fi label{font-size:12.5px;font-weight:600;color:#6b7280}
 .fi input,.fi textarea,.fi select{
-  padding:7px 10px;border:1px solid #e2e8f0;border-radius:7px;
-  font-size:13px;color:#111827;font-family:inherit;background:#fff;transition:.12s;
+  padding:8px 11px;border:1px solid #e2e8f0;border-radius:7px;
+  font-size:14px;color:#111827;font-family:inherit;background:#fff;transition:.12s;
 }
 .fi input:focus,.fi textarea:focus{outline:none;border-color:#16a34a;box-shadow:0 0 0 2px rgba(22,163,74,.1)}
 .fi input:disabled{background:#f9fafb;color:#9ca3af;cursor:not-allowed}
@@ -182,7 +187,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 .skill-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.65rem}
 .skill-chip{
   display:inline-flex;align-items:center;gap:6px;
-  padding:4px 11px;border-radius:20px;font-size:12px;font-weight:600;
+  padding:5px 12px;border-radius:20px;font-size:13px;font-weight:600;
   color:var(--cc);background:var(--cb);border:1px solid var(--ce);
 }
 .skill-chip i{font-size:10px;opacity:.4;cursor:pointer;transition:.12s}
@@ -217,9 +222,9 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 }
 .cv-ico.doc{background:#dbeafe;color:#1d4ed8}
 .cv-inf{flex:1;min-width:0}
-.cv-name{font-size:12.5px;font-weight:600;color:#111827;display:flex;align-items:center;gap:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cv-badge{font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:20px;background:#dcfce7;color:#166534;flex-shrink:0}
-.cv-meta{font-size:11px;color:#9ca3af;margin-top:1px}
+.cv-name{font-size:13.5px;font-weight:600;color:#111827;display:flex;align-items:center;gap:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv-badge{font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;background:#dcfce7;color:#166534;flex-shrink:0}
+.cv-meta{font-size:12px;color:#9ca3af;margin-top:1px}
 .cv-acts{display:flex;gap:4px;flex-shrink:0}
 .btn-xs{
   display:inline-flex;align-items:center;gap:3px;
@@ -260,6 +265,9 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 
 [x-cloak]{display:none!important}
 
+@media(max-width:1024px){
+  .pf-right{column-count:1}
+}
 @media(max-width:640px){
   .pf-wrap{grid-template-columns:1fr}
   .pf-form-grid{grid-template-columns:1fr}
@@ -327,42 +335,6 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
         <div class="pf-prog-bg"><div class="pf-prog-fill" style="width:{{ $pct }}%"></div></div>
       </div>
 
-      {{-- Social --}}
-      <div class="pf-soc-list">
-        @if($user->profile?->github)
-          <a href="{{ $user->profile->github }}" target="_blank" class="pf-soc-item">
-            <i class="fa-brands fa-github soc-gh"></i>
-            <span>GitHub</span>
-          </a>
-        @else
-          <div class="pf-soc-item">
-            <i class="fa-brands fa-github" style="color:#d1d5db"></i>
-            <span class="pf-soc-muted">GitHub</span>
-          </div>
-        @endif
-        @if($user->profile?->linkedin)
-          <a href="{{ $user->profile->linkedin }}" target="_blank" class="pf-soc-item">
-            <i class="fa-brands fa-linkedin soc-li"></i>
-            <span>LinkedIn</span>
-          </a>
-        @else
-          <div class="pf-soc-item">
-            <i class="fa-brands fa-linkedin" style="color:#d1d5db"></i>
-            <span class="pf-soc-muted">LinkedIn</span>
-          </div>
-        @endif
-        @if($user->profile?->website)
-          <a href="{{ $user->profile->website }}" target="_blank" class="pf-soc-item">
-            <i class="fa-solid fa-globe soc-wb"></i>
-            <span>Website</span>
-          </a>
-        @else
-          <div class="pf-soc-item">
-            <i class="fa-solid fa-globe" style="color:#d1d5db"></i>
-            <span class="pf-soc-muted">Website</span>
-          </div>
-        @endif
-      </div>
     </div>
   </aside>
 

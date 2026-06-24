@@ -11,7 +11,7 @@
   width:100%;max-width:560px;max-height:90vh;
   overflow-y:auto;
   box-shadow:0 12px 40px rgba(0,0,0,.18);
-  font-family:'Barlow',system-ui,sans-serif;
+  font-family:var(--font);
 }
 .mr-hd{
   display:flex;align-items:center;justify-content:space-between;

@@ -1,24 +1,7 @@
 <div>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-
-:root{
-  --blue:   #16a34a;
-  --blue2:  #22c55e;
-  --navy:   #043a6e;
-  --pale:   #e8f0fe;
-  --pale2:  #f4f8fd;
-  --gold:   #F6A309;
-  --border: #e2e8f0;
-  --text:   #0f172a;
-  --muted:  #64748b;
-  --bg:     #f8fafc;
-  --white:  #ffffff;
-}
-
-body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(--bg);}
 
 .lp{max-width:1200px;margin:0 auto;padding:0 24px;}
 .hero{
@@ -53,7 +36,7 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
 }
 
 .hero h1{
-  font-family:'Barlow Condensed','Barlow',sans-serif;
+  font-family:'Barlow Condensed',var(--font);
   font-size:clamp(36px,4.5vw,58px);font-weight:800;
   color:#fff;line-height:1.07;
   text-transform:uppercase;letter-spacing:-0.5px;
@@ -74,7 +57,7 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
 }
 .btn-hero-w{
   padding:13px 26px;border-radius:10px;
-  font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;
+  font-family:var(--font);font-size:14px;font-weight:700;
   background:#fff;color:var(--green);border:none;
   cursor:pointer;text-decoration:none;
   transition:.18s;display:inline-flex;align-items:center;gap:8px;
@@ -83,7 +66,7 @@ body{font-family:'Barlow',system-ui,sans-serif;color:var(--text);background:var(
 
 .btn-hero-o{
   padding:13px 26px;border-radius:10px;
-  font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;
+  font-family:var(--font);font-size:14px;font-weight:600;
   background:rgba(255,255,255,.08);color:#fff;
   border:1.5px solid rgba(255,255,255,.3);
   cursor:pointer;text-decoration:none;
@@ -151,7 +134,7 @@ section{padding:72px 24px;}
   color:var(--green);margin-bottom:10px;display:block;
 }
 .sec-title{
-  font-family:'Barlow Condensed','Barlow',sans-serif;
+  font-family:'Barlow Condensed',var(--font);
   font-size:clamp(24px,3vw,36px);font-weight:800;
   color:var(--text);line-height:1.15;
   text-transform:uppercase;letter-spacing:.2px;margin-bottom:14px;
@@ -344,7 +327,7 @@ section{padding:72px 24px;}
   pointer-events:none;
 }
 .cta-box h2{
-  font-family:'Barlow Condensed','Barlow',sans-serif;
+  font-family:'Barlow Condensed',var(--font);
   font-size:clamp(26px,3.5vw,44px);font-weight:800;
   text-transform:uppercase;color:#fff;
   margin-bottom:14px;position:relative;
@@ -360,6 +343,9 @@ section{padding:72px 24px;}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
+.lp-empty{grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--muted);}
+.lp-empty i{font-size:32px;color:var(--border);margin-bottom:12px;display:block;}
+.lp-empty p{font-size:14px;color:var(--muted);}
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr;gap:0;}
   .hero-card{display:none;}
@@ -423,7 +409,7 @@ section{padding:72px 24px;}
         <div class="hc-ico"><i class="fa-solid fa-calendar"></i></div>
         <div>
           <div class="hc-name">{{ Str::limit($ev->title ?? 'Sự kiện sắp tới', 28) }}</div>
-          <div class="hc-sub">{{ isset($ev->start_date) ? \Carbon\Carbon::parse($ev->start_date)->format('d/m/Y') : '' }}</div>
+          <div class="hc-sub">{{ optional($ev->event_date)->format('d/m/Y') }}</div>
         </div>
         <div class="hc-tag open">Sắp diễn ra</div>
       </div>
@@ -524,30 +510,15 @@ section{padding:72px 24px;}
             @endif
           </div>
         </div>
-        @if($job->salary ?? null)
-          <div class="job-salary">{{ $job->salary }}</div>
+        @if($job->min_salary || $job->max_salary)
+          <div class="job-salary">{{ $job->salary_range }}</div>
         @endif
       </a>
       @empty
-      @foreach([
-        ['Lập trình viên Backend','FPT Software','Full-time','Hà Nội','20-30tr'],
-        ['Mobile Developer','VNG Corporation','Full-time','TP.HCM','25-35tr'],
-        ['Data Analyst','Viettel','Part-time','Hà Nội','15-22tr'],
-        ['Frontend Engineer','Shopee','Full-time','TP.HCM','28-40tr'],
-      ] as $j)
-      <div class="job-card reveal">
-        <div class="job-logo">{{ strtoupper(substr($j[1],0,2)) }}</div>
-        <div class="job-info">
-          <div class="job-title">{{ $j[0] }}</div>
-          <div class="job-company">{{ $j[1] }}</div>
-          <div class="job-tags">
-            <span class="jtag jtag-blue">{{ $j[2] }}</span>
-            <span class="jtag jtag-gray"><i class="fa-solid fa-location-dot"></i> {{ $j[3] }}</span>
-          </div>
-        </div>
-        <div class="job-salary">{{ $j[4] }}</div>
+      <div class="lp-empty">
+        <i class="fa-solid fa-briefcase"></i>
+        <p>Chưa có tin tuyển dụng nào được duyệt.</p>
       </div>
-      @endforeach
       @endforelse
     </div>
   </div>
@@ -569,46 +540,28 @@ section{padding:72px 24px;}
       @forelse(($upcomingEvents ?? collect())->take(4) as $ev)
       <a href="{{ route('event.show', $ev->id) }}" class="ev-card reveal" wire:navigate>
         <div class="ev-date">
-          <div class="ev-day">{{ \Carbon\Carbon::parse($ev->start_date)->format('d') }}</div>
-          <div class="ev-month">Th{{ \Carbon\Carbon::parse($ev->start_date)->format('n') }}</div>
+          <div class="ev-day">{{ $ev->day }}</div>
+          <div class="ev-month">{{ $ev->month_label }}</div>
         </div>
         <div class="ev-sep"></div>
         <div class="ev-info">
           <div class="ev-title">{{ $ev->title }}</div>
           <div class="ev-meta">
-            @if($ev->location ?? null)
+            @if($ev->location)
               <span><i class="fa-solid fa-location-dot"></i> {{ $ev->location }}</span>
             @endif
-            @if($ev->start_date ?? null)
-              <span><i class="fa-solid fa-clock"></i> {{ \Carbon\Carbon::parse($ev->start_date)->format('H:i') }}</span>
+            @if($ev->start_time)
+              <span><i class="fa-solid fa-clock"></i> {{ \Illuminate\Support\Str::of($ev->start_time)->substr(0, 5) }}</span>
             @endif
           </div>
         </div>
         <span class="ev-badge ev-badge-blue">Sắp diễn ra</span>
       </a>
       @empty
-      @foreach([
-        ['Hội thảo Công nghệ AI 2025','15','5','Hội trường A1, VNUA','14:00','blue'],
-        ['Gặp mặt Alumni khóa 67','22','5','Khoa CNTT, VNUA','09:00','gold'],
-        ['Workshop: DevOps & Cloud','08','6','Online - Zoom','19:00','blue'],
-        ['Ngày hội Tuyển dụng VNUA 2025','20','6','Sân vận động VNUA','08:00','gold'],
-      ] as $e)
-      <div class="ev-card reveal">
-        <div class="ev-date">
-          <div class="ev-day">{{ $e[1] }}</div>
-          <div class="ev-month">Th{{ $e[2] }}</div>
-        </div>
-        <div class="ev-sep"></div>
-        <div class="ev-info">
-          <div class="ev-title">{{ $e[0] }}</div>
-          <div class="ev-meta">
-            <span><i class="fa-solid fa-location-dot"></i> {{ $e[3] }}</span>
-            <span><i class="fa-solid fa-clock"></i> {{ $e[4] }}</span>
-          </div>
-        </div>
-        <span class="ev-badge ev-badge-{{ $e[5] }}">Sắp diễn ra</span>
+      <div class="lp-empty">
+        <i class="fa-solid fa-calendar-days"></i>
+        <p>Chưa có sự kiện sắp diễn ra.</p>
       </div>
-      @endforeach
       @endforelse
     </div>
   </div>
@@ -648,25 +601,10 @@ section{padding:72px 24px;}
         </div>
       </a>
       @empty
-      @foreach([
-        ['Kinh nghiệm phỏng vấn tại FPT Software','Chia sẻ những tips hữu ích khi phỏng vấn vào các công ty công nghệ lớn tại Việt Nam và cách chuẩn bị portfolio ấn tượng.','Nguyễn Văn An','12/05/2025'],
-        ['Lộ trình học Data Science từ Zero','Hướng dẫn chi tiết lộ trình học Data Science cho người mới bắt đầu, từ Python cơ bản đến Machine Learning thực tế.','Trần Thị Mai','08/05/2025'],
-        ['Review môi trường làm việc tại Shopee','Chia sẻ thực tế về môi trường làm việc, văn hóa công ty và cơ hội phát triển tại Shopee Việt Nam sau 2 năm làm việc.','Lê Minh Đức','05/05/2025'],
-      ] as $p)
-      <div class="post-card reveal">
-        <div class="post-img"><i class="fa-solid fa-newspaper" style="color:rgba(255,255,255,.3)"></i></div>
-        <div class="post-body">
-          <span class="post-cat">Chia sẻ</span>
-          <div class="post-title">{{ $p[0] }}</div>
-          <div class="post-excerpt">{{ $p[1] }}</div>
-          <div class="post-foot">
-            <div class="post-ava">{{ strtoupper(substr($p[2],0,1)) }}</div>
-            <span>{{ $p[2] }}</span>
-            <span class="post-date">{{ $p[3] }}</span>
-          </div>
-        </div>
+      <div class="lp-empty">
+        <i class="fa-solid fa-newspaper"></i>
+        <p>Chưa có bài viết nào.</p>
       </div>
-      @endforeach
       @endforelse
     </div>
   </div>

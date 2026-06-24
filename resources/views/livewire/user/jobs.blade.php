@@ -16,7 +16,7 @@
     --white:       #ffffff;
     --radius:      12px;
     --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
-    --font:        'Barlow', system-ui, sans-serif;
+    --font:        'Be Vietnam Pro', system-ui, sans-serif;
 }
 .jobs-page { font-family: var(--font); background: var(--bg); min-height: 60vh; padding: 28px 0 48px; }
 .jobs-title-bar { margin-bottom: 18px; }
@@ -473,8 +473,8 @@
                                 </div>
 
                                 <div class="job-right">
-                                    @if($job->salary)
-                                        <p class="job-salary">{{ $job->salary }}</p>
+                                    @if($job->min_salary || $job->max_salary)
+                                        <p class="job-salary">{{ $job->salary_range }}</p>
                                     @endif
                                     <a href="{{ route('job.show', $job->id) }}" wire:navigate class="job-btn-apply">Ứng tuyển</a>
                                     <button class="job-btn-save">Lưu tin</button>

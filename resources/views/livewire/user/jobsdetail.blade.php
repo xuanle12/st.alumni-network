@@ -3,7 +3,7 @@
 .jd-page{
   min-height:100vh;
   background:#f1f5f9;
-  font-family:'Barlow',system-ui,sans-serif;
+  font-family:var(--font);
   padding:1.75rem 1rem;
 }
 .jd-inner{ max-width:960px; margin:0 auto; }
@@ -289,7 +289,7 @@
             </div>
             <div>
               <div class="ig-lbl">Mức lương</div>
-              <div class="ig-val green">{{ $job->salary ?? 'Thỏa thuận' }}</div>
+              <div class="ig-val green">{{ $job->salary_range }}</div>
             </div>
           </div>
           <div class="ig">

@@ -34,11 +34,9 @@
                       <div class="author-name">{{ auth()->user()?->name }}</div>
                       <div class="author-cat">
                         <select class="cat-sel" wire:model="category">
-                          <option value="discussion">Thảo luận</option>
-                          <option value="experience">Chia sẻ kinh nghiệm</option>
-                          <option value="news">Tin tức</option>
-                          <option value="job">Tìm việc</option>
-                          <option value="network">Kết nối</option>
+                          <option value="normal">Thảo luận</option>
+                          <option value="job">Tuyển dụng</option>
+                          <option value="event">Sự kiện</option>
                         </select>
                       </div>
                     </div>
@@ -89,10 +87,10 @@
 
             <div class="nw-cp-sep"></div>
             <div class="nw-cp-ac">
-                <button class="nw-cpb"><i class="fa-solid fa-camera"></i> Ảnh</button>
-                <button class="nw-cpb"><i class="fa-solid fa-briefcase"></i> Tuyển dụng</button>
-                <button class="nw-cpb"><i class="fa-solid fa-calendar"></i> Sự kiện</button>
-                <button class="nw-cpb nw-cpb-post" wire:click="openModal">Đăng</button>
+                <button class="nw-cpb" wire:click="openModal('normal')"><i class="fa-solid fa-camera"></i> Ảnh</button>
+                <button class="nw-cpb" wire:click="openModal('job')"><i class="fa-solid fa-briefcase"></i> Tuyển dụng</button>
+                <button class="nw-cpb" wire:click="openModal('event')"><i class="fa-solid fa-calendar"></i> Sự kiện</button>
+                <button class="nw-cpb nw-cpb-post" wire:click="openModal('normal')">Đăng</button>
             </div>
         </div>
 
@@ -123,7 +121,7 @@
                     @if($post->category === 'job' && $post->job)
                         <div class="nw-jb">
                             <div class="nw-jbt"><i class="fa-solid fa-briefcase"></i> {{ $post->job->title }}</div>
-                            <div class="nw-jbm">{{ $post->job->type }}@if($post->job->salary) · {{ $post->job->salary }}@endif@if($post->job->location) · {{ $post->job->location }}@endif</div>
+                            <div class="nw-jbm">{{ $post->job->type }}@if($post->job->min_salary || $post->job->max_salary) · {{ $post->job->salary_range }}@endif @if($post->job->location)· {{ $post->job->location }}@endif</div>
                             <a href="{{ $post->job->url ?? '#' }}" class="nw-jbb">Xem chi tiết →</a>
                         </div>
                     @endif
@@ -184,16 +182,22 @@
         </div>
 
         <div class="nw-rs-block">
-            <div class="nw-rs-lbl"><i class="fa-solid fa-briefcase"></i> Việc làm mới</div>
+            <div class="nw-rs-lbl" style="display:flex;align-items:center;justify-content:space-between">
+              <span><i class="fa-solid fa-briefcase"></i> Việc làm mới</span>
+              <a href="{{ route('job.create') }}" wire:navigate
+                style="font-size:11px;font-weight:700;color:#16a34a;text-decoration:none;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:2px 8px">
+                + Đăng tin
+              </a>
+            </div>
             @forelse($jobs as $job)
                 <a href="{{ route('job.show', $job->id) }}" class="nw-job-item" wire:navigate>
                     <div class="nw-job-title">{{ $job->title }}</div>
                     <div class="nw-job-meta">
-                        {{ $job->company?->name ?? $job->company_name ?? '' }}
+                        {{ $job->company }}
                         @if($job->location) · {{ $job->location }} @endif
                     </div>
-                    @if($job->salary)
-                        <div class="nw-job-salary">{{ $job->salary }}</div>
+                    @if($job->min_salary || $job->max_salary)
+                        <div class="nw-job-salary">{{ $job->salary_range }}</div>
                     @endif
                 </a>
             @empty
@@ -222,7 +226,7 @@
   height: calc(100vh - var(--header-h));
   overflow: hidden;
   background: var(--oc-p);
-  font-family: 'Barlow', system-ui, sans-serif;
+  font-family: var(--font);
   padding: 20px;
   gap: 20px;
   max-width: 1400px;
@@ -244,17 +248,17 @@
 
 .nw-filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
 .nw-title{font-size:15px;font-weight:700;color:var(--oc);margin-right:6px;}
-.nw-fb{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:#fff;font-size:12px;font-weight:500;color:var(--oc-m);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;transition:.15s;}
+.nw-fb{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:#fff;font-size:12px;font-weight:500;color:var(--oc-m);cursor:pointer;font-family:var(--font);transition:.15s;}
 .nw-fb:hover{background:var(--oc-s);}
 .nw-fb.on{background:var(--oc-m);color:#fff;border-color:var(--oc-m);}
 
 
 .nw-cp{background:#fff;border-radius:14px;border:1px solid var(--bd);padding:14px 16px;margin-bottom:12px;}
 .nw-cp-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.nw-cp-in{flex:1;padding:9px 16px;border:1px solid var(--bd);border-radius:20px;font-size:13px;color:var(--muted);background:var(--oc-s);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;}
+.nw-cp-in{flex:1;padding:9px 16px;border:1px solid var(--bd);border-radius:20px;font-size:13px;color:var(--muted);background:var(--oc-s);cursor:pointer;font-family:var(--font);}
 .nw-cp-sep{height:1px;background:var(--oc-p);margin-bottom:10px;}
 .nw-cp-ac{display:flex;}
-.nw-cpb{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px;border-radius:8px;border:none;background:none;font-size:12px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;transition:.15s;}
+.nw-cpb{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px;border-radius:8px;border:none;background:none;font-size:12px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:var(--font);transition:.15s;}
 .nw-cpb:hover{background:var(--oc-s);color:var(--oc);}
 .nw-cpb-post{color:var(--oc-m);font-weight:700;}
 
@@ -284,7 +288,7 @@
 .nw-jbb:hover{background:var(--oc);}
 .nw-rr{display:flex;justify-content:space-between;padding:8px 16px;border-top:1px solid var(--oc-p);font-size:12px;color:var(--muted);}
 .nw-pac{display:flex;border-top:1px solid var(--oc-p);}
-.nw-pab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;border:none;background:none;font-size:13px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:'Barlow',system-ui,sans-serif;transition:.15s;}
+.nw-pab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;border:none;background:none;font-size:13px;font-weight:500;color:var(--oc-l);cursor:pointer;font-family:var(--font);transition:.15s;}
 .nw-pab:hover{background:var(--oc-s);color:var(--oc);}
 .nw-empty{text-align:center;padding:40px 20px;font-size:14px;color:var(--muted);background:#fff;border-radius:14px;border:1px solid var(--bd);}
 
