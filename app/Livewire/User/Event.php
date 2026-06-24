@@ -3,21 +3,28 @@
 namespace App\Livewire\User;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Event as EventModel;
 use App\Models\EventRegistration;
 
 class Event extends Component
 {
+    use WithPagination;
+
     public string $search    = '';
     public string $activeTab = 'all';
 
-    public function updatedSearch(): void {}
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
 
     public function setTab(string $tab): void
     {
         $this->activeTab = $tab;
         $this->search    = '';
+        $this->resetPage();
     }
 
     public function register(int $eventId)
@@ -88,8 +95,7 @@ class Event extends Component
                 $q->where('badge', 'free')
             )
             ->orderBy('event_date')
-            ->take(4)
-            ->get();
+            ->paginate(4);
 
         $upcomingEvents = EventModel::where('status', 'active')
             ->where('event_date', '>', now()->addDays(14)->toDateString())

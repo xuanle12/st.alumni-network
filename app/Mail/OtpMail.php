@@ -14,14 +14,17 @@ class OtpMail extends Mailable
 
     public function __construct(
         public readonly string $otp,
-        public readonly string $jobTitle,
-        public readonly string $companyName,
+        public readonly string $itemTitle,
+        public readonly string $itemName,
+        public readonly string $type = 'job', // 'job' | 'event'
     ) {}
 
     public function envelope(): Envelope
     {
+        $label = $this->type === 'event' ? 'đăng sự kiện' : 'đăng tin tuyển dụng';
+
         return new Envelope(
-            subject: '[ST Alumni] Mã xác thực đăng tin tuyển dụng',
+            subject: "[ST Alumni] Mã xác thực {$label}",
         );
     }
 

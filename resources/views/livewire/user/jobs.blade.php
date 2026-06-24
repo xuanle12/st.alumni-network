@@ -136,208 +136,13 @@
 .employer-cta-btn { display: block; width: 100%; padding: 10px 0; text-align: center; font-size: 13px; font-weight: 700; color: #fff; background: var(--fita); border: none; border-radius: 8px; cursor: pointer; font-family: var(--font); transition: background .15s, transform .12s; text-decoration: none; }
 .employer-cta-btn:hover { background: var(--fita2); transform: translateY(-1px); }
 
-/* Modal */
-.jm-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(15,23,42,0.55); display: flex; align-items: center; justify-content: center; padding: 24px 16px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-.jm-overlay.open { opacity: 1; pointer-events: all; }
-.jm-modal { background: #fff; border-radius: 16px; border: 1px solid var(--border); width: 100%; max-width: 660px; overflow: hidden; box-shadow: 0 20px 60px rgba(15,23,42,0.2); transform: translateY(16px); transition: transform 0.25s; display: flex; flex-direction: column; max-height: 90vh; }
-.jm-overlay.open .jm-modal { transform: translateY(0); }
-.jm-header { background: linear-gradient(135deg, #074e89 0%, var(--fita) 55%, var(--fita2) 100%); padding: 22px 28px 20px; display: flex; align-items: flex-start; justify-content: space-between; flex-shrink: 0; }
-.jm-header-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.15); border: 0.5px solid rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
-.jm-header-title { font-size: 16px; font-weight: 800; color: #fff; margin: 0 0 3px; }
-.jm-header-sub { font-size: 13px; color: rgba(255,255,255,0.72); margin: 0; }
-.jm-close { background: rgba(255,255,255,0.15); border: none; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 15px; flex-shrink: 0; transition: background .15s; margin-top: 2px; }
-.jm-close:hover { background: rgba(255,255,255,0.28); }
-.jm-steps { display: flex; align-items: center; padding: 0 28px; background: var(--fita-pale); border-bottom: 1px solid rgba(9,97,170,0.15); flex-shrink: 0; }
-.jm-step { display: flex; align-items: center; gap: 8px; padding: 12px 0; flex: 1; position: relative; }
-.jm-step:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 22px; height: 1px; background: rgba(9,97,170,0.2); }
-.jm-step-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
-.jm-step.active .jm-step-num { background: var(--fita); color: #fff; }
-.jm-step.inactive .jm-step-num { background: var(--border); color: #94a3b8; }
-.jm-step-label { font-size: 12px; font-weight: 600; }
-.jm-step.active .jm-step-label { color: var(--fita); }
-.jm-step.inactive .jm-step-label { color: #94a3b8; }
-.jm-body { padding: 22px 28px 0; overflow-y: auto; flex: 1; font-family: var(--font); }
-.jm-body::-webkit-scrollbar { width: 4px; }
-.jm-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-.jm-section-title { font-size: 11px; font-weight: 700; color: var(--fita); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 14px; display: flex; align-items: center; gap: 7px; padding-bottom: 8px; border-bottom: 1px solid var(--fita-pale); }
-.jm-row { display: flex; gap: 14px; margin-bottom: 14px; }
-.jm-field { display: flex; flex-direction: column; gap: 5px; flex: 1; }
-.jm-label { font-size: 12px; font-weight: 600; color: #334155; }
-.jm-label .req { color: #ef4444; }
-.jm-input, .jm-select, .jm-textarea { border: 1px solid var(--border); border-radius: 9px; padding: 9px 13px; font-size: 13px; color: var(--text); background: #fff; outline: none; font-family: var(--font); width: 100%; box-sizing: border-box; transition: border-color .2s, box-shadow .2s; }
-.jm-input:focus, .jm-select:focus, .jm-textarea:focus { border-color: var(--fita); box-shadow: 0 0 0 3px rgba(9,97,170,0.10); }
-.jm-input::placeholder, .jm-textarea::placeholder { color: #aab2be; }
-.jm-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
-.jm-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
-.jm-skill-wrap { display: flex; flex-wrap: wrap; gap: 7px; padding: 10px; border: 1px solid var(--border); border-radius: 9px; min-height: 44px; align-items: flex-start; cursor: text; transition: border-color .2s; box-sizing: border-box; width: 100%; }
-.jm-skill-wrap:focus-within { border-color: var(--fita); box-shadow: 0 0 0 3px rgba(9,97,170,0.10); }
-.jm-skill-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--fita-pale); border: 1px solid var(--fita-border); color: var(--fita); font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 6px; }
-.jm-skill-tag button { background: none; border: none; padding: 0; cursor: pointer; color: var(--fita2); line-height: 1; display: flex; align-items: center; font-size: 14px; }
-.jm-skill-tag button:hover { color: #ef4444; }
-.jm-skill-input { border: none; outline: none; font-size: 13px; color: var(--text); font-family: var(--font); background: transparent; flex: 1; min-width: 80px; }
-.jm-hint { font-size: 11px; color: #aab2be; margin-top: 3px; }
-.jm-divider { border: none; border-top: 1px solid #f1f5f9; margin: 18px 0; }
-.jm-char-count { font-size: 11px; color: #aab2be; text-align: right; margin-top: 3px; }
-.jm-required-note { font-size: 11.5px; color: #aab2be; margin-bottom: 18px; }
-.jm-footer { padding: 16px 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: #fff; flex-shrink: 0; }
-.jm-footer-left { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
-.jm-footer-right { display: flex; gap: 10px; }
-.jm-btn-cancel { padding: 9px 18px; font-size: 13px; font-weight: 500; color: var(--text-muted); background: none; border: 1px solid var(--border); border-radius: 9px; cursor: pointer; transition: all .15s; font-family: var(--font); }
-.jm-btn-cancel:hover { border-color: #94a3b8; color: var(--text); }
-.jm-btn-preview { padding: 9px 16px; font-size: 13px; font-weight: 600; color: var(--fita); background: var(--fita-pale); border: 1px solid var(--fita-border); border-radius: 9px; cursor: pointer; transition: all .15s; font-family: var(--font); display: flex; align-items: center; gap: 6px; }
-.jm-btn-preview:hover { background: rgba(9,97,170,0.12); }
-.jm-btn-submit { padding: 9px 22px; font-size: 13px; font-weight: 800; color: #fff; background: var(--fita); border: none; border-radius: 9px; cursor: pointer; transition: background .15s; font-family: var(--font); display: flex; align-items: center; gap: 7px; }
-.jm-btn-submit:hover { background: var(--fita2); }
-
 @media (max-width: 640px) {
     .job-card-inner { flex-direction: column; gap: 12px; }
     .job-right { width: 100%; flex-direction: row; align-items: center; flex-wrap: wrap; }
     .job-btn-apply, .job-btn-save { width: auto; flex: 1; }
-    .jm-row { flex-direction: column; }
-    .jm-steps { padding: 0 18px; }
-    .jm-body { padding: 18px 18px 0; }
-    .jm-header { padding: 18px; }
-    .jm-footer { padding: 14px 18px; flex-wrap: wrap; gap: 10px; }
-    .jm-step-label { display: none; }
 }
 </style>
 
-<div class="jm-overlay" id="jm-overlay" role="dialog" aria-modal="true" aria-labelledby="jm-title">
-    <div class="jm-modal">
-        <div class="jm-header">
-            <div>
-                <div class="jm-header-tag">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                    Tuyển dụng
-                </div>
-                <p class="jm-header-title" id="jm-title">Đăng tin tuyển dụng</p>
-                <p class="jm-header-sub">Tiếp cận sinh viên & cựu sinh viên VNUA ngay hôm nay</p>
-            </div>
-            <button class="jm-close" onclick="closeModal()" aria-label="Đóng">&times;</button>
-        </div>
-        <div class="jm-steps">
-            <div class="jm-step active"><div class="jm-step-num">1</div><span class="jm-step-label">Thông tin cơ bản</span></div>
-            <div class="jm-step inactive"><div class="jm-step-num">2</div><span class="jm-step-label">Chi tiết vị trí</span></div>
-            <div class="jm-step inactive"><div class="jm-step-num">3</div><span class="jm-step-label">Xem trước & gửi</span></div>
-        </div>
-        <div class="jm-body">
-            <p class="jm-required-note">Các trường có dấu <span style="color:#ef4444">*</span> là bắt buộc.</p>
-            <p class="jm-section-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                Thông tin công ty
-            </p>
-            <div class="jm-row">
-                <div class="jm-field">
-                    <label class="jm-label">Tên công ty <span class="req">*</span></label>
-                    <input class="jm-input" type="text" name="company" placeholder="VD: Công ty CP ABC Technology" required>
-                </div>
-                <div class="jm-field">
-                    <label class="jm-label">Email liên hệ <span class="req">*</span></label>
-                    <input class="jm-input" type="email" name="contact_email" placeholder="hr@company.com" required>
-                </div>
-            </div>
-            <hr class="jm-divider">
-            <p class="jm-section-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Thông tin vị trí
-            </p>
-            <div class="jm-row">
-                <div class="jm-field">
-                    <label class="jm-label">Tên vị trí tuyển dụng <span class="req">*</span></label>
-                    <input class="jm-input" type="text" name="title" placeholder="VD: Kỹ sư phần mềm Backend" oninput="jmCount(this,'jm-tc',80)" required>
-                    <div class="jm-char-count"><span id="jm-tc">0</span>/80</div>
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field">
-                    <label class="jm-label">Loại hình <span class="req">*</span></label>
-                    <select class="jm-select" name="type" required>
-                        <option value="">Chọn loại hình</option>
-                        <option value="full-time">Toàn thời gian</option><option value="part-time">Bán thời gian</option><option value="internship">Thực tập</option><option value="remote">Remote</option>
-                    </select>
-                </div>
-                <div class="jm-field">
-                    <label class="jm-label">Địa điểm <span class="req">*</span></label>
-                    <input class="jm-input" type="text" name="location" placeholder="VD: Hà Nội, Hồ Chí Minh..." required>
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field">
-                    <label class="jm-label">Ngành nghề</label>
-                    <input class="jm-input" type="text" name="field" placeholder="VD: Công nghệ, Marketing...">
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field">
-                    <label class="jm-label">Kinh nghiệm yêu cầu (năm)</label>
-                    <input class="jm-input" type="number" name="experience_required" min="0" placeholder="VD: 1 (0 = không yêu cầu)">
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field">
-                    <label class="jm-label">Lương tối thiểu (triệu)</label>
-                    <input class="jm-input" type="number" name="min_salary" min="0" placeholder="VD: 10">
-                </div>
-                <div class="jm-field">
-                    <label class="jm-label">Lương tối đa (triệu)</label>
-                    <input class="jm-input" type="number" name="max_salary" min="0" placeholder="VD: 20">
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field" style="max-width:220px">
-                    <label class="jm-label">Hạn nộp hồ sơ <span class="req">*</span></label>
-                    <input class="jm-input" type="date" name="deadline" style="color:#334155" required>
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field" style="flex:1 1 100%">
-                    <label class="jm-label">Mô tả công việc <span class="req">*</span></label>
-                    <textarea class="jm-textarea" name="description" placeholder="Mô tả chung về vị trí, nhiệm vụ chính..." oninput="jmCount(this,'jm-dc',2000)" required></textarea>
-                    <div class="jm-char-count"><span id="jm-dc">0</span>/2000</div>
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field" style="flex:1 1 100%">
-                    <label class="jm-label">Yêu cầu công việc</label>
-                    <textarea class="jm-textarea" name="requirements" placeholder="Mỗi yêu cầu một dòng, VD:&#10;- Tốt nghiệp đại học chuyên ngành CNTT&#10;- Có kinh nghiệm với Laravel"></textarea>
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field" style="flex:1 1 100%">
-                    <label class="jm-label">Quyền lợi</label>
-                    <textarea class="jm-textarea" name="benefits" placeholder="Mỗi quyền lợi một dòng, VD:&#10;- Lương thưởng cạnh tranh&#10;- Bảo hiểm đầy đủ"></textarea>
-                </div>
-            </div>
-            <div class="jm-row">
-                <div class="jm-field" style="flex:1 1 100%">
-                    <label class="jm-label">Kỹ năng yêu cầu</label>
-                    <div class="jm-skill-wrap" id="jm-skill-wrap" onclick="document.getElementById('jm-skill-input').focus()">
-                        <input id="jm-skill-input" class="jm-skill-input" type="text" placeholder="Nhập kỹ năng rồi nhấn Enter...">
-                    </div>
-                    <p class="jm-hint">Nhấn <kbd style="font-size:10px;background:#f1f5f9;border:1px solid #cbd5e1;padding:1px 5px;border-radius:4px;">Enter</kbd> hoặc dấu phẩy để thêm kỹ năng</p>
-                </div>
-            </div>
-            <div style="height:24px"></div>
-        </div>
-        <div class="jm-footer">
-            <span class="jm-footer-left">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                Tin sẽ được duyệt trong 24h
-            </span>
-            <div class="jm-footer-right">
-                <button type="button" class="jm-btn-cancel" onclick="closeModal()">Huỷ</button>
-                <button type="button" class="jm-btn-preview">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                    Xem trước
-                </button>
-                <button type="submit" class="jm-btn-submit">
-                    Đăng tin
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="jobs-page">
     <div class="container" style="max-width:1200px;margin:0 auto;padding:0 24px">
@@ -551,7 +356,7 @@
                     </div>
                     <div class="employer-cta">
                         <p>Đăng tin miễn phí, tiếp cận trực tiếp sinh viên & cựu sinh viên VNUA.</p>
-                        <button onclick="openModal()" class="employer-cta-btn">+ Đăng tin tuyển dụng</button>
+                        <a href="{{ route('job.create') }}" class="employer-cta-btn">+ Đăng tin tuyển dụng</a>
                     </div>
                 </div>
 
@@ -562,39 +367,6 @@
 </div>
 
 <script>
-function openModal() {
-    document.getElementById('jm-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-function closeModal() {
-    document.getElementById('jm-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-}
-document.getElementById('jm-overlay').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
-function jmCount(el, id, max) {
-    var s = document.getElementById(id);
-    if (s) { s.textContent = el.value.length; s.style.color = el.value.length > max * 0.9 ? '#ef4444' : ''; }
-}
-var si = document.getElementById('jm-skill-input');
-var sw = document.getElementById('jm-skill-wrap');
-si && si.addEventListener('keydown', function(e) {
-    if ((e.key === 'Enter' || e.key === ',') && this.value.trim()) {
-        e.preventDefault(); addSkill(this.value.trim().replace(/,$/, '')); this.value = '';
-    }
-    if (e.key === 'Backspace' && !this.value) {
-        var tags = sw.querySelectorAll('.jm-skill-tag'); if (tags.length) tags[tags.length - 1].remove();
-    }
-});
-function addSkill(t) {
-    if (!t) return;
-    var tag = document.createElement('div'); tag.className = 'jm-skill-tag';
-    tag.innerHTML = t + '<button type="button" onclick="this.parentNode.remove()" aria-label="Xoá">×</button>';
-    sw.insertBefore(tag, si);
-}
-
 /* Toggle suggested-jobs panel */
 function toggleSuggestPanel() {
     var panel = document.getElementById('suggest-panel');

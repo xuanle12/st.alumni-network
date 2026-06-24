@@ -1,10 +1,18 @@
 <x-mail::message>
 
+@if($type === 'event')
+# Xác thực email đăng sự kiện
+
+Xin chào **{{ $itemName }}**,
+
+Bạn vừa gửi yêu cầu đăng sự kiện **"{{ $itemTitle }}"** trên hệ thống **{{ config('app.name') }}**.
+@else
 # Xác thực email đăng tin tuyển dụng
 
-Xin chào **{{ $companyName }}**,
+Xin chào **{{ $itemName }}**,
 
-Bạn vừa gửi yêu cầu đăng tin tuyển dụng **"{{ $jobTitle }}"** trên hệ thống **{{ config('app.name') }}**.
+Bạn vừa gửi yêu cầu đăng tin tuyển dụng **"{{ $itemTitle }}"** trên hệ thống **{{ config('app.name') }}**.
+@endif
 
 Để xác nhận email liên hệ, vui lòng nhập mã OTP bên dưới:
 

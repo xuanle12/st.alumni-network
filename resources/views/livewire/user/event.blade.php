@@ -139,7 +139,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
   color: inherit;
   display: block;
 }
-.featured-card:hover { border-color: var(--fita2); box-shadow: 0 6px 24px rgba(9,97,170,0.1); transform: translateY(-2px); }
+.featured-card:hover { border-color: var(--fita2); box-shadow: 0 6px 24px rgba(22,163,74,0.12); transform: translateY(-2px); }
 .featured-img {
   width: 100%; height: 220px; background: var(--fita-pale);
   display: flex; align-items: center; justify-content: center;
@@ -222,7 +222,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
 .event-row:hover .event-thumb img { transform: scale(1.05); }
 .thumb-date {
   position: absolute; bottom: 6px; left: 6px;
-  background: rgba(9,97,170,.9); color: #fff;
+  background: rgba(22,163,74,.92); color: #fff;
   font-size: 10px; font-weight: 700;
   padding: 2px 7px; border-radius: 6px;
 }
@@ -267,10 +267,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
   flex-shrink: 0; align-self: center;
 }
 .btn-reg-prim  { background: var(--fita); color: #fff; }
-.btn-reg-prim:hover { background: #064d86; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(9,97,170,.3); }
+.btn-reg-prim:hover { background: #15803d; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(22,163,74,.3); }
 .btn-reg-done  { background: #f3f4f6; color: #9ca3af; cursor: default; }
 .btn-reg-ok    { background: var(--fita-pale); color: var(--fita); border: 1px solid #dcfce7; }
-.btn-reg-ok:hover { background: #dbeafe; }
+.btn-reg-ok:hover { background: #dcfce7; }
 .btn-reg-free  { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
 .btn-reg-free:hover { background: #dcfce7; }
 
@@ -307,7 +307,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
   font-size: 13px; color: var(--text);
   font-family: var(--font); width: 100%; transition: .15s;
 }
-.sb-search:focus { outline: none; border-color: var(--fita2); box-shadow: 0 0 0 3px rgba(9,97,170,.08); }
+.sb-search:focus { outline: none; border-color: var(--fita2); box-shadow: 0 0 0 3px rgba(22,163,74,.1); }
 .sb-search-wrap { position: relative; }
 .sb-search-wrap i { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); }
 
@@ -369,9 +369,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
 }
 </style>
 <div class="page-banner">
-  <div class="page-banner-inner">
-    <div class="page-banner-title">Sự kiện &amp; Hoạt động</div>
-    <div class="page-banner-sub">Các sự kiện kết nối cựu sinh viên, hội thảo nghề nghiệp và hoạt động cộng đồng</div>
+  <div class="page-banner-inner" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="page-banner-title">Sự kiện &amp; Hoạt động</div>
+      <div class="page-banner-sub">Các sự kiện kết nối cựu sinh viên, hội thảo nghề nghiệp và hoạt động cộng đồng</div>
+    </div>
+    <a href="{{ route('event.create') }}"
+      style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#16a34a;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s;white-space:nowrap"
+      onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
+      <i class="fa-solid fa-plus"></i> Đăng sự kiện
+    </a>
   </div>
 </div>
 
