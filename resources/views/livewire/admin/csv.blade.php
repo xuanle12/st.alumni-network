@@ -12,14 +12,6 @@
   .stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-bottom:0;}.ic-b{background:#f0fdf4}.ic-g{background:#f0fdf4}.ic-a{background:#fffbeb}.ic-p{background:#faf5ff}
   .stat-n{font-size:24px;font-weight:700}.stat-l{font-size:11px;color:#64748b;margin-top:3px}
   .n-b{color:#0f172a}.n-g{color:#16a34a}.n-a{color:#d97706}.n-p{color:#7c3aed}
-  .toolbar{display:flex;gap:10px;flex-wrap:wrap}
-  .sw{flex:1;min-width:200px;position:relative}
-  .sw input{width:100%;height:40px;padding:0 14px 0 40px;background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13.5px;color:#0f172a;font-family:inherit;box-shadow:0 1px 3px rgba(15,23,42,.06);transition:border-color .15s,box-shadow .15s}
-  .sw input:focus{outline:none;border-color:#0961AA;box-shadow:0 0 0 3px rgba(9,97,170,.1)}
-  .sw input::placeholder{color:#b0bec5;font-weight:400}
-  .sw-ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8;pointer-events:none}
-  .sel{height:40px;padding:0 34px 0 13px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;background-size:15px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;font-weight:500;color:#374151;font-family:inherit;cursor:pointer;box-shadow:0 1px 3px rgba(15,23,42,.06);appearance:none;-webkit-appearance:none;transition:border-color .15s,box-shadow .15s}
-  .sel:focus{outline:none;border-color:#0961AA;box-shadow:0 0 0 3px rgba(9,97,170,.1)}
   .msv{font-size:13px;font-weight:600;color:#0f172a}.cls{font-size:11px;color:#94a3b8;margin-top:1px}
   .job{font-size:12px;font-weight:600;color:#0f172a}.cmp{font-size:11px;color:#94a3b8;margin-top:1px}
   .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s}
@@ -64,9 +56,6 @@
 @media(max-width:768px){
   .aw{padding:1rem}
   .stats{grid-template-columns:repeat(2,1fr);gap:8px}
-  .toolbar{flex-wrap:wrap}
-  .sw{min-width:100%}
-  .sel{flex:1;min-width:120px}
 }
 @media(max-width:600px){
   .stats{grid-template-columns:1fr 1fr;gap:8px}
@@ -92,28 +81,23 @@
       <div><div class="tt">Danh sách cựu sinh viên</div><div class="ts">Quản lý danh sách tốt nghiệp</div></div>
       <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
     </div>
-    <div class="toolbar">
-      <div class="sw">
-        <span class="sw-ic"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input wire:model.live.debounce.300ms="search" type="text" placeholder="Tìm tên, MSV, lớp...">
-      </div>
-      <select wire:model.live="filterNam" class="sel">
+    <x-toolbar>
+      <x-slot:search>
+        <x-toolbar.search model="search" placeholder="Tìm tên, MSV, lớp..." />
+      </x-slot:search>
+      <x-toolbar.select model="filterNam">
         <option value="">Tất cả năm</option>
         @foreach($namList as $nam)
           <option value="{{ $nam }}">{{ $nam }}</option>
         @endforeach
-      </select>
-      <select wire:model.live="filterStatus" class="sel">
+      </x-toolbar.select>
+      <x-toolbar.select model="filterStatus">
         <option value="">Tất cả</option>
         <option value="co_tk">Đã có tài khoản</option>
         <option value="chua_tk">Chưa có tài khoản</option>
-      </select>
-      <select wire:model.live="perPage" class="sel">
-        <option value="10">10 / trang</option>
-        <option value="20">20 / trang</option>
-        <option value="50">50 / trang</option>
-      </select>
-    </div>
+      </x-toolbar.select>
+      <x-toolbar.per-page />
+    </x-toolbar>
 
     <x-table>
       <x-slot:heading>
