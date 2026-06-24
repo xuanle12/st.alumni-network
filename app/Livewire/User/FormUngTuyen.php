@@ -18,7 +18,7 @@ class FormUngTuyen extends Component
  
     public ?int $jobId = null;
     public ?Job $job = null;
-    public bool $show = true;
+    public bool $show = false;
  
     // Form fields
     public string $name = '';

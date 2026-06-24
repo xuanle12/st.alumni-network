@@ -476,8 +476,7 @@
                                     @if($job->min_salary || $job->max_salary)
                                         <p class="job-salary">{{ $job->salary_range }}</p>
                                     @endif
-                                    <a href="{{ route('job.show', $job->id) }}" wire:navigate class="job-btn-apply">Ứng tuyển</a>
-                                    <button class="job-btn-save">Lưu tin</button>
+<a href="{{ route('job.show', $job->id) }}" wire:navigate class="job-btn-apply">Ứng tuyển</a>                                    <button class="job-btn-save">Lưu tin</button>
                                     @if($job->deadline)
                                         <p class="job-deadline">Hạn: {{ $job->deadline }}</p>
                                     @endif
@@ -570,10 +569,15 @@ function closeModal() {
     document.getElementById('jm-overlay').classList.remove('open');
     document.body.style.overflow = '';
 }
-document.getElementById('jm-overlay').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
+document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'jm-overlay') closeModal();
 });
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        var overlay = document.getElementById('jm-overlay');
+        if (overlay && overlay.classList.contains('open')) closeModal();
+    }
+});
 function jmCount(el, id, max) {
     var s = document.getElementById(id);
     if (s) { s.textContent = el.value.length; s.style.color = el.value.length > max * 0.9 ? '#ef4444' : ''; }

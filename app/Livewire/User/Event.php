@@ -75,7 +75,7 @@ class Event extends Component
             ->when($this->search, fn($q) =>
                 $q->where(function ($w) {
                     $w->where('title',    'like', '%'.$this->search.'%')
-                      ->orWhere('location','like', '%'.$this->search.'%');
+                    ->orWhere('location','like', '%'.$this->search.'%');
                 })
             )
             ->when($this->activeTab === 'upcoming', fn($q) =>
@@ -88,8 +88,7 @@ class Event extends Component
                 $q->where('badge', 'free')
             )
             ->orderBy('event_date')
-            ->take(4)
-            ->get();
+            ->paginate(4);
 
         $upcomingEvents = EventModel::where('status', 'active')
             ->where('event_date', '>', now()->addDays(14)->toDateString())
