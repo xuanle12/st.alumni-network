@@ -109,7 +109,7 @@ class EventForm extends Component
             'title'         => $this->title,
             'organizer'     => $this->organizer,
             'location'      => $this->location ?: null,
-            'contact_email' => $this->contact_email,
+            'contact_email' => auth()->user()->email,            
             'event_date'    => $this->event_date,
             'start_time'    => $this->start_time ?: null,
             'end_time'      => $this->end_time ?: null,
