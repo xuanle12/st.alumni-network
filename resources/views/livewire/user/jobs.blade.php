@@ -149,11 +149,11 @@
 
         <div class="jobs-title-bar" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
             <h1>Cơ hội việc làm</h1>
-            <a href="{{ route('job.create') }}"
+            <!-- <a href="{{ route('job.create') }}"
               style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#16a34a;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s"
               onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
               <i class="fa-solid fa-plus"></i> Đăng tin tuyển dụng
-            </a>
+            </a> -->
         </div>
 
         <div class="jobs-grid">

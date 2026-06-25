@@ -128,14 +128,15 @@
                 </div>
                 <div class="nw-rr">
                     <span>{{ number_format($post->likes_count) }} lượt thích</span>
-                    <span>{{ number_format($post->comments_count) }} bình luận · {{ number_format($post->shares_count) }} chia sẻ</span>
+                    <span>{{ number_format($post->comments_count) }} bình luận </span>
                 </div>
                 <div class="nw-pac">
-<button class="nw-pab" wire:click="like({{ $post->id }})">
-    <i class="fa-solid fa-thumbs-up {{ $post->isLikedBy() ? 'text-green-600' : '' }}"></i>
-    {{ $post->isLikedBy() ? 'Đã thích' : 'Thích' }}
-</button>                    <button class="nw-pab" @click="openComments = !openComments"><i class="fa-solid fa-comment"></i> Bình luận</button>
-                    <button class="nw-pab"><i class="fa-solid fa-share"></i> Chia sẻ</button>
+                    <button class="nw-pab" wire:click="like({{ $post->id }})">
+                        <i class="fa-solid fa-thumbs-up {{ $post->isLikedBy() ? 'text-green-600' : '' }}"></i>
+                        {{ $post->isLikedBy() ? 'Đã thích' : 'Thích' }}
+                    </button>                    
+                    <button class="nw-pab" @click="openComments = !openComments"><i class="fa-solid fa-comment"></i> Bình luận</button>
+                    <!-- <button class="nw-pab"><i class="fa-solid fa-share"></i> Chia sẻ</button> -->
                 </div>
                 <div x-show="openComments" x-transition>
                     <livewire:user.comment :post="$post" :key="'comment-'.$post->id" />
