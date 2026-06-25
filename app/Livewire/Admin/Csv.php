@@ -16,7 +16,7 @@ class Csv extends Component
     public string $filterKhoa   = '';
     public string $filterNam    = '';
     public string $filterStatus = '';
-    public int    $perPage      = 15;
+    public int    $perPage      = 10;
 
     public bool  $showModal = false;
     public ?int  $editId    = null;

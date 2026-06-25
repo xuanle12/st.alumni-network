@@ -14,7 +14,7 @@ class Mentor extends Component
 
     public string $search = '';
     public string $filterStatus = '';
-    public int    $perPage = 15;
+    public int    $perPage = 10;
     public ?int   $selectedId = null;
     public string $admin_note = '';
 

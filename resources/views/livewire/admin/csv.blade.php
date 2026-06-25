@@ -96,7 +96,6 @@
         <option value="co_tk">Đã có tài khoản</option>
         <option value="chua_tk">Chưa có tài khoản</option>
       </x-toolbar.select>
-      <x-toolbar.per-page />
     </x-toolbar>
 
     <x-table>

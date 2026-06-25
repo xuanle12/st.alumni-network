@@ -310,6 +310,18 @@ a:focus-visible, button:focus-visible {
   font-size: 12.5px; color: #64748b; font-weight: 500;
 }
 
+/* override pagination buttons to match admin blue theme */
+.adm-tpgn .alumni-pgn__btn:hover:not(.alumni-pgn__btn--disabled):not(.alumni-pgn__btn--active):not(.alumni-pgn__btn--dots) {
+  background: #eef4fb;
+  border-color: var(--primary, #0961AA);
+  color: var(--primary, #0961AA);
+}
+.adm-tpgn .alumni-pgn__btn--active {
+  background: var(--primary, #0961AA);
+  border-color: var(--primary, #0961AA);
+  box-shadow: 0 2px 8px rgba(9, 97, 170, .28);
+}
+
 /* ── badge ── */
 .adm-badge {
   display: inline-flex; align-items: center; gap: 5px;
@@ -344,7 +356,8 @@ a:focus-visible, button:focus-visible {
   padding: 0 0 18px;
 }
 .adm-tb-search-wrap { flex: 1; min-width: 220px; }
-.adm-tb-filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.adm-tb-filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex: 1; }
+.adm-tb-per-wrap { margin-left: auto; flex-shrink: 0; }
 
 /* ── search input ── */
 .adm-tb-search { position: relative; }
@@ -401,7 +414,6 @@ a:focus-visible, button:focus-visible {
 /* ── per-page control ── */
 .adm-tb-per {
   display: inline-flex; align-items: center;
-  margin-left: auto;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
   background: #fff;
@@ -437,7 +449,7 @@ a:focus-visible, button:focus-visible {
 @media(max-width:640px) {
   .adm-tb-search-wrap { min-width: 100%; }
   .adm-tb-sel { min-width: 0; flex: 1; }
-  .adm-tb-per { margin-left: 0; }
+  .adm-tb-per-wrap { margin-left: 0; flex: 1 0 100%; display: flex; justify-content: flex-end; }
 }
 
 /* ── action dot-button + dropdown ── */

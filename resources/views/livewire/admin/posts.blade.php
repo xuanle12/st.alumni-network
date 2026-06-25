@@ -130,7 +130,6 @@
     <option value="Tuyển dụng">Tuyển dụng</option>
     <option value="Chia sẻ">Chia sẻ</option>
   </x-toolbar.select>
-  <x-toolbar.per-page />
 </x-toolbar>
 
 <x-table minWidth="680px">

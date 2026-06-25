@@ -14,7 +14,7 @@ class Posts extends Component
     public string $search = '';
     public string $filterStatus = '';
     public string $filterCat = '';
-    public int    $perPage = 15;
+    public int    $perPage = 10;
 
     // modal thêm / sửa
     public bool $showModal = false;

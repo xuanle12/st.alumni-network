@@ -160,7 +160,6 @@
       <option value="approved">Đã duyệt</option>
       <option value="rejected">Từ chối</option>
     </x-toolbar.select>
-    <x-toolbar.per-page />
   </x-toolbar>
 
   <x-table>

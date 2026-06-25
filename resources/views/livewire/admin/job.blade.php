@@ -255,7 +255,6 @@
           <option value="part-time">Part-time</option>
           <option value="internship">Thực tập</option>
         </x-toolbar.select>
-        <x-toolbar.per-page />
       </x-toolbar>
 
       <x-table minWidth="900px">

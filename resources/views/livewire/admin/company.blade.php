@@ -149,7 +149,6 @@
     <option value="Sản xuất">Sản xuất</option>
     <option value="Giáo dục">Giáo dục</option>
   </x-toolbar.select>
-  <x-toolbar.per-page />
 </x-toolbar>
 
 <x-table minWidth="680px">

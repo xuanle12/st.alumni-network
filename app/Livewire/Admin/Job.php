@@ -15,7 +15,7 @@ class Job extends Component
     public string $search = '';
     public string $type = '';
     public string $statusFilter = '';
-    public int    $perPage = 15;
+    public int    $perPage = 10;
 
     public bool $showForm = false;
     public bool $showDetail = false;

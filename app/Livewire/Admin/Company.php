@@ -16,7 +16,7 @@ class Company extends Component
     public string $search = '';
     public string $filterStatus = '';
     public string $filterField = '';
-    public int    $perPage = 15;
+    public int    $perPage = 10;
 
     public bool $showModal = false;
     public bool $showView = false;

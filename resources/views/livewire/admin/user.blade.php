@@ -119,7 +119,6 @@
       <option value="pending">Chờ duyệt</option>
       <option value="locked">Bị khóa</option>
     </x-toolbar.select>
-    <x-toolbar.per-page />
   </x-toolbar>
 
   {{-- Table --}}
