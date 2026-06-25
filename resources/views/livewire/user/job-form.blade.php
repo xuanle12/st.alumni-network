@@ -136,6 +136,27 @@
   .jf-card{padding:20px}
   .step-label{display:none}
 }
+
+/* skill tags (yêu cầu kỹ năng) */
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.skill-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:20px;font-size:12.5px;font-weight:600;
+  color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;
+}
+.skill-chip i{font-size:10px;opacity:.45;cursor:pointer;transition:.12s}
+.skill-chip i:hover{opacity:1;color:#dc2626}
+.skill-empty{font-size:12.5px;color:#9ca3af;font-style:italic}
+.skill-input-wrap{position:relative}
+.skill-suggest{
+  position:absolute;top:calc(100% + 3px);left:0;right:0;
+  background:#fff;border:1px solid #e2e8f0;border-radius:9px;
+  box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:170px;overflow-y:auto;z-index:10;
+}
+.skill-suggest-item{padding:8px 12px;font-size:12.5px;color:#374151;cursor:pointer;transition:.1s}
+.skill-suggest-item:hover{background:#f0fdf4;color:#166534}
+.skill-hint{font-size:11.5px;color:#94a3b8;margin-top:5px}
+
 </style>
 
 <div class="jf-wrap">
@@ -234,6 +255,38 @@
       <div class="fi full">
         <textarea wire:model="description" placeholder="Mô tả công việc, yêu cầu ứng viên, quyền lợi được hưởng..."></textarea>
         @error('description')<div class="err"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>@enderror
+      </div>
+    </div>
+
+    <div class="jf-section">Kỹ năng yêu cầu</div>
+    <div class="fg">
+      <div class="fi full" x-data="{open:false}">
+        <div class="skill-tags">
+          @forelse($selectedSkills as $sk)
+            <span class="skill-chip">
+              {{ $sk }} <i class="fa-solid fa-xmark" wire:click="removeSkill('{{ $sk }}')"></i>
+            </span>
+          @empty
+            <span class="skill-empty">Chưa thêm kỹ năng nào.</span>
+          @endforelse
+        </div>
+        <div class="skill-input-wrap">
+          <input
+            type="text"
+            wire:model.live.debounce.250ms="skillInput"
+            wire:keydown.enter.prevent="addSkill"
+            x-on:focus="open=true"
+            x-on:blur="setTimeout(()=>open=false,150)"
+            placeholder="VD: PHP, Laravel, Giao tiếp... rồi nhấn Enter"
+          >
+          <div class="skill-suggest" x-show="open" x-cloak
+               @if($this->skillSuggestions->isEmpty()) style="display:none" @endif>
+            @foreach($this->skillSuggestions as $s)
+              <div class="skill-suggest-item" wire:click="addSkill('{{ $s->name }}')">{{ $s->name }}</div>
+            @endforeach
+          </div>
+        </div>
+        <div class="skill-hint">Nhấn Enter để thêm kỹ năng. Có thể thêm nhiều kỹ năng.</div>
       </div>
     </div>
 

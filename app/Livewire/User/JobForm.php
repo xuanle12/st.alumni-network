@@ -25,6 +25,10 @@ class JobForm extends Component
     public string $description = '';
     public string $contact_email = '';
 
+    // Kỹ năng yêu cầu
+    public array $selectedSkills = [];
+    public string $skillInput = '';
+
     // OTP
     public string $otp_input = '';
     public bool   $otp_sent  = false;
@@ -107,7 +111,7 @@ class JobForm extends Component
         }
 
         // OTP hợp lệ → tạo job
-        Job::create([
+        $job = Job::create([
             'title'               => $this->title,
             'company'             => $this->company,
             'location'            => $this->location ?: null,
@@ -124,6 +128,21 @@ class JobForm extends Component
             'created_by'          => auth()->id(),
         ]);
 
+        // Gắn kỹ năng yêu cầu vào tin tuyển dụng
+        if (!empty($this->selectedSkills)) {
+            $skillIds = collect($this->selectedSkills)
+                ->filter()
+                ->map(function ($name) {
+                    $skill = \App\Models\Skill::firstOrCreate(['name' => trim($name)]);
+                    return $skill->id;
+                })
+                ->unique()
+                ->values()
+                ->toArray();
+
+            $job->skills()->sync($skillIds);
+        }
+
         session()->forget(['job_otp', 'job_otp_exp', 'job_otp_email']);
 
         $this->step = 'success';
@@ -134,6 +153,50 @@ class JobForm extends Component
         $this->step      = 'form';
         $this->otp_input = '';
         $this->otp_error = '';
+    }
+
+    // Thêm kỹ năng yêu cầu (từ gợi ý hoặc nhập tự do)
+    public function addSkill(?string $name = null)
+    {
+        $name = trim($name ?? $this->skillInput);
+
+        if ($name === '') {
+            return;
+        }
+
+        // tránh trùng (không phân biệt hoa thường)
+        $exists = collect($this->selectedSkills)
+            ->contains(fn ($s) => mb_strtolower($s) === mb_strtolower($name));
+
+        if (!$exists) {
+            $this->selectedSkills[] = $name;
+        }
+
+        $this->skillInput = '';
+    }
+
+    public function removeSkill(string $name)
+    {
+        $this->selectedSkills = array_values(array_filter(
+            $this->selectedSkills,
+            fn ($s) => $s !== $name
+        ));
+    }
+
+    // Gợi ý kỹ năng theo input, lấy từ danh mục Skill đã có sẵn
+    public function getSkillSuggestionsProperty()
+    {
+        $term = trim($this->skillInput);
+
+        if ($term === '') {
+            return collect();
+        }
+
+        return \App\Models\Skill::where('name', 'like', "%{$term}%")
+            ->whereNotIn('name', $this->selectedSkills ?: [''])
+            ->orderBy('name')
+            ->limit(8)
+            ->get();
     }
 
     public function render()

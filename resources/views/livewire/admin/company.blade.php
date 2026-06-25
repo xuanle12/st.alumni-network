@@ -84,6 +84,7 @@
 .empty{text-align:center;padding:3rem;color:#cbd5e1;font-size:13px}
 
 
+
 @media(max-width:1024px){
   .aw{padding:1.25rem}
   .stats{grid-template-columns:repeat(2,1fr);gap:10px}

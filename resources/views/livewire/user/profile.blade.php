@@ -278,7 +278,6 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 <div class="pf-page">
 <div class="pf-wrap">
 
-  {{-- ══ LEFT ══ --}}
   <aside class="pf-left">
     <div class="pf-id-card">
       <div class="pf-ava-wrap">
@@ -338,7 +337,6 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
     </div>
   </aside>
 
-  {{-- ══ RIGHT ══ --}}
   <div class="pf-right">
 
     {{-- Thông tin cơ bản --}}

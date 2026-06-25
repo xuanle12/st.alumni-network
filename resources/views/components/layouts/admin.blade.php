@@ -103,10 +103,10 @@
                 </button>
             </div>
             <div class="adm-topbar-right">
-                <button class="adm-notif" title="Thông báo">
+                <!-- <button class="adm-notif" title="Thông báo">
                     <i class="fa-solid fa-bell"></i>
                     <span class="adm-notif-dot"></span>
-                </button>
+                </button> -->
                 <div class="adm-topbar-user" id="admUserBtn" onclick="toggleUserMenu()" role="button" tabindex="0">
                     <div class="adm-topbar-uava">{{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}</div>
                     <div class="adm-topbar-uinfo">
