@@ -11,6 +11,8 @@ Route::get('/', \App\Livewire\User\Home::class)->name('home');
 //Auth
 Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
 Route::get('/register', \App\Livewire\Auth\Register::class)->name('register');
+Route::get('/forgot-password', \App\Livewire\Auth\ForgotPassword::class)->name('password.request');
+Route::get('/reset-password/{token}', \App\Livewire\Auth\ResetPassword::class)->name('password.reset');
 
 Route::post('/logout', function (Request $request) {
     Auth::logout();

@@ -266,7 +266,7 @@ body{font-family:var(--font);}
       <div class="lfield">
         <div class="lfield-row">
           <label for="lpassword">Mật khẩu</label>
-          <a href="#" onclick="event.preventDefault()">Quên mật khẩu?</a>
+          <a href="{{ route('password.request') }}" wire:navigate>Quên mật khẩu?</a>
         </div>
         <div class="linput-wrap">
           <input

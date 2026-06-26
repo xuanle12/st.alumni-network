@@ -4,6 +4,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -119,7 +121,17 @@ class User extends Authenticatable
             'is_online'         => 'boolean',
         ];
     }
-     public static function makeInitials(string $name): string
+     public function sendPasswordResetNotification($token): void
+    {
+        $resetUrl = route('password.reset', [
+            'token' => $token,
+            'email' => $this->email,
+        ]);
+
+        Mail::to($this->email)->send(new ResetPasswordMail($resetUrl, $this->name));
+    }
+
+    public static function makeInitials(string $name): string
     {
         $parts = explode(' ', $name);
         if (count($parts) >= 2) {
