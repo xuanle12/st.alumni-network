@@ -141,6 +141,15 @@
                       class="form-input form-textarea"></textarea>
             @error('cover_letter') <p class="field-error">{{ $message }}</p> @enderror
 
+            {{-- Đồng ý thoả thuận --}}
+            <div class="form-group" style="margin-top: 1rem;">
+                <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer; font-size:13px; color:#374151;">
+                    <input type="checkbox" wire:model="agreed" style="margin-top:3px;" />
+                    <span>Tôi đồng ý với thoả thuận sử dụng dữ liệu cá nhân của hệ thống. <span class="required">*</span></span>
+                </label>
+                @error('agreed') <p class="field-error">{{ $message }}</p> @enderror
+            </div>
+
             {{-- Submit --}}
             <button wire:click="submit" wire:loading.attr="disabled" wire:target="submit" class="btn-submit">
                 <span wire:loading.remove wire:target="submit">Nộp hồ sơ ứng tuyển</span>
