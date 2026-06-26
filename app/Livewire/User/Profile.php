@@ -266,18 +266,18 @@ class Profile extends Component
 
         // % hoàn thành profile 
         $check = [
-            $user->name,
-            $user->email,
-            $user->profile->phone ?? null,
-            $user->profile->que_quan ?? null,
-            $user->profile->tinh_thanh ?? null,
-            $user->profile->nganh ?? null,
-            $user->profile->current_company ?? null,
-            ($user->profile->experience_years ?? 0) > 0 ? true : null,
-            $user->profile->github ?? null,
-            $user->profile->linkedin ?? null,
-            $user->profile?->skills->count() ?? 0,
-            $user->cv->count()
+            $user->name,                                                              // tên
+            $user->email,                                                             // email
+            $user->profile->phone ?? null,                                            // điện thoại
+            $user->profile->que_quan ?? null,                                         // quê quán
+            $user->profile->tinh_thanh ?? null,                                       // tỉnh thành
+            $user->profile->nganh ?? null,                                            // ngành
+            $user->profile->current_company ?? null,                                  // công ty
+            ($user->profile->experience_years ?? 0) > 0 ? true : null,               // kinh nghiệm
+            $user->profile->github ?? null,                                           // github
+            $user->profile->linkedin ?? null,                                         // linkedin
+            ($user->profile?->skills->count() > 0) ? true : null,                   // kỹ năng
+            ($user->cv->count() > 0) ? true : null,                                  // cv
         ];
 
         $this->pct =
