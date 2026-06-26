@@ -199,6 +199,12 @@ body{
   height:260px;
 }
 
+.donut-row{display:flex;align-items:center;gap:1.25rem}
+.leg{display:flex;flex-direction:column;gap:9px;flex:1}
+.leg-row{display:flex;align-items:center;gap:7px;font-size:12px;color:#374151}
+.leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.leg-pct{margin-left:auto;font-weight:600;font-size:13px;color:#111}
+
 
 .btn-xs{
   font-size:13px;
@@ -425,7 +431,29 @@ body{
     </div>
     <div class="card">
       <div class="card-hd"><div class="card-title">Trạng thái hồ sơ</div></div>
-      <div id="donut-chart" wire:ignore style="height:260px"></div>
+      @php
+        $total = ($statusStats['active'] ?? 0) + ($statusStats['pending'] ?? 0) + ($statusStats['inactive'] ?? 0);
+        $active  = $total > 0 ? round(($statusStats['active'] ?? 0) / $total * 238) : 0;
+        $pending = $total > 0 ? round(($statusStats['pending'] ?? 0) / $total * 238) : 0;
+      @endphp
+      <div class="donut-row">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#f3f4f6" stroke-width="16"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#3b82f6" stroke-width="16"
+                  stroke-dasharray="{{ $active }} {{ 238 - $active }}"
+                  stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#f59e0b" stroke-width="16"
+                  stroke-dasharray="{{ $pending }} {{ 238 - $pending }}"
+                  stroke-dashoffset="-{{ $active }}" transform="rotate(-90 50 50)"/>
+          <text x="50" y="46" text-anchor="middle" font-size="14" font-weight="700" fill="#111">{{ number_format($total) }}</text>
+          <text x="50" y="60" text-anchor="middle" font-size="9" fill="#9ca3af">tổng</text>
+        </svg>
+        <div class="leg">
+          <div class="leg-row"><div class="leg-dot" style="background:#3b82f6"></div>Hoạt động<span class="leg-pct">{{ number_format($statusStats['active'] ?? 0) }}</span></div>
+          <div class="leg-row"><div class="leg-dot" style="background:#f59e0b"></div>Chờ duyệt<span class="leg-pct">{{ number_format($statusStats['pending'] ?? 0) }}</span></div>
+          <div class="leg-row"><div class="leg-dot" style="background:#e5e7eb"></div>Không HĐ<span class="leg-pct">{{ number_format($statusStats['inactive'] ?? 0) }}</span></div>
+        </div>
+      </div>
     </div>
   </div>
  
@@ -492,18 +520,15 @@ body{
  
 <script>
 (function () {
-  var _barRoot   = null;
-  var _donutRoot = null;
+  var _barRoot = null;
 
   var MONTHLY = @json($monthlyStats);
-  var STATUS  = @json($statusStats);
 
   function initCharts() {
     if (!document.getElementById('bar-chart')) return;
 
     // dispose cũ nếu có
-    if (_barRoot)   { _barRoot.dispose();   _barRoot   = null; }
-    if (_donutRoot) { _donutRoot.dispose(); _donutRoot = null; }
+    if (_barRoot) { _barRoot.dispose(); _barRoot = null; }
 
     // ── BAR CHART ──────────────────────────────────────────────
     _barRoot = am5.Root.new('bar-chart');
@@ -567,58 +592,6 @@ body{
     series.data.setAll(barData);
     series.appear(1000);
     chart.appear(1000, 100);
-
-    // ── DONUT CHART ────────────────────────────────────────────
-    _donutRoot = am5.Root.new('donut-chart');
-    _donutRoot._logo && _donutRoot._logo.dispose();
-    _donutRoot.setThemes([am5themes_Animated.new(_donutRoot)]);
-
-    var pie = _donutRoot.container.children.push(
-      am5percent.PieChart.new(_donutRoot, {
-        innerRadius: am5.percent(62),
-        layout: _donutRoot.verticalLayout,
-      })
-    );
-
-    var pieSeries = pie.series.push(
-      am5percent.PieSeries.new(_donutRoot, {
-        valueField: 'value', categoryField: 'category', alignLabels: false,
-      })
-    );
-    pieSeries.labels.template.setAll({ forceHidden: true });
-    pieSeries.ticks.template.setAll({ forceHidden: true });
-    pieSeries.slices.template.setAll({ strokeWidth: 2, stroke: am5.color(0xffffff), cornerRadius: 4 });
-    pieSeries.get('colors').set('colors', [
-      am5.color(0x3b82f6),
-      am5.color(0xf59e0b),
-      am5.color(0xd1d5db),
-    ]);
-
-    var total = (STATUS.active || 0) + (STATUS.pending || 0) + (STATUS.inactive || 0);
-    pieSeries.data.setAll([
-      { category: 'Hoạt động', value: STATUS.active  || 0 },
-      { category: 'Chờ duyệt', value: STATUS.pending || 0 },
-      { category: 'Không HĐ',  value: STATUS.inactive || 0 },
-    ]);
-
-    // nhãn giữa
-    pie.seriesContainer.children.push(am5.Label.new(_donutRoot, {
-      text: '[fontSize:22px fontWeight:700 fill:#0f172a]' + total + '[/]\n[fontSize:11px fill:#94a3b8]tổng hồ sơ[/]',
-      textAlign: 'center',
-      centerX: am5.percent(50), centerY: am5.percent(50),
-      x: am5.percent(50), y: am5.percent(50),
-      oversizedBehavior: 'fit',
-    }));
-
-    var legend = pie.children.push(am5.Legend.new(_donutRoot, {
-      centerX: am5.percent(50), x: am5.percent(50), marginTop: 12,
-    }));
-    legend.labels.template.setAll({ fontSize: 12, fill: am5.color(0x475569) });
-    legend.valueLabels.template.setAll({ fontSize: 12, fontWeight: '700', fill: am5.color(0x0f172a) });
-    legend.markers.template.setAll({ width: 10, height: 10, borderRadius: 3 });
-    legend.data.setAll(pieSeries.dataItems);
-
-    pieSeries.appear(1000, 100);
   }
 
   document.addEventListener('DOMContentLoaded', initCharts);
