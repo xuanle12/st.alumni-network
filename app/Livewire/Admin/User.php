@@ -48,6 +48,9 @@ class User extends Component
             'f_role'           => 'required|in:alumni,student,lecturer,admin,company',
             'f_status'         => 'required|in:active,pending,locked',
             'f_msv'            => 'nullable|string|max:20',
+            'f_nganh'          => 'nullable|string|max:100',
+            'f_current_company' => 'nullable|string|max:100',
+            'f_experience_years' => 'nullable|integer|min:0',
             'f_nam_tot_nghiep' => 'nullable|digits:4|integer|min:1990|max:2099',
         ];
     }
@@ -59,6 +62,9 @@ class User extends Component
         'f_password.required'       => 'Vui lòng nhập mật khẩu.',
         'f_password.min'            => 'Mật khẩu ít nhất 6 ký tự.',
         'f_msv.max'                 => 'Mã SV tối đa 20 ký tự.',
+        'f_nganh.max'               => 'Ngành học tối đa 100 ký tự.',
+        'f_current_company.max'     => 'Tên công ty tối đa 100 ký tự.',
+        'f_experience_years.min'    => 'Số năm kinh nghiệm không hợp lệ.',  
         'f_nam_tot_nghiep.digits'   => 'Năm tốt nghiệp phải gồm 4 chữ số.',
         'f_nam_tot_nghiep.min'      => 'Năm tốt nghiệp không hợp lệ.',
         'f_nam_tot_nghiep.max'      => 'Năm tốt nghiệp không hợp lệ.',
