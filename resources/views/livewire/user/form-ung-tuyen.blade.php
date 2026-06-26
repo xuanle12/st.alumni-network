@@ -142,9 +142,9 @@
             @error('cover_letter') <p class="field-error">{{ $message }}</p> @enderror
 
             {{-- Submit --}}
-            <button wire:click="submit" wire:loading.attr="disabled" class="btn-submit">
-                <span wire:loading.remove>Nộp hồ sơ ứng tuyển</span>
-                <span wire:loading>Đang gửi...</span>
+            <button wire:click="submit" wire:loading.attr="disabled" wire:target="submit" class="btn-submit">
+                <span wire:loading.remove wire:target="submit">Nộp hồ sơ ứng tuyển</span>
+                <span wire:loading wire:target="submit">Đang gửi...</span>
             </button>
         </div>
 

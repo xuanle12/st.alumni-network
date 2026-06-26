@@ -4,7 +4,7 @@
 .mr-overlay{
   position:fixed;inset:0;background:rgba(15,23,42,.55);
   display:flex;align-items:center;justify-content:center;
-  z-index:300;padding:1rem;
+  z-index:1000;padding:1rem;
 }
 .mr-modal{
   background:#fff;border-radius:16px;

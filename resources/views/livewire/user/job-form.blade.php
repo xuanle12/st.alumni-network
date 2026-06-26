@@ -59,6 +59,35 @@
 .fi textarea{resize:vertical;min-height:100px;line-height:1.6}
 .fi .err{font-size:11.5px;color:#dc2626;margin-top:3px;display:flex;align-items:center;gap:4px}
 
+/* Kỹ năng */
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.skill-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;
+  font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:7px;
+}
+.skill-chip i{font-size:10px;opacity:.5;cursor:pointer;transition:.12s}
+.skill-chip i:hover{opacity:1;color:#dc2626}
+.skill-empty{font-size:12.5px;color:#94a3b8;font-style:italic}
+.skill-input-wrap{position:relative}
+.skill-input-wrap input{
+  width:100%;padding:9px 12px;
+  border:1.5px solid #e2e8f0;border-radius:9px;
+  font-size:13.5px;color:#0f172a;font-family:inherit;
+  transition:border-color .15s,box-shadow .15s;background:#fff;
+}
+.skill-input-wrap input:focus{
+  outline:none;border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.1);
+}
+.skill-suggest{
+  position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:10;
+  background:#fff;border:1px solid #e2e8f0;border-radius:9px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);max-height:220px;overflow-y:auto;
+}
+.skill-suggest-item{padding:8px 13px;font-size:12.5px;color:#374151;cursor:pointer;transition:.1s}
+.skill-suggest-item:hover{background:#f0fdf4;color:#15803d}
+.skill-hint{font-size:11px;color:#94a3b8;margin-top:4px}
+
 .jf-note{
   background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;
   padding:10px 14px;font-size:12.5px;color:#166534;
@@ -249,6 +278,29 @@
         @error('deadline')<div class="err"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>@enderror
       </div>
     </div>
+
+    <div class="jf-section">Kỹ năng yêu cầu</div>
+    <div class="skill-tags">
+      @forelse($selectedSkills as $sk)
+        <span class="skill-chip">
+          {{ $sk }} <i class="fa-solid fa-xmark" wire:click="removeSkill('{{ $sk }}')"></i>
+        </span>
+      @empty
+        <span class="skill-empty">Chưa thêm kỹ năng nào.</span>
+      @endforelse
+    </div>
+    <div class="skill-input-wrap" x-data="{open:false}">
+      <input type="text" wire:model.live.debounce.250ms="skillInput" wire:keydown.enter.prevent="addSkill"
+             @focus="open=true" @click.outside="open=false"
+             placeholder="VD: PHP, Laravel, Excel... gõ rồi Enter để thêm">
+      <div class="skill-suggest" x-show="open" x-cloak
+           @if($this->skillSuggestions->isEmpty()) style="display:none" @endif>
+        @foreach($this->skillSuggestions as $s)
+          <div class="skill-suggest-item" wire:click="addSkill('{{ $s->name }}')">{{ $s->name }}</div>
+        @endforeach
+      </div>
+    </div>
+    <div class="skill-hint">Nhấn Enter để thêm kỹ năng. Ứng viên có kỹ năng trùng sẽ thấy gợi ý phù hợp.</div>
 
     <div class="jf-section">Mô tả công việc</div>
     <div class="fg">
