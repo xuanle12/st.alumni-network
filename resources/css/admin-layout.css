@@ -96,7 +96,7 @@ body.adm header {
 .adm-item.active .adm-item-ic { color: #fff; }
 
 .adm-item-badge {
-  margin-left: auto;
+margin-left: auto;
   font-size: 13px; font-weight: 700;
   padding: 2px 7px; border-radius: 20px;
   background: rgba(251,191,36,0.15); color: #fbbf24;
@@ -248,7 +248,7 @@ a:focus-visible, button:focus-visible {
 /* ── RESPONSIVE ───────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .adm-sb {
-    position: fixed; left: -260px;
+position: fixed; left: -260px;
     top: 0; height: 100%; z-index: 100;
     transition: left .25s ease;
   }
@@ -356,7 +356,7 @@ a:focus-visible, button:focus-visible {
   padding: 0 0 18px;
 }
 .adm-tb-search-wrap { flex: 1; min-width: 220px; }
-.adm-tb-filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex-shrink: 0; }
+.adm-tb-filters { display: flex; gap: 8px; align-items: center;  flex-shrink: 0; }
 .adm-tb-per-wrap { margin-left: auto; flex-shrink: 0; }
 
 /* ── search input ── */
@@ -413,7 +413,7 @@ a:focus-visible, button:focus-visible {
 
 /* ── per-page control ── */
 .adm-tb-per {
-  display: inline-flex; align-items: center;
+display: inline-flex; align-items: center;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
   background: #fff;
@@ -485,4 +485,3 @@ a:focus-visible, button:focus-visible {
 .adm-dd-item.red    { color: #b91c1c; } .adm-dd-item.red:hover    { background: #fef2f2; }
 .adm-dd-sep { height: 1px; background: #f1f5f9; margin: 4px 0; }
 .adm-dd-ic  { width: 15px; text-align: center; font-size: 12px; flex-shrink: 0; }
-

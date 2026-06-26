@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Profile as ProfileModel;
 use App\Models\User as UserModel;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -16,13 +17,18 @@ class User extends Component
     public string  $filterStatus = '';
     public int     $perPage      = 10;
 
-    public bool    $showModal  = false;
-    public ?int    $editId     = null;
-    public string  $f_name     = '';
-    public string  $f_email    = '';
-    public string  $f_password = '';
-    public string  $f_role     = 'alumni';
-    public string  $f_status   = 'active';
+    public bool    $showModal    = false;
+    public ?int    $editId       = null;
+    public string  $f_name       = '';
+    public string  $f_email      = '';
+    public string  $f_password   = '';
+    public bool    $showPassword = false;
+    public string  $f_role       = 'alumni';
+    public string  $f_status     = 'active';
+
+    // --- mới: mã SV & năm tốt nghiệp ---
+    public string  $f_msv           = '';
+    public string  $f_nam_tot_nghiep = '';
 
     public bool    $showRole     = false;
     public ?int    $roleUserId   = null;
@@ -36,20 +42,26 @@ class User extends Component
     protected function rules(): array
     {
         return [
-            'f_name'     => 'required|string|max:100',
-            'f_email'    => 'required|email|unique:users,email,'.($this->editId ?? 'NULL'),
-            'f_password' => $this->editId ? 'nullable|min:6' : 'required|min:6',
-            'f_role'     => 'required|in:alumni,student,lecturer,admin,company',
-            'f_status'   => 'required|in:active,pending,locked',
+            'f_name'           => 'required|string|max:100',
+            'f_email'          => 'required|email|unique:users,email,'.($this->editId ?? 'NULL'),
+            'f_password'       => $this->editId ? 'nullable|min:6' : 'required|min:6',
+            'f_role'           => 'required|in:alumni,student,lecturer,admin,company',
+            'f_status'         => 'required|in:active,pending,locked',
+            'f_msv'            => 'nullable|string|max:20',
+            'f_nam_tot_nghiep' => 'nullable|digits:4|integer|min:1990|max:2099',
         ];
     }
 
     protected $messages = [
-        'f_name.required'     => 'Vui lòng nhập họ tên.',
-        'f_email.required'    => 'Vui lòng nhập email.',
-        'f_email.unique'      => 'Email này đã được sử dụng.',
-        'f_password.required' => 'Vui lòng nhập mật khẩu.',
-        'f_password.min'      => 'Mật khẩu ít nhất 6 ký tự.',
+        'f_name.required'           => 'Vui lòng nhập họ tên.',
+        'f_email.required'          => 'Vui lòng nhập email.',
+        'f_email.unique'            => 'Email này đã được sử dụng.',
+        'f_password.required'       => 'Vui lòng nhập mật khẩu.',
+        'f_password.min'            => 'Mật khẩu ít nhất 6 ký tự.',
+        'f_msv.max'                 => 'Mã SV tối đa 20 ký tự.',
+        'f_nam_tot_nghiep.digits'   => 'Năm tốt nghiệp phải gồm 4 chữ số.',
+        'f_nam_tot_nghiep.min'      => 'Năm tốt nghiệp không hợp lệ.',
+        'f_nam_tot_nghiep.max'      => 'Năm tốt nghiệp không hợp lệ.',
     ];
 
     public function updatingSearch(): void       { $this->resetPage(); }
@@ -58,7 +70,8 @@ class User extends Component
 
     public function openAdd(): void
     {
-        $this->reset(['editId','f_name','f_email','f_password']);
+        $this->reset(['editId','f_name','f_email','f_password','f_msv','f_nam_tot_nghiep']);
+        $this->showPassword = false;
         $this->f_role   = 'alumni';
         $this->f_status = 'active';
         $this->showModal = true;
@@ -66,14 +79,17 @@ class User extends Component
 
     public function openEdit(int $id): void
     {
-        $u = UserModel::findOrFail($id);
-        $this->editId     = $u->id;
-        $this->f_name     = $u->name;
-        $this->f_email    = $u->email;
-        $this->f_password = '';
-        $this->f_role     = $u->role   ?? 'student';
-        $this->f_status   = $u->status ?? 'pending';
-        $this->showModal  = true;
+        $u = UserModel::with('profile')->findOrFail($id);
+        $this->editId              = $u->id;
+        $this->f_name              = $u->name;
+        $this->f_email             = $u->email;
+        $this->f_password          = '';
+        $this->showPassword        = false;
+        $this->f_role              = $u->role   ?? 'student';
+        $this->f_status            = $u->status ?? 'pending';
+        $this->f_msv               = $u->profile->msv           ?? '';
+        $this->f_nam_tot_nghiep    = $u->profile->nam_tot_nghiep ? (string) $u->profile->nam_tot_nghiep : '';
+        $this->showModal           = true;
     }
 
     public function save(): void
@@ -91,15 +107,35 @@ class User extends Component
             if ($this->f_password) {
                 $u->update(['password' => Hash::make($this->f_password)]);
             }
+
+            // lưu msv & nam_tot_nghiep vào profile
+            $profile = ProfileModel::firstOrNew(['user_id' => $u->id]);
+            if (!$profile->exists) {
+                $profile->khoa = ''; // NOT NULL default khi admin tạo profile
+            }
+            $profile->msv            = $this->f_msv ?: null;
+            $profile->nam_tot_nghiep = $this->f_nam_tot_nghiep ?: null;
+            $profile->save();
+
             $this->dispatch('toast', type: 'success', message: 'Cập nhật người dùng thành công!');
         } else {
-            UserModel::create([
+            $u = UserModel::create([
                 'name'     => $this->f_name,
                 'email'    => $this->f_email,
                 'password' => Hash::make($this->f_password),
                 'role'     => $this->f_role,
                 'status'   => $this->f_status,
             ]);
+
+            if ($this->f_msv || $this->f_nam_tot_nghiep) {
+                ProfileModel::create([
+                    'user_id'        => $u->id,
+                    'khoa'           => '', // NOT NULL default
+                    'msv'            => $this->f_msv ?: null,
+                    'nam_tot_nghiep' => $this->f_nam_tot_nghiep ?: null,
+                ]);
+            }
+
             $this->dispatch('toast', type: 'success', message: 'Thêm người dùng thành công!');
         }
 

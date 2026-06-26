@@ -29,6 +29,8 @@ class Profile extends Component
     public string $tinh_thanh = '';
     public string $bio = '';
 
+    
+
     // social 
     public string $github = '';
     public string $linkedin = '';

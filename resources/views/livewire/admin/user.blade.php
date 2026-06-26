@@ -127,6 +127,7 @@
       <th style="width:5%">STT</th>
       <th style="width:25%">Người dùng</th>
       <th style="width:22%">Email</th>
+      <th style="width:10%">Mã SV</th>
       <th style="width:13%">Vai trò</th>
       <th style="width:13%">Trạng thái</th>
       <th style="width:11%">Ngày tạo</th>
@@ -155,6 +156,7 @@
         </div>
       </td>
       <td class="u-email-cell">{{ $u->email }}</td>
+      <td style="font-size:12px;color:#475569">{{ $u->profile->msv ?? '—' }}</td>
       <td><x-badge :color="$roleColor">{{ $roleLabel }}</x-badge></td>
       <td><x-badge :color="$statusColor">{{ $statusLabel }}</x-badge></td>
       <td style="font-size:12px;color:#94a3b8">{{ $u->created_at->format('d/m/Y') }}</td>
@@ -221,8 +223,19 @@
         </div>
       </div>
       <div class="fi">
-        <label>{{ $editId ? 'Mật khẩu mới (để trống nếu không đổi)' : 'Mật khẩu *' }}</label>
-        <input wire:model="f_password" type="password" placeholder="••••••••">
+        <label>{{ $editId ? 'Mật khẩu (để trống nếu không đổi)' : 'Mật khẩu *' }}</label>
+        <div style="position:relative;display:flex;align-items:center">
+          <input wire:model="f_password"
+                 type="{{ $showPassword ? 'text' : 'password' }}"
+                 placeholder="{{ $editId ? '••••••••' : 'Nhập mật khẩu' }}"
+                 style="width:100%;padding-right:38px">
+          <button type="button"
+                  wire:click="$toggle('showPassword')"
+                  style="position:absolute;right:10px;background:none;border:none;cursor:pointer;color:#94a3b8;font-size:14px;padding:0;line-height:1"
+                  title="{{ $showPassword ? 'Ẩn' : 'Hiện' }} mật khẩu">
+            <i class="fa-solid {{ $showPassword ? 'fa-eye-slash' : 'fa-eye' }}"></i>
+          </button>
+        </div>
         @error('f_password')<div class="err">{{ $message }}</div>@enderror
       </div>
       <div class="mo-sec-lbl">Vai trò &amp; Trạng thái</div>
@@ -244,6 +257,19 @@
             <option value="pending">Chờ duyệt</option>
             <option value="locked">Bị khóa</option>
           </select>
+        </div>
+      </div>
+      <div class="mo-sec-lbl">Thông tin học vụ</div>
+      <div class="fg2">
+        <div class="fi">
+          <label>Mã sinh viên</label>
+          <input wire:model="f_msv" type="text" placeholder="VD: SV2021001">
+          @error('f_msv')<div class="err">{{ $message }}</div>@enderror
+        </div>
+        <div class="fi">
+          <label>Năm tốt nghiệp</label>
+          <input wire:model="f_nam_tot_nghiep" type="number" placeholder="VD: 2024" min="1990" max="2099">
+          @error('f_nam_tot_nghiep')<div class="err">{{ $message }}</div>@enderror
         </div>
       </div>
     </div>
