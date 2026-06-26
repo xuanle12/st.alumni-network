@@ -41,7 +41,7 @@ class MailXacNhanUngTuyen extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.xac-nhan-ung-tuyen',
         );
     }
 
