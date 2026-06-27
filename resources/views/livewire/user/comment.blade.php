@@ -46,7 +46,7 @@
 @forelse($comments as $comment)
 <div class="nw-cmi" wire:key="comment-{{ $comment->id }}">
   <div class="nw-cmi-av nw-cmi-av-lg av-c{{ ($comment->user_id ?? 0) % 6 }}">
-    {{ strtoupper(substr($comment->user?->name ?? 'U', 0, 2)) }}
+    {{ mb_strtoupper(mb_substr($comment->user?->name ?? 'U', 0, 2, 'UTF-8'), 'UTF-8') }}  
   </div>
   <div class="nw-cmi-wrap">
     <div class="nw-bbl">

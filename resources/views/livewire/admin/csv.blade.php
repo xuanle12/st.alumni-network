@@ -171,37 +171,35 @@
         <button class="mo-close" wire:click="closeModal">✕</button>
       </div>
       <div class="mo-body">
-        <div class="fg2">
-          <div class="fi">
-            <label>Họ và tên *</label>
-            <input wire:model="f_ho_ten" type="text" placeholder="Nguyễn Văn A">
-            @error('f_ho_ten')<div class="err">{{ $message }}</div>@enderror
+          <div class="fg2">
+            <div class="fi">
+              <label>Họ và tên *</label>
+              <input wire:model="f_ho_ten" type="text" placeholder="Nguyễn Văn A">
+              @error('f_ho_ten')<div class="err">{{ $message }}</div>@enderror
+            </div>
+            <div class="fi">
+              <label>Mã sinh viên *</label>
+              <input wire:model="f_msv" placeholder="651001">
+              @error('f_msv')<div class="err">{{ $message }}</div>@enderror
+            </div>
+            <div class="fi">
+              <label>Lớp</label>
+              <input wire:model="f_lop" placeholder="K65CNPMA">
+            </div>
+            <div class="fi">
+              <label>Năm tốt nghiệp</label>
+              <input wire:model="f_nam" placeholder="2024">
+              @error('f_nam')<div class="err">{{ $message }}</div>@enderror
+            </div>
+            <div class="fi">
+              <label>Khoa</label>
+              <input wire:model="f_khoa" placeholder="Công nghệ Thông tin">
+            </div>
+            <div class="fi">
+              <label>Ngành</label>
+              <input wire:model="f_nganh" placeholder="Công nghệ Phần mềm">
+            </div>
           </div>
-          <div class="fi">
-            <label>Mã sinh viên *</label>
-            <input wire:model="f_msv" placeholder="651001">
-            @error('f_msv')<div class="err">{{ $message }}</div>@enderror
-          </div>
-        </div>
-        <div class="fg3">
-          <div class="fi">
-            <label>Lớp</label>
-            <input wire:model="f_lop" placeholder="K65CNPMA">
-          </div>
-          <div class="fi">
-            <label>Khoa</label>
-            <input wire:model="f_khoa" placeholder="Công nghệ Thông tin">
-          </div>
-          <div class="fi">
-            <label>Năm tốt nghiệp</label>
-            <input wire:model="f_nam" placeholder="2024">
-            @error('f_nam')<div class="err">{{ $message }}</div>@enderror
-          </div>
-        </div>
-        <div class="fi">
-          <label>Ngành</label>
-          <input wire:model="f_nganh" placeholder="Công nghệ Phần mềm">
-        </div>
       </div>
       <div class="mo-ft">
         <button wire:click="closeModal" class="btn btn-ghost">Huỷ</button>
