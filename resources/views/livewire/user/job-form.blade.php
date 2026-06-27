@@ -226,9 +226,19 @@
         <input wire:model="title" type="text" placeholder="VD: Lập trình viên Backend PHP, Kế toán trưởng...">
         @error('title')<div class="err"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>@enderror
       </div>
-      <div class="fi">
+      <div class="fi" x-data="{open:false}">
         <label>Tên công ty<span>*</span></label>
-        <input wire:model="company" type="text" placeholder="Tên doanh nghiệp của bạn">
+        <div class="skill-input-wrap">
+          <input wire:model.live.debounce.250ms="company" type="text"
+                 placeholder="Tên doanh nghiệp của bạn" autocomplete="off"
+                 @focus="open=true" @click.outside="open=false">
+          <div class="skill-suggest" x-show="open" x-cloak
+               @if($this->companySuggestions->isEmpty()) style="display:none" @endif>
+            @foreach($this->companySuggestions as $c)
+              <div class="skill-suggest-item" wire:click="selectCompany({{ $c->id }})">{{ $c->name }}</div>
+            @endforeach
+          </div>
+        </div>
         @error('company')<div class="err"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>@enderror
       </div>
       <div class="fi">
@@ -309,39 +319,6 @@
         @error('description')<div class="err"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>@enderror
       </div>
     </div>
-
-    <div class="jf-section">Kỹ năng yêu cầu</div>
-    <div class="fg">
-      <div class="fi full" x-data="{open:false}">
-        <div class="skill-tags">
-          @forelse($selectedSkills as $sk)
-            <span class="skill-chip">
-              {{ $sk }} <i class="fa-solid fa-xmark" wire:click="removeSkill('{{ $sk }}')"></i>
-            </span>
-          @empty
-            <span class="skill-empty">Chưa thêm kỹ năng nào.</span>
-          @endforelse
-        </div>
-        <div class="skill-input-wrap">
-          <input
-            type="text"
-            wire:model.live.debounce.250ms="skillInput"
-            wire:keydown.enter.prevent="addSkill"
-            x-on:focus="open=true"
-            x-on:blur="setTimeout(()=>open=false,150)"
-            placeholder="VD: PHP, Laravel, Giao tiếp... rồi nhấn Enter"
-          >
-          <div class="skill-suggest" x-show="open" x-cloak
-               @if($this->skillSuggestions->isEmpty()) style="display:none" @endif>
-            @foreach($this->skillSuggestions as $s)
-              <div class="skill-suggest-item" wire:click="addSkill('{{ $s->name }}')">{{ $s->name }}</div>
-            @endforeach
-          </div>
-        </div>
-        <div class="skill-hint">Nhấn Enter để thêm kỹ năng. Có thể thêm nhiều kỹ năng.</div>
-      </div>
-    </div>
-
     <button class="btn-submit" wire:click="sendOtp" wire:loading.attr="disabled">
       <span wire:loading wire:target="sendOtp"><i class="fa-solid fa-spinner fa-spin"></i> Đang gửi OTP...</span>
       <span wire:loading.remove wire:target="sendOtp"><i class="fa-solid fa-envelope"></i> Tiếp theo — Xác thực email</span>
@@ -405,7 +382,6 @@
   </div>
   @endif
 
-  {{-- ===== STEP: SUCCESS ===== --}}
   @if($step === 'success')
   <div class="jf-card">
     <div class="jf-success">

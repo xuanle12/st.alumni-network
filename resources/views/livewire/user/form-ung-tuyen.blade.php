@@ -29,7 +29,7 @@
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14 2 14 8 20 8"/>
                 </svg>
-                Chọn CV để ứng tuyển
+                Chọn CV để ứng tuyển <span class="required">*</span>
             </div>
 
             <div x-data="{ fileURL: null }">
@@ -112,20 +112,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label" for="apply_location">Địa điểm làm việc mong muốn <span class="required">*</span></label>
-                <select id="apply_location" wire:model="location" class="form-input form-select">
-                    <option value="">Chọn địa điểm bạn muốn làm việc</option>
-                    <option value="Hà Nội">Hà Nội</option>
-                    <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
-                    <option value="Đà Nẵng">Đà Nẵng</option>
-                    <option value="Hải Phòng">Hải Phòng</option>
-                    <option value="Cần Thơ">Cần Thơ</option>
-                    <option value="Khác">Khác</option>
-                </select>
-                @error('location') <p class="field-error">{{ $message }}</p> @enderror
-            </div>
-
             {{-- Thư giới thiệu --}}
             <div class="form-section-label" style="margin-top: 1.25rem;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -140,15 +126,6 @@
                       placeholder="Viết giới thiệu ngắn gọn về bản thân (điểm mạnh, điểm yếu) và nêu rõ mong muốn, lý do bạn muốn ứng tuyển cho vị trí này."
                       class="form-input form-textarea"></textarea>
             @error('cover_letter') <p class="field-error">{{ $message }}</p> @enderror
-
-            {{-- Đồng ý thoả thuận --}}
-            <div class="form-group" style="margin-top: 1rem;">
-                <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer; font-size:13px; color:#374151;">
-                    <input type="checkbox" wire:model="agreed" style="margin-top:3px;" />
-                    <span>Tôi đồng ý với thoả thuận sử dụng dữ liệu cá nhân của hệ thống. <span class="required">*</span></span>
-                </label>
-                @error('agreed') <p class="field-error">{{ $message }}</p> @enderror
-            </div>
 
             {{-- Submit --}}
             <button wire:click="submit" wire:loading.attr="disabled" wire:target="submit" class="btn-submit">

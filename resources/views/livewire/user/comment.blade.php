@@ -111,7 +111,7 @@
         rows="1" wire:keydown.enter.prevent="submit"
         x-data x-on:input="$el.style.height='auto';$el.style.height=Math.min($el.scrollHeight,120)+'px'">
       </textarea>
-      <button class="nw-cm-emoji" type="button">😊</button>
+      <!-- <button class="nw-cm-emoji" type="button">😊</button> -->
       <button class="nw-cm-send" wire:click="submit" wire:loading.attr="disabled" wire:target="submit" x-data :disabled="!$wire.newComment.trim()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>

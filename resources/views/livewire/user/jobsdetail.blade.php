@@ -329,10 +329,6 @@
             </button>
 
           @endif
-          <button wire:click="toggleSave" class="btn-save {{ $saved ? 'saved' : '' }}" style="flex:0 0 160px">
-            <i class="fa-{{ $saved ? 'solid' : 'regular' }} fa-heart"></i>
-            {{ $saved ? 'Đã lưu' : 'Lưu việc làm' }}
-          </button>
         </div>
 
         {{-- Mô tả công việc --}}

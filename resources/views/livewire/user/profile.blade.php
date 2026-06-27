@@ -278,6 +278,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 <div class="pf-page">
 <div class="pf-wrap">
 
+  {{-- ══ LEFT ══ --}}
   <aside class="pf-left">
     <div class="pf-id-card">
       <div class="pf-ava-wrap">
@@ -337,6 +338,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
     </div>
   </aside>
 
+  {{-- ══ RIGHT ══ --}}
   <div class="pf-right">
 
     {{-- Thông tin cơ bản --}}
@@ -375,6 +377,19 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
           <div class="fi">
             <label>Năm tốt nghiệp</label>
             <input type="text" value="{{ $user->profile?->nam_tot_nghiep ?? '' }}" disabled placeholder="—">
+          </div>
+          <div class="fi">
+            <label>Ngành học</label>
+            <input wire:model="nganh" type="text" placeholder="VD: Công nghệ thông tin">
+          </div>
+          <div class="fi">
+            <label>Công ty hiện tại</label>
+            <input wire:model="current_company" type="text" placeholder="VD: FPT Software">
+          </div>
+          <div class="fi">
+            <label>Số năm kinh nghiệm</label>
+            <input wire:model="experience_years" type="number" min="0" max="50" placeholder="0">
+            @error('experience_years')<div class="err">{{ $message }}</div>@enderror
           </div>
           <div class="fi full">
             <label>Giới thiệu bản thân</label>
@@ -422,6 +437,20 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
           <div class="pf-info-row">
             <span class="pf-info-lbl">Năm tốt nghiệp</span>
             <span class="pf-info-val">{{ $user->profile?->nam_tot_nghiep ?? '—' }}</span>
+          </div>
+          <div class="pf-info-row">
+            <span class="pf-info-lbl">Ngành học</span>
+            <span class="pf-info-val {{ $user->profile?->nganh ? '' : 'muted' }}">{{ $user->profile?->nganh ?: 'Chưa cập nhật' }}</span>
+          </div>
+          <div class="pf-info-row">
+            <span class="pf-info-lbl">Công ty hiện tại</span>
+            <span class="pf-info-val {{ $user->profile?->current_company ? '' : 'muted' }}">{{ $user->profile?->current_company ?: 'Chưa cập nhật' }}</span>
+          </div>
+          <div class="pf-info-row">
+            <span class="pf-info-lbl">Kinh nghiệm</span>
+            <span class="pf-info-val {{ ($user->profile?->experience_years ?? 0) > 0 ? '' : 'muted' }}">
+              {{ ($user->profile?->experience_years ?? 0) > 0 ? $user->profile->experience_years . ' năm' : 'Chưa cập nhật' }}
+            </span>
           </div>
           @if($user->profile?->bio)
           <div class="pf-info-row" style="align-items:flex-start">

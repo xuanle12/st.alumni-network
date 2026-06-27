@@ -28,6 +28,9 @@ class Profile extends Component
     public string $que_quan = '';
     public string $tinh_thanh = '';
     public string $bio = '';
+    public string $nganh = '';
+    public string $current_company = '';
+    public int $experience_years = 0;
 
     // social 
     public string $github = '';
@@ -56,6 +59,9 @@ class Profile extends Component
         $this->que_quan = $u->profile->que_quan ?? '';
         $this->tinh_thanh = $u->profile->tinh_thanh ?? '';
         $this->bio = $u->profile->bio ?? '';
+        $this->nganh = $u->profile->nganh ?? '';
+        $this->current_company = $u->profile->current_company ?? '';
+        $this->experience_years = $u->profile->experience_years ?? 0;
 
         $this->github = $u->profile->github ?? '';
         $this->linkedin = $u->profile->linkedin ?? '';
@@ -71,7 +77,8 @@ class Profile extends Component
     {
         $this->validate([
             'name' => 'required|max:100',
-            'phone' => 'nullable|max:15'
+            'phone' => 'nullable|max:15',
+            'experience_years' => 'nullable|integer|min:0|max:50',
         ]);
 
         Auth::user()->update([
@@ -84,7 +91,10 @@ class Profile extends Component
                 'phone' => $this->phone,
                 'que_quan' => $this->que_quan,
                 'tinh_thanh' => $this->tinh_thanh,
-                'bio' => $this->bio
+                'bio' => $this->bio,
+                'nganh' => $this->nganh,
+                'current_company' => $this->current_company,
+                'experience_years' => $this->experience_years,
             ]
         );
 
@@ -256,15 +266,18 @@ class Profile extends Component
 
         // % hoàn thành profile 
         $check = [
-            $user->name,
-            $user->email,
-            $user->profile->phone ?? null,
-            $user->profile->que_quan ?? null,
-            $user->profile->tinh_thanh ?? null,
-            $user->profile->github ?? null,
-            $user->profile->linkedin ?? null,
-            $user->profile?->skills->count() ?? 0,
-            $user->cv->count()
+            $user->name,                                                              // tên
+            $user->email,                                                             // email
+            $user->profile->phone ?? null,                                            // điện thoại
+            $user->profile->que_quan ?? null,                                         // quê quán
+            $user->profile->tinh_thanh ?? null,                                       // tỉnh thành
+            $user->profile->nganh ?? null,                                            // ngành
+            $user->profile->current_company ?? null,                                  // công ty
+            ($user->profile->experience_years ?? 0) > 0 ? true : null,               // kinh nghiệm
+            $user->profile->github ?? null,                                           // github
+            $user->profile->linkedin ?? null,                                         // linkedin
+            ($user->profile?->skills->count() > 0) ? true : null,                   // kỹ năng
+            ($user->cv->count() > 0) ? true : null,                                  // cv
         ];
 
         $this->pct =

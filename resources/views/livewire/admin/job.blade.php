@@ -149,6 +149,15 @@
 }
 .fi textarea { resize: vertical; min-height: 80px; }
 
+.fi .company-input-wrap { position: relative; }
+.fi .company-suggest {
+  position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 20;
+  background: #fff; border: 1px solid #d1d5db; border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08); max-height: 200px; overflow-y: auto;
+}
+.fi .company-suggest-item { padding: 8px 12px; font-size: 12.5px; color: #374151; cursor: pointer; transition: .1s; }
+.fi .company-suggest-item:hover { background: #eff6ff; color: #1d4ed8; }
+
 .err { font-size: 11px; color: #dc2626; margin-top: 2px; }
 
 .modal-footer {
@@ -425,8 +434,19 @@
             <div class="fi full"><label>Tiêu đề *</label><input wire:model="title" type="text"
                 placeholder="VD: Lập trình viên Backend PHP">@error('title')<div class="err">{{ $message }}</div>@enderror
             </div>
-            <div class="fi"><label>Công ty *</label><input wire:model="company" type="text"
-                placeholder="FPT Software">@error('company')<div class="err">{{ $message }}</div>@enderror</div>
+            <div class="fi" x-data="{open:false}"><label>Công ty *</label>
+              <div class="company-input-wrap">
+                <input wire:model.live.debounce.250ms="company" type="text"
+                  placeholder="FPT Software" autocomplete="off"
+                  @focus="open=true" @click.outside="open=false">
+                <div class="company-suggest" x-show="open" x-cloak
+                     @if($this->companySuggestions->isEmpty()) style="display:none" @endif>
+                  @foreach($this->companySuggestions as $c)
+                    <div class="company-suggest-item" wire:click="selectCompany({{ $c->id }})">{{ $c->name }}</div>
+                  @endforeach
+                </div>
+              </div>
+              @error('company')<div class="err">{{ $message }}</div>@enderror</div>
             <div class="fi"><label>Địa điểm</label><input wire:model="location" type="text" placeholder="Hà Nội"></div>
             <div class="fi"><label>Loại công việc</label><select wire:model="f_type">
                 <option value="full-time">Full-time</option>

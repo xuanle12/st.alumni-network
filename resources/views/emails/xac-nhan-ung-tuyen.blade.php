@@ -13,7 +13,7 @@
 
                     <tr>
                         <td style="background:#0961AA;padding:24px 32px;">
-                            <h1 style="margin:0;color:#fff;font-size:20px;font-weight:700;">VNUA Alumni Network</h1>
+                            <h1 style="margin:0;color:#fff;font-size:20px;font-weight:700;">Mạng lưới cựu sinh viên FITA-VNUA</h1>
                             <p style="margin:4px 0 0;color:#b3d4f0;font-size:13px;">Xác nhận nộp hồ sơ ứng tuyển</p>
                         </td>
                     </tr>
@@ -81,7 +81,7 @@
                     <tr>
                         <td style="padding:20px 32px;border-top:1px solid #e5e7eb;background:#f9fafb;">
                             <p style="margin:0;font-size:12px;color:#9ca3af;text-align:center;">
-                                Email này được gửi tự động từ VNUA Alumni Network.
+                                Email này được gửi tự động từ Mạng lưới cựu sinh viên FITA-VNUA.
                             </p>
                         </td>
                     </tr>

@@ -3,10 +3,10 @@
      <main class="nw-feed">
         <div class="nw-filter-bar">
             <h2 class="nw-title">Mạng lưới</h2>
-            <button wire:click="setFilter('all')"     class="nw-fb {{ $filter === 'all'     ? 'on' : '' }}">Tất cả</button>
+            <!-- <button wire:click="setFilter('all')"     class="nw-fb {{ $filter === 'all'     ? 'on' : '' }}">Tất cả</button>
             <button wire:click="setFilter('friends')" class="nw-fb {{ $filter === 'friends' ? 'on' : '' }}">Bạn bè</button>
             <button wire:click="setFilter('alumni')"  class="nw-fb {{ $filter === 'alumni'  ? 'on' : '' }}">Cựu SV</button>
-            <button wire:click="setFilter('recruit')" class="nw-fb {{ $filter === 'recruit' ? 'on' : '' }}">Tuyển dụng</button>
+            <button wire:click="setFilter('recruit')" class="nw-fb {{ $filter === 'recruit' ? 'on' : '' }}">Tuyển dụng</button> -->
         </div>
 
          <div class="nw-cp">
@@ -58,11 +58,11 @@
                   <textarea class="content-editor" wire:model="content" placeholder="Bạn đang nghĩ gì? Chia sẻ với mọi người..." rows="5" autofocus></textarea>
                   @error('content')<div class="err">{{ $message }}</div>@enderror
                   @if(count($tags) < 5)
-                    <div class="tag-input-row">
+                    <!-- <div class="tag-input-row">
                       <span style="font-size:12px;color:#9ca3af">#</span>
                       <input class="tag-input-el" wire:model="tagInput" type="text" placeholder="Thêm tag... (nhấn Enter)" wire:keydown.enter.prevent="addTag">
-                    </div>
-                  @endif
+                    </div> -->
+                  @endif 
                 </div>
                 <div class="modal-ft">
                   <div class="action-row">
@@ -71,10 +71,10 @@
                       <span class="action-label" style="color:#16a34a">Ảnh</span>
                       <input type="file" id="cover-file" wire:model="coverImage" accept="image/*" style="display:none">
                     </label>
-                    <button class="action-btn">
+                    <!-- <button class="action-btn">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#f59e0b" stroke-width="1.5"/><circle cx="6" cy="7" r=".8" fill="#f59e0b"/><circle cx="10" cy="7" r=".8" fill="#f59e0b"/><path d="M5.5 10c.5 1 4.5 1 5 0" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round"/></svg>
                       <span class="action-label" style="color:#f59e0b">Cảm xúc</span>
-                    </button>
+                    </button> -->
                   </div>
                   <button class="pub-btn" wire:click="publish" wire:loading.attr="disabled" wire:loading.class="opacity-75">
                     <span wire:loading wire:target="publish">Đang đăng...</span>
@@ -136,7 +136,6 @@
                         {{ $post->isLikedBy() ? 'Đã thích' : 'Thích' }}
                     </button>                    
                     <button class="nw-pab" @click="openComments = !openComments"><i class="fa-solid fa-comment"></i> Bình luận</button>
-                    <!-- <button class="nw-pab"><i class="fa-solid fa-share"></i> Chia sẻ</button> -->
                 </div>
                 <div x-show="openComments" x-transition>
                     <livewire:user.comment :post="$post" :key="'comment-'.$post->id" />
