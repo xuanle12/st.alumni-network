@@ -123,13 +123,13 @@
     <option value="draft">Bản nháp</option>
     <option value="hidden">Ẩn</option>
   </x-toolbar.select>
-  <x-toolbar.select model="filterCat">
+  <!-- <x-toolbar.select model="filterCat">
     <option value="">Tất cả danh mục</option>
     <option value="Tin tức">Tin tức</option>
     <option value="Sự kiện">Sự kiện</option>
     <option value="Tuyển dụng">Tuyển dụng</option>
     <option value="Chia sẻ">Chia sẻ</option>
-  </x-toolbar.select>
+  </x-toolbar.select> -->
 </x-toolbar>
 
 <x-table minWidth="680px">

@@ -32,7 +32,7 @@ class FormUngTuyen extends Component
     protected function rules(): array
     {
         return [
-            'cv_file'      => 'nullable|file|mimes:doc,docx,pdf|max:5120',
+            'cv_file'      => 'required|file|mimes:doc,docx,pdf|max:5120',
             'name'         => 'required|string|max:255',
             'email'        => 'required|email|max:255',
             'phone'        => 'required|regex:/^[0-9]{9,11}$/',
@@ -46,6 +46,7 @@ class FormUngTuyen extends Component
         'email.email'       => 'Email không hợp lệ.',
         'phone.required'    => 'Vui lòng nhập số điện thoại.',
         'phone.regex'       => 'Số điện thoại không hợp lệ.',
+        'cv_file.required'  => 'Vui lòng tải lên CV để ứng tuyển.',
         'cv_file.mimes'     => 'CV chỉ hỗ trợ định dạng .doc, .docx, .pdf.',
         'cv_file.max'       => 'CV không được vượt quá 5MB.',
     ];

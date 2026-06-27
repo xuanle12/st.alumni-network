@@ -403,7 +403,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
     @if($featured && $activeTab === 'all' && !$search)
     <div style="margin-bottom: 24px;">
       <div class="sec-heading">Sự kiện nổi bật</div>
-      @php $isReg = in_array($featured->id, $registeredIds); @endphp
       <a href="{{ route('event.show', $featured->id) }}" class="featured-card" wire:navigate>
         <div class="featured-img">
           @if($featured->image)
@@ -441,19 +440,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
               <span class="tag-pill tag-gray">{{ $tag }}</span>
             @endforeach
           </div>
-          @if($isReg)
-            <button wire:click.prevent="unregister({{ $featured->id }})" class="btn-reg btn-reg-ok">
-              <span wire:loading.remove wire:target="unregister({{ $featured->id }})">✓ Đã đăng ký</span>
-              <span wire:loading wire:target="unregister({{ $featured->id }})"><span class="spin"></span></span>
-            </button>
-          @elseif($featured->registration_status === 'open')
-            <button wire:click.prevent="register({{ $featured->id }})" class="btn-reg btn-reg-prim">
-              <span wire:loading.remove wire:target="register({{ $featured->id }})">Đăng ký ngay →</span>
-              <span wire:loading wire:target="register({{ $featured->id }})"><span class="spin"></span></span>
-            </button>
-          @else
-            <button class="btn-reg btn-reg-done" disabled>Đã đóng</button>
-          @endif
+          <span style="font-size:12.5px;font-weight:700;color:var(--fita);">Xem chi tiết →</span>
         </div>
       </a>
     </div>
@@ -467,9 +454,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
     @if($gridEvents->count())
       <div class="events-list">
         @foreach($gridEvents as $event)
-        @php
-          $isReg = in_array($event->id, $registeredIds);
-        @endphp
         <a href="{{ route('event.show', $event->id) }}" class="event-row" wire:navigate>
 
         
@@ -512,25 +496,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
               <span class="ei"><i class="fa-regular fa-clock"></i>{{ $event->time_range }}</span>
               <span class="ei"><i class="fa-solid fa-tag"></i>{{ $event->format_label ?? 'Trực tiếp' }}</span>
             </div>
-          </div>
-
-           
-          <div>
-            @if($isReg)
-              <button wire:click.prevent="unregister({{ $event->id }})" class="btn-reg btn-reg-ok">
-                <span wire:loading.remove wire:target="unregister({{ $event->id }})">✓ Đã đăng ký</span>
-                <span wire:loading wire:target="unregister({{ $event->id }})"><span class="spin"></span></span>
-              </button>
-            @elseif(($event->registration_status ?? '') === 'open' && !($event->is_internal ?? false))
-              <button wire:click.prevent="register({{ $event->id }})" class="btn-reg {{ $event->is_free ? 'btn-reg-free' : 'btn-reg-prim' }}">
-                <span wire:loading.remove wire:target="register({{ $event->id }})">Đăng ký</span>
-                <span wire:loading wire:target="register({{ $event->id }})"><span class="spin"></span></span>
-              </button>
-            @else
-              <button class="btn-reg btn-reg-done" disabled>
-                {{ ($event->registration_status ?? '') === 'full' ? 'Hết chỗ' : 'Đã đóng' }}
-              </button>
-            @endif
           </div>
 
         </a>

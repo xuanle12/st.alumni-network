@@ -189,30 +189,30 @@
               <div class="cd-item"><div class="cd-num">{{ str_pad($countdown['minutes'], 2, '0', STR_PAD_LEFT) }}</div><div class="cd-unit">Phút</div></div>
             </div>
           </div>
-          <button wire:click="register" class="reg-btn {{ $registered ? 'done' : '' }}">
+          <!-- <button wire:click="register" class="reg-btn {{ $registered ? 'done' : '' }}">
             <span wire:loading wire:target="register">Đang xử lý...</span>
             <span wire:loading.remove wire:target="register">
               {{ $registered ? '✓ Đã đăng ký' : '🎟 Đăng ký tham dự' }}
             </span>
-          </button>
+          </button> -->
         @else
           <div style="text-align:center;padding:.875rem;background:#f8fafc;border-radius:8px;font-size:13px;color:#9ca3af;margin-bottom:.875rem;">
             Sự kiện đã kết thúc
           </div>
         @endif
-        <button wire:click="toggleSave" class="save-btn {{ $saved ? 'saved' : '' }}">
+        <!-- <button wire:click="toggleSave" class="save-btn {{ $saved ? 'saved' : '' }}">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13l-6-6a3 3 0 014-4l2 2 2-2a3 3 0 014 4l-6 6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
           {{ $saved ? 'Đã lưu' : 'Lưu sự kiện' }}
-        </button>
+        </button> -->
       </div>
  
       <div class="side-card">
         <div class="side-title">Thông tin chi tiết</div>
         <div class="meta-row"><span class="meta-key">Hình thức</span><span class="meta-val">Trực tiếp</span></div>
-        <div class="meta-row">
+        <!-- <div class="meta-row">
           <span class="meta-key">Loại vé</span>
           <span class="meta-val" style="{{ $event->badge === 'free' ? 'color:#166534' : '' }}">{{ $event->badge_label }}</span>
-        </div>
+        </div> -->
         <div class="meta-row">
           <span class="meta-key">Ngày đăng</span>
           <span class="meta-val">{{ $event->created_at->format('d/m/Y') }}</span>
@@ -220,7 +220,7 @@
       </div>
  
       
-      <div class="side-card">
+      <!-- <div class="side-card">
         <div class="side-title">Chia sẻ sự kiện</div>
         <div class="share-row">
           <button class="share-btn" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href))">
@@ -231,8 +231,8 @@
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 10l4-4M5 7l-1 1a3 3 0 004 4l1-1M11 9l1-1a3 3 0 00-4-4L7 5" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/></svg>
             Copy link
           </button>
-        </div>
-      </div>
+        </div> 
+      </div>-->
  
      
       @if($relatedEvents->count() > 0)
