@@ -437,7 +437,7 @@ body{
         $pending = $total > 0 ? round(($statusStats['pending'] ?? 0) / $total * 238) : 0;
       @endphp
       <div class="donut-row">
-        <svg width="100" height="100" viewBox="0 0 100 100">
+        <svg width="200" height="200" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="38" fill="none" stroke="#f3f4f6" stroke-width="16"/>
           <circle cx="50" cy="50" r="38" fill="none" stroke="#3b82f6" stroke-width="16"
                   stroke-dasharray="{{ $active }} {{ 238 - $active }}"
