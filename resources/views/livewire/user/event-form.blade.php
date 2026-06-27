@@ -141,34 +141,12 @@
 <div class="jf-wrap">
   <div class="jf-header">
     <div class="jf-title">Đăng sự kiện</div>
-    <div class="jf-sub">Điền thông tin và xác thực email — sự kiện sẽ hiển thị trên trang sự kiện sau khi xác thực.</div>
+    <div class="jf-sub">Điền thông tin sự kiện — sự kiện sẽ hiển thị ngay trên trang sự kiện sau khi đăng.</div>
   </div>
-
-  {{-- Steps indicator --}}
-  @if($step !== 'success')
-  <div class="steps">
-    <div class="step-item">
-      <div class="step-dot {{ $step === 'form' ? 'active' : 'done' }}">
-        @if($step === 'form') 1 @else <i class="fa-solid fa-check" style="font-size:10px"></i> @endif
-      </div>
-      <span class="step-label {{ $step === 'form' ? 'active' : 'done' }}">Thông tin</span>
-    </div>
-    <div class="step-line {{ $step !== 'form' ? 'done' : '' }}"></div>
-    <div class="step-item">
-      <div class="step-dot {{ $step === 'verify' ? 'active' : 'idle' }}">2</div>
-      <span class="step-label {{ $step === 'verify' ? 'active' : 'idle' }}">Xác thực OTP</span>
-    </div>
-  </div>
-  @endif
 
   {{-- ===== STEP: FORM ===== --}}
   @if($step === 'form')
   <div class="jf-card">
-    <div class="jf-note">
-      <i class="fa-solid fa-circle-info" style="margin-top:1px;flex-shrink:0"></i>
-      <span>Sau khi gửi, hệ thống sẽ gửi mã <strong>OTP</strong> đến email liên hệ để xác thực. Sự kiện sẽ hiển thị ngay sau khi xác thực thành công.</span>
-    </div>
-
     <div class="jf-section">Thông tin sự kiện</div>
     <div class="fg">
       <div class="fi full">
@@ -227,66 +205,10 @@
       </div>
     </div>
 
-    <button class="btn-submit" wire:click="sendOtp" wire:loading.attr="disabled">
-      <span wire:loading wire:target="sendOtp"><i class="fa-solid fa-spinner fa-spin"></i> Đang gửi OTP...</span>
-      <span wire:loading.remove wire:target="sendOtp"><i class="fa-solid fa-envelope"></i> Tiếp theo — Xác thực email</span>
+    <button class="btn-submit" wire:click="submit" wire:loading.attr="disabled">
+      <span wire:loading wire:target="submit"><i class="fa-solid fa-spinner fa-spin"></i> Đang đăng...</span>
+      <span wire:loading.remove wire:target="submit"><i class="fa-solid fa-check"></i> Đăng sự kiện</span>
     </button>
-  </div>
-  @endif
-
-  {{-- ===== STEP: VERIFY OTP ===== --}}
-  @if($step === 'verify')
-  <div class="jf-card">
-    <button class="btn-back-link" wire:click="backToForm">
-      <i class="fa-solid fa-arrow-left"></i> Quay lại chỉnh sửa
-    </button>
-
-    <div class="otp-hero">
-      <div class="otp-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-      <div class="otp-title">Kiểm tra hộp thư của bạn</div>
-      <div class="otp-desc">
-        Chúng tôi đã gửi mã OTP 6 chữ số đến
-        <br><span class="otp-email-tag">{{ $contact_email }}</span>
-      </div>
-    </div>
-
-    <div class="otp-input-wrap">
-      <label>Nhập mã OTP</label>
-      <input
-        wire:model="otp_input"
-        type="text"
-        inputmode="numeric"
-        maxlength="6"
-        placeholder="• • • • • •"
-        class="otp-input {{ $otp_error ? 'error' : '' }}"
-        autocomplete="one-time-code"
-        wire:keydown.enter="verifyOtp"
-      >
-    </div>
-
-    @if($otp_error)
-      <div class="otp-error">
-        <i class="fa-solid fa-circle-xmark"></i>
-        {{ $otp_error }}
-      </div>
-    @endif
-
-    <button class="btn-submit" wire:click="verifyOtp" wire:loading.attr="disabled">
-      <span wire:loading wire:target="verifyOtp"><i class="fa-solid fa-spinner fa-spin"></i> Đang xác thực...</span>
-      <span wire:loading.remove wire:target="verifyOtp"><i class="fa-solid fa-check"></i> Xác nhận & Đăng sự kiện</span>
-    </button>
-
-    <div class="otp-actions" style="margin-top:16px">
-      <span style="font-size:12.5px;color:#94a3b8">Không nhận được mã?</span>
-      <span class="sep">·</span>
-      <button wire:click="resendOtp" wire:loading.attr="disabled" class="otp-actions a" style="font-size:12.5px;color:#16a34a;cursor:pointer;text-decoration:underline;background:none;border:none;font-family:inherit">
-        <span wire:loading wire:target="resendOtp">Đang gửi lại...</span>
-        <span wire:loading.remove wire:target="resendOtp">Gửi lại OTP</span>
-      </button>
-    </div>
-    <div style="text-align:center;font-size:11.5px;color:#d1d5db;margin-top:8px">
-      Mã hết hạn sau 10 phút
-    </div>
   </div>
   @endif
 
@@ -296,7 +218,7 @@
     <div class="jf-success">
       <div class="jf-success-icon"><i class="fa-solid fa-circle-check"></i></div>
       <h2>Đăng sự kiện thành công!</h2>
-      <p>Sự kiện đã được xác thực và hiển thị trên trang sự kiện của mạng lưới cựu sinh viên. Cảm ơn bạn đã đóng góp!</p>
+      <p>Sự kiện đã được đăng và hiển thị trên trang sự kiện của mạng lưới cựu sinh viên. Cảm ơn bạn đã đóng góp!</p>
       <a href="{{ route('event') }}" class="btn-back">
         <i class="fa-solid fa-arrow-left"></i> Về trang sự kiện
       </a>

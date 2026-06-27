@@ -374,11 +374,13 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
       <div class="page-banner-title">Sự kiện &amp; Hoạt động</div>
       <div class="page-banner-sub">Các sự kiện kết nối cựu sinh viên, hội thảo nghề nghiệp và hoạt động cộng đồng</div>
     </div>
+    @if(auth()->user()->isAdmin())
     <a href="{{ route('event.create') }}"
       style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#16a34a;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s;white-space:nowrap"
       onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
       <i class="fa-solid fa-plus"></i> Đăng sự kiện
     </a>
+    @endif
   </div>
 </div>
 

@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/job/create', \App\Livewire\User\JobForm::class)->name('job.create');
     Route::get('/job/{id}', \App\Livewire\User\Jobsdetail::class)->name('job.show');
     Route::get('/event', \App\Livewire\User\Event::class)->name('event');
-    Route::get('/event/create', \App\Livewire\User\EventForm::class)->name('event.create');
+    Route::get('/event/create', \App\Livewire\User\EventForm::class)->middleware('role:admin')->name('event.create');
     Route::get('/event/{id}', \App\Livewire\User\Eventdetail::class)->name('event.show');
     Route::get('/profile', \App\Livewire\User\Profile::class)->name('profile');
     Route::get('/post', \App\Livewire\User\Post::class)->name('post');
