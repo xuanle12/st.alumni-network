@@ -26,9 +26,12 @@ class User extends Component
     public string  $f_role       = 'alumni';
     public string  $f_status     = 'active';
 
-    // --- mới: mã SV & năm tốt nghiệp ---
+    
     public string  $f_msv           = '';
     public string  $f_nam_tot_nghiep = '';
+    public string  $f_nganh          = '';
+    public string  $f_current_company = '';
+    public int     $f_experience_years = 0;
 
     public bool    $showRole     = false;
     public ?int    $roleUserId   = null;
@@ -94,7 +97,10 @@ class User extends Component
         $this->f_role              = $u->role   ?? 'student';
         $this->f_status            = $u->status ?? 'pending';
         $this->f_msv               = $u->profile->msv           ?? '';
-        $this->f_nam_tot_nghiep    = $u->profile->nam_tot_nghiep ? (string) $u->profile->nam_tot_nghiep : '';
+        $this->f_nam_tot_nghiep    = $u->profile->nam_tot_nghiep ?? '';
+        $this->f_nganh              = $u->profile->nganh         ?? '';
+        $this->f_current_company    = $u->profile->current_company ?? '';
+        $this->f_experience_years   = $u->profile->experience_years ?? 0;
         $this->showModal           = true;
     }
 
@@ -117,7 +123,7 @@ class User extends Component
             // lưu msv & nam_tot_nghiep vào profile
             $profile = ProfileModel::firstOrNew(['user_id' => $u->id]);
             if (!$profile->exists) {
-                $profile->khoa = ''; // NOT NULL default khi admin tạo profile
+                $profile->khoa = ''; 
             }
             $profile->msv            = $this->f_msv ?: null;
             $profile->nam_tot_nghiep = $this->f_nam_tot_nghiep ?: null;
