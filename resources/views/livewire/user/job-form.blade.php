@@ -226,9 +226,19 @@
         <input wire:model="title" type="text" placeholder="VD: Lập trình viên Backend PHP, Kế toán trưởng...">
         @error('title')<div class="err"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>@enderror
       </div>
-      <div class="fi">
+      <div class="fi" x-data="{open:false}">
         <label>Tên công ty<span>*</span></label>
-        <input wire:model="company" type="text" placeholder="Tên doanh nghiệp của bạn">
+        <div class="skill-input-wrap">
+          <input wire:model.live.debounce.250ms="company" type="text"
+                 placeholder="Tên doanh nghiệp của bạn" autocomplete="off"
+                 @focus="open=true" @click.outside="open=false">
+          <div class="skill-suggest" x-show="open" x-cloak
+               @if($this->companySuggestions->isEmpty()) style="display:none" @endif>
+            @foreach($this->companySuggestions as $c)
+              <div class="skill-suggest-item" wire:click="selectCompany({{ $c->id }})">{{ $c->name }}</div>
+            @endforeach
+          </div>
+        </div>
         @error('company')<div class="err"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>@enderror
       </div>
       <div class="fi">

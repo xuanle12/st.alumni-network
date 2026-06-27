@@ -4,7 +4,9 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Computed;
 use App\Models\Job as JobModel;
+use App\Models\Company;
 
 class Job extends Component
 {
@@ -168,6 +170,31 @@ class Job extends Component
         ]);
 
         $this->f_type = 'full-time';
+    }
+
+    // Gợi ý công ty đang hợp tác: ô trống -> hiện hết danh sách, có gõ -> lọc theo từ khóa
+    #[Computed]
+    public function companySuggestions()
+    {
+        $term = trim($this->company);
+
+        $query = Company::where('status', 'active')->orderBy('name');
+
+        if ($term !== '') {
+            $query->where('name', 'like', "%{$term}%");
+        }
+
+        return $query->limit($term === '' ? 20 : 8)->get();
+    }
+
+    // Chọn công ty từ danh sách gợi ý
+    public function selectCompany(int $id)
+    {
+        $company = Company::find($id);
+
+        if ($company) {
+            $this->company = $company->name;
+        }
     }
 
     public function render()

@@ -24,11 +24,10 @@ class FormUngTuyen extends Component
     public string $name = '';
     public string $email = '';
     public string $phone = '';
-    public string $location = '';
+    public string $location = ''; // không hỏi user nữa, giữ rỗng để lưu DB (cột location NOT NULL)
     public string $cover_letter = '';
     public $cv_file = null;
     public bool $allow_ai = false;
-    public bool $agreed = false;
  
     protected function rules(): array
     {
@@ -37,9 +36,7 @@ class FormUngTuyen extends Component
             'name'         => 'required|string|max:255',
             'email'        => 'required|email|max:255',
             'phone'        => 'required|regex:/^[0-9]{9,11}$/',
-            'location'     => 'required|string|max:255',
             'cover_letter' => 'nullable|string|max:3000',
-            'agreed'       => 'accepted',
         ];
     }
  
@@ -49,10 +46,8 @@ class FormUngTuyen extends Component
         'email.email'       => 'Email không hợp lệ.',
         'phone.required'    => 'Vui lòng nhập số điện thoại.',
         'phone.regex'       => 'Số điện thoại không hợp lệ.',
-        'location.required' => 'Vui lòng chọn địa điểm làm việc.',
         'cv_file.mimes'     => 'CV chỉ hỗ trợ định dạng .doc, .docx, .pdf.',
         'cv_file.max'       => 'CV không được vượt quá 5MB.',
-        'agreed.accepted'   => 'Vui lòng đồng ý với thoả thuận sử dụng dữ liệu.',
     ];
  
     #[On('open-apply-modal')]
@@ -75,7 +70,7 @@ class FormUngTuyen extends Component
     public function closeModal(): void
     {
         $this->reset(['show', 'jobId', 'job', 'name', 'email', 'phone',
-                       'location', 'cover_letter', 'cv_file', 'allow_ai', 'agreed']);
+                       'location', 'cover_letter', 'cv_file', 'allow_ai']);
         $this->resetErrorBag();
     }
  

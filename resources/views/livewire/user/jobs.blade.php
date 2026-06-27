@@ -276,7 +276,7 @@
                                     @if($job->min_salary || $job->max_salary)
                                         <p class="job-salary">{{ $job->salary_range }}</p>
                                     @endif
-                                        <a href="{{ route('job.show', $job->id) }}" wire:navigate class="job-btn-apply">Ứng tuyển</a>                                    <button class="job-btn-save">Lưu tin</button>
+                                        <a href="{{ route('job.show', $job->id) }}" wire:navigate class="job-btn-apply">Chi tiết </a>                                    
                                     @if($job->deadline)
                                         <p class="job-deadline">Hạn: {{ $job->deadline }}</p>
                                     @endif
