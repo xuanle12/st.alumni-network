@@ -159,13 +159,12 @@
         <div class="jobs-grid">
             <div>
 
-                {{-- 1. Search bar --}}
+               
                 <div class="jobs-search-wrap">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     <input type="text" wire:model.live.debounce.300ms="search" placeholder="Tìm vị trí, kỹ năng, công ty...">
                 </div>
 
-                {{-- 2. Meta: tổng số tin + sort --}}
                 <div class="jobs-meta">
                     <p class="jobs-meta-count">Tìm thấy <strong>{{ $jobs->total() }} tin</strong> phù hợp</p>
                     <select wire:model.live="sort">
@@ -174,7 +173,6 @@
                     </select>
                 </div>
 
-                {{-- 3. Cảnh báo chưa có kỹ năng --}}
                 @if(!$hasSkills)
                 <div class="skill-warning">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -186,7 +184,6 @@
                 </div>
                 @endif
 
-                {{-- 4. Nút gợi ý việc làm (collapsed mặc định) --}}
                 @if($hasSkills && count($suggestedJobs))
                 <button type="button" class="btn-suggest-toggle" id="suggest-toggle-btn" onclick="toggleSuggestPanel()">
                     <div class="bst-left">
@@ -200,7 +197,6 @@
                     </div>
                     <svg class="bst-chev" id="suggest-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
                 </button>
-
                 <div class="suggest-panel" id="suggest-panel">
                     <div class="suggest-panel-body">
                         @foreach($suggestedJobs as $i => $sj)
@@ -222,7 +218,6 @@
                 </div>
                 @endif
 
-                {{-- 5. Danh sách job --}}
                 @forelse($jobs as $job)
                     @php $isNew = $job->created_at && $job->created_at->diffInDays(now()) <= 3; @endphp
                     <div class="jobs-list">
@@ -281,7 +276,7 @@
                                     @if($job->min_salary || $job->max_salary)
                                         <p class="job-salary">{{ $job->salary_range }}</p>
                                     @endif
-<a href="{{ route('job.show', $job->id) }}" wire:navigate class="job-btn-apply">Ứng tuyển</a>                                    <button class="job-btn-save">Lưu tin</button>
+                                        <a href="{{ route('job.show', $job->id) }}" wire:navigate class="job-btn-apply">Ứng tuyển</a>                                    <button class="job-btn-save">Lưu tin</button>
                                     @if($job->deadline)
                                         <p class="job-deadline">Hạn: {{ $job->deadline }}</p>
                                     @endif
@@ -350,12 +345,16 @@
                     <div class="side-card-header">
                         <h3>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M13 21V11l6 4v6M9 9v.01M9 12v.01M9 15v.01"/></svg>
-                            Dành cho doanh nghiệp
+                            Dành cho doanh nghiệp & Cựu sinh viên
                         </h3>
                     </div>
                     <div class="employer-cta">
                         <p>Đăng tin miễn phí, tiếp cận trực tiếp sinh viên & cựu sinh viên VNUA.</p>
-                        <a href="{{ route('job.create') }}" class="employer-cta-btn">+ Đăng tin tuyển dụng</a>
+                        @auth
+                            @if(auth()->user()->role =='admin' || auth()->user()->role =='company' || auth()->user()->role =='alumni')    
+                                <a href="{{ route('job.create') }}" class="employer-cta-btn">+ Đăng tin tuyển dụng</a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
 
