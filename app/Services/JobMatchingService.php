@@ -39,7 +39,6 @@ class JobMatchingService
             ->take($limit)
             ->values();
 
-        // Fallback nếu không có kết quả
         if ($result->isEmpty()) {
             return Job::active()->latest()->limit($limit)->get()
                 ->map(function ($job) {
@@ -53,7 +52,6 @@ class JobMatchingService
 
     private function calcScore(Job $job, Profile $profile, array $candidateSkillIds): float
     {
-        // Mỗi hàm con trả về tỉ lệ 0.0–1.0, nhân trọng số rồi × 100 → điểm 0–100
         return (
             self::W_SKILL    * $this->calcSkillScore($job, $candidateSkillIds)
           + self::W_EXP      * $this->calcExpScore($job, $profile)
@@ -62,7 +60,6 @@ class JobMatchingService
         ) * 100;
     }
 
-    // S_skill: (skill trùng / tổng skill yêu cầu) → 0.0–1.0
     public function calcSkillScore(Job $job, array $candidateSkillIds): float
     {
         $jobSkillIds = $job->skills->pluck('id')->toArray();
@@ -73,7 +70,6 @@ class JobMatchingService
         return $matched / count($jobSkillIds);
     }
 
-    // S_exp: tỉ lệ năm kinh nghiệm → 0.0–1.0
     private function calcExpScore(Job $job, Profile $profile): float
     {
         $required = $job->experience_required ?? 0;
@@ -86,7 +82,6 @@ class JobMatchingService
         return $has / $required;
     }
 
-    // S_major: ngành/khoa khớp → 0.0 hoặc 1.0
     private function calcMajorScore(Job $job, Profile $profile): float
     {
         $nganh = mb_strtolower(trim($profile->nganh ?? ''));
@@ -101,7 +96,6 @@ class JobMatchingService
         return 0.0;
     }
 
-    // S_location: địa điểm khớp → 0.0 hoặc 1.0
     private function calcLocationScore(Job $job, Profile $profile): float
     {
         $userCity = mb_strtolower(trim($profile->tinh_thanh ?? ''));

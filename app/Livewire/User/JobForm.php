@@ -6,15 +6,14 @@ use Livewire\Component;
 use Livewire\Attributes\Computed;
 use App\Models\Job;
 use App\Models\Company;
+use App\Models\Post;
 use App\Mail\OtpMail;
 use Illuminate\Support\Facades\Mail;
 
 class JobForm extends Component
 {
-    // Bước hiện tại: 'form' | 'verify' | 'success'
     public string $step = 'form';
 
-    // Form fields
     public string $title = '';
     public string $company = '';
     public string $location = '';
@@ -27,11 +26,9 @@ class JobForm extends Component
     public string $description = '';
     public string $contact_email = '';
 
-    // Kỹ năng yêu cầu
     public array $selectedSkills = [];
     public string $skillInput = '';
 
-    // OTP
     public string $otp_input = '';
     public bool   $otp_sent  = false;
     public string $otp_error = '';
@@ -62,7 +59,6 @@ class JobForm extends Component
 
         $otp = (string) random_int(100000, 999999);
 
-        // Lưu OTP vào session kèm thời gian hết hạn
         session([
             'job_otp'     => $otp,
             'job_otp_exp' => now()->addMinutes(10)->timestamp,
@@ -121,7 +117,7 @@ class JobForm extends Component
             'field'               => $this->field ?: null,
             'min_salary'          => $this->min_salary !== '' ? $this->min_salary : null,
             'max_salary'          => $this->max_salary !== '' ? $this->max_salary : null,
-            'experience_required' => $this->experience_required !== '' ? $this->experience_required : null,
+            'experience_required' => $this->experience_required !== '' ? $this->experience_required : 0,
             'deadline'            => $this->deadline ?: null,
             'description'         => $this->description ?: null,
             'contact_email'       => $this->contact_email,
@@ -148,6 +144,16 @@ class JobForm extends Component
         session()->forget(['job_otp', 'job_otp_exp', 'job_otp_email']);
 
         $this->step = 'success';
+
+        $post = Post::create([
+        'user_id'  => auth()->id(),
+        'content'  => $this->title . ' tại ' . $this->company
+                    . ($this->description ? "\n\n" . $this->description : ''),
+        'category' => 'job',
+        'status'   => 'pending',
+        ]);
+
+        $job->update(['post_id' => $post->id]);
     }
 
     public function backToForm()
@@ -226,6 +232,8 @@ class JobForm extends Component
             $this->company = $company->name;
         }
     }
+
+    
 
     public function render()
     {

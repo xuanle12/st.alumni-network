@@ -43,6 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/Csv', \App\Livewire\Admin\Csv::class)->name('admin.csv');
     Route::get('/admin/company', \App\Livewire\Admin\Company::class)->name('admin.company');
     Route::get('/admin/job', \App\Livewire\Admin\Job::class)->name('admin.job');
+    Route::get('/admin/event', \App\Livewire\Admin\Event::class)->name('admin.event');
     Route::get('/admin/thongk', \App\Livewire\Admin\Thongk::class)->name('admin.thongk');
     Route::get('/admin/post', \App\Livewire\Admin\Posts::class)->name('admin.post');
     Route::get('/admin/user', \App\Livewire\Admin\User::class)->name('admin.user');

@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use App\Models\Job as JobModel;
 use App\Models\Company;
+use App\Models\Post;
 
 class Job extends Component
 {
@@ -73,10 +74,23 @@ class Job extends Component
 
     public function approve($id)
     {
-        JobModel::where('id', $id)->update([
-            'status'    => 'approved',
-            'is_active' => true,
-        ]);
+        $job = JobModel::findOrFail($id);
+
+        $job->update(['status' => 'approved', 'is_active' => true]);
+
+        // Hiện tin lên newsfeed (/csv): publish post đã có, hoặc tạo mới nếu chưa có
+        if ($job->post_id) {
+            Post::where('id', $job->post_id)->update(['status' => 'published']);
+        } else {
+            $post = Post::create([
+                'user_id'  => $job->created_by ?? auth()->id(),
+                'content'  => $job->title . ' tại ' . $job->company
+                            . ($job->description ? "\n\n" . $job->description : ''),
+                'category' => 'job',
+                'status'   => 'published',
+            ]);
+            $job->update(['post_id' => $post->id]);
+        }
 
         $this->showDetail = false;
         $this->dispatch('toast', type: 'success', message: 'Đã duyệt tin tuyển dụng.');
@@ -84,10 +98,14 @@ class Job extends Component
 
     public function reject($id)
     {
-        JobModel::where('id', $id)->update([
-            'status'    => 'rejected',
-            'is_active' => false,
-        ]);
+        $job = JobModel::findOrFail($id);
+
+        $job->update(['status' => 'rejected', 'is_active' => false]);
+
+        // Ẩn bài đăng liên quan khỏi newsfeed
+        if ($job->post_id) {
+            Post::where('id', $job->post_id)->update(['status' => 'draft']);
+        }
 
         $this->showDetail = false;
         $this->dispatch('toast', type: 'success', message: 'Đã từ chối tin tuyển dụng.');
@@ -119,7 +137,7 @@ class Job extends Component
             'field'               => $this->field ?: null,
             'min_salary'          => $this->min_salary !== '' ? $this->min_salary : null,
             'max_salary'          => $this->max_salary !== '' ? $this->max_salary : null,
-            'experience_required' => $this->experience_required !== '' ? $this->experience_required : null,
+            'experience_required' => $this->experience_required !== '' ? $this->experience_required : 0,
             'deadline'            => $this->deadline ?: null,
             'description'         => $this->description ?: null,
             'contact_email'       => $this->contact_email ?: null,

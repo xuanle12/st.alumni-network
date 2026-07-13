@@ -43,6 +43,11 @@ class Post extends Model
     {
         return $this->hasOne(Job::class, 'post_id');
     }
+
+    public function event()
+    {
+        return $this->hasOne(Event::class, 'post_id');
+    }
     public function comments()
     {
         return $this->hasMany(Comment::class)

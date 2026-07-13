@@ -10,7 +10,7 @@ class Job extends Model
         'title', 'company', 'location', 'type',
         'field', 'min_salary', 'max_salary', 'is_active',
         'description', 'experience_required', 'deadline', 'created_by',
-        'status', 'contact_email',
+        'status', 'contact_email', 'post_id',
     ];
 
      // Label hiển thị cho loại công việc

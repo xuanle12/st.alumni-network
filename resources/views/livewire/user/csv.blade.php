@@ -122,7 +122,18 @@
                         <div class="nw-jb">
                             <div class="nw-jbt"><i class="fa-solid fa-briefcase"></i> {{ $post->job->title }}</div>
                             <div class="nw-jbm">{{ $post->job->type }}@if($post->job->min_salary || $post->job->max_salary) · {{ $post->job->salary_range }}@endif @if($post->job->location)· {{ $post->job->location }}@endif</div>
-                            <a href="{{ $post->job->url ?? '#' }}" class="nw-jbb">Xem chi tiết →</a>
+                            <a href="{{ route('job.show', $post->job->id) }}" class="nw-jbb" wire:navigate>Xem chi tiết →</a>
+                        </div>
+                    @endif
+                    @if($post->category === 'event' && $post->event)
+                        <div class="nw-jb">
+                            <div class="nw-jbt"><i class="fa-solid fa-calendar-days"></i> {{ $post->event->title }}</div>
+                            <div class="nw-jbm">
+                                {{ \Illuminate\Support\Carbon::parse($post->event->event_date)->format('d/m/Y') }}
+                                @if($post->event->location) · {{ $post->event->location }} @endif
+                                · {{ $post->event->format_label }}
+                            </div>
+                            <a href="{{ route('event.show', $post->event->id) }}" class="nw-jbb" wire:navigate>Xem chi tiết →</a>
                         </div>
                     @endif
                 </div>

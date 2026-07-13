@@ -53,6 +53,9 @@
         <a href="{{ route('admin.job') }}" class="adm-item {{ request()->routeIs('admin.job*') ? 'active' : '' }}" wire:navigate>
             <i class="fa-solid fa-briefcase adm-item-ic"></i> Tuyển dụng
         </a>
+        <a href="{{ route('admin.event') }}" class="adm-item {{ request()->routeIs('admin.event*') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-calendar-days adm-item-ic"></i> Sự kiện
+        </a>
         <a href="{{ route('admin.company') }}" class="adm-item {{ request()->routeIs('admin.company*') ? 'active' : '' }}" wire:navigate>
             <i class="fa-solid fa-building adm-item-ic"></i> Doanh nghiệp
         </a>
@@ -80,6 +83,7 @@
                 'admin.user'    => 'Người dùng',
                 'admin.csv'     => 'Cựu sinh viên',
                 'admin.job'     => 'Tuyển dụng',
+                'admin.event'   => 'Sự kiện',
                 'admin.company' => 'Doanh nghiệp',
                 'admin.post'    => 'Bài viết',
                 'admin.mentor'  => 'Mentor',

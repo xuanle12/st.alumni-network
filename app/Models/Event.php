@@ -9,7 +9,7 @@ class Event extends Model
     protected $fillable = [
         'title', 'organizer', 'location', 'contact_email',
         'event_date', 'start_time', 'end_time', 'badge',
-        'status', 'description', 'likes_count', 'created_by',
+        'status', 'description', 'likes_count', 'created_by', 'post_id',
     ];
 
     protected $casts = [
@@ -67,6 +67,39 @@ class Event extends Model
     public function getRegistrationStatusAttribute(): string
     {
         return $this->status === 'active' ? 'open' : 'closed';
+    }
+
+    /** Nhãn trạng thái tiếng Việt */
+    public function getStatusLabelAttribute(): string
+    {
+        return match($this->status) {
+            'active' => 'Đang diễn ra',
+            'closed' => 'Đã đóng',
+            default  => 'Nháp',
+        };
+    }
+
+    /** Màu badge cho trạng thái (dùng với x-badge) */
+    public function getStatusColorAttribute(): string
+    {
+        return match($this->status) {
+            'active' => 'green',
+            'closed' => 'red',
+            default  => 'yellow',
+        };
+    }
+
+    /** Nhãn loại vé */
+    public function getBadgeLabelAttribute(): string
+    {
+        return $this->format_label;
+    }
+
+    // ── Scopes bổ sung ─────────────────────────────────────
+
+    public function scopeStatus($query, string $status)
+    {
+        return $query->where('status', $status);
     }
 
     // ── Relations ──────────────────────────────────────────

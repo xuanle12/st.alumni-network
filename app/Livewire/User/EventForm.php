@@ -4,6 +4,7 @@ namespace App\Livewire\User;
 
 use Livewire\Component;
 use App\Models\Event;
+use App\Models\Post;
 
 class EventForm extends Component
 {
@@ -42,7 +43,7 @@ class EventForm extends Component
             'event_date.after_or_equal' => 'Ngày diễn ra không được ở quá khứ.',
         ]);
 
-        Event::create([
+        $event = Event::create([
             'title'         => $this->title,
             'organizer'     => $this->organizer,
             'location'      => $this->location ?: null,
@@ -55,6 +56,17 @@ class EventForm extends Component
             'status'        => 'active',
             'created_by'    => auth()->id(),
         ]);
+
+        // Hiện sự kiện lên newsfeed (/csv)
+        $post = Post::create([
+            'user_id'  => auth()->id(),
+            'content'  => $this->title . ' — ' . $this->organizer
+                        . ($this->description ? "\n\n" . $this->description : ''),
+            'category' => 'event',
+            'status'   => 'published',
+        ]);
+
+        $event->update(['post_id' => $post->id]);
 
         $this->step = 'success';
     }
