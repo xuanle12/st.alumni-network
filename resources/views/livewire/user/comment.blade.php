@@ -58,7 +58,7 @@
         <button class="nw-cmab-btn" :class="liked?'nw-liked':''" @click="toggle()" wire:click="likeComment({{ $comment->id }})">Thích</button>
       </span>
       <button class="nw-cmab-btn" wire:click="setReply({{ $comment->id }}, '{{ addslashes($comment->user?->name ?? '') }}')">Trả lời</button>
-      <span class="nw-cmab-time">{{ $comment->created_at->diffForHumans() }}</span>
+      <span class="nw-cmab-time">{{ $comment->time_label }}</span>
       @if(($comment->user_id ?? 0) === auth()->id())
         <button class="nw-cmab-btn nw-red" wire:click="deleteComment({{ $comment->id }})" wire:confirm="Xóa bình luận này?">Xóa</button>
       @endif

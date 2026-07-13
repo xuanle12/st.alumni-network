@@ -7,6 +7,8 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Setting;
+use App\Services\AlumniSyncService;
 
 class Csv extends Component
 {
@@ -34,6 +36,13 @@ class Csv extends Component
     public ?int   $deleteId   = null;
     public string $deleteName = '';
 
+    // Cấu hình API (nhập trên giao diện, lưu vào bảng settings)
+    public bool   $showSettings   = false;
+    public string $api_url        = '';
+    public string $api_token      = '';
+    public string $api_data_key   = 'data';
+    public bool   $api_verify_ssl = true;
+
     public function updatingSearch()      { $this->resetPage(); }
     public function updatingFilterKhoa()  { $this->resetPage(); }
     public function updatingFilterNam()   { $this->resetPage(); }
@@ -44,6 +53,63 @@ class Csv extends Component
     {
         $this->reset(['editId', 'f_msv', 'f_ho_ten', 'f_lop', 'f_khoa', 'f_nganh', 'f_nam']);
         $this->showModal = true;
+    }
+
+    /** Mở form cấu hình API, nạp giá trị hiện tại (DB, fallback .env). */
+    public function openSettings(): void
+    {
+        $this->api_url        = Setting::get('alumni.url', config('services.alumni.url') ?? '');
+        $this->api_token      = Setting::get('alumni.token', config('services.alumni.token') ?? '');
+        $this->api_data_key   = Setting::get('alumni.data_key', config('services.alumni.data_key') ?? 'data');
+        $this->api_verify_ssl = filter_var(
+            Setting::get('alumni.verify_ssl', config('services.alumni.verify_ssl') ?? true),
+            FILTER_VALIDATE_BOOLEAN
+        );
+        $this->resetValidation();
+        $this->showSettings = true;
+    }
+
+    public function closeSettings(): void
+    {
+        $this->showSettings = false;
+    }
+
+    /** Lưu cấu hình API vào DB (không cần sửa .env). */
+    public function saveSettings(): void
+    {
+        $this->validate([
+            'api_url'      => 'nullable|url|max:500',
+            'api_token'    => 'nullable|string|max:1000',
+            'api_data_key' => 'nullable|string|max:100',
+        ], [
+            'api_url.url' => 'URL API không hợp lệ (phải bắt đầu bằng http:// hoặc https://).',
+        ]);
+
+        Setting::set('alumni.url',        trim($this->api_url));
+        Setting::set('alumni.token',      trim($this->api_token));
+        Setting::set('alumni.data_key',   trim($this->api_data_key));
+        Setting::set('alumni.verify_ssl', $this->api_verify_ssl ? '1' : '0');
+
+        $this->showSettings = false;
+        $this->dispatch('toast', type: 'success', message: 'Đã lưu cấu hình API.');
+    }
+
+    /** Đồng bộ danh sách cựu sinh viên từ API bên ngoài về bảng ds_csv. */
+    public function syncFromApi(AlumniSyncService $service): void
+    {
+        try {
+            $r = $service->sync();
+        } catch (\Throwable $e) {
+            $this->dispatch('toast', type: 'error', message: 'Đồng bộ thất bại: ' . $e->getMessage());
+            return;
+        }
+
+        $this->resetPage();
+
+        $this->dispatch('toast', type: 'success', message: sprintf(
+            'Đã đồng bộ: thêm %d, cập nhật %d, bỏ qua %d (tổng %d).',
+            $r['inserted'], $r['updated'], $r['skipped'], $r['fetched']
+        ));
     }
 
     public function openEdit(int $id): void

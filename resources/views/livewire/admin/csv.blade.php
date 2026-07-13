@@ -79,7 +79,18 @@
 
     <div class="topbar">
       <div><div class="tt">Danh sách cựu sinh viên</div><div class="ts">Quản lý danh sách tốt nghiệp</div></div>
-      <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost" wire:click="openSettings" title="Cấu hình API">
+          <i class="fa-solid fa-gear"></i> Cấu hình API
+        </button>
+        <button class="btn btn-ghost" wire:click="syncFromApi"
+                wire:confirm="Đồng bộ danh sách cựu sinh viên từ API? Bản ghi trùng mã SV sẽ được cập nhật."
+                wire:loading.attr="disabled" wire:target="syncFromApi">
+          <span wire:loading.remove wire:target="syncFromApi"><i class="fa-solid fa-cloud-arrow-down"></i> Đồng bộ từ API</span>
+          <span wire:loading wire:target="syncFromApi"><i class="fa-solid fa-spinner fa-spin"></i> Đang đồng bộ...</span>
+        </button>
+        <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
+      </div>
     </div>
     <x-toolbar>
       <x-slot:search>
@@ -206,6 +217,54 @@
         <button wire:click="save" class="btn btn-prim">
           <span wire:loading wire:target="save">Đang lưu...</span>
           <span wire:loading.remove wire:target="save">{{ $editId ? 'Cập nhật' : 'Thêm mới' }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  @endif
+
+  {{-- MODAL CẤU HÌNH API --}}
+  @if($showSettings)
+  <div class="mo-bg" wire:click.self="closeSettings">
+    <div class="mo">
+      <div class="mo-hd">
+        <div class="mo-title"><i class="fa-solid fa-gear"></i> Cấu hình API cựu sinh viên</div>
+        <button class="mo-close" wire:click="closeSettings">✕</button>
+      </div>
+      <div class="mo-body">
+        <div style="font-size:12px;color:#64748b;margin-bottom:14px;line-height:1.6">
+          Nhập địa chỉ API để lấy danh sách cựu sinh viên. Cấu hình lưu trong hệ thống, không cần sửa file code.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="fi">
+            <label>URL API *</label>
+            <input wire:model="api_url" type="url" placeholder="https://api.truong.edu.vn/alumni">
+            @error('api_url')<div class="err">{{ $message }}</div>@enderror
+          </div>
+          <div class="fi">
+            <label>Token xác thực (nếu có)</label>
+            <input wire:model="api_token" type="text" placeholder="Bearer token — để trống nếu API không cần">
+            @error('api_token')<div class="err">{{ $message }}</div>@enderror
+          </div>
+          <div class="fi">
+            <label>Khóa chứa dữ liệu trong JSON</label>
+            <input wire:model="api_data_key" type="text" placeholder="data">
+            <div style="font-size:11px;color:#94a3b8;margin-top:4px">
+              Ví dụ nếu API trả về <code>{"data": [...]}</code> thì điền <code>data</code>. Để trống nếu API trả thẳng mảng.
+            </div>
+            @error('api_data_key')<div class="err">{{ $message }}</div>@enderror
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#334155;cursor:pointer">
+            <input wire:model="api_verify_ssl" type="checkbox" style="width:16px;height:16px">
+            Kiểm tra chứng chỉ SSL (bỏ chọn nếu API dùng chứng chỉ tự ký)
+          </label>
+        </div>
+      </div>
+      <div class="mo-ft">
+        <button wire:click="closeSettings" class="btn btn-ghost">Huỷ</button>
+        <button wire:click="saveSettings" class="btn btn-prim">
+          <span wire:loading wire:target="saveSettings">Đang lưu...</span>
+          <span wire:loading.remove wire:target="saveSettings">Lưu cấu hình</span>
         </button>
       </div>
     </div>

@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Traits\HasLikes;
+use App\Traits\HasTimeLabel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 class Comment extends Model
 {
     use HasLikes;
+    use HasTimeLabel;
  
     protected $fillable = [
         'post_id','user_id','parent_id','content','likes_count',

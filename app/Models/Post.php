@@ -3,22 +3,43 @@
 namespace App\Models;
 
 use App\Traits\HasLikes;
+use App\Traits\HasTimeLabel;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     use HasLikes;
+    use HasTimeLabel;
     protected $table = 'post';
      protected $fillable = [
-        'user_id', 'content', 'image', 'category', 'status',
+        'user_id', 'content', 'image', 'images', 'category', 'status',
         'likes_count', 'comments_count', 'shares_count',
     ];
- 
+
     protected $casts = [
+        'images'         => 'array',
         'likes_count'    => 'integer',
         'comments_count' => 'integer',
         'shares_count'   => 'integer',
     ];
+
+    /** Toàn bộ ảnh của bài viết (gộp ảnh cũ `image` + mảng `images`). */
+    public function getPhotosAttribute(): array
+    {
+        $photos = [];
+
+        if (!empty($this->attributes['image'])) {
+            $photos[] = $this->attributes['image'];
+        }
+
+        foreach ((array) ($this->images ?? []) as $img) {
+            if (!empty($img) && !in_array($img, $photos, true)) {
+                $photos[] = $img;
+            }
+        }
+
+        return $photos;
+    }
  
     public const CATEGORIES = [
 

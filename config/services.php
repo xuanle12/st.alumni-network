@@ -42,4 +42,15 @@ return [
     'userinfo_url' => env('SSO_USERINFO_URL'),
 ],
 
+    // API danh sách cựu sinh viên (đồng bộ về bảng ds_csv)
+    'alumni' => [
+        'url'        => env('ALUMNI_API_URL'),
+        'token'      => env('ALUMNI_API_TOKEN'),
+        // Khóa chứa mảng dữ liệu trong JSON trả về (vd: "data"). Để trống nếu API trả thẳng mảng.
+        'data_key'   => env('ALUMNI_API_DATA_KEY', 'data'),
+        // Tắt kiểm tra SSL nếu API dùng chứng chỉ tự ký (vd cổng :6891 của trường)
+        'verify_ssl' => env('ALUMNI_API_VERIFY_SSL', true),
+        'timeout'    => env('ALUMNI_API_TIMEOUT', 30),
+    ],
+
 ];

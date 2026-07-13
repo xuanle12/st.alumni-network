@@ -33,7 +33,8 @@ class Csv extends Component
     public array $tags = [];
     public string $tagInput = '';
 
-    public $coverImage = null;
+    public $coverImage = null;      // giữ để tương thích
+    public array $coverImages = []; // hỗ trợ nhiều ảnh (kiểu Facebook)
 
 
     public function mount()
@@ -98,8 +99,16 @@ class Csv extends Component
             'category',
             'tags',
             'tagInput',
-            'coverImage'
+            'coverImage',
+            'coverImages',
         ]);
+    }
+
+    /** Xoá một ảnh đã chọn khỏi danh sách trước khi đăng. */
+    public function removeCoverImage(int $i): void
+    {
+        unset($this->coverImages[$i]);
+        $this->coverImages = array_values($this->coverImages);
     }
 
 
@@ -125,7 +134,11 @@ class Csv extends Component
     public function publish()
     {
         $this->validate([
-            'content' => 'required|min:3'
+            'content'        => 'required|min:3',
+            'coverImages.*'  => 'image|max:5120', // mỗi ảnh tối đa 5MB
+        ], [
+            'coverImages.*.image' => 'File tải lên phải là ảnh.',
+            'coverImages.*.max'   => 'Mỗi ảnh tối đa 5MB.',
         ]);
 
         $body = trim($this->title) !== ''
@@ -149,9 +162,14 @@ class Csv extends Component
             }
         }
 
-        $path = null;
-        if ($this->coverImage) {
-            $path = $this->coverImage->store('posts', 'public');
+        // Lưu tất cả ảnh đã chọn
+        $paths = [];
+        foreach ($this->coverImages as $img) {
+            $paths[] = $img->store('posts', 'public');
+        }
+        // Tương thích: nếu dùng ô upload đơn cũ
+        if (empty($paths) && $this->coverImage) {
+            $paths[] = $this->coverImage->store('posts', 'public');
         }
 
         Post::create([
@@ -159,7 +177,8 @@ class Csv extends Component
             'content'  => $body,
             'category' => in_array($this->category, ['normal', 'job', 'event'], true)
                           ? $this->category : 'normal',
-            'image'    => $path,
+            'image'    => $paths[0] ?? null,
+            'images'   => count($paths) ? $paths : null,
             'status'   => $hasBanned ? 'pending' : 'published',
         ]);
 
@@ -186,6 +205,12 @@ class Csv extends Component
 
     public function render()
     {
-        return view('livewire.user.csv');
+        return view('livewire.user.csv', [
+            'stats' => [
+                'posts'   => Post::where('user_id', $this->currentUser->id)->count(),
+                'members' => User::count(),
+                'events'  => Event::count(),
+            ],
+        ]);
     }
 }
