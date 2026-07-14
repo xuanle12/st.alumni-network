@@ -1,5 +1,5 @@
 <div class="nb-wrap" wire:poll.30s x-data @click.outside="$wire.open = false">
-    <button type="button" class="nb-btn" wire:click="toggle" aria-label="Thông báo">
+    <button type="button" class="nb-btn" wire:click="toggle" aria-label="Thông báo" x-ref="bell">
         <i class="fa-regular fa-bell"></i>
         @if($unreadCount > 0)
             <span class="nb-badge">{{ $unreadCount > 9 ? '9+' : $unreadCount }}</span>
@@ -7,7 +7,13 @@
     </button>
 
     @if($open)
-        <div class="nb-panel">
+        <div class="nb-panel" x-init="
+            $nextTick(() => {
+                const r = $refs.bell.getBoundingClientRect();
+                $el.style.top = (r.bottom + 8) + 'px';
+                $el.style.right = Math.max(12, window.innerWidth - r.right) + 'px';
+            });
+        ">
             <div class="nb-hd">
                 <span class="nb-hd-title">Thông báo</span>
                 @if($unreadCount > 0)
@@ -46,7 +52,7 @@
     .nb-btn{position:relative;width:40px;height:40px;border:none;background:#f1f5f9;border-radius:50%;cursor:pointer;color:#334155;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.15s;}
     .nb-btn:hover{background:#e2e8f0;}
     .nb-badge{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 4px;background:#ef4444;color:#fff;font-size:10px;font-weight:700;border-radius:99px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
-    .nb-panel{position:absolute;top:calc(100% + 10px);right:0;width:360px;max-width:calc(100vw - 24px);background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.14);z-index:1000;overflow:hidden;}
+    .nb-panel{position:fixed;top:100px;right:16px;width:360px;max-width:calc(100vw - 24px);background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:2000;overflow:hidden;}
     .nb-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #f1f5f9;}
     .nb-hd-title{font-size:15px;font-weight:700;color:#0f172a;}
     .nb-mark{border:none;background:none;color:#2f6bff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}

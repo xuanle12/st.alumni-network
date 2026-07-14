@@ -4,12 +4,14 @@ namespace App\Livewire\User;
 
 use Livewire\Component;
 use App\Models\Job;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
 class Jobsdetail extends Component
 {
     public Job $job;
     public $related = [];
+    public ?Company $companyInfo = null;
 
     public array $matchedSkills = [];
     public array $missingSkills = [];
@@ -40,6 +42,11 @@ class Jobsdetail extends Component
             $this->matchedSkills = [];
             $this->missingSkills = $jobSkillNames;
         }
+
+        // Hồ sơ công ty: ưu tiên liên kết company_id, fallback khớp theo tên
+        $this->companyInfo = $this->job->company_id
+            ? Company::find($this->job->company_id)
+            : Company::where('name', $this->job->company)->first();
 
         $this->companyOpenJobs = Job::where('company', $this->job->company)
             ->where('id', '!=', $id)
@@ -96,6 +103,7 @@ class Jobsdetail extends Component
             'matchedSkills' => $this->matchedSkills,
             'missingSkills' => $this->missingSkills,
             'companyOpenJobs' => $this->companyOpenJobs,
+            'companyInfo' => $this->companyInfo,
         ]);
     }
 }

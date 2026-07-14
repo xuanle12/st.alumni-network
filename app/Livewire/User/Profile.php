@@ -47,6 +47,11 @@ class Profile extends Component
 
     public function mount()
     {
+        // Tài khoản doanh nghiệp dùng hồ sơ công ty riêng
+        if ((Auth::user()->role ?? null) === 'company') {
+            return $this->redirect(route('company.profile'), navigate: true);
+        }
+
         $this->loadData();
     }
 

@@ -108,6 +108,9 @@
       <a href="{{ route('event') }}" class="sidebar-nav-item {{ request()->routeIs('event*') ? 'active' : '' }}" wire:navigate>
         <div class="nav-icon"><i class="fa-solid fa-calendar-days"></i></div> Sự kiện
       </a>
+      <a href="{{ route('my.posts') }}" class="sidebar-nav-item {{ request()->routeIs('my.posts') ? 'active' : '' }}" wire:navigate>
+        <div class="nav-icon"><i class="fa-solid fa-rectangle-list"></i></div> Bài viết của tôi
+      </a>
       <a href="{{ route('profile') }}" class="sidebar-nav-item" wire:navigate>
         <div class="nav-icon"><i class="fa-solid fa-user"></i></div> Hồ Sơ
       </a>

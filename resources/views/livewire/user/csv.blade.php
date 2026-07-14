@@ -147,7 +147,12 @@
 
         {{-- Danh sách bài viết --}}
         @forelse($posts as $post)
-            <div class="cm-card cm-post" x-data="{ openComments:false }">
+            <div class="cm-card cm-post {{ $post->status === 'pending' ? 'is-pending' : '' }}" x-data="{ openComments:false }">
+                @if($post->status === 'pending')
+                    <div class="cm-pending-banner">
+                        <i class="fa-solid fa-clock"></i> Bài viết đang chờ quản trị viên duyệt — hiện chỉ mình bạn thấy.
+                    </div>
+                @endif
                 <div class="cm-post-hd">
                     @if($post->author->profile?->avatar)
                         <img src="{{ asset('storage/' . $post->author->profile->avatar) }}" class="cm-av cm-av-44" alt="{{ $post->author->name }}"/>
@@ -377,6 +382,8 @@
 .cm-composer-btn:hover{background:#f2f4f7;}
 .cm-composer-post{margin-left:auto;padding:8px 20px;background:var(--cm-blue);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;}
 .cm-composer-post:hover{background:var(--cm-blue-d);}
+.cm-post.is-pending{border:1px solid #fde68a;}
+.cm-pending-banner{display:flex;align-items:center;gap:8px;padding:9px 14px;background:#fffbeb;color:#92400e;font-size:12.5px;font-weight:500;border-bottom:1px solid #fde68a;border-radius:12px 12px 0 0;}
 
 .cm-sortbar{display:flex;align-items:center;justify-content:space-between;padding:2px 4px;}
 .cm-sortbar-t{font-size:15px;font-weight:700;}

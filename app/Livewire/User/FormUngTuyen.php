@@ -6,6 +6,9 @@ use App\Mail\MailXacNhanUngTuyen;
 use App\Mail\MailThongBaoUngVienMoi;
 use App\Models\Job;
 use App\Models\DonUngTuyen;
+use App\Models\User;
+use App\Models\Company;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\On;
@@ -113,16 +116,85 @@ class FormUngTuyen extends Component
         // Gửi email xác nhận cho ứng viên
         Mail::to($this->email)
             ->queue(new MailXacNhanUngTuyen($application, $this->job));
- 
-        // Gửi thông báo cho NTD (nếu company có email)
+
+        // Gửi email thông báo cho NTD (nếu company có email)
         if ($this->job->contact_email) {
             Mail::to($this->job->contact_email)
                 ->queue(new MailThongBaoUngVienMoi($application, $this->job));
         }
- 
+
+        // ── Thông báo trong hệ thống (chuông) ──
+
+        // 1) Ứng viên: xác nhận gửi CV thành công (nếu đã đăng nhập)
+        if (Auth::check()) {
+            Notification::create([
+                'user_id'  => Auth::id(),
+                'actor_id' => null,
+                'type'     => 'apply',
+                'title'    => 'Gửi CV ứng tuyển thành công',
+                'message'  => 'Bạn đã ứng tuyển vị trí "' . $this->job->title . '". Vui lòng theo dõi email để nhận phản hồi từ nhà tuyển dụng.',
+                'link'     => route('job.show', $this->jobId),
+            ]);
+        }
+
+        // 2) Tài khoản doanh nghiệp của tin: có CV mới, nhắc kiểm tra email công ty
+        $companyUser  = $this->resolveCompanyUser($this->job);
+        if ($companyUser) {
+            $companyEmail = $this->job->contact_email ?: $companyUser->email;
+            Notification::send(
+                $companyUser->id,
+                'apply',
+                'Có ứng viên nộp CV mới',
+                $this->name . ' vừa ứng tuyển vị trí "' . $this->job->title . '". Vui lòng kiểm tra hộp thư'
+                    . ($companyEmail ? ' (' . $companyEmail . ')' : ' của công ty') . ' để xem CV.',
+                route('job.show', $this->jobId),
+                Auth::id()
+            );
+        }
+
         $this->closeModal();
         $this->dispatch('application-submitted');
         session()->flash('success', 'Nộp hồ sơ thành công! Vui lòng kiểm tra email để xác nhận.');
+    }
+
+    /** Dò tài khoản doanh nghiệp (role=company) gắn với tin tuyển dụng. */
+    private function resolveCompanyUser(Job $job): ?User
+    {
+        // 1) Người tạo tin chính là tài khoản doanh nghiệp
+        if ($job->created_by) {
+            $creator = User::find($job->created_by);
+            if ($creator && $creator->role === 'company') {
+                return $creator;
+            }
+        }
+
+        // 2) Truy ra bản ghi Company (theo company_id hoặc theo tên)
+        $company = null;
+        if (!empty($job->company_id)) {
+            $company = Company::find($job->company_id);
+        }
+        if (!$company && $job->company) {
+            $company = Company::where('name', $job->company)->first();
+        }
+
+        // 2a) Company do một tài khoản doanh nghiệp tạo
+        if ($company && $company->created_by) {
+            $owner = User::find($company->created_by);
+            if ($owner && $owner->role === 'company') {
+                return $owner;
+            }
+        }
+
+        // 3) Khớp email công ty với tài khoản role=company
+        $emails = array_filter([
+            $company->contact_email ?? null,
+            $job->contact_email ?: null,
+        ]);
+        if (!empty($emails)) {
+            return User::where('role', 'company')->whereIn('email', $emails)->first();
+        }
+
+        return null;
     }
     public function render()
     {

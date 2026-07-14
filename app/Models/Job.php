@@ -87,7 +87,13 @@ class Job extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
-    
+
+    // Hồ sơ công ty gắn với tin (đọc thông tin doanh nghiệp đầy đủ)
+    public function companyProfile()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
     public function skills()
     {
     return $this->belongsToMany(Skill::class, 'job_skills');

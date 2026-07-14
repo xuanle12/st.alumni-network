@@ -53,10 +53,18 @@ class Csv extends Component
 
     private function loadData()
     {
+        // Hiện bài đã duyệt cho mọi người + bài đang chờ duyệt CỦA CHÍNH mình
         $query = Post::with([
             'author.profile',
-            'job'
-        ])->where('status', 'published')->latest();
+            'job',
+            'event',
+        ])->where(function ($q) {
+            $q->where('status', 'published')
+              ->orWhere(function ($q2) {
+                  $q2->where('status', 'pending')
+                     ->where('user_id', $this->currentUser->id);
+              });
+        })->latest();
 
         $this->posts = match ($this->filter) {
 
@@ -179,26 +187,25 @@ class Csv extends Component
                           ? $this->category : 'normal',
             'image'    => $paths[0] ?? null,
             'images'   => count($paths) ? $paths : null,
-            'status'   => $hasBanned ? 'pending' : 'published',
+            'status'   => 'pending', // Mọi bài đều chờ quản trị viên duyệt
         ]);
 
-        // Bài chứa từ ngữ không phù hợp → báo admin duyệt
-        if ($hasBanned) {
-            \App\Models\Notification::sendToAdmins(
-                'post_pending',
-                'Có bài viết chờ duyệt (nghi chứa nội dung không phù hợp)',
-                \Illuminate\Support\Str::limit($body, 120),
-                route('admin.post'),
-                Auth::id()
-            );
-        }
+        // Báo admin có bài chờ duyệt (đánh dấu nếu nghi chứa nội dung không phù hợp)
+        \App\Models\Notification::sendToAdmins(
+            'post_pending',
+            $hasBanned
+                ? 'Có bài viết chờ duyệt (nghi chứa nội dung không phù hợp)'
+                : 'Có bài viết mới chờ duyệt',
+            \Illuminate\Support\Str::limit($body, 120),
+            route('admin.post'),
+            Auth::id()
+        );
 
         $this->closeModal();
         $this->loadData();
 
-        $this->dispatch('toast', type: 'success', message: $hasBanned
-            ? 'Bài viết đang chờ admin duyệt do chứa nội dung không phù hợp.'
-            : 'Đăng bài thành công!'
+        $this->dispatch('toast', type: 'success',
+            message: 'Đã gửi bài viết, đang chờ quản trị viên duyệt.'
         );
     }
     public function like(int $postId): void

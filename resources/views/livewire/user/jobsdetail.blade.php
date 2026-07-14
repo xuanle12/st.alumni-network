@@ -123,6 +123,14 @@
 }
 .jd-contact-link:hover{background:#dbeafe}
 
+/* COMPANY INFO CARD */
+.jd-cinfo-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.jd-cinfo-logo{width:48px;height:48px;border-radius:12px;object-fit:cover;flex-shrink:0;background:#f1f5f9;}
+.jd-cinfo-logo-df{display:flex;align-items:center;justify-content:center;background:#eff6ff;color:#0961aa;font-weight:800;font-size:16px;}
+.jd-cinfo-name{font-size:15px;font-weight:700;color:#0f172a;line-height:1.3;}
+.jd-cinfo-field{font-size:12px;color:#64748b;margin-top:2px;}
+.jd-cinfo-desc{font-size:12.5px;color:#475569;line-height:1.65;margin-top:10px;padding-top:10px;border-top:1px solid #eef2f7;white-space:pre-line;}
+
 /* SKILLS */
 .skill-matched{
   display:inline-flex;align-items:center;gap:5px;
@@ -444,6 +452,43 @@
           @endif
         </div>
       </div>
+
+      {{-- Thông tin doanh nghiệp (đồng bộ từ hồ sơ công ty) --}}
+      @if($companyInfo)
+        <div class="jd-card">
+          <div class="side-body">
+            <div class="side-sec-title">Thông tin doanh nghiệp</div>
+            <div class="jd-cinfo-head">
+              @if($companyInfo->logo)
+                <img src="{{ asset('storage/'.$companyInfo->logo) }}" class="jd-cinfo-logo" alt="{{ $companyInfo->name }}">
+              @else
+                <div class="jd-cinfo-logo jd-cinfo-logo-df">{{ $companyInfo->initials }}</div>
+              @endif
+              <div>
+                <div class="jd-cinfo-name">{{ $companyInfo->name }}</div>
+                @if($companyInfo->field)<div class="jd-cinfo-field">{{ $companyInfo->field }}</div>@endif
+              </div>
+            </div>
+            @if($companyInfo->size)
+              <div class="meta-row"><span class="meta-key">Quy mô</span><span class="meta-val">{{ $companyInfo->size }}</span></div>
+            @endif
+            @if($companyInfo->address)
+              <div class="meta-row"><span class="meta-key">Địa chỉ</span><span class="meta-val">{{ $companyInfo->address }}</span></div>
+            @endif
+            @if($companyInfo->contact_phone)
+              <div class="meta-row"><span class="meta-key">Điện thoại</span><span class="meta-val">{{ $companyInfo->contact_phone }}</span></div>
+            @endif
+            @if($companyInfo->website)
+              <div class="meta-row"><span class="meta-key">Website</span>
+                <a href="{{ $companyInfo->website }}" target="_blank" rel="noopener" class="meta-val" style="color:#0961aa">{{ preg_replace('#^https?://#', '', rtrim($companyInfo->website, '/')) }}</a>
+              </div>
+            @endif
+            @if($companyInfo->description)
+              <div class="jd-cinfo-desc">{{ $companyInfo->description }}</div>
+            @endif
+          </div>
+        </div>
+      @endif
 
       {{-- Việc làm tương tự --}}
       @if($related->count() > 0)
