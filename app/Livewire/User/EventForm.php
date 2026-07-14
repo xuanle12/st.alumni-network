@@ -68,6 +68,14 @@ class EventForm extends Component
 
         $event->update(['post_id' => $post->id]);
 
+        \App\Models\Notification::sendToAdmins(
+            'event_new',
+            'Có sự kiện mới được đăng: "' . $this->title . '"',
+            $this->organizer,
+            route('admin.event'),
+            auth()->id()
+        );
+
         $this->step = 'success';
     }
 

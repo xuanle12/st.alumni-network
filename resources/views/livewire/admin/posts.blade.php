@@ -1,12 +1,12 @@
 <div>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-.aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;min-height:100vh;background:#f8fafc}
+.aw{padding:1.75rem;display:flex;flex-direction:column;gap:1rem;min-height:100vh;background:#f8fafc}
 
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.tt{font-size:20px;font-weight:700;color:#0f172a}.ts{font-size:13px;color:#64748b;margin-top:2px}
-.btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#16a34a;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
-.btn-add:hover{background:#15803d}
+.tt{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.4px}.ts{font-size:13px;color:#64748b;margin-top:3px}
+.btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#0961aa;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
+.btn-add:hover{background:#075490}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -14,20 +14,20 @@
 .stat-l{font-size:12px;color:#64748b;font-weight:500}
 .stat-n{font-size:28px;font-weight:700;line-height:1.1}
 .stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.ic-b{background:#f0fdf4}.ic-o{background:#fff7ed}.ic-a{background:#fffbeb}.ic-r{background:#fef2f2}
-.n-b{color:#0f172a}.n-g{color:#16a34a}.n-o{color:#ea580c}.n-a{color:#d97706}
+.ic-b{background:#eff6ff}.ic-o{background:#fff7ed}.ic-a{background:#fffbeb}.ic-r{background:#fef2f2}
+.n-b{color:#0f172a}.n-g{color:#0961aa}.n-o{color:#ea580c}.n-a{color:#d97706}
 
 .post-row{display:flex;align-items:center;gap:10px}
 .post-ico{width:36px;height:36px;border-radius:8px;background:#f1f5f9;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 .post-content{font-size:13px;color:#0f172a;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .post-meta{font-size:11px;color:#94a3b8;margin-top:2px}
 .author-row{display:flex;align-items:center;gap:6px}
-.author-ava{width:26px;height:26px;border-radius:50%;background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.author-ava{width:26px;height:26px;border-radius:50%;background:#eff6ff;color:#0961aa;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s}
 .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}.btn-ghost:hover{background:#f8fafc}
-.btn-prim{background:#16a34a;color:#fff}.btn-prim:hover{background:#15803d}
-.btn-green{background:#15803d;color:#fff}.btn-green:hover{background:#166534}
+.btn-prim{background:#0961aa;color:#fff}.btn-prim:hover{background:#075490}
+.btn-green{background:#075490;color:#fff}.btn-green:hover{background:#063a68}
 .btn-amber{background:#d97706;color:#fff}.btn-amber:hover{background:#b45309}
 .btn-del{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.btn-del:hover{background:#fee2e2}
 
@@ -49,7 +49,7 @@
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .mo-sec{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8}
 
-.pv-cat{font-size:11px;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.pv-cat{font-size:11px;font-weight:700;color:#0961aa;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 .pv-meta{display:flex;align-items:center;gap:12px;font-size:12px;color:#94a3b8;margin-bottom:14px;flex-wrap:wrap}
 .pv-body{font-size:13px;color:#374151;line-height:1.8;white-space:pre-wrap}
 
@@ -85,17 +85,17 @@
   <button wire:click="openAdd" class="btn-add">＋ Viết bài mới</button>
 </div>
 
+<x-status-tabs :current="$filterStatus" :tabs="[
+  ['value' => '',          'label' => 'Tất cả'],
+  ['value' => 'published', 'label' => 'Đã đăng',  'count' => $stats['published'], 'color' => 'blue'],
+  ['value' => 'pending',   'label' => 'Chờ duyệt', 'count' => $stats['pending'],   'color' => 'amber'],
+  ['value' => 'draft',     'label' => 'Bản nháp',  'count' => $stats['draft'],     'color' => 'gray'],
+]" />
 
 <x-toolbar>
   <x-slot:search>
     <x-toolbar.search placeholder="Tìm nội dung bài viết..." />
   </x-slot:search>
-  <x-toolbar.select model="filterStatus">
-    <option value="">Tất cả trạng thái</option>
-    <option value="published">Đã đăng</option>
-    <option value="pending">Chờ duyệt</option>
-    <option value="draft">Bản nháp</option>
-  </x-toolbar.select>
   <x-toolbar.select model="filterCat">
     <option value="">Tất cả danh mục</option>
     <option value="general">Thảo luận chung</option>
@@ -298,7 +298,7 @@
         </div>
       </div>
       <p style="font-size:13px;color:#64748b;line-height:1.7">
-        Bài viết sẽ <strong style="color:#15803d">hiển thị công khai</strong> ngay sau khi duyệt.
+        Bài viết sẽ <strong style="color:#075490">hiển thị công khai</strong> ngay sau khi duyệt.
       </p>
     </div>
     <div class="mo-ft">

@@ -67,6 +67,14 @@ class SSOController extends Controller
             ]
         );
 
+        // Chặn tài khoản chưa duyệt hoặc bị khóa
+        if (in_array($user->status, ['pending', 'locked'], true)) {
+            $reason = $user->status === 'locked'
+                ? 'Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.'
+                : 'Tài khoản đang chờ quản trị viên duyệt.';
+            return redirect()->route('login')->with('error', $reason);
+        }
+
         Auth::login($user);
 
         return redirect('/csv');

@@ -7,10 +7,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    {{-- amCharts chỉ cần ở trang Dashboard (biểu đồ). Các trang admin khác không tải để load nhanh hơn. --}}
+    @if(request()->routeIs('admin'))
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    @endif
 </head>
 <body class="adm">
 
@@ -107,10 +110,7 @@
                 </button>
             </div>
             <div class="adm-topbar-right">
-                <!-- <button class="adm-notif" title="Thông báo">
-                    <i class="fa-solid fa-bell"></i>
-                    <span class="adm-notif-dot"></span>
-                </button> -->
+                <livewire:notification-bell />
                 <div class="adm-topbar-user" id="admUserBtn" onclick="toggleUserMenu()" role="button" tabindex="0">
                     <div class="adm-topbar-uava">{{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}</div>
                     <div class="adm-topbar-uinfo">

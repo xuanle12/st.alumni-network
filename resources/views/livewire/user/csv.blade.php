@@ -40,7 +40,7 @@
                 <span class="cm-sc-lbl">Việc làm</span>
             </a>
             <a href="{{ route('event') }}" wire:navigate class="cm-sc">
-                <span class="cm-sc-ic" style="background:#ecfdf5;color:#059669"><i class="fa-solid fa-calendar-days"></i></span>
+                <span class="cm-sc-ic" style="background:#eff6ff;color:#0961aa"><i class="fa-solid fa-calendar-days"></i></span>
                 <span class="cm-sc-lbl">Sự kiện</span>
             </a>
             <a href="{{ route('job.create') }}" wire:navigate class="cm-sc">
@@ -69,7 +69,7 @@
                 <div class="cm-composer-in" wire:click="openModal">Chia sẻ điều gì đó...</div>
             </div>
             <div class="cm-composer-ac">
-                <button class="cm-composer-btn" wire:click="openModal('normal')"><i class="fa-solid fa-image" style="color:#22c55e"></i> Ảnh</button>
+                <button class="cm-composer-btn" wire:click="openModal('normal')"><i class="fa-solid fa-image" style="color:#0c83d8"></i> Ảnh</button>
                 <button class="cm-composer-btn" wire:click="openModal('job')"><i class="fa-solid fa-briefcase" style="color:#3b82f6"></i> Tuyển dụng</button>
                 <button class="cm-composer-btn" wire:click="openModal('event')"><i class="fa-solid fa-calendar" style="color:#f59e0b"></i> Sự kiện</button>
                 <button class="cm-composer-post" wire:click="openModal('normal')">Đăng</button>
@@ -251,7 +251,7 @@
         {{-- Sự kiện sắp tới --}}
         <div class="cm-card cm-side">
             <div class="cm-card-hd">
-                <span class="cm-card-title"><i class="fa-solid fa-calendar-days" style="color:#059669"></i> Sự kiện sắp tới</span>
+                <span class="cm-card-title"><i class="fa-solid fa-calendar-days" style="color:#0961aa"></i> Sự kiện sắp tới</span>
                 <a href="{{ route('event') }}" wire:navigate class="cm-card-more">Xem tất cả</a>
             </div>
             @forelse($events as $event)
@@ -446,12 +446,12 @@
 .cm-person-sub{font-size:11.5px;color:var(--cm-muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .cm-ev{display:flex;align-items:center;gap:11px;padding:8px 16px;text-decoration:none;color:var(--cm-txt);transition:.15s;}
 .cm-ev:hover{background:var(--cm-blue-s);}
-.cm-ev-date{flex-shrink:0;width:40px;height:40px;border-radius:10px;background:#ecfdf5;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.cm-ev-d{font-size:15px;font-weight:700;color:#059669;line-height:1;}
-.cm-ev-mo{font-size:9px;color:#10b981;text-transform:uppercase;font-weight:600;}
+.cm-ev-date{flex-shrink:0;width:40px;height:40px;border-radius:10px;background:#eff6ff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.cm-ev-d{font-size:15px;font-weight:700;color:#0961aa;line-height:1;}
+.cm-ev-mo{font-size:9px;color:#0c83d8;text-transform:uppercase;font-weight:600;}
 .cm-jobitem{display:block;padding:9px 16px;text-decoration:none;color:var(--cm-txt);transition:.15s;}
 .cm-jobitem:hover{background:var(--cm-blue-s);}
-.cm-jobitem-salary{font-size:11.5px;font-weight:600;color:#059669;margin-top:3px;}
+.cm-jobitem-salary{font-size:11.5px;font-weight:600;color:#0961aa;margin-top:3px;}
 
 /* ── Modal (giữ nguyên chức năng) ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;}

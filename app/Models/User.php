@@ -103,9 +103,14 @@ class User extends Authenticatable
     { 
         return $this->getRole() === 'lecturer'; 
     }
-    public function isBusiness(): bool 
-    { 
-        return $this->getRole() === 'business'; 
+    public function isBusiness(): bool
+    {
+        return $this->getRole() === 'company';
+    }
+
+    public function isCompany(): bool
+    {
+        return $this->getRole() === 'company';
     }
 
     /**

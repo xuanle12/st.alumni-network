@@ -125,7 +125,17 @@ class Posts extends Component
 
     public function approve()
     {
-        Post::findOrFail($this->approveId)->update(['status' => 'published']);
+        $post = Post::findOrFail($this->approveId);
+        $post->update(['status' => 'published']);
+
+        \App\Models\Notification::send(
+            $post->user_id,
+            'post',
+            'Bài viết của bạn đã được duyệt và hiển thị',
+            \Illuminate\Support\Str::limit($post->content, 120),
+            route('csv')
+        );
+
         $this->dispatch('toast', type: 'success', message: 'Đã duyệt bài viết.');
         $this->closeApprove();
     }

@@ -31,7 +31,7 @@
 .pf-ava-wrap{position:relative;display:inline-block}
 .pf-ava{
   width:72px;height:72px;border-radius:50%;
-  background:linear-gradient(135deg,#16a34a,#22c55e);
+  background:linear-gradient(135deg,#0961aa,#0c83d8);
   color:#fff;font-size:26px;font-weight:700;
   display:flex;align-items:center;justify-content:center;
   border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.1);
@@ -41,11 +41,11 @@
 .pf-ava-btn{
   position:absolute;bottom:0;right:0;
   width:22px;height:22px;border-radius:50%;
-  background:#16a34a;color:#fff;border:2px solid #fff;
+  background:#0961aa;color:#fff;border:2px solid #fff;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;font-size:9px;transition:.15s;
 }
-.pf-ava-btn:hover{background:#15803d}
+.pf-ava-btn:hover{background:#075490}
 .pf-ava-btn input{display:none}
 
 .pf-name{font-size:17px;font-weight:700;color:#111827;line-height:1.3}
@@ -56,7 +56,7 @@
   font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;
   letter-spacing:.03em;
 }
-.bdg-green{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+.bdg-green{background:#dbeafe;color:#075490;border:1px solid #bfdbfe}
 .bdg-amber{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
 .bdg-blue {background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe}
 .bdg-gray {background:#f3f4f6;color:#4b5563;border:1px solid #e5e7eb}
@@ -64,9 +64,9 @@
 /* progress */
 .pf-prog{width:100%;padding-top:.1rem}
 .pf-prog-row{display:flex;justify-content:space-between;font-size:10px;color:#9ca3af;margin-bottom:4px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.pf-prog-val{color:#16a34a;font-weight:700}
+.pf-prog-val{color:#0961aa;font-weight:700}
 .pf-prog-bg{height:3px;background:#e5e7eb;border-radius:99px;overflow:hidden}
-.pf-prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#16a34a,#22c55e);transition:width .4s}
+.pf-prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#0961aa,#0c83d8);transition:width .4s}
 
 /* meta rows */
 .pf-meta-list{width:100%;text-align:left;display:flex;flex-direction:column;gap:3px}
@@ -84,7 +84,7 @@
   font-size:13px;color:#374151;
   background:#f8fafc;text-decoration:none;transition:.12s;
 }
-a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
+a.pf-soc-item:hover{background:#eff6ff;color:#0961aa}
 .pf-soc-item i{font-size:12px;width:14px;text-align:center;flex-shrink:0}
 .soc-gh{color:#24292e}.soc-li{color:#0077b5}.soc-wb{color:#7c3aed}
 .pf-soc-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
@@ -124,10 +124,10 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
   display:inline-flex;align-items:center;gap:4px;
   padding:6px 14px;border-radius:7px;
   font-size:12px;font-weight:600;cursor:pointer;
-  border:1px solid #16a34a;background:#16a34a;color:#fff;
+  border:1px solid #0961aa;background:#0961aa;color:#fff;
   transition:.12s;font-family:inherit;white-space:nowrap;
 }
-.btn-prim:hover{background:#15803d;box-shadow:0 2px 6px rgba(22,163,74,.25)}
+.btn-prim:hover{background:#075490;box-shadow:0 2px 6px rgba(9,97,170,.25)}
 .btn-ghost{
   display:inline-flex;align-items:center;gap:4px;
   padding:6px 12px;border-radius:7px;
@@ -161,7 +161,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
   padding:8px 11px;border:1px solid #e2e8f0;border-radius:7px;
   font-size:14px;color:#111827;font-family:inherit;background:#fff;transition:.12s;
 }
-.fi input:focus,.fi textarea:focus{outline:none;border-color:#16a34a;box-shadow:0 0 0 2px rgba(22,163,74,.1)}
+.fi input:focus,.fi textarea:focus{outline:none;border-color:#0961aa;box-shadow:0 0 0 2px rgba(9,97,170,.1)}
 .fi input:disabled{background:#f9fafb;color:#9ca3af;cursor:not-allowed}
 .fi textarea{resize:vertical;min-height:70px}
 .fi .err{font-size:11px;color:#dc2626;margin-top:1px}
@@ -174,12 +174,12 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
   display:inline-flex;align-items:center;gap:4px;
   padding:5px 12px;border-radius:7px;
   font-size:12px;font-weight:600;cursor:pointer;
-  border:1px solid #16a34a;background:#16a34a;color:#fff;
+  border:1px solid #0961aa;background:#0961aa;color:#fff;
   transition:.12s;font-family:inherit;white-space:nowrap;
 }
-.mentor-cta-btn:hover{background:#15803d}
+.mentor-cta-btn:hover{background:#075490}
 .mentor-cta-btn.is-pending{border-color:#fde68a;background:#fffbeb;color:#92400e}
-.mentor-cta-btn.is-approved{border-color:#bbf7d0;background:#f0fdf4;color:#15803d}
+.mentor-cta-btn.is-approved{border-color:#bfdbfe;background:#eff6ff;color:#075490}
 .mentor-cta-btn.is-rejected{border-color:#fecaca;background:#fff;color:#dc2626}
 .mentor-desc{font-size:12px;color:#6b7280;margin-top:.25rem}
 
@@ -198,14 +198,14 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
   width:100%;padding:7px 10px;border:1px solid #e2e8f0;
   border-radius:7px;font-size:13px;color:#111827;font-family:inherit;
 }
-.skill-input-wrap input:focus{outline:none;border-color:#16a34a;box-shadow:0 0 0 2px rgba(22,163,74,.1)}
+.skill-input-wrap input:focus{outline:none;border-color:#0961aa;box-shadow:0 0 0 2px rgba(9,97,170,.1)}
 .skill-suggest{
   position:absolute;top:calc(100% + 3px);left:0;right:0;
   background:#fff;border:1px solid #e2e8f0;border-radius:8px;
   box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:160px;overflow-y:auto;z-index:10;
 }
 .skill-suggest-item{padding:7px 12px;font-size:12.5px;color:#374151;cursor:pointer;transition:.1s}
-.skill-suggest-item:hover{background:#f0fdf4;color:#15803d}
+.skill-suggest-item:hover{background:#eff6ff;color:#075490}
 .skill-hint{font-size:11px;color:#9ca3af;margin-bottom:2px}
 
 /* CV */
@@ -223,7 +223,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 .cv-ico.doc{background:#dbeafe;color:#1d4ed8}
 .cv-inf{flex:1;min-width:0}
 .cv-name{font-size:13.5px;font-weight:600;color:#111827;display:flex;align-items:center;gap:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cv-badge{font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;background:#dcfce7;color:#166534;flex-shrink:0}
+.cv-badge{font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;background:#dbeafe;color:#063a68;flex-shrink:0}
 .cv-meta{font-size:12px;color:#9ca3af;margin-top:1px}
 .cv-acts{display:flex;gap:4px;flex-shrink:0}
 .btn-xs{
@@ -232,8 +232,8 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
   border:1px solid #e2e8f0;background:#fff;color:#374151;transition:.12s;font-family:inherit;
 }
 .btn-xs:hover{background:#f9fafb}
-.btn-xs-blue{border-color:#bbf7d0;background:#f0fdf4;color:#15803d}
-.btn-xs-blue:hover{background:#dcfce7}
+.btn-xs-blue{border-color:#bfdbfe;background:#eff6ff;color:#075490}
+.btn-xs-blue:hover{background:#dbeafe}
 .btn-xs-red{border-color:#fecaca;background:#fff;color:#dc2626}
 .btn-xs-red:hover{background:#fef2f2}
 .dropzone{
@@ -241,16 +241,16 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
   padding:1rem;text-align:center;cursor:pointer;transition:.15s;
   display:flex;flex-direction:column;align-items:center;gap:4px;
 }
-.dropzone:hover{border-color:#16a34a;background:#f0fdf4}
+.dropzone:hover{border-color:#0961aa;background:#eff6ff}
 .dropzone input{display:none}
 .dz-icon{font-size:20px;color:#94a3b8}
 .dz-title{font-size:12px;font-weight:600;color:#374151}
 .dz-sub{font-size:11px;color:#9ca3af}
 .cv-preview{
   display:flex;align-items:center;gap:7px;padding:7px 10px;
-  background:#f0fdf4;border:1px solid #dcfce7;border-radius:7px;margin-top:7px;
+  background:#eff6ff;border:1px solid #dbeafe;border-radius:7px;margin-top:7px;
 }
-.cv-preview p{font-size:12px;color:#15803d;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv-preview p{font-size:12px;color:#075490;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cv-empty{text-align:center;padding:1rem;color:#94a3b8;font-size:12.5px}
 
 /* social edit */
@@ -261,7 +261,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
 .sf-ico.li{background:#0077b5;color:#fff}
 .sf-ico.wb{background:#7c3aed;color:#fff}
 .sf-row input{flex:1;padding:6px 10px;border:1px solid #e2e8f0;border-radius:7px;font-size:12.5px;color:#111827;font-family:inherit}
-.sf-row input:focus{outline:none;border-color:#16a34a;box-shadow:0 0 0 2px rgba(22,163,74,.1)}
+.sf-row input:focus{outline:none;border-color:#0961aa;box-shadow:0 0 0 2px rgba(9,97,170,.1)}
 
 [x-cloak]{display:none!important}
 
@@ -502,7 +502,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
           <div class="pf-info-row">
             <span class="pf-info-lbl"><i class="fa-brands fa-github" style="margin-right:5px;color:#24292e"></i> GitHub</span>
             @if($user->profile?->github)
-              <a href="{{ $user->profile->github }}" target="_blank" class="pf-info-val" style="color:#16a34a;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ $user->profile->github }}</a>
+              <a href="{{ $user->profile->github }}" target="_blank" class="pf-info-val" style="color:#0961aa;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ $user->profile->github }}</a>
             @else
               <span class="pf-info-val muted">Chưa cập nhật</span>
             @endif
@@ -510,7 +510,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
           <div class="pf-info-row">
             <span class="pf-info-lbl"><i class="fa-brands fa-linkedin" style="margin-right:5px;color:#0077b5"></i> LinkedIn</span>
             @if($user->profile?->linkedin)
-              <a href="{{ $user->profile->linkedin }}" target="_blank" class="pf-info-val" style="color:#16a34a;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ $user->profile->linkedin }}</a>
+              <a href="{{ $user->profile->linkedin }}" target="_blank" class="pf-info-val" style="color:#0961aa;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ $user->profile->linkedin }}</a>
             @else
               <span class="pf-info-val muted">Chưa cập nhật</span>
             @endif
@@ -518,7 +518,7 @@ a.pf-soc-item:hover{background:#f0fdf4;color:#16a34a}
           <div class="pf-info-row">
             <span class="pf-info-lbl"><i class="fa-solid fa-globe" style="margin-right:5px;color:#7c3aed"></i> Website</span>
             @if($user->profile?->website)
-              <a href="{{ $user->profile->website }}" target="_blank" class="pf-info-val" style="color:#16a34a;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ $user->profile->website }}</a>
+              <a href="{{ $user->profile->website }}" target="_blank" class="pf-info-val" style="color:#0961aa;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ $user->profile->website }}</a>
             @else
               <span class="pf-info-val muted">Chưa cập nhật</span>
             @endif

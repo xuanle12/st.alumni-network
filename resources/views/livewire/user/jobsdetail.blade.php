@@ -14,7 +14,7 @@
   text-decoration:none;margin-bottom:1.25rem;
   transition:color .15s;
 }
-.jd-back:hover{color:#16a34a}
+.jd-back:hover{color:#0961aa}
 
 .jd-layout{
   display:grid;
@@ -62,7 +62,7 @@
   font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px;
   display:inline-flex;align-items:center;gap:4px;
 }
-.tag-green {background:#dcfce7;color:#15803d}
+.tag-green {background:#dbeafe;color:#075490}
 .tag-yellow{background:#fef9c3;color:#854d0e}
 .tag-blue  {background:#dbeafe;color:#1d4ed8}
 .tag-gray  {background:#f1f5f9;color:#475569}
@@ -87,7 +87,7 @@
 }
 .ig-lbl{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;margin-bottom:2px}
 .ig-val{font-size:13px;font-weight:700;color:#0f172a}
-.ig-val.green{color:#15803d}
+.ig-val.green{color:#075490}
 
 /* SECTIONS */
 .jd-section{ padding:1.25rem 1.5rem; }
@@ -117,17 +117,17 @@
 .jd-contact-link{
   display:inline-flex;align-items:center;gap:8px;
   padding:9px 16px;border-radius:9px;
-  background:#f0fdf4;border:1px solid #dcfce7;
-  color:#15803d;font-size:13px;font-weight:600;
+  background:#eff6ff;border:1px solid #dbeafe;
+  color:#075490;font-size:13px;font-weight:600;
   text-decoration:none;transition:background .15s;
 }
-.jd-contact-link:hover{background:#dcfce7}
+.jd-contact-link:hover{background:#dbeafe}
 
 /* SKILLS */
 .skill-matched{
   display:inline-flex;align-items:center;gap:5px;
   font-size:12px;font-weight:600;padding:5px 12px;
-  border-radius:7px;background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;
+  border-radius:7px;background:#dbeafe;color:#075490;border:1px solid #bfdbfe;
 }
 .skill-missing{
   display:inline-flex;align-items:center;gap:5px;
@@ -150,22 +150,22 @@
 
 .btn-apply{
   width:100%;padding:12px;
-  background:#16a34a;color:#fff;
+  background:#0961aa;color:#fff;
   border:none;border-radius:10px;
   font-family:inherit;font-size:14px;font-weight:700;
   cursor:pointer;transition:all .18s;
   display:flex;align-items:center;justify-content:center;gap:8px;
-  box-shadow:0 2px 10px rgba(22,163,74,.22);
+  box-shadow:0 2px 10px rgba(9,97,170,.22);
   margin-bottom:10px;
 }
-.btn-apply:hover{background:#22c55e;transform:translateY(-1px)}
+.btn-apply:hover{background:#0c83d8;transform:translateY(-1px)}
 
 .applied-box{
   text-align:center;padding:.75rem;margin-bottom:10px;
-  background:#f0fdf4;border:1px solid #86efac;border-radius:10px;
+  background:#eff6ff;border:1px solid #93c5fd;border-radius:10px;
 }
 .applied-ico{font-size:26px;margin-bottom:4px}
-.applied-title{font-size:13px;font-weight:700;color:#166534}
+.applied-title{font-size:13px;font-weight:700;color:#063a68}
 .applied-sub{font-size:11px;color:#94a3b8;margin-top:3px}
 
 .btn-save{
@@ -207,11 +207,11 @@
 }
 .rel-info{flex:1;min-width:0}
 .rel-title{
-  font-size:13px;font-weight:600;color:#16a34a;line-height:1.4;
+  font-size:13px;font-weight:600;color:#0961aa;line-height:1.4;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .rel-meta{font-size:11px;color:#94a3b8;margin-top:3px}
-.rel-salary{font-size:11px;font-weight:700;color:#15803d;flex-shrink:0;margin-top:2px}
+.rel-salary{font-size:11px;font-weight:700;color:#075490;flex-shrink:0;margin-top:2px}
 
 @media(max-width:768px){
   .jd-layout{grid-template-columns:1fr}
@@ -284,7 +284,7 @@
             </div>
           </div>
           <div class="ig">
-            <div class="ig-icon" style="background:#dcfce7;color:#15803d">
+            <div class="ig-icon" style="background:#dbeafe;color:#075490">
               <i class="fa-solid fa-money-bill-wave"></i>
             </div>
             <div>
@@ -316,7 +316,7 @@
         <div class="jd-section jd-actions-row">
           @if($applied)
             <div class="applied-box" style="flex:1">
-              <div class="applied-ico"><i class="fa-solid fa-circle-check" style="color:#16a34a;font-size:24px"></i></div>
+              <div class="applied-ico"><i class="fa-solid fa-circle-check" style="color:#0961aa;font-size:24px"></i></div>
               <div class="applied-title">Đã ứng tuyển thành công!</div>
               <div class="applied-sub">Nhà tuyển dụng sẽ liên hệ sớm</div>
             </div>
@@ -371,7 +371,7 @@
 
             @auth
               <div class="skill-summary">
-                <span style="color:#15803d;font-weight:600">
+                <span style="color:#075490;font-weight:600">
                   <i class="fa-solid fa-check"></i>
                   Bạn có: {{ count($matchedSkills ?? []) }}/{{ $job->skills->count() }} kỹ năng
                 </span>
@@ -433,7 +433,7 @@
           @if($job->contact_email)
             <div class="meta-row">
               <span class="meta-key">Email liên hệ</span>
-              <span class="meta-val" style="color:#16a34a;font-size:11.5px">{{ $job->contact_email }}</span>
+              <span class="meta-val" style="color:#0961aa;font-size:11.5px">{{ $job->contact_email }}</span>
             </div>
           @endif
           @if($companyOpenJobs > 0)

@@ -62,6 +62,7 @@
     </nav>
     <div class="header-right">
       @auth
+        <livewire:notification-bell />
         @if(auth()->user()->isAdmin())
           <a href="{{ route('admin') }}" class="btn btn-primary">Bảng điều khiển </a>
         @else

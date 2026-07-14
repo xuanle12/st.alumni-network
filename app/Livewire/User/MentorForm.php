@@ -23,6 +23,17 @@ class MentorForm extends Component
     public function open()
     {
         $this->resetForm();
+
+        // Nạp dữ liệu hiện có để "Cập nhật" (nếu đã đăng ký trước đó)
+        $profile = MentorProfile::where('user_id', Auth::id())->first();
+        if ($profile) {
+            $this->expertise    = $profile->expertise ?? '';
+            $this->skills       = $profile->skills ?? '';
+            $this->bio          = $profile->bio ?? '';
+            $this->contact_info = $profile->contact_info ?? '';
+            $this->max_mentee   = $profile->max_mentee ?? 3;
+        }
+
         $this->showModal = true;
     }
  
@@ -42,6 +53,20 @@ class MentorForm extends Component
         $this->max_mentee = 3;
     }
  
+    public function cancelMentor()
+    {
+        MentorProfile::where('user_id', Auth::id())->delete();
+
+        $this->showModal = false;
+        $this->resetForm();
+        $this->resetErrorBag();
+
+        // báo cho trang cha cập nhật lại trạng thái (nút "Đăng ký mentor")
+        $this->dispatch('mentor-registered');
+
+        $this->dispatch('toast', type: 'success', message: 'Bạn đã ngừng làm mentor.');
+    }
+
     public function submit()
     {
         $this->validate([
@@ -71,9 +96,17 @@ class MentorForm extends Component
             ]
         );
  
+        \App\Models\Notification::sendToAdmins(
+            'mentor_pending',
+            'Có đăng ký làm Mentor mới chờ duyệt',
+            (auth()->user()->name ?? '') . ' — ' . $this->expertise,
+            route('admin.mentor'),
+            Auth::id()
+        );
+
         $this->showModal = false;
         $this->resetForm();
- 
+
         $this->dispatch('mentor-registered');
  
         $this->dispatch('toast', type: 'success', message: 'Đã gửi đăng ký làm Mentor, vui lòng chờ quản trị viên duyệt.');

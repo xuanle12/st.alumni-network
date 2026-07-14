@@ -1,13 +1,13 @@
 <div>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-.aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;min-height:100vh;background:#f8fafc}
-.flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
+.aw{padding:1.75rem;display:flex;flex-direction:column;gap:1rem;min-height:100vh;background:#f8fafc}
+.flash{background:#eff6ff;border:1px solid #93c5fd;color:#063a68;padding:9px 14px;border-radius:8px;font-size:13px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.tt{font-size:20px;font-weight:700;color:#0f172a}
-.ts{font-size:13px;color:#64748b;margin-top:2px}
-.btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#16a34a;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
-.btn-add:hover{background:#15803d}
+.tt{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.4px}
+.ts{font-size:13px;color:#64748b;margin-top:3px}
+.btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#0961aa;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn-add:hover{background:#075490}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:box-shadow .15s}
 .stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
@@ -15,8 +15,8 @@
 .stat-l{font-size:12px;color:#64748b;font-weight:500}
 .stat-n{font-size:28px;font-weight:700;line-height:1.1}
 .stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:#94a3b8}
-.ic-b{background:#f0fdf4}.ic-g{background:#f0fdf4}.ic-p{background:#faf5ff}.ic-a{background:#fffbeb}
-.n-b{color:#0f172a}.n-g{color:#16a34a}.n-p{color:#7c3aed}.n-a{color:#d97706}
+.ic-b{background:#eff6ff}.ic-g{background:#eff6ff}.ic-p{background:#faf5ff}.ic-a{background:#fffbeb}
+.n-b{color:#0f172a}.n-g{color:#0961aa}.n-p{color:#7c3aed}.n-a{color:#d97706}
 .clogo{width:36px;height:36px;border-radius:9px;background:#f1f5f9;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#475569;flex-shrink:0}
 .crow{display:flex;align-items:center;gap:10px}
 .cn{font-size:13px;font-weight:600;color:#0f172a}
@@ -75,7 +75,7 @@
 
 /* Badge */
 .bd{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;border:0.5px solid transparent}
-.bd-g{background:var(--bg-success,#f0fdf4);color:var(--text-success,#15803d);border-color:var(--border-success,#bbf7d0)}
+.bd-g{background:var(--bg-success,#eff6ff);color:var(--text-success,#075490);border-color:var(--border-success,#bfdbfe)}
 .bd-a{background:var(--bg-warning,#fffbeb);color:var(--text-warning,#b45309);border-color:var(--border-warning,#fde68a)}
 .bd-r{background:var(--bg-danger,#fef2f2);color:var(--text-danger,#b91c1c);border-color:var(--border-danger,#fecaca)}
 
@@ -149,16 +149,17 @@
     <button class="btn-add" wire:click="openAdd">＋ Thêm doanh nghiệp</button>
 </div>
 
+<x-status-tabs :current="$filterStatus" :tabs="[
+    ['value' => '',         'label' => 'Tất cả'],
+    ['value' => 'active',   'label' => 'Đang hợp tác', 'count' => $stats['active'],   'color' => 'blue'],
+    ['value' => 'pending',  'label' => 'Chờ duyệt',    'count' => $stats['pending'],  'color' => 'amber'],
+    ['value' => 'inactive', 'label' => 'Ngừng hợp tác','count' => $stats['inactive'], 'color' => 'red'],
+]" />
+
 <x-toolbar>
     <x-slot:search>
         <x-toolbar.search placeholder="Tìm tên, email, lĩnh vực..." />
     </x-slot:search>
-    <x-toolbar.select model="filterStatus">
-        <option value="">Tất cả trạng thái</option>
-        <option value="active">Đang hợp tác</option>
-        <option value="pending">Chờ duyệt</option>
-        <option value="inactive">Ngừng hợp tác</option>
-    </x-toolbar.select>
     <x-toolbar.select model="filterField">
         <option value="">Tất cả lĩnh vực</option>
         <option value="CNTT">CNTT</option>

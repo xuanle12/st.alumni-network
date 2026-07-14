@@ -9,7 +9,7 @@
 .psub   { font-size: 13px; color: #64748b; margin-top: 3px; }
 
 .btn-prim {
-  padding: 8px 18px; background: #16a34a; color: #fff; border: none;
+  padding: 8px 18px; background: #0961aa; color: #fff; border: none;
   border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
   font-family: inherit; display: inline-flex; align-items: center; gap: 6px;
   transition: background .15s, transform .1s;
@@ -32,7 +32,7 @@
   content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
   border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .2s;
 }
-.tog.on { background: #16a34a; }
+.tog.on { background: #0961aa; }
 .tog.on::after { transform: translateX(16px); }
 .tog.off { background: #d1d5db; }
 
@@ -105,14 +105,14 @@
       {{-- Tabs trạng thái --}}
       <div style="display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap">
         <button wire:click="$set('statusFilter','')"
-          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='' ? '#16a34a' : '#e5e7eb' }};background:{{ $statusFilter==='' ? '#f0fdf4' : '#fff' }};color:{{ $statusFilter==='' ? '#16a34a' : '#6b7280' }}">
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='' ? '#0961aa' : '#e5e7eb' }};background:{{ $statusFilter==='' ? '#eff6ff' : '#fff' }};color:{{ $statusFilter==='' ? '#0961aa' : '#6b7280' }}">
           Tất cả
         </button>
         <button wire:click="$set('statusFilter','active')"
-          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='active' ? '#16a34a' : '#e5e7eb' }};background:{{ $statusFilter==='active' ? '#f0fdf4' : '#fff' }};color:{{ $statusFilter==='active' ? '#16a34a' : '#6b7280' }};display:inline-flex;align-items:center;gap:6px">
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='active' ? '#0961aa' : '#e5e7eb' }};background:{{ $statusFilter==='active' ? '#eff6ff' : '#fff' }};color:{{ $statusFilter==='active' ? '#0961aa' : '#6b7280' }};display:inline-flex;align-items:center;gap:6px">
           Đang diễn ra
           @if($activeCount > 0)
-            <span style="background:#16a34a;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;line-height:1.6">{{ $activeCount }}</span>
+            <span style="background:#0961aa;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;line-height:1.6">{{ $activeCount }}</span>
           @endif
         </button>
         <button wire:click="$set('statusFilter','draft')"
@@ -188,7 +188,7 @@
                   <i class="fa-solid fa-lock"></i> Đóng sự kiện
                 </div>
               @elseif($event->status === 'closed')
-                <div class="adm-dd-item" wire:click="setStatus({{ $event->id }}, 'active')" style="color:#16a34a;font-weight:600">
+                <div class="adm-dd-item" wire:click="setStatus({{ $event->id }}, 'active')" style="color:#0961aa;font-weight:600">
                   <i class="fa-solid fa-unlock"></i> Mở lại
                 </div>
               @endif
@@ -218,8 +218,8 @@
             <div style="font-size:12px;color:#6b7280;margin-top:2px">{{ $detail->organizer }}@if($detail->location) · {{ $detail->location }}@endif</div>
             <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
               @php
-                $bc = match($detail->badge) { 'paid'=>'background:#ede9fe;color:#7c3aed', 'register'=>'background:#fef9c3;color:#ca8a04', default=>'background:#dcfce7;color:#16a34a' };
-                $sc = match($detail->status) { 'active'=>'background:#dcfce7;color:#16a34a', 'closed'=>'background:#fee2e2;color:#dc2626', default=>'background:#fef9c3;color:#ca8a04' };
+                $bc = match($detail->badge) { 'paid'=>'background:#ede9fe;color:#7c3aed', 'register'=>'background:#fef9c3;color:#ca8a04', default=>'background:#dbeafe;color:#0961aa' };
+                $sc = match($detail->status) { 'active'=>'background:#dbeafe;color:#0961aa', 'closed'=>'background:#fee2e2;color:#dc2626', default=>'background:#fef9c3;color:#ca8a04' };
               @endphp
               <span class="badge" style="{{ $bc }}">{{ $detail->badge_label }}</span>
               <span class="badge" style="{{ $sc }}">{{ $detail->status_label }}</span>

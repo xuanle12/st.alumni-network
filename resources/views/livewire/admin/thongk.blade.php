@@ -15,7 +15,7 @@
 .sc-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center}
 .sc-val{font-size:24px;font-weight:700;color:#111;line-height:1;margin-bottom:4px}
 .sc-sub{font-size:11px}
-.up{color:#16a34a}.muted{color:#9ca3af}
+.up{color:#0961aa}.muted{color:#9ca3af}
  
 .row2{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
 .row3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
@@ -43,7 +43,7 @@
  
  
 .spark{display:flex;align-items:flex-end;gap:2px;height:28px}
-.sp{width:6px;border-radius:2px 2px 0 0;background:#dcfce7}
+.sp{width:6px;border-radius:2px 2px 0 0;background:#dbeafe}
 .sp.hi{background:#3b82f6}
  
 @media(max-width:1024px){.stats4{grid-template-columns:1fr 1fr}}
@@ -70,7 +70,7 @@
     <div class="sc">
       <div class="sc-top">
         <div class="sc-label">Tổng cựu sinh viên</div>
-        <div class="sc-ico" style="background:#f0fdf4">
+        <div class="sc-ico" style="background:#eff6ff">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="#3b82f6" stroke-width="1.5"/><path d="M2 13c0-3 2.7-5 6-5s6 2 6 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
       </div>
@@ -80,8 +80,8 @@
     <div class="sc">
       <div class="sc-top">
         <div class="sc-label">Tin tuyển dụng</div>
-        <div class="sc-ico" style="background:#f0fdf4">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#16a34a" stroke-width="1.5"/><path d="M5 7h6M5 10h4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="sc-ico" style="background:#eff6ff">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#0961aa" stroke-width="1.5"/><path d="M5 7h6M5 10h4" stroke="#0961aa" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
       </div>
       <div class="sc-val">{{ $this->totalJobs }}</div>
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const col = document.createElement('div');
       col.className = 'bc';
       const h = vals[i] ? Math.round((vals[i] / max) * 110) : 3;
-      const clr = i === cur ? '#3b82f6' : vals[i] === 0 ? '#eaecf0' : '#dcfce7';
+      const clr = i === cur ? '#3b82f6' : vals[i] === 0 ? '#eaecf0' : '#dbeafe';
       col.innerHTML = `<div class="bar" style="height:${h}px;background:${clr}" title="${vals[i]} đăng ký"></div><div class="bl">${m}</div>`;
       wrap.appendChild(col);
     });

@@ -5,8 +5,8 @@
 @keyframes reg-spin{to{transform:rotate(360deg)}}
 
 :root{
-  --primary:#16a34a;
-  --primary-hover:#22c55e;
+  --primary:#0961AA;
+  --primary-hover:#0c83d8;
   --primary-soft:#e8f0fe;
   --bg:#f1f5f9;
   --card:#ffffff;
@@ -15,8 +15,8 @@
   --muted:#64748b;
   --danger:#dc2626;
   --danger-bg:#fef2f2;
-  --success:#16a34a;
-  --success-bg:#f0fdf4;
+  --success:#0961aa;
+  --success-bg:#eff6ff;
   --shadow:0 10px 40px rgba(15,23,42,.08);
 }
 
@@ -63,7 +63,7 @@ body{font-family:var(--font);}
   font-size:14px;color:var(--text);
   outline:none;transition:.15s;background:#fff;
 }
-.reg-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(22,163,74,.1);}
+.reg-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(9,97,170,.1);}
 .reg-input::placeholder{color:#94a3b8;}
 .reg-input.is-error{border-color:var(--danger);background:var(--danger-bg);}
 
@@ -72,7 +72,7 @@ body{font-family:var(--font);}
 /* Verify box */
 .reg-verify-box{
   border-radius:12px;padding:14px 16px;margin-bottom:14px;
-  border:1.5px solid #d1fae5;background:#f0fdf4;
+  border:1.5px solid #bfdbfe;background:#eff6ff;
 }
 .reg-verify-title{
   font-size:12.5px;font-weight:700;color:var(--primary);
@@ -97,11 +97,11 @@ body{font-family:var(--font);}
   cursor:pointer;transition:.18s;
   display:flex;align-items:center;justify-content:center;
   min-height:48px;gap:8px;
-  box-shadow:0 2px 12px rgba(22,163,74,.25);
+  box-shadow:0 2px 12px rgba(9,97,170,.25);
 }
 .reg-submit:hover:not(:disabled){
   background:var(--primary-hover);transform:translateY(-1px);
-  box-shadow:0 6px 18px rgba(22,163,74,.35);
+  box-shadow:0 6px 18px rgba(9,97,170,.35);
 }
 .reg-submit:disabled{opacity:.65;cursor:default;}
 
@@ -201,7 +201,7 @@ body{font-family:var(--font);}
     <div class="reg-verify-box" x-data="{ open: false }">
 
       <div class="reg-verify-title" @click="open = !open">
-        <i class="fa-solid fa-shield-halved" style="color:#16a34a"></i>
+        <i class="fa-solid fa-shield-halved" style="color:#0961aa"></i>
         <span>Xác minh cựu sinh viên</span>
         <span style="font-size:11px;color:#64748b;font-weight:400">— tùy chọn</span>
         <i class="fa-solid" :class="open ? 'fa-chevron-up' : 'fa-chevron-down'" style="margin-left:auto"></i>

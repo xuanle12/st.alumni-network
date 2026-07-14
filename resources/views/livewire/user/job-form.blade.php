@@ -20,14 +20,14 @@
 .steps{display:flex;align-items:center;gap:0;margin-bottom:28px}
 .step-item{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600}
 .step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
-.step-dot.done{background:#16a34a;color:#fff}
+.step-dot.done{background:#0961aa;color:#fff}
 .step-dot.active{background:#0f172a;color:#fff}
 .step-dot.idle{background:#f1f5f9;color:#94a3b8;border:1.5px solid #e2e8f0}
 .step-label.active{color:#0f172a}
-.step-label.done{color:#16a34a}
+.step-label.done{color:#0961aa}
 .step-label.idle{color:#94a3b8}
 .step-line{flex:1;height:2px;background:#e2e8f0;margin:0 8px;min-width:20px}
-.step-line.done{background:#16a34a}
+.step-line.done{background:#0961aa}
 
 .jf-section{
   font-size:11px;font-weight:700;color:#94a3b8;
@@ -53,8 +53,8 @@
   background:#fff;
 }
 .fi input:focus,.fi select:focus,.fi textarea:focus{
-  outline:none;border-color:#16a34a;
-  box-shadow:0 0 0 3px rgba(22,163,74,.1);
+  outline:none;border-color:#0961aa;
+  box-shadow:0 0 0 3px rgba(9,97,170,.1);
 }
 .fi textarea{resize:vertical;min-height:100px;line-height:1.6}
 .fi .err{font-size:11.5px;color:#dc2626;margin-top:3px;display:flex;align-items:center;gap:4px}
@@ -63,7 +63,7 @@
 .skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .skill-chip{
   display:inline-flex;align-items:center;gap:6px;
-  background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;
+  background:#eff6ff;border:1px solid #bfdbfe;color:#063a68;
   font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:7px;
 }
 .skill-chip i{font-size:10px;opacity:.5;cursor:pointer;transition:.12s}
@@ -77,7 +77,7 @@
   transition:border-color .15s,box-shadow .15s;background:#fff;
 }
 .skill-input-wrap input:focus{
-  outline:none;border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.1);
+  outline:none;border-color:#0961aa;box-shadow:0 0 0 3px rgba(9,97,170,.1);
 }
 .skill-suggest{
   position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:10;
@@ -85,33 +85,33 @@
   box-shadow:0 8px 24px rgba(0,0,0,.08);max-height:220px;overflow-y:auto;
 }
 .skill-suggest-item{padding:8px 13px;font-size:12.5px;color:#374151;cursor:pointer;transition:.1s}
-.skill-suggest-item:hover{background:#f0fdf4;color:#15803d}
+.skill-suggest-item:hover{background:#eff6ff;color:#075490}
 .skill-hint{font-size:11px;color:#94a3b8;margin-top:4px}
 
 .jf-note{
-  background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;
-  padding:10px 14px;font-size:12.5px;color:#166534;
+  background:#eff6ff;border:1px solid #bfdbfe;border-radius:9px;
+  padding:10px 14px;font-size:12.5px;color:#063a68;
   display:flex;gap:8px;align-items:flex-start;margin-bottom:20px;
 }
 
 .btn-submit{
   width:100%;padding:12px;margin-top:20px;
-  background:#16a34a;color:#fff;border:none;
+  background:#0961aa;color:#fff;border:none;
   border-radius:10px;font-size:14px;font-weight:700;
   cursor:pointer;font-family:inherit;
   transition:background .15s,transform .1s;
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.btn-submit:hover{background:#15803d}
+.btn-submit:hover{background:#075490}
 .btn-submit:active{transform:scale(.99)}
-.btn-submit:disabled{background:#86efac;cursor:not-allowed}
+.btn-submit:disabled{background:#93c5fd;cursor:not-allowed}
 
 /* OTP verify step */
 .otp-hero{text-align:center;padding:20px 0 28px}
-.otp-icon{width:64px;height:64px;background:#f0fdf4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px;color:#16a34a}
+.otp-icon{width:64px;height:64px;background:#eff6ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px;color:#0961aa}
 .otp-title{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:6px}
 .otp-desc{font-size:13px;color:#64748b;line-height:1.6;max-width:340px;margin:0 auto}
-.otp-email-tag{display:inline-block;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:6px;padding:2px 10px;font-weight:700;font-size:13px;margin-top:4px}
+.otp-email-tag{display:inline-block;background:#eff6ff;color:#0961aa;border:1px solid #bfdbfe;border-radius:6px;padding:2px 10px;font-weight:700;font-size:13px;margin-top:4px}
 
 .otp-input-wrap{margin:24px 0 0}
 .otp-input-wrap label{display:block;font-size:11.5px;font-weight:700;color:#475569;margin-bottom:6px;letter-spacing:.3px}
@@ -123,7 +123,7 @@
   color:#0f172a;outline:none;
   transition:border-color .15s,box-shadow .15s;
 }
-.otp-input:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.1)}
+.otp-input:focus{border-color:#0961aa;box-shadow:0 0 0 3px rgba(9,97,170,.1)}
 .otp-input.error{border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.08)}
 
 .otp-error{
@@ -133,8 +133,8 @@
 }
 
 .otp-actions{margin-top:10px;text-align:center}
-.otp-actions a{font-size:12.5px;color:#16a34a;cursor:pointer;text-decoration:underline;background:none;border:none;font-family:inherit}
-.otp-actions a:hover{color:#15803d}
+.otp-actions a{font-size:12.5px;color:#0961aa;cursor:pointer;text-decoration:underline;background:none;border:none;font-family:inherit}
+.otp-actions a:hover{color:#075490}
 .otp-actions .sep{color:#d1d5db;margin:0 6px}
 
 .btn-back-link{
@@ -146,7 +146,7 @@
 
 /* success state */
 .jf-success{text-align:center;padding:40px 16px}
-.jf-success-icon{font-size:52px;color:#16a34a;margin-bottom:16px}
+.jf-success-icon{font-size:52px;color:#0961aa;margin-bottom:16px}
 .jf-success h2{font-size:20px;font-weight:800;color:#0f172a;margin-bottom:8px}
 .jf-success p{font-size:13.5px;color:#64748b;line-height:1.6;max-width:360px;margin:0 auto 20px}
 .btn-back{
@@ -171,7 +171,7 @@
 .skill-chip{
   display:inline-flex;align-items:center;gap:6px;
   padding:5px 12px;border-radius:20px;font-size:12.5px;font-weight:600;
-  color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;
+  color:#063a68;background:#eff6ff;border:1px solid #bfdbfe;
 }
 .skill-chip i{font-size:10px;opacity:.45;cursor:pointer;transition:.12s}
 .skill-chip i:hover{opacity:1;color:#dc2626}
@@ -183,7 +183,7 @@
   box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:170px;overflow-y:auto;z-index:10;
 }
 .skill-suggest-item{padding:8px 12px;font-size:12.5px;color:#374151;cursor:pointer;transition:.1s}
-.skill-suggest-item:hover{background:#f0fdf4;color:#166534}
+.skill-suggest-item:hover{background:#eff6ff;color:#063a68}
 .skill-hint{font-size:11.5px;color:#94a3b8;margin-top:5px}
 
 </style>
@@ -371,7 +371,7 @@
     <div class="otp-actions" style="margin-top:16px">
       <span style="font-size:12.5px;color:#94a3b8">Không nhận được mã?</span>
       <span class="sep">·</span>
-      <button wire:click="resendOtp" wire:loading.attr="disabled" class="otp-actions a" style="font-size:12.5px;color:#16a34a;cursor:pointer;text-decoration:underline;background:none;border:none;font-family:inherit">
+      <button wire:click="resendOtp" wire:loading.attr="disabled" class="otp-actions a" style="font-size:12.5px;color:#0961aa;cursor:pointer;text-decoration:underline;background:none;border:none;font-family:inherit">
         <span wire:loading wire:target="resendOtp">Đang gửi lại...</span>
         <span wire:loading.remove wire:target="resendOtp">Gửi lại OTP</span>
       </button>

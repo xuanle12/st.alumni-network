@@ -21,7 +21,7 @@
 .mr-hd-left{display:flex;align-items:center;gap:10px}
 .mr-hd-icon{
   width:36px;height:36px;border-radius:10px;
-  background:#dcfce7;color:#15803d;
+  background:#dbeafe;color:#075490;
   display:flex;align-items:center;justify-content:center;font-size:16px;
 }
 .mr-title{font-size:15px;font-weight:700;color:#111827}
@@ -40,7 +40,7 @@
   font-size:13px;font-weight:500;
 }
 .mr-status.pending{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
-.mr-status.approved{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+.mr-status.approved{background:#dbeafe;color:#075490;border:1px solid #bfdbfe}
 .mr-status.rejected{background:#fee2e2;color:#dc2626;border:1px solid #fecaca}
 
 .mr-form{display:flex;flex-direction:column;gap:14px}
@@ -53,8 +53,8 @@
   transition:border-color .15s;
 }
 .mr-fi input:focus,.mr-fi textarea:focus{
-  outline:none;border-color:#16a34a;
-  box-shadow:0 0 0 3px rgba(22,163,74,.1);
+  outline:none;border-color:#0961aa;
+  box-shadow:0 0 0 3px rgba(9,97,170,.1);
 }
 .mr-fi textarea{resize:vertical;min-height:80px}
 .mr-fi .hint{font-size:11px;color:#9ca3af}
@@ -63,9 +63,18 @@
 .mr-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
 .mr-foot{
-  display:flex;justify-content:flex-end;gap:8px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
   margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid #f0f4f8;
 }
+.mr-foot-right{margin-left:auto;display:flex;gap:8px}
+.mr-btn-danger{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 16px;border-radius:9px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  border:1px solid #fecaca;background:#fef2f2;color:#dc2626;
+  transition:all .15s;font-family:inherit;
+}
+.mr-btn-danger:hover{background:#fee2e2;border-color:#fca5a5}
 .mr-btn-ghost{
   display:inline-flex;align-items:center;gap:5px;
   padding:9px 18px;border-radius:9px;
@@ -78,10 +87,10 @@
   display:inline-flex;align-items:center;gap:5px;
   padding:9px 22px;border-radius:9px;
   font-size:13px;font-weight:600;cursor:pointer;
-  border:1px solid #16a34a;background:#16a34a;color:#fff;
+  border:1px solid #0961aa;background:#0961aa;color:#fff;
   transition:all .15s;font-family:inherit;
 }
-.mr-btn-prim:hover{background:#22c55e}
+.mr-btn-prim:hover{background:#0c83d8}
 
 @media(max-width:640px){
   .mr-row2{grid-template-columns:1fr}
@@ -168,11 +177,20 @@
           </div>
 
           <div class="mr-foot">
-            <button type="button" wire:click="close" class="mr-btn-ghost">Huỷ</button>
-            <button type="submit" class="mr-btn-prim">
-              <span wire:loading.remove wire:target="submit"><i class="fa-solid fa-paper-plane"></i> Gửi đăng ký</span>
-              <span wire:loading wire:target="submit">Đang gửi...</span>
-            </button>
+            @if($mentorProfile)
+              <button type="button" wire:click="cancelMentor"
+                wire:confirm="Bạn chắc chắn muốn ngừng làm mentor? Hồ sơ mentor của bạn sẽ bị xoá và bạn có thể đăng ký lại sau."
+                class="mr-btn-danger">
+                <i class="fa-solid fa-user-slash"></i> Ngừng làm mentor
+              </button>
+            @endif
+            <div class="mr-foot-right">
+              <button type="button" wire:click="close" class="mr-btn-ghost">Huỷ</button>
+              <button type="submit" class="mr-btn-prim">
+                <span wire:loading.remove wire:target="submit"><i class="fa-solid fa-paper-plane"></i> {{ $mentorProfile ? 'Cập nhật' : 'Gửi đăng ký' }}</span>
+                <span wire:loading wire:target="submit">Đang gửi...</span>
+              </button>
+            </div>
           </div>
 
         </form>

@@ -8,10 +8,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --green:       #16a34a;
-  --green-light: #22c55e;
-  --green-pale:  #f0fdf4;
-  --green-dark:  #15803d;
+  --green:       #0961AA;
+  --green-light: #0c83d8;
+  --green-pale:  #e8f0fe;
+  --green-dark:  #074e8a;
   --navy:        #003a70;
   --gold:        #c8912a;
   --gold-light:  #f0c050;
@@ -182,18 +182,8 @@ nav a {
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
-nav a::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 0; height: 3px;
-  background: var(--green-light);
-  transition: width .25s;
-}
 nav a:hover { color: var(--green-light); }
-nav a:hover::before { width: 100%; }
 nav a.active { color: var(--green); font-weight: 700; }
-nav a.active::before { width: 100%; background: var(--green-dark); }
 
 .header-right {
   display: flex;
@@ -450,8 +440,8 @@ footer {
 }
 
 /* variants */
-.toast-item.is-success .toast-icon     { background: var(--success-bg, #f0fdf4); color: var(--success, #16a34a); }
-.toast-item.is-success .toast-progress { background: var(--success, #16a34a); }
+.toast-item.is-success .toast-icon     { background: var(--success-bg, #eff6ff); color: var(--success, #0961aa); }
+.toast-item.is-success .toast-progress { background: var(--success, #0961aa); }
 .toast-item.is-error   .toast-icon     { background: var(--danger-bg, #fef2f2);  color: var(--danger, #dc2626); }
 .toast-item.is-error   .toast-progress { background: var(--danger, #dc2626); }
 .toast-item.is-info    .toast-icon     { background: var(--primary-soft, #e8f0fe); color: var(--primary, #0961AA); }

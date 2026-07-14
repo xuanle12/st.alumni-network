@@ -4,11 +4,11 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --fita:      #16a34a;
-  --fita2:     #22c55e;
+  --fita:      #0961AA;
+  --fita2:     #0c83d8;
   --fita-pale: #e8f0fe;
   --gold:      #F6A309;
-  --green:     #066140;
+  --green:     #074e8a;
   --brown:     #4E3636;
   --text:      #1a1f2e;
   --muted:     #5c6470;
@@ -139,7 +139,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
   color: inherit;
   display: block;
 }
-.featured-card:hover { border-color: var(--fita2); box-shadow: 0 6px 24px rgba(22,163,74,0.12); transform: translateY(-2px); }
+.featured-card:hover { border-color: var(--fita2); box-shadow: 0 6px 24px rgba(9,97,170,0.12); transform: translateY(-2px); }
 .featured-img {
   width: 100%; height: 220px; background: var(--fita-pale);
   display: flex; align-items: center; justify-content: center;
@@ -181,9 +181,9 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
   font-size: 11px; font-weight: 600;
   padding: 3px 10px; border-radius: 20px;
 }
-.tag-free   { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+.tag-free   { background: #eff6ff; color: #063a68; border: 1px solid #93c5fd; }
 .tag-paid   { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
-.tag-online { background: var(--fita-pale); color: var(--fita); border: 1px solid #dcfce7; }
+.tag-online { background: var(--fita-pale); color: var(--fita); border: 1px solid #dbeafe; }
 .tag-gray   { background: #f3f4f6; color: #6b7280; border: 1px solid #e2e8f0; }
 
 /* ── EVENT LIST (post-style giống fita) ── */
@@ -222,7 +222,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
 .event-row:hover .event-thumb img { transform: scale(1.05); }
 .thumb-date {
   position: absolute; bottom: 6px; left: 6px;
-  background: rgba(22,163,74,.92); color: #fff;
+  background: rgba(9,97,170,.92); color: #fff;
   font-size: 10px; font-weight: 700;
   padding: 2px 7px; border-radius: 6px;
 }
@@ -267,12 +267,12 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
   flex-shrink: 0; align-self: center;
 }
 .btn-reg-prim  { background: var(--fita); color: #fff; }
-.btn-reg-prim:hover { background: #15803d; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(22,163,74,.3); }
+.btn-reg-prim:hover { background: #075490; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(9,97,170,.3); }
 .btn-reg-done  { background: #f3f4f6; color: #9ca3af; cursor: default; }
-.btn-reg-ok    { background: var(--fita-pale); color: var(--fita); border: 1px solid #dcfce7; }
-.btn-reg-ok:hover { background: #dcfce7; }
-.btn-reg-free  { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
-.btn-reg-free:hover { background: #dcfce7; }
+.btn-reg-ok    { background: var(--fita-pale); color: var(--fita); border: 1px solid #dbeafe; }
+.btn-reg-ok:hover { background: #dbeafe; }
+.btn-reg-free  { background: #eff6ff; color: #063a68; border: 1px solid #93c5fd; }
+.btn-reg-free:hover { background: #dbeafe; }
 
 /* Spinning loader */
 .spin { display: inline-block; width: 11px; height: 11px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
@@ -307,7 +307,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
   font-size: 13px; color: var(--text);
   font-family: var(--font); width: 100%; transition: .15s;
 }
-.sb-search:focus { outline: none; border-color: var(--fita2); box-shadow: 0 0 0 3px rgba(22,163,74,.1); }
+.sb-search:focus { outline: none; border-color: var(--fita2); box-shadow: 0 0 0 3px rgba(9,97,170,.1); }
 .sb-search-wrap { position: relative; }
 .sb-search-wrap i { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); }
 
@@ -334,7 +334,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
 .mini-ev:hover .mini-ev-title { color: var(--fita); }
 .mini-date {
   width: 38px; height: 38px; border-radius: 9px;
-  background: var(--fita-pale); border: 1px solid #dcfce7;
+  background: var(--fita-pale); border: 1px solid #dbeafe;
   display: flex; flex-direction: column; align-items: center;
   justify-content: center; flex-shrink: 0;
 }
@@ -376,8 +376,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); }
     </div>
     @if(auth()->user()->isAdmin())
     <a href="{{ route('event.create') }}"
-      style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#16a34a;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s;white-space:nowrap"
-      onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
+      style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#0961aa;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s;white-space:nowrap"
+      onmouseover="this.style.background='#075490'" onmouseout="this.style.background='#0961aa'">
       <i class="fa-solid fa-plus"></i> Đăng sự kiện
     </a>
     @endif

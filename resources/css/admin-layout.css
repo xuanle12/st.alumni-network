@@ -86,7 +86,7 @@ body.adm header {
   text-decoration: none;
 }
 .adm-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.9); }
-.adm-item.active { background: #16a34a; color: #fff; font-weight: 600; }
+.adm-item.active { background: #0961aa; color: #fff; font-weight: 600; }
 .adm-item-ic {
   font-size: 15px; width: 18px; text-align: center;
   flex-shrink: 0; color: rgba(255,255,255,0.38);
@@ -101,7 +101,7 @@ margin-left: auto;
   padding: 2px 7px; border-radius: 20px;
   background: rgba(251,191,36,0.15); color: #fbbf24;
 }
-.adm-item-badge.blue { background: rgba(22,163,74,0.2); color: #6ee7a0; }
+.adm-item-badge.blue { background: rgba(9,97,170,0.2); color: #6ee7a0; }
 
 .adm-div { height: 1px; background: rgba(255,255,255,0.07); margin: 8px 12px; }
 
@@ -162,7 +162,7 @@ margin-left: auto;
 .adm-topbar-user.open .adm-topbar-chev { transform: rotate(180deg); }
 .adm-topbar-uava {
   width: 34px; height: 34px; border-radius: 50%;
-  background: #16a34a; color: #fff;
+  background: #0961aa; color: #fff;
   font-size: 15px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -191,7 +191,7 @@ margin-left: auto;
 }
 .adm-udrop-ava {
   width: 38px; height: 38px; border-radius: 50%;
-  background: #16a34a; color: #fff;
+  background: #0961aa; color: #fff;
   font-size: 15px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -229,7 +229,7 @@ margin-left: auto;
   display: flex; align-items: center; gap: 5px;
   transition: color .15s;
 }
-.adm-breadbar a:hover { color: #16a34a; }
+.adm-breadbar a:hover { color: #0961aa; }
 .adm-breadbar a i    { font-size: 13px; }
 .adm-breadbar-sep    { color: #cbd5e1; font-size: 13px; }
 .adm-breadbar-cur    { color: #1a1f2e; font-weight: 700; }
@@ -242,7 +242,7 @@ margin-left: auto;
 
 /* ── ACCESSIBILITY ────────────────────────────────────────── */
 a:focus-visible, button:focus-visible {
-  outline: 2px solid #16a34a; outline-offset: 2px; border-radius: 6px;
+  outline: 2px solid #0961aa; outline-offset: 2px; border-radius: 6px;
 }
 
 /* ── RESPONSIVE ───────────────────────────────────────────── */
@@ -332,8 +332,8 @@ position: fixed; left: -260px;
 .adm-badge::before {
   content: ''; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
 }
-.adm-badge-green  { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
-.adm-badge-green::before  { background:#16a34a; }
+.adm-badge-green  { background:#eff6ff; color:#075490; border:1px solid #bfdbfe; }
+.adm-badge-green::before  { background:#0961aa; }
 .adm-badge-yellow { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
 .adm-badge-yellow::before { background:#d97706; }
 .adm-badge-red    { background:#fef2f2; color:#b91c1c; border:1px solid #fecaca; }
@@ -480,7 +480,7 @@ display: inline-flex; align-items: center;
 }
 .adm-dd-item:hover  { background: #f8fafc; }
 .adm-dd-item.blue   { color: #1d4ed8; } .adm-dd-item.blue:hover   { background: #eff6ff; }
-.adm-dd-item.green  { color: #15803d; } .adm-dd-item.green:hover  { background: #f0fdf4; }
+.adm-dd-item.green  { color: #075490; } .adm-dd-item.green:hover  { background: #eff6ff; }
 .adm-dd-item.amber  { color: #b45309; } .adm-dd-item.amber:hover  { background: #fffbeb; }
 .adm-dd-item.red    { color: #b91c1c; } .adm-dd-item.red:hover    { background: #fef2f2; }
 .adm-dd-sep { height: 1px; background: #f1f5f9; margin: 4px 0; }

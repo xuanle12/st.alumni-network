@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use Livewire\Component;
 use App\Models\Post;
 use App\Models\Comment as CommentModel;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class Comment extends Component
@@ -69,6 +70,35 @@ class Comment extends Component
         ]);
 
         Post::where('id', $this->post->id)->increment('comments_count');
+
+        // Thông báo
+        $actorName = Auth::user()->name ?? 'Ai đó';
+        $preview   = \Illuminate\Support\Str::limit(trim($this->newComment), 120);
+
+        // Báo cho chủ bài viết
+        Notification::send(
+            $this->post->user_id,
+            'comment',
+            $actorName . ' đã bình luận về bài viết của bạn',
+            $preview,
+            route('csv'),
+            Auth::id()
+        );
+
+        // Nếu là trả lời: báo cho chủ bình luận được trả lời
+        if ($this->replyTo) {
+            $target = CommentModel::find($this->replyTo);
+            if ($target) {
+                Notification::send(
+                    $target->user_id,
+                    'reply',
+                    $actorName . ' đã trả lời bình luận của bạn',
+                    $preview,
+                    route('csv'),
+                    Auth::id()
+                );
+            }
+        }
 
         if ($this->replyTo && !in_array($this->replyTo, $this->openReplies)) {
             $this->openReplies[] = $this->replyTo;

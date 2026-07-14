@@ -17,8 +17,8 @@
   --primary-soft:#eaf4ff;
   --primary-light:#bfdbfe;
 
-  --success:#16a34a;
-  --success-bg:#f0fdf4;
+  --success:#0961aa;
+  --success-bg:#eff6ff;
 
   --warning:#d97706;
   --warning-bg:#fff7ed;
@@ -224,13 +224,13 @@ body{
 }
 
 .btn-ok{
-  border-color:#bbf7d0;
-  color:#15803d;
-  background:#f0fdf4;
+  border-color:#bfdbfe;
+  color:#075490;
+  background:#eff6ff;
 }
 
 .btn-ok:hover{
-  background:#dcfce7;
+  background:#dbeafe;
 }
 
 .btn-no{
@@ -395,10 +395,10 @@ body{
           @if($pendingJobCount > 0)
             <span style="background:#ef4444;color:#fff;border-radius:20px;padding:1px 8px;font-size:11px;font-weight:700">{{ $pendingJobCount }} chờ</span>
           @endif
-          <div class="stat-ico" style="background:#f0fdf4">
+          <div class="stat-ico" style="background:#eff6ff">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-              <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#16a34a" stroke-width="1.5"/>
-              <path d="M5 7h6M5 10h4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#0961aa" stroke-width="1.5"/>
+              <path d="M5 7h6M5 10h4" stroke="#0961aa" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
           </div>
         </div>
@@ -526,6 +526,11 @@ body{
 
   function initCharts() {
     if (!document.getElementById('bar-chart')) return;
+
+    // amCharts được nạp riêng cho trang này; chờ nạp xong rồi mới vẽ
+    if (typeof am5 === 'undefined' || typeof am5xy === 'undefined' || typeof am5themes_Animated === 'undefined') {
+      return void setTimeout(initCharts, 100);
+    }
 
     // dispose cũ nếu có
     if (_barRoot) { _barRoot.dispose(); _barRoot = null; }

@@ -92,7 +92,7 @@ body{font-family:var(--font);}
 }
 .lfield-row label{margin-bottom:0;}
 .lfield-row a{
-    font-size:12.5px;color:#16a34a;
+    font-size:12.5px;color:#0961aa;
     text-decoration:none;transition:.15s;
 }
 .lfield-row a:hover{text-decoration:underline;}
@@ -109,7 +109,7 @@ body{font-family:var(--font);}
     transition:border-color .15s,box-shadow .15s;
 }
 .linput:focus{
-    border-color:#16a34a;
+    border-color:#0961aa;
     box-shadow:0 0 0 3px rgba(9,97,170,.1);
 }
 .linput::placeholder{color:#94a3b8;}
@@ -123,7 +123,7 @@ body{font-family:var(--font);}
     padding:0;color:#94a3b8;font-size:15px;
     transition:.15s;
 }
-.ltoggle:hover{color:#16a34a;}
+.ltoggle:hover{color:#0961aa;}
 
 .lfield-err{font-size:12px;color:#dc2626;margin-top:4px;display:block;}
 
@@ -133,13 +133,13 @@ body{font-family:var(--font);}
 }
 .lremember input{
     width:16px;height:16px;
-    accent-color:#16a34a;cursor:pointer;
+    accent-color:#0961aa;cursor:pointer;
 }
 
 .lbtn-submit{
     width:100%;
     padding:13px;
-    background:#16a34a;
+    background:#0961aa;
     color:#fff;border:none;
     border-radius:10px;
     font-family:var(--font);
@@ -151,7 +151,7 @@ body{font-family:var(--font);}
     display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .lbtn-submit:hover:not(:disabled){
-    background:#22c55e;
+    background:#0c83d8;
     transform:translateY(-1px);
     box-shadow:0 4px 18px rgba(9,97,170,.35);
 }
@@ -170,7 +170,7 @@ body{font-family:var(--font);}
     font-size:13.5px;color:#64748b;
 }
 .lregister a{
-    color:#16a34a;font-weight:600;
+    color:#0961aa;font-weight:600;
     text-decoration:none;transition:.15s;
 }
 .lregister a:hover{text-decoration:underline;}
@@ -191,13 +191,13 @@ body{font-family:var(--font);}
     width:100%;
     padding:13px 16px;
     border-radius:10px;
-    border:1.5px solid #16a34a;
+    border:1.5px solid #0961aa;
     background:#e8f0fe;
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;gap:10px;
     font-family:var(--font);
     font-size:14px;font-weight:700;
-    color:#16a34a;
+    color:#0961aa;
     transition:.18s;
     text-decoration:none;
 }
@@ -234,12 +234,12 @@ body{font-family:var(--font);}
 
     {{-- Errors --}}
     @if(session('register_success'))
-      <div class="lerr" style="background:#f0fdf4;border-color:#86efac;color:#166534;padding:12px 14px;border-radius:10px;border:1px solid;margin-bottom:12px;font-size:13px;">
+      <div class="lerr" style="background:#eff6ff;border-color:#93c5fd;color:#063a68;padding:12px 14px;border-radius:10px;border:1px solid;margin-bottom:12px;font-size:13px;">
         <i class="fa-solid fa-circle-check"></i> {{ session('register_success') }}
       </div>
     @endif
     @if(session('status'))
-      <div class="lerr" style="background:#f0fdf4;border-color:#86efac;color:#166534;">
+      <div class="lerr" style="background:#eff6ff;border-color:#93c5fd;color:#063a68;">
         <i class="fa-solid fa-check"></i> {{ session('status') }}
       </div>
     @endif

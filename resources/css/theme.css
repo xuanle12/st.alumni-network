@@ -37,13 +37,13 @@ a { text-decoration: none; }
   /* --- Màu phụ --- */
   --gold:           #c8912a;
   --gold-light:     #f0c050;
-  --green:          #1a6b3a;
-  --green-light:    #2d8a50;
-  --green-pale:     #e8f5ee;
+  --green:          #0961AA;
+  --green-light:    #0c83d8;
+  --green-pale:     #e8f0fe;
 
   /* --- Trạng thái --- */
-  --success:        #16a34a;
-  --success-bg:     #f0fdf4;
+  --success:        #0961aa;
+  --success-bg:     #eff6ff;
   --danger:         #dc2626;
   --danger-bg:      #fef2f2;
   --warning:        #d97706;
@@ -289,9 +289,9 @@ a:focus-visible, button:focus-visible {
 }
 
 .alumni-pgn__btn:hover:not(.alumni-pgn__btn--disabled):not(.alumni-pgn__btn--active):not(.alumni-pgn__btn--dots) {
-  background: #f0fdf4;
-  border-color: #16a34a;
-  color: #16a34a;
+  background: #eff6ff;
+  border-color: #0961aa;
+  color: #0961aa;
 }
 
 .alumni-pgn__btn--nav {
@@ -299,12 +299,12 @@ a:focus-visible, button:focus-visible {
 }
 
 .alumni-pgn__btn--active {
-  background: #16a34a;
-  border-color: #16a34a;
+  background: #0961aa;
+  border-color: #0961aa;
   color: #fff;
   font-weight: 700;
   cursor: default;
-  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.28);
+  box-shadow: 0 2px 8px rgba(9,97,170, 0.28);
 }
 
 .alumni-pgn__btn--disabled {

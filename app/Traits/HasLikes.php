@@ -35,6 +35,21 @@ trait HasLikes
 
         $this->likes()->create(['user_id' => $userId]);
         $this->increment('likes_count');
+
+        // Thông báo cho chủ sở hữu (nếu có cột user_id)
+        $ownerId = $this->user_id ?? null;
+        if ($ownerId) {
+            $what = $this instanceof \App\Models\Post ? 'bài viết' : 'bình luận';
+            \App\Models\Notification::send(
+                $ownerId,
+                'like',
+                (Auth::user()->name ?? 'Ai đó') . ' đã thích ' . $what . ' của bạn',
+                null,
+                route('csv'),
+                $userId
+            );
+        }
+
         return ['liked' => true, 'count' => $this->fresh()->likes_count];
     }
 }

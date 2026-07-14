@@ -215,6 +215,8 @@ class User extends Component
             'alumni'  => UserModel::where('role', 'alumni')->count(),
             'pending' => UserModel::where('status', 'pending')->count(),
             'company' => UserModel::where('role', 'company')->count(),
+            'active'  => UserModel::where('status', 'active')->count(),
+            'locked'  => UserModel::where('status', 'locked')->count(),
         ];
 
         return view('livewire.admin.user', compact('users', 'stats'))

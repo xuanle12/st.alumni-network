@@ -172,7 +172,7 @@ class Csv extends Component
             $paths[] = $this->coverImage->store('posts', 'public');
         }
 
-        Post::create([
+        $newPost = Post::create([
             'user_id'  => Auth::id(),
             'content'  => $body,
             'category' => in_array($this->category, ['normal', 'job', 'event'], true)
@@ -181,6 +181,17 @@ class Csv extends Component
             'images'   => count($paths) ? $paths : null,
             'status'   => $hasBanned ? 'pending' : 'published',
         ]);
+
+        // Bài chứa từ ngữ không phù hợp → báo admin duyệt
+        if ($hasBanned) {
+            \App\Models\Notification::sendToAdmins(
+                'post_pending',
+                'Có bài viết chờ duyệt (nghi chứa nội dung không phù hợp)',
+                \Illuminate\Support\Str::limit($body, 120),
+                route('admin.post'),
+                Auth::id()
+            );
+        }
 
         $this->closeModal();
         $this->loadData();

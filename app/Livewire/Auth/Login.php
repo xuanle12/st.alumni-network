@@ -26,6 +26,17 @@ class Login extends Component
 
         if (Auth::attempt($credentials, $this->remember)) {
 
+            // Chặn tài khoản chưa được duyệt hoặc bị khóa
+            $status = Auth::user()->status;
+            if (in_array($status, ['pending', 'locked'], true)) {
+                Auth::logout();
+                $this->addError('email', $status === 'locked'
+                    ? 'Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.'
+                    : 'Tài khoản đang chờ quản trị viên duyệt.');
+                $this->password = '';
+                return;
+            }
+
             session()->regenerate();
 
             return redirect()->intended('/csv');

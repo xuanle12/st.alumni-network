@@ -4,8 +4,8 @@
    FITA-STYLE JOBS PAGE — POLISHED REDESIGN
    ══════════════════════════════════════════ */
 :root {
-    --fita:        #16a34a;
-    --fita2:       #22c55e;
+    --fita:        #0961aa;
+    --fita2:       #0c83d8;
     --fita-pale:   #e8f1fb;
     --fita-border: rgba(9,97,170,0.18);
     --warning:     #F6A309;
@@ -38,10 +38,10 @@
 
 /* Suggested jobs toggle button — pill style with icon + subtitle */
 .btn-suggest-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 16px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color .15s, background .15s; font-family: var(--font); margin-bottom: 10px; box-shadow: var(--shadow-sm); }
-.btn-suggest-toggle:hover { background: #f8fafb; border-color: #bbf7d0; }
-.btn-suggest-toggle.open { border-color: #bbf7d0; background: #f0fdf4; border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
+.btn-suggest-toggle:hover { background: #f8fafb; border-color: #bfdbfe; }
+.btn-suggest-toggle.open { border-color: #bfdbfe; background: #eff6ff; border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
 .bst-left { display: flex; align-items: center; gap: 10px; text-align: left; }
-.bst-icon { width: 32px; height: 32px; border-radius: 50%; background: #f0fdf4; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.bst-icon { width: 32px; height: 32px; border-radius: 50%; background: #eff6ff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .bst-icon svg { width: 16px; height: 16px; color: var(--fita); }
 .bst-text { display: flex; flex-direction: column; }
 .bst-title { font-size: 14px; font-weight: 700; color: var(--text); }
@@ -50,15 +50,15 @@
 .btn-suggest-toggle.open .bst-chev { transform: rotate(180deg); }
 
 /* Suggested panel body */
-.suggest-panel { background: var(--white); border: 1px solid #bbf7d0; border-top: none; border-radius: 0 0 var(--radius) var(--radius); margin-bottom: 16px; overflow: hidden; display: none; box-shadow: var(--shadow-sm); }
+.suggest-panel { background: var(--white); border: 1px solid #bfdbfe; border-top: none; border-radius: 0 0 var(--radius) var(--radius); margin-bottom: 16px; overflow: hidden; display: none; box-shadow: var(--shadow-sm); }
 .suggest-panel.open { display: block; }
 .suggest-panel-body { padding: 8px; display: flex; flex-direction: column; gap: 4px; }
 .sj-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 9px; text-decoration: none; color: inherit; transition: background .15s; }
 .sj-row:hover { background: #f8fafb; }
-.sj-row.top { background: #f0fdf4; }
+.sj-row.top { background: #eff6ff; }
 .sj-row.top:hover { background: #e7fbef; }
 .sj-icon { width: 38px; height: 38px; border-radius: 9px; background: #f4f7fb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.sj-row.top .sj-icon { background: #dcfce7; }
+.sj-row.top .sj-icon { background: #dbeafe; }
 .sj-icon svg { width: 17px; height: 17px; color: var(--text-muted); }
 .sj-row.top .sj-icon svg { color: var(--fita); }
 .sj-info { flex: 1; min-width: 0; }
@@ -90,7 +90,7 @@
 .job-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 7px; align-items: center; }
 .badge-cat { display: inline-block; background: var(--fita); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 5px; }
 .badge-featured { display: inline-flex; align-items: center; gap: 3px; background: rgba(246,163,9,0.15); color: #a86800; border: 1px solid rgba(246,163,9,0.35); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
-.badge-new { display: inline-flex; align-items: center; gap: 4px; background: #22c55e; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 5px; }
+.badge-new { display: inline-flex; align-items: center; gap: 4px; background: #0c83d8; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 5px; }
 .badge-new::before { content: ''; width: 6px; height: 6px; background: #fff; border-radius: 50%; display: block; }
 .job-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color .15s; }
 .job-card:hover .job-title { color: var(--fita); }
@@ -150,8 +150,8 @@
         <div class="jobs-title-bar" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
             <h1>Cơ hội việc làm</h1>
             <!-- <a href="{{ route('job.create') }}"
-              style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#16a34a;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s"
-              onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
+              style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#0961aa;color:#fff;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:background .15s"
+              onmouseover="this.style.background='#075490'" onmouseout="this.style.background='#0961aa'">
               <i class="fa-solid fa-plus"></i> Đăng tin tuyển dụng
             </a> -->
         </div>

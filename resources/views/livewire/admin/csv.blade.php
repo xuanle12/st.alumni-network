@@ -1,24 +1,24 @@
 <div>
   <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  .aw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1rem;background:#f8fafc;min-height:100vh}
-  .flash{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:9px 14px;border-radius:8px;font-size:13px}
+  .aw{padding:1.75rem;display:flex;flex-direction:column;gap:1rem;background:#f8fafc;min-height:100vh}
+  .flash{background:#eff6ff;border:1px solid #93c5fd;color:#063a68;padding:9px 14px;border-radius:8px;font-size:13px}
   .topbar{display:flex;align-items:center;justify-content:space-between}
-  .tt{font-size:20px;font-weight:700;color:#0f172a}.ts{font-size:13px;color:#64748b;margin-top:2px}
-  .btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#16a34a;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
-  .btn-add:hover{background:#15803d}
+  .tt{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.4px}.ts{font-size:13px;color:#64748b;margin-top:3px}
+  .btn-add{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:#0961aa;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px}
+  .btn-add:hover{background:#075490}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:14px;}
-  .stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-bottom:0;}.ic-b{background:#f0fdf4}.ic-g{background:#f0fdf4}.ic-a{background:#fffbeb}.ic-p{background:#faf5ff}
+  .stat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-bottom:0;}.ic-b{background:#eff6ff}.ic-g{background:#eff6ff}.ic-a{background:#fffbeb}.ic-p{background:#faf5ff}
   .stat-n{font-size:24px;font-weight:700}.stat-l{font-size:11px;color:#64748b;margin-top:3px}
-  .n-b{color:#0f172a}.n-g{color:#16a34a}.n-a{color:#d97706}.n-p{color:#7c3aed}
+  .n-b{color:#0f172a}.n-g{color:#0961aa}.n-a{color:#d97706}.n-p{color:#7c3aed}
   .msv{font-size:13px;font-weight:600;color:#0f172a}.cls{font-size:11px;color:#94a3b8;margin-top:1px}
   .job{font-size:12px;font-weight:600;color:#0f172a}.cmp{font-size:11px;color:#94a3b8;margin-top:1px}
   .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s}
   .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}
   .btn-ghost:hover{background:#f8fafc}
-  .btn-prim{background:#16a34a;color:#fff}
-  .btn-prim:hover{background:#15803d}
+  .btn-prim{background:#0961aa;color:#fff}
+  .btn-prim:hover{background:#075490}
   .btn-del{background:#fef2f2;color:#b91c1c;border-color:#fecaca}
   .btn-del:hover{background:#fee2e2}
   .mo-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem}
@@ -42,7 +42,7 @@
   .vi label{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;margin-bottom:3px}
   .vi p{font-size:13px;font-weight:600;color:#0f172a}
   .vi p.mt{color:#cbd5e1;font-style:italic;font-weight:400}
-  .vi a{font-size:12px;color:#16a34a}
+  .vi a{font-size:12px;color:#0961aa}
   .cf-body{padding:2rem 1.5rem;text-align:center}
   .cf-ic{font-size:36px;margin-bottom:12px}
   .cf-title{font-size:16px;font-weight:700;color:#0f172a;margin-bottom:6px}
@@ -92,6 +92,12 @@
         <button class="btn-add" wire:click="openAdd">＋ Thêm cựu sinh viên</button>
       </div>
     </div>
+    <x-status-tabs :current="$filterStatus" :tabs="[
+      ['value' => '',        'label' => 'Tất cả'],
+      ['value' => 'co_tk',   'label' => 'Đã có tài khoản',  'count' => $stats['co_tk'],   'color' => 'blue'],
+      ['value' => 'chua_tk', 'label' => 'Chưa có tài khoản', 'count' => $stats['chua_tk'], 'color' => 'amber'],
+    ]" />
+
     <x-toolbar>
       <x-slot:search>
         <x-toolbar.search model="search" placeholder="Tìm tên, MSV, lớp..." />
@@ -101,11 +107,6 @@
         @foreach($namList as $nam)
           <option value="{{ $nam }}">{{ $nam }}</option>
         @endforeach
-      </x-toolbar.select>
-      <x-toolbar.select model="filterStatus">
-        <option value="">Tất cả</option>
-        <option value="co_tk">Đã có tài khoản</option>
-        <option value="chua_tk">Chưa có tài khoản</option>
       </x-toolbar.select>
     </x-toolbar>
 
@@ -276,7 +277,7 @@
     <div class="mo">
       <div class="mo-hd">
         <div style="display:flex;align-items:center;gap:12px">
-          <div class="uava" style="width:44px;height:44px;font-size:16px;background:#16a34a">{{ $viewUser->initials }}</div>
+          <div class="uava" style="width:44px;height:44px;font-size:16px;background:#0961aa">{{ $viewUser->initials }}</div>
           <div>
             <div class="mo-title">{{ $viewUser->name }}</div>
             <div style="font-size:12px;color:#64748b;margin-top:2px">{{ $viewUser->email }}</div>

@@ -1,19 +1,19 @@
 <div>
 <style>
-.uw{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:1.25rem;min-height:100vh;background:#f8fafc;font-family:'Be Vietnam Pro',system-ui,sans-serif}
+.uw{padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem;min-height:100vh;background:#f8fafc;font-family:'Be Vietnam Pro',system-ui,sans-serif}
 .u-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.u-title{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.2px}
-.u-sub{font-size:12px;color:#64748b;margin-top:2px}
-.u-btn-add{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#16a34a;color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(22,163,74,.3);transition:all .15s}
-.u-btn-add:hover{background:#15803d;transform:translateY(-1px)}
+.u-title{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.4px}
+.u-sub{font-size:13px;color:#64748b;margin-top:3px}
+.u-btn-add{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#0961aa;color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(9,97,170,.3);transition:all .15s}
+.u-btn-add:hover{background:#075490;transform:translateY(-1px)}
 .u-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .u-stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:box-shadow .15s}
 .u-stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
 .u-stat-lbl{font-size:12px;color:#64748b;font-weight:500;margin-bottom:4px}
 .u-stat-val{font-size:26px;font-weight:700;line-height:1}
 .u-stat-ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.sic-green{background:#f0fdf4;color:#16a34a}.sic-purple{background:#faf5ff;color:#7c3aed}.sic-amber{background:#fffbeb;color:#d97706}.sic-blue{background:#eff6ff;color:#2563eb}
-.sval-default{color:#0f172a}.sval-green{color:#16a34a}.sval-amber{color:#d97706}.sval-blue{color:#2563eb}
+.sic-green{background:#eff6ff;color:#0961aa}.sic-purple{background:#faf5ff;color:#7c3aed}.sic-amber{background:#fffbeb;color:#d97706}.sic-blue{background:#eff6ff;color:#2563eb}
+.sval-default{color:#0f172a}.sval-green{color:#0961aa}.sval-amber{color:#d97706}.sval-blue{color:#2563eb}
 .u-row{display:flex;align-items:center;gap:10px}
 .u-ava{width:34px;height:34px;border-radius:9px;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .u-name{font-size:13px;font-weight:600;color:#0f172a}
@@ -32,13 +32,13 @@
 .fi{display:flex;flex-direction:column;gap:4px}
 .fi label{font-size:11.5px;font-weight:600;color:#475569}
 .fi input,.fi select{padding:9px 11px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:13px;color:#0f172a;font-family:inherit;background:#fff;transition:border .15s}
-.fi input:focus,.fi select:focus{outline:none;border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.08)}
+.fi input:focus,.fi select:focus{outline:none;border-color:#0961aa;box-shadow:0 0 0 3px rgba(9,97,170,.08)}
 .fi .err{font-size:11px;color:#dc2626;margin-top:2px}
 .mo-ft{padding:.9rem 1.4rem;border-top:1px solid #f1f5f9;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}
 .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .role-card{border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px}
-.role-card:hover{border-color:#16a34a;background:#f0faf5}
-.role-card.selected{border-color:#16a34a;background:#f0fdf4;box-shadow:0 0 0 3px rgba(22,163,74,.1)}
+.role-card:hover{border-color:#0961aa;background:#eff6ff}
+.role-card.selected{border-color:#0961aa;background:#eff6ff;box-shadow:0 0 0 3px rgba(9,97,170,.1)}
 .role-ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .role-name{font-size:12.5px;font-weight:600;color:#0f172a}
 .role-desc{font-size:10.5px;color:#94a3b8;margin-top:1px}
@@ -49,7 +49,7 @@
 .cf-btns{display:flex;gap:10px;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1.5px solid transparent;cursor:pointer;font-family:inherit;transition:all .12s}
 .btn-ghost{background:transparent;border-color:#e2e8f0;color:#475569}.btn-ghost:hover{background:#f8fafc}
-.btn-prim{background:#16a34a;color:#fff;border-color:#16a34a}.btn-prim:hover{background:#15803d}
+.btn-prim{background:#0961aa;color:#fff;border-color:#0961aa}.btn-prim:hover{background:#075490}
 .btn-del{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.btn-del:hover{background:#fee2e2;border-color:#fca5a5}
 @media(max-width:900px){.u-stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.uw{padding:1rem}.u-stats{grid-template-columns:repeat(2,1fr);gap:8px}.fg2{grid-template-columns:1fr}.mo{border-radius:12px 12px 0 0;max-width:100%;align-self:flex-end}.mo-bg{align-items:flex-end;padding:0}}
@@ -101,6 +101,13 @@
   </div>
 
   {{-- Toolbar --}}
+  <x-status-tabs :current="$filterStatus" :tabs="[
+    ['value' => '',       'label' => 'Tất cả'],
+    ['value' => 'active', 'label' => 'Đang hoạt động', 'count' => $stats['active'],  'color' => 'blue'],
+    ['value' => 'pending','label' => 'Chờ duyệt',      'count' => $stats['pending'], 'color' => 'amber'],
+    ['value' => 'locked', 'label' => 'Bị khóa',        'count' => $stats['locked'],  'color' => 'red'],
+  ]" />
+
   <x-toolbar>
     <x-slot:search>
       <x-toolbar.search placeholder="Tìm tên, email..." />
@@ -112,12 +119,6 @@
       <option value="student">Sinh viên</option>
       <option value="lecturer">Giảng viên</option>
       <option value="company">Doanh nghiệp</option>
-    </x-toolbar.select>
-    <x-toolbar.select model="filterStatus">
-      <option value="">Tất cả trạng thái</option>
-      <option value="active">Đang hoạt động</option>
-      <option value="pending">Chờ duyệt</option>
-      <option value="locked">Bị khóa</option>
     </x-toolbar.select>
   </x-toolbar>
 
@@ -138,7 +139,7 @@
     @php
       $role   = $u->role   ?? 'student';
       $status = $u->status ?? 'pending';
-      $ava_colors = ['#16a34a','#7c3aed','#065f46','#c2410c','#1d4ed8','#9d174d'];
+      $ava_colors = ['#0961aa','#7c3aed','#065f46','#c2410c','#1d4ed8','#9d174d'];
       $color = $ava_colors[$u->id % count($ava_colors)];
       $roleLabel   = match($role)   { 'admin'=>'Quản trị', 'alumni'=>'Cựu SV', 'student'=>'Sinh viên', 'lecturer'=>'Giảng viên', 'company'=>'Doanh nghiệp', default=>'Khác' };
       $statusLabel = match($status) { 'active'=>'Hoạt động', 'pending'=>'Chờ duyệt', 'locked'=>'Bị khóa', default=>'Khác' };
@@ -303,7 +304,7 @@
           ['alumni',   'fa-graduation-cap',  '#eff6ff', 'Cựu sinh viên', 'Đã ra trường'],
           ['student',  'fa-user-graduate',   '#faf5ff', 'Sinh viên',     'Đang theo học'],
           ['lecturer', 'fa-chalkboard-user', '#fff7ed', 'Giảng viên',    'Cán bộ giảng dạy'],
-          ['admin',    'fa-shield-halved',   '#f0fdf4', 'Quản trị viên', 'Toàn quyền hệ thống'],
+          ['admin',    'fa-shield-halved',   '#eff6ff', 'Quản trị viên', 'Toàn quyền hệ thống'],
           ['company',  'fa-building',        '#ecfdf5', 'Doanh nghiệp',  'Tài khoản doanh nghiệp'],
         ] as [$val, $ic, $bg, $name, $desc])
         <div class="role-card {{ $roleValue === $val ? 'selected' : '' }}"

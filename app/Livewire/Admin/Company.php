@@ -243,6 +243,8 @@ class Company extends Component
 
             'pending' => CompanyModel::where('status','pending')->count(),
 
+            'inactive' => CompanyModel::where('status','inactive')->count(),
+
             'jobs' => JobModel::where('is_active',true)->count()
 
         ];

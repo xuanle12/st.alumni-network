@@ -18,7 +18,7 @@
 
 <x-mail::panel>
 <div style="text-align:center;padding:8px 0">
-  <span style="font-size:34px;font-weight:800;letter-spacing:12px;color:#16a34a;font-family:'Courier New',monospace">{{ $otp }}</span>
+  <span style="font-size:34px;font-weight:800;letter-spacing:12px;color:#0961aa;font-family:'Courier New',monospace">{{ $otp }}</span>
 </div>
 </x-mail::panel>
 

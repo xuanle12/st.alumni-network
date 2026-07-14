@@ -16,7 +16,7 @@
 
 .btn-prim {
   padding: 8px 18px;
-  background: #16a34a;
+  background: #0961aa;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -31,7 +31,7 @@
 }
 
 .btn-prim:hover {
-  background: #16a34a;
+  background: #0961aa;
 }
 
 .btn-prim:active {
@@ -92,7 +92,7 @@
   width: 16px; height: 16px; border-radius: 50%; background: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .2s;
 }
-.tog.on { background: #16a34a; }
+.tog.on { background: #0961aa; }
 .tog.on::after { transform: translateX(16px); }
 .tog.off { background: #d1d5db; }
 
@@ -234,7 +234,7 @@
       {{-- Tabs trạng thái --}}
       <div style="display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap">
         <button wire:click="$set('statusFilter','')"
-          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='' ? '#16a34a' : '#e5e7eb' }};background:{{ $statusFilter==='' ? '#f0fdf4' : '#fff' }};color:{{ $statusFilter==='' ? '#16a34a' : '#6b7280' }}">
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='' ? '#0961aa' : '#e5e7eb' }};background:{{ $statusFilter==='' ? '#eff6ff' : '#fff' }};color:{{ $statusFilter==='' ? '#0961aa' : '#6b7280' }}">
           Tất cả
         </button>
         <button wire:click="$set('statusFilter','pending')"
@@ -245,7 +245,7 @@
           @endif
         </button>
         <button wire:click="$set('statusFilter','approved')"
-          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='approved' ? '#16a34a' : '#e5e7eb' }};background:{{ $statusFilter==='approved' ? '#f0fdf4' : '#fff' }};color:{{ $statusFilter==='approved' ? '#16a34a' : '#6b7280' }}">
+          style="padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid {{ $statusFilter==='approved' ? '#0961aa' : '#e5e7eb' }};background:{{ $statusFilter==='approved' ? '#eff6ff' : '#fff' }};color:{{ $statusFilter==='approved' ? '#0961aa' : '#6b7280' }}">
           Đã duyệt
         </button>
         <button wire:click="$set('statusFilter','rejected')"
@@ -316,7 +316,7 @@
               </div>
               @if($job->status === 'pending')
                 <div class="adm-dd-sep"></div>
-                <div class="adm-dd-item" wire:click="approve({{ $job->id }})" style="color:#16a34a;font-weight:600">
+                <div class="adm-dd-item" wire:click="approve({{ $job->id }})" style="color:#0961aa;font-weight:600">
                   <i class="fa-solid fa-check"></i> Duyệt
                 </div>
                 <div class="adm-dd-item red" wire:click="reject({{ $job->id }})">
@@ -356,7 +356,7 @@
               <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
                 <span class="badge {{ $detail->type === 'internship' ? 'by' : 'bg' }}">{{ $detail->type_label }}</span>
                 @php
-                  $sc = match($detail->status) { 'approved'=>'background:#dcfce7;color:#16a34a', 'rejected'=>'background:#fee2e2;color:#dc2626', default=>'background:#fef9c3;color:#ca8a04' };
+                  $sc = match($detail->status) { 'approved'=>'background:#dbeafe;color:#0961aa', 'rejected'=>'background:#fee2e2;color:#dc2626', default=>'background:#fef9c3;color:#ca8a04' };
                 @endphp
                 <span class="badge" style="{{ $sc }}">{{ $detail->status_label }}</span>
               </div>

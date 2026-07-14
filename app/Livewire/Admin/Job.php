@@ -92,6 +92,14 @@ class Job extends Component
             $job->update(['post_id' => $post->id]);
         }
 
+        \App\Models\Notification::send(
+            $job->created_by,
+            'job',
+            'Tin tuyển dụng "' . $job->title . '" đã được duyệt',
+            null,
+            route('job.show', $job->id)
+        );
+
         $this->showDetail = false;
         $this->dispatch('toast', type: 'success', message: 'Đã duyệt tin tuyển dụng.');
     }
@@ -106,6 +114,14 @@ class Job extends Component
         if ($job->post_id) {
             Post::where('id', $job->post_id)->update(['status' => 'draft']);
         }
+
+        \App\Models\Notification::send(
+            $job->created_by,
+            'job',
+            'Tin tuyển dụng "' . $job->title . '" đã bị từ chối',
+            null,
+            route('job')
+        );
 
         $this->showDetail = false;
         $this->dispatch('toast', type: 'success', message: 'Đã từ chối tin tuyển dụng.');

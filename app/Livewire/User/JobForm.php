@@ -154,6 +154,14 @@ class JobForm extends Component
         ]);
 
         $job->update(['post_id' => $post->id]);
+
+        \App\Models\Notification::sendToAdmins(
+            'job_pending',
+            'Có tin tuyển dụng mới chờ duyệt: "' . $this->title . '"',
+            $this->company,
+            route('admin.job'),
+            auth()->id()
+        );
     }
 
     public function backToForm()
