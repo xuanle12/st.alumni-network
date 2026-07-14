@@ -509,3 +509,13 @@ a:focus-visible, button:focus-visible {
   .container { padding: 0 16px; }
   .flash-toast { left: 16px; right: 16px; top: 112px; }
 }
+
+/* ═══════════ NỀN RESPONSIVE CHUNG — áp cho MỌI trang người dùng ═══════════ */
+img { max-width: 100%; height: auto; }
+iframe, video, embed, object, canvas { max-width: 100%; }
+/* Chống trang bị cuộn ngang trên điện thoại */
+html, body { overflow-x: hidden; max-width: 100%; }
+#main-content { min-width: 0; overflow-x: hidden; }
+table { max-width: 100%; }
+/* Ngắt từ/URL quá dài để không tràn khung */
+p, h1, h2, h3, h4, a { overflow-wrap: anywhere; }

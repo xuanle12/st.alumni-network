@@ -59,7 +59,12 @@ body{
   justify-content:space-between;
   align-items:flex-start;
   margin-bottom:1.6rem;
+  gap:12px;
+  flex-wrap:wrap;
 }
+.dash-export{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;background:#0961aa;color:#fff;
+  border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;flex-shrink:0;}
+.dash-export:hover{background:#075490;}
 
 .page-title{
   font-size:26px;
@@ -359,6 +364,9 @@ body{
       <div class="page-title">Bảng điều khiển</div>
       <div class="page-sub">{{ ucfirst(now()->locale('vi')->isoFormat('dddd, DD/MM/YYYY')) }}</div>
     </div>
+    <button class="dash-export" wire:click="export">
+      <i class="fa-solid fa-file-arrow-down"></i> Xuất file thống kê
+    </button>
   </div>
  
   <div class="stats">
@@ -517,7 +525,7 @@ body{
     </div>
   </div>
 </div>
- 
+
 <script>
 (function () {
   var _barRoot = null;

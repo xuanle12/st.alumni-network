@@ -72,8 +72,8 @@
         <div class="adm-div"></div>
         <div class="adm-sec">Hệ thống</div>
 
-        <a href="{{ route('admin.thongk') }}" class="adm-item {{ request()->routeIs('admin.thongk*') ? 'active' : '' }}" wire:navigate>
-            <i class="fa-solid fa-chart-bar adm-item-ic"></i> Thống kê
+        <a href="{{ route('admin.mail-config') }}" class="adm-item {{ request()->routeIs('admin.mail-config') ? 'active' : '' }}" wire:navigate>
+            <i class="fa-solid fa-envelope adm-item-ic"></i> Cấu hình Email
         </a>
 
     </aside>
@@ -91,6 +91,7 @@
                 'admin.post'    => 'Bài viết',
                 'admin.mentor'  => 'Mentor',
                 'admin.thongk'  => 'Thống kê',
+                'admin.mail-config' => 'Cấu hình Email',
                 'admin'         => 'Bảng điều khiển',
             ];
             $pageLabel = 'Bảng điều khiển';

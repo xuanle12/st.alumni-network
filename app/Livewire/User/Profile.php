@@ -31,6 +31,9 @@ class Profile extends Component
     public string $nganh = '';
     public string $current_company = '';
     public int $experience_years = 0;
+    public string $salary = '';
+    public bool $hide_salary = false;
+    public bool $hide_company = false;
 
     // social 
     public string $github = '';
@@ -67,6 +70,9 @@ class Profile extends Component
         $this->nganh = $u->profile->nganh ?? '';
         $this->current_company = $u->profile->current_company ?? '';
         $this->experience_years = $u->profile->experience_years ?? 0;
+        $this->salary = $u->profile->salary ?? '';
+        $this->hide_salary = (bool) ($u->profile->hide_salary ?? false);
+        $this->hide_company = (bool) ($u->profile->hide_company ?? false);
 
         $this->github = $u->profile->github ?? '';
         $this->linkedin = $u->profile->linkedin ?? '';
@@ -100,6 +106,9 @@ class Profile extends Component
                 'nganh' => $this->nganh,
                 'current_company' => $this->current_company,
                 'experience_years' => $this->experience_years,
+                'salary' => $this->salary,
+                'hide_salary' => $this->hide_salary,
+                'hide_company' => $this->hide_company,
             ]
         );
 

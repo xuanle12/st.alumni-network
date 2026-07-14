@@ -28,6 +28,10 @@ class Csv extends Component
     public string $f_khoa   = '';
     public string $f_nganh  = '';
     public string $f_nam    = '';
+    public string $f_cong_ty    = '';
+    public string $f_dien_thoai = '';
+    public string $f_dia_chi    = '';
+    public string $f_muc_luong  = '';
 
     public bool $showView = false;
     public ?int $viewId   = null;
@@ -51,7 +55,8 @@ class Csv extends Component
 
     public function openAdd(): void
     {
-        $this->reset(['editId', 'f_msv', 'f_ho_ten', 'f_lop', 'f_khoa', 'f_nganh', 'f_nam']);
+        $this->reset(['editId', 'f_msv', 'f_ho_ten', 'f_lop', 'f_khoa', 'f_nganh', 'f_nam',
+            'f_cong_ty', 'f_dien_thoai', 'f_dia_chi', 'f_muc_luong']);
         $this->showModal = true;
     }
 
@@ -124,6 +129,10 @@ class Csv extends Component
         $this->f_khoa   = $row->khoa   ?? '';
         $this->f_nganh  = $row->nganh  ?? '';
         $this->f_nam    = $row->nam_tot_nghiep ?? '';
+        $this->f_cong_ty    = $row->cong_ty    ?? '';
+        $this->f_dien_thoai = $row->dien_thoai ?? '';
+        $this->f_dia_chi    = $row->dia_chi    ?? '';
+        $this->f_muc_luong  = $row->muc_luong  ?? '';
         $this->showModal = true;
     }
 
@@ -158,6 +167,10 @@ class Csv extends Component
             'khoa'           => $this->f_khoa   ?: null,
             'nganh'          => $this->f_nganh  ?: null,
             'nam_tot_nghiep' => $this->f_nam    ?: null,
+            'cong_ty'        => $this->f_cong_ty    ?: null,
+            'dien_thoai'     => $this->f_dien_thoai ?: null,
+            'dia_chi'        => $this->f_dia_chi    ?: null,
+            'muc_luong'      => $this->f_muc_luong  ?: null,
             'updated_at'     => now(),
         ];
 

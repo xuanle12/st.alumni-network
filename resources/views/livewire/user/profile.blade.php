@@ -391,6 +391,20 @@ a.pf-soc-item:hover{background:#eff6ff;color:#0961aa}
             <input wire:model="experience_years" type="number" min="0" max="50" placeholder="0">
             @error('experience_years')<div class="err">{{ $message }}</div>@enderror
           </div>
+          <div class="fi">
+            <label>Mức lương hiện tại</label>
+            <input wire:model="salary" type="text" placeholder="VD: 20 triệu (có thể để trống)">
+          </div>
+          <div class="fi full">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:500;cursor:pointer">
+              <input type="checkbox" wire:model="hide_company" style="width:auto"> Ẩn công ty hiện tại khỏi hồ sơ công khai
+            </label>
+          </div>
+          <div class="fi full">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:500;cursor:pointer">
+              <input type="checkbox" wire:model="hide_salary" style="width:auto"> Ẩn mức lương khỏi hồ sơ công khai
+            </label>
+          </div>
           <div class="fi full">
             <label>Giới thiệu bản thân</label>
             <textarea wire:model="bio" placeholder="Một vài dòng giới thiệu..."></textarea>
@@ -444,7 +458,21 @@ a.pf-soc-item:hover{background:#eff6ff;color:#0961aa}
           </div>
           <div class="pf-info-row">
             <span class="pf-info-lbl">Công ty hiện tại</span>
-            <span class="pf-info-val {{ $user->profile?->current_company ? '' : 'muted' }}">{{ $user->profile?->current_company ?: 'Chưa cập nhật' }}</span>
+            <span class="pf-info-val {{ $user->profile?->current_company ? '' : 'muted' }}">
+              {{ $user->profile?->current_company ?: 'Chưa cập nhật' }}
+              @if($user->profile?->current_company && $user->profile?->hide_company)
+                <span style="font-size:11px;color:#94a3b8;font-style:italic">· đã ẩn với người khác</span>
+              @endif
+            </span>
+          </div>
+          <div class="pf-info-row">
+            <span class="pf-info-lbl">Mức lương</span>
+            <span class="pf-info-val {{ $user->profile?->salary ? '' : 'muted' }}">
+              {{ $user->profile?->salary ?: 'Chưa cập nhật' }}
+              @if($user->profile?->salary && $user->profile?->hide_salary)
+                <span style="font-size:11px;color:#94a3b8;font-style:italic">· đã ẩn với người khác</span>
+              @endif
+            </span>
           </div>
           <div class="pf-info-row">
             <span class="pf-info-lbl">Kinh nghiệm</span>

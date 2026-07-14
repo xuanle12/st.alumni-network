@@ -1,71 +1,67 @@
-<div>
+<div class="tk-embed">
 <style>
-.dash{padding:1.75rem}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px}
-.ptitle{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.3px}
-.psub{font-size:13px;color:#64748b;margin-top:3px}
-.filter-row{display:flex;gap:8px}
-.f-sel{padding:6px 10px;border:1px solid #d1d5db;border-radius:7px;font-size:12px;color:#374151;background:#fff}
-.f-sel:focus{outline:none;border-color:#3b82f6}
- 
-.stats4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
-.sc{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
-.sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.sc-label{font-size:11px;color:#9ca3af;font-weight:500}
-.sc-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center}
-.sc-val{font-size:24px;font-weight:700;color:#111;line-height:1;margin-bottom:4px}
-.sc-sub{font-size:11px}
-.up{color:#0961aa}.muted{color:#9ca3af}
- 
-.row2{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
-.row3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.card{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
-.card-title{font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
-.card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
- 
-.bar-wrap{height:130px;display:flex;align-items:flex-end;gap:4px}
-.bc{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
-.bar{width:100%;border-radius:3px 3px 0 0;cursor:pointer;transition:opacity .15s}
-.bar:hover{opacity:.75}
-.bl{font-size:9px;color:#9ca3af}
- 
-.donut-row{display:flex;align-items:center;gap:1.25rem}
-.leg{display:flex;flex-direction:column;gap:9px;flex:1}
-.leg-row{display:flex;align-items:center;gap:7px;font-size:12px;color:#374151}
-.leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
-.leg-pct{margin-left:auto;font-weight:600;font-size:13px;color:#111}
- 
-.hbar-list{display:flex;flex-direction:column;gap:10px}
-.hbar-top{display:flex;justify-content:space-between;font-size:12px;color:#374151;margin-bottom:4px}
-.hbar-val{font-weight:600;color:#111}
-.hbar-bg{height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden}
-.hbar-fill{height:100%;border-radius:3px}
- 
- 
-.spark{display:flex;align-items:flex-end;gap:2px;height:28px}
-.sp{width:6px;border-radius:2px 2px 0 0;background:#dbeafe}
-.sp.hi{background:#3b82f6}
- 
-@media(max-width:1024px){.stats4{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){.row2,.row3{grid-template-columns:1fr}}
+.tk-embed .dash{padding:1.75rem}
+.tk-embed .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px}
+.tk-embed .ptitle{font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-.3px}
+.tk-embed .psub{font-size:13px;color:#64748b;margin-top:3px}
+.tk-embed .filter-row{display:flex;gap:8px}
+.tk-embed .f-sel{padding:6px 10px;border:1px solid #d1d5db;border-radius:7px;font-size:12px;color:#374151;background:#fff}
+.tk-embed .f-sel:focus{outline:none;border-color:#3b82f6}
+.tk-embed .stats4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
+.tk-embed .sc{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
+.tk-embed .sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.tk-embed .sc-label{font-size:11px;color:#9ca3af;font-weight:500}
+.tk-embed .sc-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.tk-embed .sc-val{font-size:24px;font-weight:700;color:#111;line-height:1;margin-bottom:4px}
+.tk-embed .sc-sub{font-size:11px}
+.tk-embed .up{color:#0961aa}
+.tk-embed .muted{color:#9ca3af}
+.tk-embed .row2{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
+.tk-embed .row3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.tk-embed .card{background:#fff;border:1px solid #eaecf0;border-radius:8px;padding:1rem 1.1rem}
+.tk-embed .card-title{font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
+.tk-embed .card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.tk-embed .bar-wrap{height:130px;display:flex;align-items:flex-end;gap:4px}
+.tk-embed .bc{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tk-embed .bar{width:100%;border-radius:3px 3px 0 0;cursor:pointer;transition:opacity .15s}
+.tk-embed .bar:hover{opacity:.75}
+.tk-embed .bl{font-size:9px;color:#9ca3af}
+.tk-embed .donut-row{display:flex;align-items:center;gap:1.25rem}
+.tk-embed .leg{display:flex;flex-direction:column;gap:9px;flex:1}
+.tk-embed .leg-row{display:flex;align-items:center;gap:7px;font-size:12px;color:#374151}
+.tk-embed .leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.tk-embed .leg-pct{margin-left:auto;font-weight:600;font-size:13px;color:#111}
+.tk-embed .hbar-list{display:flex;flex-direction:column;gap:10px}
+.tk-embed .hbar-top{display:flex;justify-content:space-between;font-size:12px;color:#374151;margin-bottom:4px}
+.tk-embed .hbar-val{font-weight:600;color:#111}
+.tk-embed .hbar-bg{height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden}
+.tk-embed .hbar-fill{height:100%;border-radius:3px}
+.tk-embed .spark{display:flex;align-items:flex-end;gap:2px;height:28px}
+.tk-embed .sp{width:6px;border-radius:2px 2px 0 0;background:#dbeafe}
+.tk-embed .sp.hi{background:#3b82f6}
+@media(max-width:1024px){.tk-embed .stats4{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.tk-embed .row2, .tk-embed .row3{grid-template-columns:1fr}}
 </style>
 <div>
     <div class="dash">
   <div class="topbar">
     <div>
-      <div class="ptitle">Thống kê</div>
-      <div class="psub">Tổng quan hoạt động hệ thống</div>
+      <div class="ptitle">{{ $embedded ? 'Phân tích chi tiết' : 'Thống kê' }}</div>
+      <div class="psub">{{ $embedded ? 'Khu vực làm việc, lĩnh vực & doanh nghiệp tuyển dụng' : 'Tổng quan hoạt động hệ thống' }}</div>
     </div>
+    @unless($embedded)
     <div class="filter-row">
       <select class="f-sel" wire:model.live="year">
         @foreach(range(now()->year, now()->year - 3) as $y)
           <option value="{{ $y }}">Năm {{ $y }}</option>
         @endforeach
       </select>
-     
+
     </div>
+    @endunless
   </div>
- 
+
+  @unless($embedded)
   <div class="stats4">
     <div class="sc">
       <div class="sc-top">
@@ -108,8 +104,9 @@
       <div class="sc-sub up">↑ Đã cập nhật địa chỉ</div>
     </div>
   </div>
- 
- 
+  @endunless
+
+  @unless($embedded)
   <div class="row2">
     <div class="card">
       <div class="card-hd">
@@ -148,8 +145,8 @@
       </div>
     </div>
   </div>
- 
- 
+  @endunless
+
   <div class="row3">
     <div class="card">
       <div class="card-title">Khu vực làm việc</div>

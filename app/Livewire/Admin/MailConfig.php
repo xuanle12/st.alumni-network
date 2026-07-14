@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Setting;
+use App\Support\MailTemplate;
 
 class MailConfig extends Component
 {
@@ -18,18 +19,29 @@ class MailConfig extends Component
 
     public string $test_email = '';
 
+    /** Nội dung các thư: [key => ['subject'=>, 'body'=>]] */
+    public array $tpl = [];
+
     public function mount(): void
     {
-        // Nạp từ DB, fallback về cấu hình .env hiện tại
-        $this->host         = Setting::get('mail.host', config('mail.mailers.smtp.host', ''));
-        $this->port         = (string) Setting::get('mail.port', config('mail.mailers.smtp.port', '587'));
-        $this->username     = Setting::get('mail.username', config('mail.mailers.smtp.username', ''));
-        $this->password     = Setting::get('mail.password', config('mail.mailers.smtp.password', ''));
-        $this->encryption   = Setting::get('mail.encryption', config('mail.mailers.smtp.encryption', 'tls') ?: 'none');
-        $this->from_address = Setting::get('mail.from_address', config('mail.from.address', ''));
-        $this->from_name    = Setting::get('mail.from_name', config('mail.from.name', ''));
+        // Nạp nội dung email (DB → fallback mặc định)
+        foreach (MailTemplate::defaults() as $key => $def) {
+            $this->tpl[$key] = [
+                'subject' => (string) (Setting::get("mail_tpl.{$key}.subject") ?? $def['subject']),
+                'body'    => (string) (Setting::get("mail_tpl.{$key}.body") ?? $def['body']),
+            ];
+        }
 
-        $this->test_email = auth()->user()->email ?? '';
+        // Nạp từ DB, fallback về cấu hình .env hiện tại (ép về chuỗi, tránh null)
+        $this->host         = (string) (Setting::get('mail.host', config('mail.mailers.smtp.host')) ?? '');
+        $this->port         = (string) (Setting::get('mail.port', config('mail.mailers.smtp.port')) ?? '587');
+        $this->username     = (string) (Setting::get('mail.username', config('mail.mailers.smtp.username')) ?? '');
+        $this->password     = (string) (Setting::get('mail.password', config('mail.mailers.smtp.password')) ?? '');
+        $this->encryption   = (string) (Setting::get('mail.encryption', config('mail.mailers.smtp.encryption')) ?: 'tls');
+        $this->from_address = (string) (Setting::get('mail.from_address', config('mail.from.address')) ?? '');
+        $this->from_name    = (string) (Setting::get('mail.from_name', config('mail.from.name')) ?? '');
+
+        $this->test_email = (string) (auth()->user()->email ?? '');
     }
 
     protected function rules(): array
@@ -103,8 +115,28 @@ class MailConfig extends Component
         }
     }
 
+    public function saveTemplates(): void
+    {
+        foreach ($this->tpl as $key => $t) {
+            Setting::set("mail_tpl.{$key}.subject", trim($t['subject'] ?? ''));
+            Setting::set("mail_tpl.{$key}.body", $t['body'] ?? '');
+        }
+        $this->dispatch('toast', type: 'success', message: 'Đã lưu nội dung email.');
+    }
+
+    public function resetTemplate(string $key): void
+    {
+        $def = MailTemplate::defaults()[$key] ?? null;
+        if ($def) {
+            $this->tpl[$key]['subject'] = $def['subject'];
+            $this->tpl[$key]['body']    = $def['body'];
+        }
+    }
+
     public function render()
     {
-        return view('livewire.admin.mail-config')->layout('components.layouts.admin');
+        return view('livewire.admin.mail-config', [
+            'tplMeta' => MailTemplate::defaults(),
+        ])->layout('components.layouts.admin');
     }
 }

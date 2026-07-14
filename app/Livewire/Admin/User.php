@@ -155,6 +155,12 @@ class User extends Component
         $this->resetPage();
     }
 
+    public function generatePassword(): void
+    {
+        $this->f_password   = \Illuminate\Support\Str::password(10, true, true, false);
+        $this->showPassword = true; // hiện để admin sao chép/gửi cho người dùng
+    }
+
     public function closeModal(): void { $this->showModal = false; }
 
     public function openRole(int $id): void

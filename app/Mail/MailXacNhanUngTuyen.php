@@ -31,7 +31,11 @@ class MailXacNhanUngTuyen extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Mail Xac Nhan Ung Tuyen',
+            subject: \App\Support\MailTemplate::subject('apply_confirm', [
+                'vi_tri'  => $this->job->title,
+                'cong_ty' => $this->job->company ?? '',
+                'ten'     => $this->application->name,
+            ]),
         );
     }
 

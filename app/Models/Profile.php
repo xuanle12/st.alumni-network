@@ -30,10 +30,15 @@ class Profile extends Model
         'is_online',
         'current_company',
         'experience_years',
+        'salary',
+        'hide_salary',
+        'hide_company',
     ];
 
     protected $casts = [
-        'is_online' => 'boolean',
+        'is_online'    => 'boolean',
+        'hide_salary'  => 'boolean',
+        'hide_company' => 'boolean',
     ];
  
     public function user()

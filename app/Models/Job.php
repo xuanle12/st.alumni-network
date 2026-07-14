@@ -94,6 +94,12 @@ class Job extends Model
         return $this->belongsTo(Company::class, 'company_id');
     }
 
+    // Đơn ứng tuyển của tin (để đếm số ứng viên)
+    public function applications()
+    {
+        return $this->hasMany(\App\Models\DonUngTuyen::class, 'job_id');
+    }
+
     public function skills()
     {
     return $this->belongsToMany(Skill::class, 'job_skills');

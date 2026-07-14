@@ -238,6 +238,13 @@
           </button>
         </div>
         @error('f_password')<div class="err">{{ $message }}</div>@enderror
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px">
+          <span style="font-size:11px;color:#94a3b8">Mật khẩu được mã hoá một chiều nên không thể xem lại mật khẩu cũ.</span>
+          <button type="button" wire:click="generatePassword"
+                  style="background:none;border:none;color:#0961aa;font-size:11.5px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Tạo mật khẩu mới
+          </button>
+        </div>
       </div>
       <div class="mo-sec-lbl">Vai trò &amp; Trạng thái</div>
       <div class="fg2">

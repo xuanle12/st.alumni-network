@@ -485,3 +485,14 @@ display: inline-flex; align-items: center;
 .adm-dd-item.red    { color: #b91c1c; } .adm-dd-item.red:hover    { background: #fef2f2; }
 .adm-dd-sep { height: 1px; background: #f1f5f9; margin: 4px 0; }
 .adm-dd-ic  { width: 15px; text-align: center; font-size: 12px; flex-shrink: 0; }
+
+/* ═══════════ NỀN RESPONSIVE CHUNG — áp cho MỌI trang admin ═══════════ */
+img { max-width: 100%; height: auto; }
+iframe, video, embed, object, canvas { max-width: 100%; }
+html, body { overflow-x: hidden; max-width: 100%; }
+/* Cho phép cột nội dung co lại, tránh bảng rộng đẩy tràn layout */
+.adm-main { min-width: 0; overflow-x: hidden; }
+/* Bảng admin: cuộn ngang trong thẻ trên màn nhỏ */
+@media (max-width: 640px) {
+  .adm-tcard, .card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}

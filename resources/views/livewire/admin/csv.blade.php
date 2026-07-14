@@ -116,7 +116,7 @@
         <th style="width:23%">Họ và tên</th>
         <th style="width:14%">MSV</th>
         <th style="width:14%">Lớp / Năm TN</th>
-        <th style="width:20%">Khoa / Ngành</th>
+        <th style="width:20%">Ngành / Công ty</th>
         <th style="width:14%">Tài khoản</th>
         <th style="width:10%"></th>
       </x-slot:heading>
@@ -137,8 +137,8 @@
           <div class="cls">{{ $row->nam_tot_nghiep ?? '—' }}</div>
         </td>
         <td>
-          <div class="job">{{ $row->khoa ?? '—' }}</div>
-          <div class="cmp">{{ $row->nganh ?? '—' }}</div>
+          <div class="job">{{ $row->nganh ?? '—' }}</div>
+          <div class="cmp">{{ $row->cong_ty ?? '—' }}</div>
         </td>
         <td><x-badge :color="$tkColor">{{ $tkLabel }}</x-badge></td>
         <td>
@@ -204,12 +204,24 @@
               @error('f_nam')<div class="err">{{ $message }}</div>@enderror
             </div>
             <div class="fi">
-              <label>Khoa</label>
-              <input wire:model="f_khoa" placeholder="Công nghệ Thông tin">
-            </div>
-            <div class="fi">
               <label>Ngành</label>
               <input wire:model="f_nganh" placeholder="Công nghệ Phần mềm">
+            </div>
+            <div class="fi">
+              <label>Công ty hiện tại</label>
+              <input wire:model="f_cong_ty" placeholder="VD: FPT Software (có thể để trống)">
+            </div>
+            <div class="fi">
+              <label>Số điện thoại</label>
+              <input wire:model="f_dien_thoai" placeholder="0912xxxxxx (có thể để trống)">
+            </div>
+            <div class="fi">
+              <label>Địa chỉ</label>
+              <input wire:model="f_dia_chi" placeholder="Có thể để trống">
+            </div>
+            <div class="fi">
+              <label>Mức lương</label>
+              <input wire:model="f_muc_luong" placeholder="VD: 20 triệu (có thể để trống)">
             </div>
           </div>
       </div>
@@ -290,7 +302,7 @@
           <div class="vi"><label>MSV</label><p>{{ $viewUser->profile?->msv ?? '—' }}</p></div>
           <div class="vi"><label>Lớp</label><p>{{ $viewUser->profile?->lop ?? '—' }}</p></div>
           <div class="vi"><label>Năm TN</label><p>{{ $viewUser->profile?->nam_tot_nghiep ?? '—' }}</p></div>
-          <div class="vi"><label>Khoa</label><p>{{ $viewUser->profile?->khoa ?? '—' }}</p></div>
+          <div class="vi"><label>Mức lương</label><p class="{{ $viewUser->profile?->salary ? '' : 'mt' }}">{{ $viewUser->profile?->salary ?: 'Chưa cập nhật' }}</p></div>
           <div class="vi"><label>Vị trí</label><p class="{{ $viewUser->profile?->position ? '' : 'mt' }}">{{ $viewUser->profile?->position ?: 'Chưa cập nhật' }}</p></div>
           <div class="vi"><label>Công ty</label><p class="{{ $viewUser->profile?->current_company ? '' : 'mt' }}">{{ $viewUser->profile?->current_company ?: 'Chưa cập nhật' }}</p></div>
           <div class="vi"><label>Điện thoại</label><p class="{{ $viewUser->profile?->phone ? '' : 'mt' }}">{{ $viewUser->profile?->phone ?: 'Chưa cập nhật' }}</p></div>

@@ -20,8 +20,13 @@
 
                     <tr>
                         <td style="padding:28px 32px;">
-                            <p style="font-size:15px;color:#111;margin:0 0 6px;">
-                                Có một ứng viên mới vừa nộp hồ sơ cho vị trí <strong>{{ $job->title }}</strong>.
+                            <p style="font-size:14px;color:#374151;margin:0 0 6px;line-height:1.6;">
+                                {!! nl2br(e(\App\Support\MailTemplate::body('apply_notify', [
+                                    'ten'    => $application->name,
+                                    'vi_tri' => $job->title,
+                                    'email'  => $application->email,
+                                    'phone'  => $application->phone,
+                                ]))) !!}
                             </p>
                             <p style="font-size:13px;color:#6b7280;margin:0 0 20px;">
                                 Thời gian: {{ $application->created_at->format('H:i d/m/Y') }}

@@ -31,6 +31,16 @@ class Jobs extends Component
 
     #[Url]
     public array $locations = [];
+
+    #[Url]
+    public string $locationSearch = '';
+
+    #[Url]
+    public int $salaryMin = 0;
+
+    #[Url]
+    public array $expLevels = [];
+
     public $suggestedJobs = [];
     public bool $hasSkills = false;
 
@@ -46,14 +56,17 @@ class Jobs extends Component
     { 
         $this->resetPage(); 
     }
-    public function updatingLocations() 
-    { 
-        $this->resetPage(); 
+    public function updatingLocations()
+    {
+        $this->resetPage();
     }
+    public function updatingLocationSearch() { $this->resetPage(); }
+    public function updatingSalaryMin()      { $this->resetPage(); }
+    public function updatingExpLevels()      { $this->resetPage(); }
 
     public function resetFilters()
     {
-        $this->reset(['search','field','sort','types','fields','locations']);
+        $this->reset(['search','field','sort','types','fields','locations','locationSearch','salaryMin','expLevels']);
         $this->resetPage();
     }
     public function mount()
@@ -98,7 +111,8 @@ class Jobs extends Component
     ]);
 
 
-    $query = Job::query()->active()->with('skills');
+    $query = Job::query()->active()->with('skills')->withCount('applications');
+    $this->onlyIt($query);
 
     // tìm kiếm
     if ($this->search) {
@@ -118,9 +132,39 @@ class Jobs extends Component
         $query->whereIn('type', $this->types);
     }
 
-    // lọc location
+    // lọc location (checkbox)
     if ($this->locations) {
         $query->whereIn('location', $this->locations);
+    }
+
+    // tìm theo địa điểm (ô nhập ở hero)
+    if ($this->locationSearch) {
+        $query->where('location', 'like', "%{$this->locationSearch}%");
+    }
+
+    // lọc mức lương tối thiểu (triệu)
+    if ($this->salaryMin > 0) {
+        $query->where(function ($q) {
+            $q->where('max_salary', '>=', $this->salaryMin)
+              ->orWhere('min_salary', '>=', $this->salaryMin);
+        });
+    }
+
+    // lọc theo cấp kinh nghiệm
+    if ($this->expLevels) {
+        $query->where(function ($q) {
+            foreach ($this->expLevels as $lvl) {
+                $q->orWhere(function ($qq) use ($lvl) {
+                    if ($lvl === 'entry') {
+                        $qq->whereNull('experience_required')->orWhere('experience_required', '<=', 1);
+                    } elseif ($lvl === 'intermediate') {
+                        $qq->whereBetween('experience_required', [2, 4]);
+                    } elseif ($lvl === 'expert') {
+                        $qq->where('experience_required', '>=', 5);
+                    }
+                });
+            }
+        });
     }
 
     // sắp xếp
@@ -131,7 +175,14 @@ class Jobs extends Component
     }
 
 
-    $jobs = $query->paginate(10);
+    $jobs = $query->paginate(9);
+
+    // Đếm số tin theo cấp kinh nghiệm (cho sidebar) — chỉ tính tin CNTT
+    $expCounts = [
+        'entry'        => $this->onlyIt(Job::active())->where(fn($q) => $q->whereNull('experience_required')->orWhere('experience_required', '<=', 1))->count(),
+        'intermediate' => $this->onlyIt(Job::active())->whereBetween('experience_required', [2, 4])->count(),
+        'expert'       => $this->onlyIt(Job::active())->where('experience_required', '>=', 5)->count(),
+    ];
 
     // Format các trường để view dùng đúng (salary, experience, skills)
     $jobs->getCollection()->transform(function ($job) {
@@ -152,6 +203,7 @@ class Jobs extends Component
         'remote' => 'Remote',],
         'departments' => $departments,
         'locationOptions' => $locationOptions,
+        'expCounts' => $expCounts,
     ]);
 }
 
@@ -169,5 +221,27 @@ protected function formatSalary($min, $max): ?string
     }
 
     return number_format($min ?: $max) . ' triệu';
+}
+
+/**
+ * Chỉ giữ tin ngành CNTT — loại các ngành khác (nông nghiệp, tài chính, ngân hàng...).
+ * Vì đây là mạng lưới cựu sinh viên khoa CNTT.
+ */
+private function onlyIt($query)
+{
+    $exclude = [
+        'nông nghiệp', 'nông', 'agri', 'vineco', 'dabaco', 'thực phẩm', 'chăn nuôi',
+        'tài chính', 'ngân hàng', 'bank', 'finance', 'chứng khoán', 'bảo hiểm', 'kế toán', 'kiểm toán', 'invest',
+        'xây dựng', 'bất động sản', 'y tế', 'dược', 'giáo dục', 'du lịch',
+        'nhà hàng', 'khách sạn', 'vận tải', 'logistics', 'cơ khí', 'môi trường', 'luật', 'bán lẻ',
+    ];
+
+    // Loại tin nếu NGÀNH hoặc TÊN CÔNG TY thuộc lĩnh vực ngoài CNTT
+    return $query->where(function ($q) use ($exclude) {
+        foreach ($exclude as $kw) {
+            $q->whereRaw("LOWER(COALESCE(field, '')) NOT LIKE ?", ['%' . $kw . '%'])
+              ->whereRaw("LOWER(COALESCE(company, '')) NOT LIKE ?", ['%' . $kw . '%']);
+        }
+    });
 }
 }

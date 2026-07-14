@@ -10,7 +10,10 @@ class Thongk extends Component
 {
     
     public string $year  = '';
- 
+
+    // Khi nhúng trong Bảng điều khiển: ẩn các phần trùng (thẻ số liệu, biểu đồ tháng, donut)
+    public bool $embedded = false;
+
     public function mount(): void
     {
         $this->year = (string) now()->year;

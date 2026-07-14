@@ -32,7 +32,12 @@ class MailThongBaoUngVienMoi extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Có ứng viên mới ứng tuyển vị trí ' . $this->job->title,
+            subject: \App\Support\MailTemplate::subject('apply_notify', [
+                'vi_tri' => $this->job->title,
+                'ten'    => $this->application->name,
+                'email'  => $this->application->email,
+                'phone'  => $this->application->phone,
+            ]),
         );
     }
 

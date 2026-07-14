@@ -24,12 +24,12 @@
                                 Chào <strong>{{ $application->name }}</strong>,
                             </p>
                             <p style="font-size:14px;color:#374151;margin:0 0 20px;line-height:1.6;">
-                                Bạn đã nộp hồ sơ ứng tuyển thành công cho vị trí <strong>{{ $job->title }}</strong>
-                                @if($job->company)
-                                    tại <strong>{{ $job->company }}</strong>
-                                @endif
-                                vào lúc {{ $application->created_at->format('H:i d/m/Y') }}.
-                                Nhà tuyển dụng sẽ xem xét hồ sơ của bạn và liên hệ lại trong thời gian sớm nhất.
+                                {!! nl2br(e(\App\Support\MailTemplate::body('apply_confirm', [
+                                    'ten'       => $application->name,
+                                    'vi_tri'    => $job->title,
+                                    'cong_ty'   => $job->company ?? '',
+                                    'thoi_gian' => $application->created_at->format('H:i d/m/Y'),
+                                ]))) !!}
                             </p>
 
                             <table width="100%" cellpadding="0" cellspacing="0"

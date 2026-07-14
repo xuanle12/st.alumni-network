@@ -50,6 +50,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/post', \App\Livewire\Admin\Posts::class)->name('admin.post');
     Route::get('/admin/user', \App\Livewire\Admin\User::class)->name('admin.user');
     Route::get('/admin/mentor', \App\Livewire\Admin\Mentor::class)->name('admin.mentor');
+    Route::get('/admin/mail-config', \App\Livewire\Admin\MailConfig::class)->name('admin.mail-config');
 });
 // Route để bắt đầu quá trình redirect sang SSO
 // Route::get('/auth/redirect', function () {

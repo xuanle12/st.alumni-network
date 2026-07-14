@@ -6,6 +6,10 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Company as CompanyModel;
 use App\Models\Job as JobModel;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class Company extends Component
 {
@@ -116,16 +120,72 @@ class Company extends Component
 
             CompanyModel::where('id',$this->editId)->update($data);
 
-            $this->dispatch('toast', type: 'success', message: 'Đã cập nhật company');
+            $this->dispatch('toast', type: 'success', message: 'Đã cập nhật công ty');
 
         } else {
 
-            CompanyModel::create($data);
+            $company = CompanyModel::create($data);
 
-            $this->dispatch('toast', type: 'success', message: 'Đã thêm company');
+            // Tạo tài khoản doanh nghiệp từ email người phụ trách
+            $accountMsg = $this->createCompanyAccount($company);
+
+            $this->dispatch('toast', type: 'success', message: 'Đã thêm công ty. ' . $accountMsg);
         }
 
         $this->closeModal();
+    }
+
+    /**
+     * Tạo tài khoản doanh nghiệp (role=company) gắn với công ty, tự sinh mật khẩu
+     * và gửi thông tin đăng nhập về email người phụ trách.
+     */
+    private function createCompanyAccount(CompanyModel $company): string
+    {
+        $email = trim($this->f_email);
+        if ($email === '') {
+            return 'Chưa có email người phụ trách nên chưa tạo tài khoản đăng nhập.';
+        }
+
+        $existing = User::where('email', $email)->first();
+
+        if ($existing) {
+            // Đã có tài khoản: gắn quyền doanh nghiệp + liên kết công ty
+            $existing->update(['role' => 'company']);
+            $company->update(['created_by' => $existing->id]);
+            return 'Email này đã có tài khoản — đã gắn quyền doanh nghiệp.';
+        }
+
+        $password = Str::password(10, true, true, false);
+
+        $user = User::create([
+            'name'     => $this->f_cname ?: $company->name,
+            'email'    => $email,
+            'password' => Hash::make($password),
+            'role'     => 'company',
+            'status'   => 'active',
+        ]);
+
+        $company->update(['created_by' => $user->id]);
+
+        // Gửi thông tin đăng nhập về email (nội dung lấy từ cấu hình email của admin)
+        try {
+            $vars = [
+                'ten'      => $this->f_cname ?: $company->name,
+                'cong_ty'  => $company->name,
+                'email'    => $email,
+                'mat_khau' => $password,
+                'link'     => route('login'),
+            ];
+            $body    = \App\Support\MailTemplate::body('company_account', $vars);
+            $subject = \App\Support\MailTemplate::subject('company_account', $vars);
+
+            Mail::raw($body, function ($m) use ($email, $subject) {
+                $m->to($email)->subject($subject);
+            });
+            return 'Đã tạo tài khoản doanh nghiệp và gửi mật khẩu về ' . $email . '.';
+        } catch (\Throwable $e) {
+            return 'Đã tạo tài khoản (mật khẩu: ' . $password . ') nhưng gửi email thất bại: ' . $e->getMessage();
+        }
     }
 
     public function closeModal()
