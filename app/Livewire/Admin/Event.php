@@ -137,6 +137,17 @@ class Event extends Component
             default  => 'ẩn',
         };
 
+        // Báo cho người tạo sự kiện khi được duyệt hiển thị
+        if ($status === 'active') {
+            \App\Models\Notification::send(
+                $event->created_by,
+                'event',
+                'Sự kiện của bạn đã được duyệt và hiển thị',
+                $event->title,
+                route('event')
+            );
+        }
+
         $this->showDetail = false;
         $this->dispatch('toast', type: 'success', message: "Đã {$label} sự kiện.");
     }

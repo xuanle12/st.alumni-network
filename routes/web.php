@@ -31,6 +31,31 @@ Route::middleware('auth')->group(function () {
     Route::get('/event/create', \App\Livewire\User\EventForm::class)->middleware('role:admin')->name('event.create');
     Route::get('/event/{id}', \App\Livewire\User\Eventdetail::class)->name('event.show');
     Route::get('/profile', \App\Livewire\User\Profile::class)->name('profile');
+    Route::get('/cv/tao', \App\Livewire\User\CvBuilderForm::class)->name('cv.builder');
+
+    // Trang in CV: không layout, chỉ có tờ CV → in ra đúng số trang nội dung
+    Route::get('/cv/in', function () {
+        $cv = \App\Models\CvBuilder::where('user_id', \Illuminate\Support\Facades\Auth::id())->first();
+
+        if (!$cv) {
+            return redirect()->route('cv.builder');
+        }
+
+        return view('cv-print', [
+            'full_name'    => (string) $cv->full_name,
+            'job_title'    => (string) $cv->job_title,
+            'email'        => (string) $cv->email,
+            'phone'        => (string) $cv->phone,
+            'address'      => (string) $cv->address,
+            'website'      => (string) $cv->website,
+            'summary'      => (string) $cv->summary,
+            'education'    => $cv->education    ?? [],
+            'experience'   => $cv->experience   ?? [],
+            'skills'       => $cv->skills       ?? [],
+            'projects'     => $cv->projects     ?? [],
+            'certificates' => $cv->certificates ?? [],
+        ]);
+    })->name('cv.print');
     Route::get('/company/profile', \App\Livewire\User\CompanyProfile::class)->name('company.profile');
     Route::get('/post', \App\Livewire\User\Post::class)->name('post');
     Route::get('/my-posts', \App\Livewire\User\MyPosts::class)->name('my.posts');

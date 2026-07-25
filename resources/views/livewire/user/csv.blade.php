@@ -82,7 +82,7 @@
           <div class="modal-box">
             <div class="modal-hd">
               <div style="width:32px"></div>
-              <div class="modal-hd-title">Tạo bài viết</div>
+              <div class="modal-hd-title">{{ $editingId ? 'Chỉnh sửa bài viết' : 'Tạo bài viết' }}</div>
               <button class="modal-close" wire:click="closeModal">×</button>
             </div>
             <div class="modal-body">
@@ -118,21 +118,23 @@
                   @endforeach
                 </div>
               @endif
-              <input class="title-input" wire:model="title" type="text" placeholder="Tiêu đề (tuỳ chọn)...">
+              @unless($editingId)
+                <input class="title-input" wire:model="title" type="text" placeholder="Tiêu đề (tuỳ chọn)...">
+              @endunless
               <textarea class="content-editor" wire:model="content" placeholder="Bạn đang nghĩ gì? Chia sẻ với mọi người..." rows="5" autofocus></textarea>
               @error('content')<div class="err">{{ $message }}</div>@enderror
             </div>
             <div class="modal-ft">
               <div class="action-row">
-                <label class="action-btn" for="cover-file">
+                <label class="action-btn" for="cover-file" @style(['display:none' => (bool) $editingId])>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="#3b82f6" stroke-width="1.5"/><circle cx="5" cy="6" r="1.2" stroke="#3b82f6" stroke-width="1.2"/><path d="M1 11l4-4 3 3 2-2 4 4" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   <span class="action-label" style="color:#3b82f6">Thêm ảnh</span>
                   <input type="file" id="cover-file" wire:model="coverImages" accept="image/*" multiple style="display:none">
                 </label>
               </div>
               <button class="pub-btn" wire:click="publish" wire:loading.attr="disabled" wire:loading.class="opacity-75">
-                <span wire:loading wire:target="publish">Đang đăng...</span>
-                <span wire:loading.remove wire:target="publish">Đăng bài</span>
+                <span wire:loading wire:target="publish">{{ $editingId ? 'Đang lưu...' : 'Đang đăng...' }}</span>
+                <span wire:loading.remove wire:target="publish">{{ $editingId ? 'Lưu thay đổi' : 'Đăng bài' }}</span>
               </button>
             </div>
           </div>
@@ -147,7 +149,9 @@
 
         {{-- Danh sách bài viết --}}
         @forelse($posts as $post)
-            <div class="cm-card cm-post {{ $post->status === 'pending' ? 'is-pending' : '' }}" x-data="{ openComments:false }">
+            <div class="cm-card cm-post {{ $post->status === 'pending' ? 'is-pending' : '' }}"
+                 wire:key="post-{{ $post->id }}"
+                 x-data="{ openComments:false }">
                 @if($post->status === 'pending')
                     <div class="cm-pending-banner">
                         <i class="fa-solid fa-clock"></i> Bài viết đang chờ quản trị viên duyệt — hiện chỉ mình bạn thấy.
@@ -168,24 +172,52 @@
                         </div>
                         <div class="cm-post-sub">{{ $post->author->profile?->position }} · {{ $post->time_label }}</div>
                     </div>
-                    <button class="cm-post-more">···</button>
+                    @if($post->user_id === auth()->id())
+                        <div class="cm-post-menu" x-data="{ open:false }" @click.outside="open=false">
+                            <button class="cm-post-more" @click="open=!open">···</button>
+                            <div class="cm-post-dd" x-show="open" x-cloak>
+                                @if($post->status !== 'published')
+                                    <button wire:click="editPost({{ $post->id }})" @click="open=false">
+                                        <i class="fa-solid fa-pen"></i> Chỉnh sửa bài viết
+                                    </button>
+                                @endif
+                                <button class="is-danger"
+                                        wire:click="deletePost({{ $post->id }})"
+                                        wire:confirm="Xoá bài viết này? Hành động không thể hoàn tác."
+                                        @click="open=false">
+                                    <i class="fa-solid fa-trash"></i> Xoá bài viết
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="cm-post-body">
-                    <p class="cm-post-text">{{ $post->content }}</p>
-                    @php $photos = $post->photos; $pc = count($photos); @endphp
-                    @if($pc)
-                        <div class="cm-gallery cm-gallery-{{ min($pc, 4) }}">
-                            @foreach(array_slice($photos, 0, 4) as $idx => $ph)
-                                <div class="cm-gphoto">
-                                    <img src="{{ asset('storage/' . $ph) }}" alt="" loading="lazy">
-                                    @if($pc > 4 && $idx === 3)
-                                        <span class="cm-gmore-ov">+{{ $pc - 4 }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
+                    @php $long = mb_strlen($post->content) > 320 || substr_count($post->content, "\n") > 5; @endphp
+                    <div x-data="{ more:false }">
+                        <p class="cm-post-text" :class="{ 'is-clamped': !more }" @class(['is-clamped' => $long])>{{ $post->content }}</p>
+                        @if($long)
+                            <button class="cm-post-more-txt" x-show="!more" @click="more=true">Xem thêm</button>
+                        @endif
+                    </div>
+                </div>
+
+                @php $photos = $post->photos; $pc = count($photos); @endphp
+                @if($pc)
+                    <div class="cm-gallery cm-gallery-{{ min($pc, 4) }}">
+                        @foreach(array_slice($photos, 0, 4) as $idx => $ph)
+                            <div class="cm-gphoto">
+                                <img src="{{ asset('storage/' . $ph) }}" alt="" loading="lazy">
+                                @if($pc > 4 && $idx === 3)
+                                    <span class="cm-gmore-ov">+{{ $pc - 4 }}</span>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                @if(($post->category === 'job' && $post->job) || ($post->category === 'event' && $post->event))
+                <div class="cm-post-body cm-post-embeds">
                     @if($post->category === 'job' && $post->job)
                         <div class="cm-embed">
                             <div class="cm-embed-t"><i class="fa-solid fa-briefcase"></i> {{ $post->job->title }}</div>
@@ -205,11 +237,21 @@
                         </div>
                     @endif
                 </div>
+                @endif
 
+                @if($post->likes_count || $post->comments_count)
                 <div class="cm-post-stats">
-                    <span><i class="fa-solid fa-heart" style="color:#ef4444"></i> {{ number_format($post->likes_count) }}</span>
-                    <span><i class="fa-regular fa-comment"></i> {{ number_format($post->comments_count) }}</span>
+                    @if($post->likes_count)
+                        <span class="cm-react-bubble"><i class="fa-solid fa-heart"></i></span>
+                        <span>{{ number_format($post->likes_count) }}</span>
+                    @endif
+                    @if($post->comments_count)
+                        <button class="cm-stat-link" @click="openComments = !openComments">
+                            {{ number_format($post->comments_count) }} bình luận
+                        </button>
+                    @endif
                 </div>
+                @endif
 
                 <div class="cm-post-actions">
                     <button class="cm-post-act {{ $post->isLikedBy() ? 'is-liked' : '' }}" wire:click="like({{ $post->id }})">
@@ -321,12 +363,8 @@
   color:var(--cm-txt);
 }
 
-/* Ghim 2 cột bên: dính tại chỗ khi cuộn, chỉ feed giữa chạy */
+/* 3 cột cuộn cùng nhau, luôn thẳng hàng ở mép trên */
 .cm-left,.cm-right{
-  position:sticky;
-  top:calc(var(--header-h, 102px) + 14px);
-  max-height:calc(100vh - var(--header-h, 102px) - 28px);
-  overflow-y:auto;
   overflow-x:hidden;
 }
 /* Không cho card co lại (tránh bị cắt nội dung) */
@@ -380,6 +418,7 @@
 .cm-composer-ac{display:flex;align-items:center;gap:6px;margin-top:12px;padding-top:12px;border-top:1px solid var(--cm-line);}
 .cm-composer-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border:none;background:none;border-radius:8px;font-size:13px;font-weight:500;color:var(--cm-txt);cursor:pointer;font-family:inherit;transition:.15s;}
 .cm-composer-btn:hover{background:#f2f4f7;}
+.cm-composer-btn:first-child{margin-left:-12px;}
 .cm-composer-post{margin-left:auto;padding:8px 20px;background:var(--cm-blue);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;}
 .cm-composer-post:hover{background:var(--cm-blue-d);}
 .cm-post.is-pending{border:1px solid #fde68a;}
@@ -390,34 +429,43 @@
 .cm-sortbar-s{font-size:12px;color:var(--cm-muted);}
 .cm-sortbar-s b{color:var(--cm-txt);}
 
-.cm-post{overflow:hidden;}
-.cm-post-hd{display:flex;align-items:flex-start;gap:11px;padding:14px 16px 10px;}
-.cm-post-name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px;}
-.cm-post-sub{font-size:12px;color:var(--cm-muted);margin-top:2px;}
+.cm-post{overflow:visible;}
+/* Ảnh tràn viền vẫn phải bo theo góc thẻ */
+.cm-post .cm-gallery img{border-radius:0;}
+.cm-post-hd{display:flex;align-items:flex-start;gap:10px;padding:12px 16px 8px;}
+.cm-post-name{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px;}
+.cm-post-name:hover{text-decoration:underline;text-decoration-color:transparent;}
+.cm-post-sub{font-size:12.5px;color:var(--cm-muted);margin-top:1px;}
 .cm-badge{font-size:10px;padding:1px 7px;border-radius:99px;background:var(--cm-blue-s);color:var(--cm-blue);font-weight:600;}
 .cm-post-more{margin-left:auto;width:30px;height:30px;border:none;background:none;border-radius:50%;color:var(--cm-muted);cursor:pointer;font-size:15px;}
 .cm-post-more:hover{background:#f2f4f7;}
+.cm-post-menu{position:relative;margin-left:auto;}
+.cm-post-menu .cm-post-more{margin-left:0;}
+.cm-post-dd{position:absolute;top:34px;right:0;z-index:20;min-width:210px;background:#fff;border:1px solid var(--cm-line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:6px;}
+.cm-post-dd button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border:none;background:none;border-radius:7px;font-size:13.5px;font-family:inherit;color:var(--cm-txt);text-align:left;cursor:pointer;}
+.cm-post-dd button:hover{background:#f2f4f7;}
+.cm-post-dd button.is-danger{color:#dc2626;}
+[x-cloak]{display:none!important;}
 .cm-post-body{padding:0 16px 12px;}
-.cm-post-text{font-size:14px;line-height:1.65;color:#2b2f3a;white-space:pre-line;margin-bottom:10px;}
-/* Lưới ảnh kiểu Facebook */
-.cm-gallery{display:grid;gap:3px;border-radius:12px;overflow:hidden;margin-bottom:2px;background:#e9ebf0;}
+.cm-post-embeds{padding-top:10px;}
+.cm-post-text{font-size:15px;line-height:1.55;color:#1a1d29;white-space:pre-line;margin:0;overflow-wrap:anywhere;}
+.cm-post-text.is-clamped{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;}
+.cm-post-more-txt{margin-top:2px;padding:0;border:none;background:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--cm-muted);cursor:pointer;}
+.cm-post-more-txt:hover{text-decoration:underline;}
+/* Lưới ảnh kiểu Facebook — tràn sát mép thẻ */
+.cm-gallery{display:grid;gap:2px;overflow:hidden;background:#e9ebf0;border-top:1px solid var(--cm-line);border-bottom:1px solid var(--cm-line);}
 .cm-gphoto{position:relative;overflow:hidden;background:#f0f2f5;}
 .cm-gphoto img{width:100%;height:100%;object-fit:cover;display:block;}
-/* 1 ảnh: khung matte gọn đẹp, ảnh căn giữa, thu nhỏ vừa phải */
-.cm-gallery-1{grid-template-columns:1fr;background:transparent;}
+/* 1 ảnh: nền tối như FB, ảnh nguyên khung căn giữa */
+.cm-gallery-1{grid-template-columns:1fr;background:#f0f2f5;}
 .cm-gallery-1 .cm-gphoto{
-  background:#f6f7f9;
-  border:1px solid #ebedf0;
-  border-radius:14px;
-  padding:12px;
   display:flex;align-items:center;justify-content:center;
-  max-height:420px;
+  max-height:500px;
 }
 .cm-gallery-1 .cm-gphoto img{
   width:auto;max-width:100%;
-  height:auto;max-height:396px;
+  height:auto;max-height:500px;
   object-fit:contain;
-  border-radius:8px;
 }
 /* 2 ảnh: 2 cột vuông */
 .cm-gallery-2{grid-template-columns:1fr 1fr;}
@@ -435,10 +483,12 @@
 .cm-embed-m{font-size:12.5px;color:var(--cm-muted);margin-bottom:10px;}
 .cm-embed-btn{display:inline-block;font-size:12.5px;font-weight:600;color:#fff;background:var(--cm-blue);border-radius:8px;padding:7px 15px;text-decoration:none;transition:.15s;}
 .cm-embed-btn:hover{background:var(--cm-blue-d);}
-.cm-post-stats{display:flex;gap:16px;padding:8px 16px;font-size:12.5px;color:var(--cm-muted);}
-.cm-post-stats i{margin-right:3px;}
-.cm-post-actions{display:flex;padding:4px 8px;border-top:1px solid var(--cm-line);}
-.cm-post-act{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;border:none;background:none;border-radius:8px;font-size:13.5px;font-weight:600;color:var(--cm-muted);cursor:pointer;font-family:inherit;transition:.15s;}
+.cm-post-stats{display:flex;align-items:center;gap:6px;padding:10px 16px 8px;font-size:13px;color:var(--cm-muted);}
+.cm-react-bubble{width:18px;height:18px;border-radius:50%;background:#ef4444;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px;box-shadow:0 0 0 1.5px #fff;}
+.cm-stat-link{margin-left:auto;padding:0;border:none;background:none;font-family:inherit;font-size:13px;color:var(--cm-muted);cursor:pointer;}
+.cm-stat-link:hover{text-decoration:underline;}
+.cm-post-actions{display:flex;padding:4px 8px;margin:0 16px;border-top:1px solid var(--cm-line);}
+.cm-post-act{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:9px;border:none;background:none;border-radius:8px;font-size:14px;font-weight:600;color:#65676b;cursor:pointer;font-family:inherit;transition:.15s;}
 .cm-post-act:hover{background:#f2f4f7;}
 .cm-post-act.is-liked{color:#ef4444;}
 .cm-empty{text-align:center;padding:44px 20px;font-size:14px;color:var(--cm-muted);}

@@ -25,6 +25,7 @@ class Csv extends Component
 
     /* modal post */
     public bool $showModal = false;
+    public ?int $editingId = null;  // khác null = đang sửa bài chưa duyệt
 
     public string $title = '';
     public string $content = '';
@@ -94,14 +95,58 @@ class Csv extends Component
     {
         $this->category = in_array($category, ['normal', 'job', 'event'], true)
             ? $category : 'normal';
+        $this->editingId = null;
         $this->showModal = true;
     }
 
+
+    /**
+     * Mở modal sửa bài. Chỉ cho sửa bài của chính mình và CHƯA được duyệt.
+     */
+    public function editPost(int $postId): void
+    {
+        $post = Post::find($postId);
+
+        if (!$post || $post->user_id !== Auth::id()) {
+            return;
+        }
+
+        if ($post->status === 'published') {
+            $this->dispatch('toast', type: 'error',
+                message: 'Bài đã được duyệt nên không sửa được, bạn chỉ có thể xoá.'
+            );
+            return;
+        }
+
+        $this->editingId = $post->id;
+        $this->category  = $post->category ?? 'normal';
+        $this->title     = '';
+        $this->content   = $post->content;
+        $this->showModal = true;
+    }
+
+    /**
+     * Xoá bài của chính mình — áp dụng cho mọi trạng thái.
+     */
+    public function deletePost(int $postId): void
+    {
+        $post = Post::find($postId);
+
+        if (!$post || $post->user_id !== Auth::id()) {
+            return;
+        }
+
+        $post->delete();
+        $this->loadData();
+
+        $this->dispatch('toast', type: 'success', message: 'Đã xoá bài viết.');
+    }
 
     public function closeModal()
     {
         $this->reset([
             'showModal',
+            'editingId',
             'title',
             'content',
             'category',
@@ -168,6 +213,26 @@ class Csv extends Component
                 $hasBanned = true;
                 break;
             }
+        }
+
+        // Đang sửa bài chưa duyệt: chỉ cập nhật nội dung, giữ nguyên ảnh cũ
+        if ($this->editingId) {
+            $post = Post::find($this->editingId);
+
+            if ($post && $post->user_id === Auth::id() && $post->status !== 'published') {
+                $post->update([
+                    'content'  => $body,
+                    'category' => in_array($this->category, ['normal', 'job', 'event'], true)
+                                  ? $this->category : 'normal',
+                ]);
+
+                $this->closeModal();
+                $this->loadData();
+
+                $this->dispatch('toast', type: 'success', message: 'Đã cập nhật bài viết.');
+            }
+
+            return;
         }
 
         // Lưu tất cả ảnh đã chọn

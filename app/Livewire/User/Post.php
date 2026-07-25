@@ -58,16 +58,17 @@ class Post extends Component
  
     public function publish(): void
     {
-        $this->status = 'published';
+        // Mọi bài đăng đều chờ quản trị viên duyệt
+        $this->status = 'pending';
         $this->save();
     }
- 
+
     public function saveDraft(): void
     {
         $this->status = 'draft';
         $this->save();
     }
- 
+
     private function save(): void
     {
         $this->validate();
@@ -89,8 +90,22 @@ class Post extends Component
             'status'   => $this->status,
         ]);
 
-        $this->dispatch('toast', type: 'success', message: $this->status === 'published' ? 'Bài viết đã được đăng!' : 'Đã lưu nháp.'
-        );
+        // Gửi thông báo cho admin khi có bài chờ duyệt
+        if ($this->status === 'pending') {
+            \App\Models\Notification::sendToAdmins(
+                'post_pending',
+                'Có bài viết mới chờ duyệt',
+                \Illuminate\Support\Str::limit($body, 120),
+                route('admin.post'),
+                Auth::id()
+            );
+        }
+
+        $this->dispatch('toast', type: 'success', message: match ($this->status) {
+            'pending' => 'Đã gửi bài viết, đang chờ quản trị viên duyệt.',
+            'draft'   => 'Đã lưu nháp.',
+            default   => 'Bài viết đã được đăng!',
+        });
 
         $this->redirect(route('csv'), navigate: true);
     }

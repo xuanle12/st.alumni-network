@@ -252,6 +252,15 @@ a.pf-soc-item:hover{background:#eff6ff;color:#0961aa}
 }
 .cv-preview p{font-size:12px;color:#075490;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cv-empty{text-align:center;padding:1rem;color:#94a3b8;font-size:12.5px}
+.cv-make{display:flex;align-items:center;gap:11px;padding:12px 13px;margin-bottom:.75rem;border-radius:10px;
+  background:linear-gradient(135deg,#eff6ff,#f5f3ff);border:1px solid #dbeafe;text-decoration:none;transition:.15s}
+.cv-make:hover{border-color:#93c5fd;transform:translateY(-1px)}
+.cv-make-ic{width:34px;height:34px;border-radius:9px;background:#1d4ed8;color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.cv-make-tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.cv-make-tx b{font-size:13.5px;font-weight:700;color:#0f172a}
+.cv-make-tx small{font-size:11.5px;color:#64748b;margin-top:1px}
+.cv-make-ar{color:#93c5fd;font-size:12px}
 
 /* social edit */
 .sf-list{display:flex;flex-direction:column;gap:6px}
@@ -643,6 +652,15 @@ a.pf-soc-item:hover{background:#eff6ff;color:#0961aa}
       <div class="pf-section-hd">
         <span class="pf-section-title">CV / Hồ sơ</span>
       </div>
+
+      <a href="{{ route('cv.builder') }}" wire:navigate class="cv-make">
+        <span class="cv-make-ic"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+        <span class="cv-make-tx">
+          <b>Tự viết CV online</b>
+          <small>Điền thông tin theo mẫu rồi tải về PDF</small>
+        </span>
+        <i class="fa-solid fa-chevron-right cv-make-ar"></i>
+      </a>
 
       @php $cvs = $user->cv ?? collect(); @endphp
 

@@ -8,22 +8,22 @@
 .jb-page{font-family:var(--font);background:var(--jb-bg);min-height:70vh;padding-bottom:56px;}
 
 /* ── HERO ── */
-.jb-hero{background:#0b1120;color:#fff;padding:44px 0 64px;position:relative;overflow:hidden;}
+.jb-hero{background:linear-gradient(120deg,#0961aa 0%,#0c83d8 55%,#3b9ae6 100%);color:#fff;padding:44px 0 44px;position:relative;overflow:hidden;}
 .jb-hero-inner{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
 .jb-hero h1{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:12px;margin:0 0 24px;}
-.jb-hero h1 .spark{color:#60a5fa;font-size:.8em;}
-.jb-searchbar{display:flex;align-items:center;background:#fff;border-radius:16px;padding:10px 10px 10px 4px;gap:4px;box-shadow:0 12px 40px rgba(0,0,0,.35);max-width:960px;}
-.jb-sfield{flex:1;display:flex;align-items:center;gap:10px;padding:8px 14px;min-width:0;}
+.jb-hero h1 .spark{color:#fde047;font-size:.8em;}
+.jb-searchbar{display:flex;align-items:center;gap:10px;max-width:960px;}
+.jb-sfield{flex:1;display:flex;align-items:center;gap:10px;padding:13px 16px;min-width:0;background:#fff;border-radius:12px;}
+.jb-sdiv{display:none;}
 .jb-sfield svg{width:20px;height:20px;color:#94a3b8;flex-shrink:0;}
 .jb-sfield input{flex:1;border:none;outline:none;font-size:14.5px;font-family:var(--font);color:var(--jb-ink);background:transparent;min-width:0;}
 .jb-sfield input::placeholder{color:#94a3b8;}
-.jb-sdiv{width:1px;height:30px;background:#e5e7eb;flex-shrink:0;}
 .jb-sbtn{background:var(--jb-blue);color:#fff;border:none;border-radius:12px;padding:13px 30px;font-size:14px;font-weight:700;
   cursor:pointer;font-family:var(--font);transition:background .15s;flex-shrink:0;}
 .jb-sbtn:hover{background:var(--jb-blue-d);}
 
 /* ── BODY ── */
-.jb-body{max-width:1180px;margin:0 auto;padding:0 24px;margin-top:-28px;position:relative;z-index:3;}
+.jb-body{max-width:1180px;margin:0 auto;padding:0 24px;margin-top:26px;}
 .jb-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 20px;flex-wrap:wrap;
   background:transparent;}
 .jb-head h2{font-size:24px;font-weight:800;color:var(--jb-ink);letter-spacing:-.4px;margin:0;}
@@ -31,10 +31,11 @@
 .jb-sort select{border:none;outline:none;background:transparent;font-size:13px;font-weight:600;color:var(--jb-ink);font-family:var(--font);cursor:pointer;}
 .jb-sort svg{width:15px;height:15px;color:var(--jb-muted);}
 
-.jb-layout{display:grid;grid-template-columns:236px 1fr;gap:26px;align-items:flex-start;}
+.jb-layout{display:grid;grid-template-columns:1fr 250px;gap:26px;align-items:flex-start;}
+.jb-main{order:1;min-width:0;}
 
-/* ── SIDEBAR ── */
-.jb-filters{display:flex;flex-direction:column;gap:8px;}
+/* ── SIDEBAR (bên phải) ── */
+.jb-filters{display:flex;flex-direction:column;gap:8px;order:2;}
 .jb-fgroup{padding:6px 2px 18px;border-bottom:1px solid var(--jb-line);}
 .jb-fgroup:last-child{border-bottom:none;}
 .jb-fhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
@@ -92,11 +93,26 @@
 .jb-skillwarn .t{flex:1;font-size:13px;color:#92400e;}
 .jb-skillwarn a{font-size:12px;font-weight:700;color:#fff;background:#f59e0b;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;}
 
+/* ── GỢI Ý PHÙ HỢP ── */
+[x-cloak]{display:none!important;}
+.jb-suggest{background:linear-gradient(135deg,#0961aa,#0c83d8);border-radius:16px;padding:15px 18px;margin-bottom:20px;}
+.jb-suggest-hd{color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;user-select:none;}
+.jb-suggest-hd i{color:#60a5fa;}
+.jb-suggest-chev{width:16px;height:16px;color:#93c5fd;transition:transform .2s;flex-shrink:0;}
+.jb-suggest-chev.open{transform:rotate(180deg);}
+.jb-suggest-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;margin-top:14px;}
+.jb-suggest-card{flex:0 0 200px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 15px;text-decoration:none;transition:.15s;}
+.jb-suggest-card:hover{background:rgba(255,255,255,.16);transform:translateY(-2px);}
+.jb-suggest-match{display:inline-block;background:#22c55e;color:#fff;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:8px;}
+.jb-suggest-title{color:#fff;font-size:13.5px;font-weight:700;line-height:1.35;margin-bottom:3px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.jb-suggest-co{color:#93c5fd;font-size:12px;}
+
 .jb-pgn{margin-top:24px;}
-.jb-cta{margin-top:20px;background:#0b1120;color:#fff;border-radius:16px;padding:20px;}
-.jb-cta p{font-size:13px;color:#cbd5e1;line-height:1.6;margin:0 0 12px;}
-.jb-cta a{display:block;text-align:center;background:var(--jb-blue);color:#fff;padding:10px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;}
-.jb-cta a:hover{background:var(--jb-blue-d);}
+.jb-cta{margin-bottom:16px;background:linear-gradient(135deg,#0961aa,#0c83d8);color:#fff;border-radius:16px;padding:18px;}
+.jb-cta p{font-size:13px;color:#e0f2fe;line-height:1.6;margin:0 0 12px;}
+.jb-cta a{display:block;text-align:center;background:#fff;color:#0961aa;padding:10px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;transition:.15s;}
+.jb-cta a:hover{background:#eff6ff;}
 
 @media(max-width:900px){
   .jb-layout{grid-template-columns:1fr;}
@@ -148,6 +164,15 @@
 
       {{-- SIDEBAR --}}
       <aside class="jb-filters">
+        <div class="jb-cta">
+          <p>Đăng tin miễn phí, tiếp cận trực tiếp sinh viên &amp; cựu sinh viên VNUA.</p>
+          @auth
+            @if(in_array(auth()->user()->role, ['admin','company','alumni']))
+              <a href="{{ route('job.create') }}" wire:navigate>+ Đăng tin tuyển dụng</a>
+            @endif
+          @endauth
+        </div>
+
         <div class="jb-fgroup">
           <div class="jb-fhead">
             <h4>Loại công việc</h4>
@@ -197,15 +222,6 @@
           @endforeach
         </div>
         @endif
-
-        <div class="jb-cta">
-          <p>Đăng tin miễn phí, tiếp cận trực tiếp sinh viên &amp; cựu sinh viên VNUA.</p>
-          @auth
-            @if(in_array(auth()->user()->role, ['admin','company','alumni']))
-              <a href="{{ route('job.create') }}" wire:navigate>+ Đăng tin tuyển dụng</a>
-            @endif
-          @endauth
-        </div>
       </aside>
 
       {{-- MAIN --}}
@@ -216,6 +232,24 @@
             <i class="fa-solid fa-circle-info"></i>
             <span class="t"><strong>Bạn chưa cập nhật kỹ năng</strong> — bổ sung để nhận gợi ý việc làm phù hợp.</span>
             <a href="{{ route('profile') }}" wire:navigate>Cập nhật</a>
+          </div>
+        @endif
+
+        @if($hasSkills && count($suggestedJobs))
+          <div class="jb-suggest" x-data="{ open: false }">
+            <div class="jb-suggest-hd" @click="open = !open">
+              <span><i class="fa-solid fa-wand-magic-sparkles"></i> Gợi ý phù hợp với kỹ năng của bạn ({{ count($suggestedJobs) }})</span>
+              <svg class="jb-suggest-chev" :class="{ 'open': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <div class="jb-suggest-row" x-show="open" x-collapse x-cloak>
+              @foreach($suggestedJobs as $sj)
+                <a href="{{ route('job.show', $sj['id']) }}" wire:navigate class="jb-suggest-card">
+                  <div class="jb-suggest-match">{{ $sj['match_score'] }}% phù hợp</div>
+                  <div class="jb-suggest-title">{{ $sj['title'] }}</div>
+                  <div class="jb-suggest-co">{{ $sj['company'] }}</div>
+                </a>
+              @endforeach
+            </div>
           </div>
         @endif
 
